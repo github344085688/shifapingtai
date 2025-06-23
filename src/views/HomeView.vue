@@ -47,6 +47,7 @@
                 : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
             ]"
           >
+            {{ message.aiLoading }}
             <AiText :popsMessage="message" />
           </div>
         </div>
@@ -77,15 +78,11 @@
 
 <script setup lang="ts">
 import { ref, computed, defineComponent, nextTick, onMounted } from 'vue'
-// import { sendToAI } from '@/services/aiservis'
-// E:\npmPlugins\ai-back-to-coms
-// E:\npmPlugins\juejin-puts
+
 import { AiText } from 'juejin-puts'
 
 import aiConfig, { api } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
-// import aiConfig from '@/config/aiConfig'
-// import AiText from './aiText.vue'
 defineComponent({
   name: 'Ai',
 })
@@ -112,7 +109,9 @@ const aiService = new AIService(aiConfigs)
 const examples = ref(['离婚纠纷诉讼请求？', '民间借贷纠纷诉讼请求？', '劳动争议诉讼请求？', '你好'])
 
 // 聊天消息
-const messages = ref<{ content: string; sender: 'user' | 'assistant'; isLoading?: boolean }[]>([])
+const messages = ref<
+  { content: string; sender: 'user' | 'assistant'; isLoading?: boolean; aiLoading?: boolean }[]
+>([])
 
 const userInput = ref('')
 const chatContainer = ref<HTMLElement | null>(null)
@@ -136,17 +135,17 @@ const sendMessages = async () => {
     content: message,
   }
 
-  messages.value.push({ content: '', sender: 'assistant', isLoading: true })
+  messages.value.push({ content: '', sender: 'assistant', isLoading: true, aiLoading: false })
   aiService.sendToAI(newMessage, setMessage)
   userInput.value = ''
 }
-const setMessage = (message: string, isDone: boolean) => {
-  console.log('newMessage', message)
+const setMessage = (message: string, isDone: boolean, aiLoading: boolean) => {
   const lastMessage = messages.value[messages.value.length - 1]
   if (isDone) {
     lastMessage.isLoading = false
     return
   }
+  lastMessage.aiLoading = aiLoading
   lastMessage.content = `${lastMessage.content}${message}`
   scrollToBottom()
 }

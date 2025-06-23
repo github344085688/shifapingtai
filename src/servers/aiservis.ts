@@ -37,16 +37,7 @@ class AIService {
       signal: signal,
     })
 
-    // if (response.ok) {
-    //   const errorData = await response.json();  
-    //   // 可自定义错误处理逻辑
-    //   if (errorData.code === 401) {
-    //     callback(errorData.msg, false)
-    //     callback(null, true) 
-    //     return;
-    //   } 
-    // }
-
+ 
     await this.responseReader(response, abortController, callback,    countershu  )
   }
 
@@ -72,7 +63,7 @@ class AIService {
             callback(errorData.msg, false, false)
             callback(null, true, false) // 标记流结束
             countershu=1;
-            return
+            break
           }
         }
         buffer = chunks.pop() || '' // 保留未完整数据
@@ -82,7 +73,8 @@ class AIService {
           if(countershu===0 && eventData.includes('"data":"AI思考中……"')){
             // console.log('eventData',eventData)
             callback('', false, true)
-            // return
+            break
+            //  return
           }
           if (!eventData) continue 
           // 检查是否为[DONE]消息
