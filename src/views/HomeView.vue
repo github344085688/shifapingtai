@@ -40,14 +40,15 @@
           :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
         >
           <div
+            class="relative text-sm rounded-xl"
             :class="[
-              ' rounded-xl text-sm',
               message.sender === 'user'
                 ? 'bg-[#B5D4FE] text-[#033968] rounded-tr-[4px] max-w-[80%]  p-[5px_15px]'
                 : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
+              message.aiLoading ? 'p-[5px_15px]' : 'p-[15px_15px]',
             ]"
           >
-            {{ message.aiLoading }}
+            <div v-if="message.aiLoading" class="absolute -top-[32px] w-[350px]">ai思考中...</div>
             <AiText :popsMessage="message" />
           </div>
         </div>
