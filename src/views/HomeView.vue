@@ -109,7 +109,7 @@ const aiService = new AIService(aiConfigs)
 // 使用示例
 
 // 预设问题示例
-const examples = ref(['离婚纠纷诉讼请求？', '民间借贷纠纷诉讼请求？', '劳动争议诉讼请求？'])
+const examples = ref(['离婚纠纷诉讼请求？', '民间借贷纠纷诉讼请求？', '劳动争议诉讼请求？', '你好'])
 
 // 聊天消息
 const messages = ref<{ content: string; sender: 'user' | 'assistant'; isLoading?: boolean }[]>([])
