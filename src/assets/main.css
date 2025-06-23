@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body,
+#app {
+  height: 100%;
+  max-width: 1920px;
+  margin: auto;
+}
+
+.loading-dots {
+  /* position: absolute;
+top: 10px;
+left: 0; */
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-color: #36444b;
+  border-radius: 50%;
+  animation: blink 1s infinite ease-in-out;
+  pointer-events: none;
+  /* 确保不会干扰用户交互 */
+  z-index: 1000;
+  /* 确保显示在其他元素上方 */
+}
+
+/* 闪烁动画 */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
