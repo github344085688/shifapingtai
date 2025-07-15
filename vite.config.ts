@@ -7,7 +7,7 @@ import autoprefixer from 'autoprefixer'
 import postcssPxtorem from 'postcss-pxtorem'
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/h5AiWeb/',
+  base: '/h5Aishifu/',
   build: {
     cssCodeSplit: true,
     rollupOptions: {
@@ -22,7 +22,7 @@ export default defineConfig({
         entryFileNames: 'js/[name]-[hash].js',
       },
     },
-    outDir: 'h5AiWeb', // 新增：指定输出目录为view
+    outDir: 'h5Aishifu', // 新增：指定输出目录为view
   },
   server: {
     fs: {

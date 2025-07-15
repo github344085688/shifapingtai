@@ -27,6 +27,8 @@ class AIService {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json', 
+        'Access-Control-Allow-Origin': '*', 
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE' , 
         Authorization: 'Bearer ' + this.aiConfig.apiKey,
       }, 
       body: JSON.stringify({
