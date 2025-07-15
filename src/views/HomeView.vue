@@ -48,8 +48,8 @@
           >
             <!-- 并发结果显示区域 -->
             <div class="grid grid-cols-3 gap-3 mb-4" v-if="message.sender != 'user'">
-              <div 
-                v-for="item in concurrentLabels" 
+              <div
+                v-for="item in concurrentLabels"
                 :key="item.key"
                 class="flex relative justify-center"
               >
@@ -57,14 +57,19 @@
                   {{ item.label }}
                   <div
                     class="w-[20px] h-[20px] ml-1"
-                    v-if="item.key !== 'xgft' && getConcurrentResult(message.concurrentResults, item.key)"
+                    v-if="
+                      item.key !== 'xgft' &&
+                      getConcurrentResult(message.concurrentResults, item.key)
+                    "
                   >
                     <div
                       v-if="getConcurrentResult(message.concurrentResults, item.key)?.isLoading"
                       class="loader_item"
                     ></div>
                     <div
-                      v-else-if="getConcurrentResult(message.concurrentResults, item.key)?.isCompleted"
+                      v-else-if="
+                        getConcurrentResult(message.concurrentResults, item.key)?.isCompleted
+                      "
                       class="text-green-500"
                     >
                       ✓
@@ -85,7 +90,8 @@
                   v-if="result.isCompleted && result.content"
                   class="pl-3 border-l-4 border-blue-500"
                 >
-                  <h4 class="mb-1 font-semibold text-blue-600">{{ result.name }}</h4>
+                  <!-- <h4 class="mb-1 font-semibold text-blue-600">{{ result.name }}</h4> -->
+                  <!-- <h4 class="mb-1 font-semibold text-blue-600">{{ result.content }}</h4> -->
                 </div>
                 <div
                   v-else-if="result.isCompleted && result.error"
@@ -154,7 +160,7 @@ const concurrentLabels = ref([
   { key: 'wlgd', label: '3.网络观点' },
   { key: 'cpgdz', label: '4.裁判观点' },
   { key: 'swyj', label: '5.实务研究' },
-  { key: 'xsal', label: '6.相似案例' }
+  { key: 'xsal', label: '6.相似案例' },
 ])
 
 // 从URL参数获取apiKey的函数
@@ -255,7 +261,7 @@ const handleConcurrentCallback = (
       },
       {} as Record<string, any[]>,
     )
-    lastMessage.concurrentResults = concurrentAiService.getAllResults()
+    // lastMessage.concurrentResults = concurrentAiService.getAllResults()
 
     // lastMessage.concurrentResults = keyResult
 

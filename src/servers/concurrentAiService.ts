@@ -19,47 +19,42 @@ const concurrentApis = {
     key: 'xsyw',
     name: '相似疑问',
     api: aiConfig.xsywApi,
-    "top_k":5,
-    "threshold":0.7,
-    "version":"v2",
-    "model":"中国法研LLM",
- 
+    top_k: 5,
+    threshold: 0.7,
+    version: 'v2',
+    model: '中国法研LLM'
   },
   wlgd: {
     key: 'wlgd', 
     name: '网络观点',
     api: aiConfig.wlgdApi, 
-    "top_k":5,
-    "model":"中国法研LLM",
-    "version":"v2",
-      content: 'content'
+    top_k: 5,
+    model: '中国法研LLM',
+    version: 'v2'
   },
   cpgdz: {
     key: 'cpgdz',
     name: '裁判观点', 
     api: aiConfig.cpgdzApi,
-    "top_k":5,
-    "model":"中国法研LLM",
-    "version":"v2",
-    "threshold":0.65,
-        content: 'content'
-    
+    top_k: 5,
+    model: '中国法研LLM',
+    version: 'v2',
+    threshold: 0.65
   },
   xsal: {
     key: 'xsal',
     name: '相似案例',
     api: aiConfig.xsalApi,
-    "top_k": 10,
+    top_k: 10
   },
   swyj: {
     key: 'swyj',
     name: '实务研究',
     api: aiConfig.swyjApi,
-    "top_k": 5,
-    "model": "中国法研LLM",
-    "threshold": 0.55,
-    "version": "v2",
-    content: 'content'
+    top_k: 5,
+    model: '中国法研LLM',
+    threshold: 0.55,
+    version: 'v2'
   }
 }
 
@@ -87,13 +82,7 @@ class ConcurrentAIService {
 
   // 获取所有结果
   getAllResults(): ConcurrentResult[] {
-    
     return Array.from(this.results.values())
-  }
-
-  // 获取单个结果
-  getResult(key: string): ConcurrentResult | undefined {
-    return this.results.get(key)
   }
 
   // 并发调用所有API
@@ -123,10 +112,8 @@ class ConcurrentAIService {
     apiConfig: typeof concurrentApis[keyof typeof concurrentApis], 
     message: any
   ): Promise<void> {
-    let abortController: AbortController | null = null
-    
     try {
-      abortController = new AbortController()
+      const abortController = new AbortController()
       const signal = abortController.signal
 
       // 设置加载状态
@@ -137,7 +124,7 @@ class ConcurrentAIService {
       // 构建请求参数，根据配置动态添加参数
       const requestBody: any = {
         messages: [message],
-        stream: false, // 改为非流式响应
+        stream: false
       }
 
       // 优先使用配置中的model，如果没有则使用默认的this.model
@@ -171,12 +158,9 @@ class ConcurrentAIService {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
 
-      // 获取响应数据，但不将其放入message中
+      // 获取响应数据
       const responseData = await response.json()
-     console.log
       
-      // 只更新本地结果状态，不修改原始message
-
       // 过滤固定字段，提取实际的数组内容
       let extractedContent = ''
       if (responseData && responseData.data) {
@@ -212,8 +196,6 @@ class ConcurrentAIService {
       } else {
         result.error = `网络请求失败: ${error.message}`
       }
-    } finally {
-      abortController = null
     }
   }
 }
