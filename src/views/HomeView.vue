@@ -54,7 +54,10 @@
                 :key="item.key"
                 class="flex relative justify-center"
               >
-                <div class="flex items-center px-2 py-1 bg-gray-100 rounded-sm cursor-pointer">
+                <div 
+                  class="flex items-center px-2 py-1 bg-gray-100 rounded-sm cursor-pointer hover:bg-gray-200 transition-colors"
+                  @click="handleConcurrentResultClick(message, item.key)"
+                >
                   {{ item.label }}
                   <div
                     class="w-[20px] h-[20px] ml-1"
@@ -89,21 +92,13 @@
             </div>
 
             <!-- 并发结果内容显示 -->
-            <div class="mb-4">
-              <div v-for="result in message.concurrentResults" :key="result.key" class="mb-3">
-                <div
-                  v-if="result.isCompleted && result.content"
-                  class="pl-3 border-l-4 border-blue-500"
-                >
-                  <!-- <h4 class="mb-1 font-semibold text-blue-600">{{ result.name }}</h4> -->
-                  <!-- <h4 class="mb-1 font-semibold text-blue-600">{{ result.content }}</h4> -->
-                </div>
-                <div
-                  v-else-if="result.isCompleted && result.error"
-                  class="pl-3 border-l-4 border-red-500"
-                >
-                  <h4 class="mb-1 font-semibold text-red-600">{{ result.name }}</h4>
-                  <p class="text-sm text-red-500">{{ result.error }}</p>
+            <div class="mb-4" v-if="message.selectedConcurrentResult">
+              <div class="pl-3 border-l-4 border-blue-500 bg-blue-50 rounded-r-lg p-3">
+                <h4 class="mb-2 font-semibold text-blue-600">
+                  {{ getConcurrentLabelByKey(message.selectedConcurrentResult) }}
+                </h4>
+                <div class="text-sm text-gray-700 whitespace-pre-wrap">
+                  {{ getConcurrentContentByKey(message.concurrentResults, message.selectedConcurrentResult) }}
                 </div>
               </div>
             </div>
@@ -196,6 +191,7 @@ const messages = ref<
     isLoading?: boolean
     aiLoading?: boolean
     concurrentResults?: ConcurrentResult[]
+    selectedConcurrentResult?: string // 新增：选中的并发结果key
   }[]
 >([])
 
@@ -322,6 +318,35 @@ const getConcurrentResult = (
 ): ConcurrentResult | undefined => {
   if (!aiLoading) false
   return results?.find((result) => result.key === key)
+}
+
+// 处理并发结果点击
+const handleConcurrentResultClick = (message: any, key: string) => {
+  const result = getConcurrentResult(message.aiLoading, message.concurrentResults, key)
+  
+  // 只有当结果完成且有内容时才显示
+  if (result && result.isCompleted && result.content) {
+    // 如果点击的是当前已选中的结果，则取消选中
+    if (message.selectedConcurrentResult === key) {
+      message.selectedConcurrentResult = undefined
+    } else {
+      // 否则选中新的结果
+      message.selectedConcurrentResult = key
+    }
+  }
+}
+
+// 根据key获取标签名称
+const getConcurrentLabelByKey = (key: string): string => {
+  const label = concurrentLabels.value.find(item => item.key === key)
+  return label ? label.label : key
+}
+
+// 根据key获取并发结果内容
+const getConcurrentContentByKey = (results: ConcurrentResult[] | undefined, key: string): string => {
+  if (!results) return ''
+  const result = results.find(item => item.key === key)
+  return result ? result.content : ''
 }
 </script>
 <style scoped></style>
