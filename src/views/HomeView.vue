@@ -47,6 +47,7 @@
             ]"
           >
             <!-- 并发结果显示区域 -->
+            <!-- {{ message }} -->
             <div class="grid grid-cols-3 gap-3 mb-4" v-if="message.sender != 'user'">
               <div
                 v-for="item in concurrentLabels"
@@ -59,16 +60,20 @@
                     class="w-[20px] h-[20px] ml-1"
                     v-if="
                       item.key !== 'xgft' &&
-                      getConcurrentResult(message.concurrentResults, item.key)
+                      getConcurrentResult(message.aiLoading, message.concurrentResults, item.key)
                     "
                   >
                     <div
-                      v-if="getConcurrentResult(message.concurrentResults, item.key)?.isLoading"
+                      v-if="
+                        getConcurrentResult(message.aiLoading, message.concurrentResults, item.key)
+                          ?.isLoading
+                      "
                       class="loader_item"
                     ></div>
                     <div
                       v-else-if="
-                        getConcurrentResult(message.concurrentResults, item.key)?.isCompleted
+                        getConcurrentResult(message.aiLoading, message.concurrentResults, item.key)
+                          ?.isCompleted
                       "
                       class="text-green-500"
                     >
@@ -224,14 +229,14 @@ const sendMessages = async () => {
   const assistantMessage = {
     content: '',
     sender: 'assistant' as const,
-    isLoading: true,
-    aiLoading: false,
+    isLoading: true, // 整体加载状态
+    aiLoading: true, // AI思考状态，初始设为true
     concurrentResults: concurrentAiService.getAllResults(),
   }
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
-  // aiService.sendToAI(newMessage, setMessage)
+  aiService.sendToAI(newMessage, setMessage)
 
   // 启动并发AI服务
   await concurrentAiService.sendConcurrentRequests(newMessage, handleConcurrentCallback)
@@ -250,51 +255,49 @@ const handleConcurrentCallback = (
   const lastMessage = messages.value[messages.value.length - 1]
   if (lastMessage && lastMessage.sender === 'assistant') {
     // 获取最新的结果
-
     const lastResult = concurrentAiService.getAllResults()
 
-    // 将数组格式转换为 {key: content} 格式
-    const keyResult = lastResult.reduce(
-      (acc, item: any) => {
-        acc[item.key] = item.content || []
-        return acc
-      },
-      {} as Record<string, any[]>,
-    )
-    // lastMessage.concurrentResults = concurrentAiService.getAllResults()
+    // 更新并发结果
+    lastMessage.concurrentResults = lastResult
 
-    // lastMessage.concurrentResults = keyResult
+    // 检查是否所有并发请求都完成了
+    const allCompleted = lastResult.every((result) => result.isCompleted)
 
-    // 可以在这里添加日志来调试
-    console.log(`API ${key} 完成:`, keyResult, concurrentAiService.getAllResults())
-    // // 将数组格式转换为 {key: content} 格式
-    // const keyResult = lastResult.reduce(
-    //   (acc, item: any) => {
-    //     acc[item.key] = item.content || []
-    //     return acc
-    //   },
-    //   {} as Record<string, any[]>,
-    // )
+    // 如果所有并发请求都完成了，并且主要AI也完成了，则设置整体加载完成
+    if (allCompleted && !lastMessage.aiLoading) {
+      lastMessage.isLoading = false
+      globalState.aiResults = messages.value
+    }
 
-    // lastMessage.concurrentResults = keyResult
-
-    // 可以在这里添加日志来调试
-    console.log(`API ${key} 完成:`, concurrentAiService.getAllResults())
-
-    // 如果需要，可以在这里触发界面更新
-    // 由于使用了 ref，Vue 会自动检测到变化并更新界面
+    console.log(`API ${key} 完成:`, lastResult)
   }
 }
 
 const setMessage = (message: string, isDone: boolean, aiLoading: boolean) => {
   const lastMessage = messages.value[messages.value.length - 1]
-  if (isDone) {
-    lastMessage.isLoading = false
-    globalState.aiResults = messages.value
+
+  // 确保最后一条消息存在且是助手消息
+  if (!lastMessage || lastMessage.sender !== 'assistant') {
     return
   }
+
+  if (isDone) {
+    lastMessage.aiLoading = false // AI思考完成
+
+    // 检查并发请求是否也都完成了
+    const allConcurrentCompleted =
+      lastMessage.concurrentResults?.every((result) => result.isCompleted) ?? true
+
+    if (allConcurrentCompleted) {
+      lastMessage.isLoading = false // 整体加载完成
+      globalState.aiResults = messages.value
+    }
+    return
+  }
+
+  // 更新AI思考状态和内容
   lastMessage.aiLoading = aiLoading
-  lastMessage.content = `${lastMessage.content}${message}`
+  // lastMessage.content = `${lastMessage.content}${message}`
   scrollToBottom()
 }
 
@@ -313,9 +316,11 @@ const addMessage = (content: string, sender: 'user' | 'assistant') => {
 
 // 获取并发结果的辅助函数
 const getConcurrentResult = (
+  aiLoading: boolean,
   results: ConcurrentResult[] | undefined,
   key: string,
 ): ConcurrentResult | undefined => {
+  if (!aiLoading) false
   return results?.find((result) => result.key === key)
 }
 </script>
