@@ -47,15 +47,14 @@
             ]"
           >
             <!-- 并发结果显示区域 -->
-            <!-- {{ message }} -->
             <div class="grid grid-cols-3 gap-3 mb-4" v-if="message.sender != 'user'">
               <div
                 v-for="item in concurrentLabels"
                 :key="item.key"
                 class="flex relative justify-center"
               >
-                <div 
-                  class="flex items-center px-2 py-1 bg-gray-100 rounded-sm cursor-pointer hover:bg-gray-200 transition-colors"
+                <div
+                  class="flex items-center px-2 py-1 bg-gray-100 rounded-sm transition-colors cursor-pointer hover:bg-gray-200"
                   @click="handleConcurrentResultClick(message, item.key)"
                 >
                   {{ item.label }}
@@ -91,18 +90,6 @@
               </div>
             </div>
 
-            <!-- 并发结果内容显示 -->
-            <div class="mb-4" v-if="message.selectedConcurrentResult">
-              <div class="pl-3 border-l-4 border-blue-500 bg-blue-50 rounded-r-lg p-3">
-                <h4 class="mb-2 font-semibold text-blue-600">
-                  {{ getConcurrentLabelByKey(message.selectedConcurrentResult) }}
-                </h4>
-                <div class="text-sm text-gray-700 whitespace-pre-wrap">
-                  {{ getConcurrentContentByKey(message.concurrentResults, message.selectedConcurrentResult) }}
-                </div>
-              </div>
-            </div>
-
             <div v-if="message.aiLoading" class="">ai思考中...</div>
             <AiText :popsMessage="message" />
           </div>
@@ -129,6 +116,244 @@
       >
         发送
       </button>
+    </div>
+
+    <!-- 并发结果弹窗 -->
+    <div v-if="showModal" class="flex fixed inset-0 z-50" @click="closeModal">
+      <!-- 背景遮罩 -->
+      <div
+        class="absolute inset-0 bg-black transition-opacity duration-300"
+        :class="showModal ? 'opacity-50' : 'opacity-0'"
+      ></div>
+
+      <!-- 弹窗内容 -->
+      <div
+        class="flex flex-col ml-auto h-full bg-white shadow-2xl transition-all duration-300 ease-out"
+        :class="showModal ? 'w-[90vw] translate-x-0' : 'w-0 translate-x-full'"
+        @click.stop
+      >
+        <!-- 弹窗头部 -->
+        <div
+          class="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200"
+        >
+          <h2 class="text-lg font-semibold text-gray-800">
+            {{ currentModalTitle }}
+          </h2>
+          <button @click="closeModal" class="p-2 rounded-full transition-colors hover:bg-gray-100">
+            <svg
+              class="w-6 h-6 text-gray-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M6 18L18 6M6 6l12 12"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- 弹窗内容区域 -->
+        <div class="overflow-hidden flex-1">
+          <div class="overflow-y-auto p-6 h-full">
+            <!-- 内容切换动画容器 -->
+            <div class="relative">
+              <transition
+                name="content-fade"
+                mode="out-in"
+                @enter="onContentEnter"
+                @leave="onContentLeave"
+              >
+                <div :key="currentModalKey" class="max-w-none prose">
+                  <div class="p-4 mb-6 bg-blue-50 rounded-r-lg border-l-4 border-blue-500">
+                    <h3 class="mb-2 font-medium text-blue-800">{{ currentModalTitle }}</h3>
+                    <p class="text-sm text-blue-700">以下是相关的详细信息：</p>
+                  </div>
+
+                  <!-- 格式化显示内容 -->
+                  <div class="space-y-4">
+                    <template v-if="Array.isArray(parsedModalContent)">
+                      <!-- 如果是数组，遍历显示每个项目 -->
+                      <div
+                        v-for="(item, index) in parsedModalContent"
+                        :key="index"
+                        class="p-5 bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow-md"
+                      >
+                        <!-- 标题 -->
+                        <h4
+                          v-if="item.title"
+                          class="mb-3 text-lg font-semibold leading-tight text-gray-800 line-clamp-2"
+                        >
+                          {{ item.title }}
+                        </h4>
+
+                        <!-- 内容 -->
+                        <div
+                          v-if="item.content"
+                          class="mb-4 leading-relaxed text-gray-700 whitespace-pre-wrap"
+                        >
+                          {{ item.content }}
+                        </div>
+
+                        <!-- URL链接和评分信息 -->
+                        <div
+                          class="flex justify-between items-center pt-3 border-t border-gray-100"
+                        >
+                          <div class="flex-1">
+                            <a
+                              v-if="item.url"
+                              :href="cleanUrl(item.url)"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="inline-flex items-center mr-4 text-sm text-blue-600 underline break-all hover:text-blue-800"
+                            >
+                              <svg
+                                class="flex-shrink-0 mr-1 w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                ></path>
+                              </svg>
+                              查看原文
+                            </a>
+                          </div>
+
+                          <!-- 相关性评分 -->
+                          <div v-if="item._score" class="flex items-center text-sm text-gray-500">
+                            <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                              ></path>
+                            </svg>
+                            相关性: {{ (item._score * 100).toFixed(1) }}%
+                          </div>
+                        </div>
+
+                        <!-- 类型标签 -->
+                        <div v-if="item.type" class="mt-2">
+                          <span
+                            class="inline-block px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full"
+                          >
+                            {{ item.type }}
+                          </span>
+                        </div>
+                      </div>
+                    </template>
+
+                    <!-- 如果不是数组，尝试解析为单个对象 -->
+                    <template
+                      v-else-if="
+                        typeof parsedModalContent === 'object' && parsedModalContent !== null
+                      "
+                    >
+                      <div class="p-5 bg-white rounded-lg border border-gray-200 shadow-sm">
+                        <!-- 标题 -->
+                        <h4
+                          v-if="parsedModalContent.title"
+                          class="mb-3 text-lg font-semibold leading-tight text-gray-800"
+                        >
+                          {{ parsedModalContent.title }}
+                        </h4>
+
+                        <!-- 内容 -->
+                        <div
+                          v-if="parsedModalContent.content"
+                          class="mb-4 leading-relaxed text-gray-700 whitespace-pre-wrap"
+                        >
+                          {{ parsedModalContent.content }}
+                        </div>
+
+                        <!-- URL链接和评分信息 -->
+                        <div
+                          class="flex justify-between items-center pt-3 border-t border-gray-100"
+                        >
+                          <div class="flex-1">
+                            <a
+                              v-if="parsedModalContent.url"
+                              :href="cleanUrl(parsedModalContent.url)"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="inline-flex items-center mr-4 text-sm text-blue-600 underline break-all hover:text-blue-800"
+                            >
+                              <svg
+                                class="flex-shrink-0 mr-1 w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                ></path>
+                              </svg>
+                              查看原文
+                            </a>
+                          </div>
+
+                          <!-- 相关性评分 -->
+                          <div
+                            v-if="parsedModalContent._score"
+                            class="flex items-center text-sm text-gray-500"
+                          >
+                            <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                              <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                              ></path>
+                            </svg>
+                            相关性: {{ (parsedModalContent._score * 100).toFixed(1) }}%
+                          </div>
+                        </div>
+
+                        <!-- 类型标签 -->
+                        <div v-if="parsedModalContent.type" class="mt-2">
+                          <span
+                            class="inline-block px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full"
+                          >
+                            {{ parsedModalContent.type }}
+                          </span>
+                        </div>
+                      </div>
+                    </template>
+
+                    <!-- 如果是字符串，直接显示 -->
+                    <template v-else>
+                      <div class="p-5 bg-white rounded-lg border border-gray-200 shadow-sm">
+                        <div class="leading-relaxed text-gray-700 whitespace-pre-wrap">
+                          {{ parsedModalContent }}
+                        </div>
+                      </div>
+                    </template>
+                  </div>
+                </div>
+              </transition>
+            </div>
+          </div>
+        </div>
+
+        <!-- 弹窗底部操作区 -->
+        <div class="p-4 bg-gray-50 border-t border-gray-200">
+          <div class="flex justify-between items-center">
+            <div class="text-sm text-gray-500">数据来源：AI智能分析</div>
+            <button
+              @click="closeModal"
+              class="px-4 py-2 text-white bg-blue-600 rounded-lg transition-colors hover:bg-blue-700"
+            >
+              关闭
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -162,6 +387,32 @@ const concurrentLabels = ref([
   { key: 'swyj', label: '5.实务研究' },
   { key: 'xsal', label: '6.相似案例' },
 ])
+
+// 弹窗相关状态
+const showModal = ref(false)
+const currentModalKey = ref('')
+const currentModalContent = ref('')
+const currentModalTitle = ref('')
+
+// 解析弹窗内容
+const parsedModalContent = computed(() => {
+  if (!currentModalContent.value) return ''
+
+  try {
+    // 尝试解析为JSON
+    const parsed = JSON.parse(currentModalContent.value)
+    return parsed
+  } catch (error) {
+    // 如果不是JSON，返回原始字符串
+    return currentModalContent.value
+  }
+})
+
+// 清理URL，移除反引号和多余的空格
+const cleanUrl = (url: string): string => {
+  if (!url) return ''
+  return url.replace(/`/g, '').trim()
+}
 
 // 从URL参数获取apiKey的函数
 const getApiKeyFromUrl = (): string => {
@@ -323,30 +574,76 @@ const getConcurrentResult = (
 // 处理并发结果点击
 const handleConcurrentResultClick = (message: any, key: string) => {
   const result = getConcurrentResult(message.aiLoading, message.concurrentResults, key)
-  
+
   // 只有当结果完成且有内容时才显示
   if (result && result.isCompleted && result.content) {
-    // 如果点击的是当前已选中的结果，则取消选中
-    if (message.selectedConcurrentResult === key) {
-      message.selectedConcurrentResult = undefined
-    } else {
-      // 否则选中新的结果
-      message.selectedConcurrentResult = key
-    }
+    currentModalKey.value = key
+    currentModalContent.value = result.content
+    currentModalTitle.value = getConcurrentLabelByKey(key)
+    showModal.value = true
   }
+}
+
+// 关闭弹窗
+const closeModal = () => {
+  showModal.value = false
 }
 
 // 根据key获取标签名称
 const getConcurrentLabelByKey = (key: string): string => {
-  const label = concurrentLabels.value.find(item => item.key === key)
+  const label = concurrentLabels.value.find((item) => item.key === key)
   return label ? label.label : key
 }
 
 // 根据key获取并发结果内容
-const getConcurrentContentByKey = (results: ConcurrentResult[] | undefined, key: string): string => {
+const getConcurrentContentByKey = (
+  results: ConcurrentResult[] | undefined,
+  key: string,
+): string => {
   if (!results) return ''
-  const result = results.find(item => item.key === key)
+  const result = results.find((item) => item.key === key)
   return result ? result.content : ''
 }
 </script>
-<style scoped></style>
+<style scoped>
+/* 内容切换动画 */
+.content-fade-enter-active,
+.content-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.content-fade-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.content-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.content-fade-enter-to,
+.content-fade-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 加载动画样式 */
+.loader_item {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #3498db;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
