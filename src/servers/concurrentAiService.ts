@@ -1,4 +1,4 @@
-import aiConfig from '@/config/aiConfig'
+import aiConfig,{concurrentApis} from '@/config/aiConfig'
 
 export interface ConcurrentResult {
   key: string
@@ -9,54 +9,11 @@ export interface ConcurrentResult {
   error?: string
 }
 
+
 export interface ConcurrentCallback {
   (allResults: ConcurrentResult[]): void
 }
 
-// 定义并发API配置
-const concurrentApis = {
-  xsyw: {
-    key: 'xsyw',
-    name: '相似疑问',
-    api: aiConfig.xsywApi,
-    top_k: 5,
-    threshold: 0.7,
-    version: 'v2',
-    model: '中国法研LLM'
-  },
-  wlgd: {
-    key: 'wlgd', 
-    name: '网络观点',
-    api: aiConfig.wlgdApi, 
-    top_k: 5,
-    model: '中国法研LLM',
-    version: 'v2'
-  },
-  cpgdz: {
-    key: 'cpgdz',
-    name: '裁判观点', 
-    api: aiConfig.cpgdzApi,
-    top_k: 5,
-    model: '中国法研LLM',
-    version: 'v2',
-    threshold: 0.65
-  },
-  xsal: {
-    key: 'xsal',
-    name: '相似案例',
-    api: aiConfig.xsalApi,
-    top_k: 10
-  },
-  swyj: {
-    key: 'swyj',
-    name: '实务研究',
-    api: aiConfig.swyjApi,
-    top_k: 5,
-    model: '中国法研LLM',
-    threshold: 0.55,
-    version: 'v2'
-  }
-}
 
 class ConcurrentAIService {
   private apiKey: string
@@ -122,24 +79,42 @@ class ConcurrentAIService {
       result.isCompleted = false
 
       // 构建请求参数，根据配置动态添加参数
-      const requestBody: any = {
-        messages: [message],
-        stream: false
-      }
+      let requestBody: any
 
-      // 优先使用配置中的model，如果没有则使用默认的this.model
-      requestBody.model = apiConfig.model || this.model
+      // 特殊处理相似案例API
+      if (apiConfig.name === '相似案例') {
+        requestBody = {
+          question: message.content , 
+        }
+      } else {
+        // 其他API使用原有格式
+        requestBody = {
+          messages: [message],
+          stream: false
+        }
 
-      if (apiConfig.top_k !== undefined) {
-        requestBody.top_k = apiConfig.top_k
-      }
+        // 优先使用配置中的model，如果没有则使用默认的this.model
+        requestBody.model = apiConfig.model || this.model
 
-      if (apiConfig.threshold !== undefined) {
-        requestBody.threshold = apiConfig.threshold
-      }
+        if (apiConfig.top_k !== undefined) {
+          requestBody.top_k = apiConfig.top_k
+        }
 
-      if (apiConfig.version !== undefined) {
-        requestBody.version = apiConfig.version
+        if (apiConfig.threshold !== undefined) {
+          requestBody.threshold = apiConfig.threshold
+        }
+
+        if (apiConfig.version !== undefined) {
+          requestBody.version = apiConfig.version
+        }
+
+        if (apiConfig.casetype !== undefined) {
+          requestBody.casetype = apiConfig.casetype
+        }
+
+        if (apiConfig.step !== undefined) {
+          requestBody.step = apiConfig.step
+        }
       }
 
       const response = await fetch(apiConfig.api, {

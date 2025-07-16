@@ -432,7 +432,7 @@ const aiService = new AIService(aiConfigs)
 const concurrentAiService = new ConcurrentAIService(getApiKeyFromUrl())
 
 // 预设问题示例
-const examples = ref(['离婚纠纷诉讼请求？', '民间借贷纠纷诉讼请求？', '劳动争议诉讼请求？'])
+const examples = ref(['离婚纠纷诉讼请求', '民间借贷纠纷诉讼请求', '劳动争议诉讼请求'])
 
 // 聊天消息
 const messages = ref<
@@ -626,24 +626,5 @@ const getConcurrentContentByKey = (
 .content-fade-leave-from {
   opacity: 1;
   transform: translateX(0);
-}
-
-/* 加载动画样式 */
-.loader_item {
-  width: 16px;
-  height: 16px;
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #3498db;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 </style>
