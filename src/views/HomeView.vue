@@ -2,14 +2,14 @@
   <div class="w-full h-full pb-[64px] bg-gray-50">
     <div class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
       <div
-        class="flex items-center bg-gradient-to-r from-[#bae1ff] via-[#d7fcff ] via-[#e2f1ff] to-[#d6ebfc] bg-cover bg-center p-[10px_15px] mt-5 rounded-t-xl"
+        class="flex items-center bg-gradient-to-r from-[#e23338] via-[#f04b4e] to-[#e23338] bg-cover bg-center p-[10px_15px] mt-5 rounded-t-xl"
       >
-        <div class="w-[70px] h-[40px] relative mr-[15px]">
+        <!-- <div class="w-[70px] h-[40px] relative mr-[15px]">
           <div class="absolute top-[-30px] left-0 w-[100px]">
             <img src="@img/logo.png" mode="widthFix" alt="" class="object-contain w-full h-auto" />
           </div>
-        </div>
-        <div class="text-[#4a6bff] text-lg flex justify-center w-full font-bold">
+        </div> -->
+        <div class="text-[#ffffff] text-lg flex justify-center w-full font-bold">
           Hi~我是法务助手！
         </div>
       </div>
@@ -24,7 +24,7 @@
         <div
           v-for="(example, index) in examples"
           :key="index"
-          class="bg-[#edf3ff] rounded-lg p-[12px_15px] my-2.5 text-sm text-[#4a6bff] cursor-pointer"
+          class="bg-[#e23338] rounded-lg p-[12px_15px] my-2.5 text-[#ffffff] cursor-pointer"
           @click="handleExampleClick(example)"
         >
           {{ example }}
@@ -39,7 +39,7 @@
           :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
         >
           <div
-            class="relative text-sm rounded-xl"
+            class="relative rounded-xl"
             :class="[
               message.sender === 'user'
                 ? 'bg-[#B5D4FE] text-[#033968] rounded-tr-[4px] max-w-[80%]  p-[5px_15px]'
@@ -49,14 +49,14 @@
             <div v-if="message.aiLoading" class="">ai思考中...</div>
             <AiText :popsMessage="message" />
             <!-- 并发结果显示区域 -->
-            <div class="grid grid-cols-3 gap-3 mt-4" v-if="message.sender != 'user'">
+            <div class="grid grid-cols-3 gap-2 mt-4" v-if="message.sender != 'user'">
               <div
                 v-for="item in concurrentLabels"
                 :key="item.key"
                 class="flex relative justify-center"
               >
                 <div
-                  class="flex items-center px-2 py-1 bg-gray-100 rounded-sm transition-colors cursor-pointer hover:bg-gray-200"
+                  class="flex items-center text-[14px] px-1 py-1 bg-gray-100 rounded-sm transition-colors cursor-pointer hover:bg-gray-200"
                   @click="handleConcurrentResultClick(message, item.key)"
                 >
                   {{ item.label }}
@@ -111,7 +111,7 @@
 
       <button
         type="button"
-        class="bg-[#4e6ef2] w-[250rpx] text-white border-none rounded-[20px] p-[10px_20px] text-sm cursor-pointer"
+        class="bg-[#e23338] w-[250rpx] text-white border-none rounded-[20px] p-[10px_20px] text-sm cursor-pointer"
         @click="sendMessages()"
       >
         发送
@@ -134,7 +134,7 @@
       >
         <!-- 弹窗头部 -->
         <div
-          class="flex justify-between items-center p-4 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200"
+          class="flex justify-between items-center px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200"
         >
           <h2 class="text-lg font-semibold text-gray-800">
             {{ currentModalTitle }}
@@ -158,7 +158,7 @@
 
         <!-- 弹窗内容区域 -->
         <div class="overflow-hidden flex-1">
-          <div class="overflow-y-auto p-6 h-full">
+          <div class="overflow-y-auto px-2 py-6 h-full">
             <!-- 内容切换动画容器 -->
             <div class="relative">
               <transition
@@ -175,12 +175,138 @@
 
                   <!-- 格式化显示内容 -->
                   <div class="space-y-4">
-                    <template v-if="Array.isArray(parsedModalContent)">
+                    <!-- 相似案例特殊处理 -->
+                    <template
+                      v-if="currentModalKey === 'xsal' && Array.isArray(parsedModalContent)"
+                    >
+                      <div
+                        v-for="(caseItem, index) in parsedModalContent"
+                        :key="index"
+                        class="p-3 bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow-md"
+                      >
+                        <!-- 案例标题 -->
+                        <div class="pb-3 mb-4 border-b border-gray-100">
+                          <h4 class="mb-2 text-lg font-semibold leading-tight text-gray-800">
+                            {{ caseItem.title }}
+                          </h4>
+                          <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="px-2 py-1 text-blue-800 bg-blue-100 rounded-full">
+                              {{ caseItem.caseid }}
+                            </span>
+                            <span class="px-2 py-1 text-green-800 bg-green-100 rounded-full">
+                              {{ caseItem.court }}
+                            </span>
+                            <span class="px-2 py-1 text-purple-800 bg-purple-100 rounded-full">
+                              {{ caseItem.judgedate }}
+                            </span>
+                          </div>
+                        </div>
+
+                        <!-- 案例基本信息 -->
+                        <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2">
+                          <div class="space-y-2">
+                            <div class="flex items-center">
+                              <span class="w-20 text-sm font-medium text-gray-600">案件性质:</span>
+                              <span class="text-sm text-gray-800">{{
+                                caseItem.casetype || '民事'
+                              }}</span>
+                            </div>
+                            <div class="flex items-center">
+                              <span class="w-20 text-sm font-medium text-gray-600">案由:</span>
+                              <span class="text-sm text-gray-800">{{ caseItem.casecause }}</span>
+                            </div>
+                            <div class="flex items-center">
+                              <span class="w-20 text-sm font-medium text-gray-600">审理程序:</span>
+                              <span class="text-sm text-gray-800">{{ caseItem.procedure }}</span>
+                            </div>
+                          </div>
+                          <div class="space-y-2">
+                            <div class="flex items-center">
+                              <span class="w-20 text-sm font-medium text-gray-600">审理法院:</span>
+                              <span class="text-sm text-gray-800">{{ caseItem.court }}</span>
+                            </div>
+                            <div class="flex items-center">
+                              <span class="w-20 text-sm font-medium text-gray-600">判决日期:</span>
+                              <span class="text-sm text-gray-800">{{ caseItem.judgedate }}</span>
+                            </div>
+                            <div class="flex items-center">
+                              <span class="w-20 text-sm font-medium text-gray-600">所属地区:</span>
+                              <span class="text-sm text-gray-800">{{ caseItem.province }}</span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 适用法律 -->
+                        <div
+                          v-if="caseItem.applicablelaw && caseItem.applicablelaw.length > 0"
+                          class="mb-4"
+                        >
+                          <h5 class="mb-2 text-sm font-medium text-gray-700">适用法律条文:</h5>
+                          <div class="space-y-1">
+                            <div
+                              v-for="(law, lawIndex) in caseItem.applicablelaw"
+                              :key="lawIndex"
+                              class="pl-3 text-sm text-gray-600 border-l-2 border-blue-200"
+                            >
+                              {{ law }}
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 高亮内容 -->
+                        <div
+                          v-if="caseItem.highlight_list && caseItem.highlight_list.length > 0"
+                          class="mb-4"
+                        >
+                          <h5 class="mb-2 text-sm font-medium text-gray-700">关键内容:</h5>
+                          <div class="space-y-2">
+                            <div
+                              v-for="(highlight, highlightIndex) in caseItem.highlight_list"
+                              :key="highlightIndex"
+                              class="p-3 bg-yellow-50 rounded-r-lg border-l-4 border-yellow-400"
+                            >
+                              <div
+                                class="text-sm leading-relaxed text-gray-700"
+                                v-html="highlight"
+                              ></div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 案例摘要 -->
+                        <div v-if="caseItem.purpose || caseItem.chunk" class="mb-4">
+                          <h5 class="mb-2 text-sm font-medium text-gray-700">案例要点:</h5>
+                          <div class="p-3 bg-gray-50 rounded-lg">
+                            <p class="text-sm leading-relaxed text-gray-700">
+                              {{ caseItem.purpose || caseItem.chunk }}
+                            </p>
+                          </div>
+                        </div>
+
+                        <!-- 底部信息 -->
+                        <div
+                          class="flex justify-between items-center pt-3 border-t border-gray-100"
+                        >
+                          <div class="flex flex-wrap gap-2">
+                            <span class="text-xs text-gray-500">
+                              案件编号: {{ caseItem.uniqid }}
+                            </span>
+                            <span class="text-xs text-gray-500">
+                              数据来源: {{ caseItem.database }}
+                            </span>
+                          </div>
+                          <div class="text-xs text-gray-400">{{ caseItem.judgeyear }}年案例</div>
+                        </div>
+                      </div>
+                    </template>
+
+                    <!-- 原有的通用格式处理 -->
+                    <template v-else-if="Array.isArray(parsedModalContent)">
                       <!-- 如果是数组，遍历显示每个项目 -->
                       <div
                         v-for="(item, index) in parsedModalContent"
                         :key="index"
-                        class="p-5 bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow-md"
+                        class="p-3 bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow-md"
                       >
                         <!-- 标题 -->
                         <h4
@@ -205,11 +331,10 @@
                             <template v-if="item.url">
                               <!-- 如果是微信公众号链接，显示灰底div -->
                               <div
-                                v-if="isWeixinUrl(cleanUrl(item.url))"
                                 class="flex justify-between items-center p-3 bg-gray-100 rounded-lg"
                               >
                                 <div class="flex flex-1 items-center mr-3">
-                                  <span class="text-sm text-gray-700 break-all">{{
+                                  <span class="text-sm text-gray-700 break-all line-clamp-1">{{
                                     cleanUrl(item.url)
                                   }}</span>
                                 </div>
@@ -221,7 +346,7 @@
                                 </button>
                               </div>
                               <!-- 如果不是微信公众号链接，显示查看原文按钮 -->
-                              <button
+                              <!-- <button
                                 v-else
                                 @click="openUrlModal(cleanUrl(item.url))"
                                 class="inline-flex items-center mr-4 text-sm text-blue-600 underline break-all hover:text-blue-800"
@@ -240,7 +365,7 @@
                                   ></path>
                                 </svg>
                                 查看原文
-                              </button>
+                              </button> -->
                             </template>
                           </div>
 
@@ -362,12 +487,12 @@
         </div>
 
         <!-- 弹窗底部操作区 -->
-        <div class="p-4 bg-gray-50 border-t border-gray-200">
+        <div class="p-1 bg-gray-50 border-t border-gray-200">
           <div class="flex justify-between items-center">
             <div class="text-sm text-gray-500">数据来源：AI智能分析</div>
             <button
               @click="closeModal"
-              class="px-4 py-2 text-white bg-blue-600 rounded-lg transition-colors hover:bg-blue-700"
+              class="px-4 py-1 text-white bg-blue-600 rounded-lg transition-colors hover:bg-blue-700"
             >
               关闭
             </button>
@@ -590,7 +715,7 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
-  // aiService.sendToAI(newMessage, setMessage)
+  aiService.sendToAI(newMessage, setMessage)
 
   // 启动并发AI服务
   await concurrentAiService.sendConcurrentRequests(newMessage, handleConcurrentCallback)

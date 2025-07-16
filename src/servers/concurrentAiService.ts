@@ -138,11 +138,7 @@ class ConcurrentAIService {
       
       // 过滤固定字段，提取实际的数组内容
       let extractedContent = ''
-      if (responseData && responseData.data) { 
-           console.log('responseData', apiConfig.simulatedData)
-        alert(!apiConfig.dataField)
-     
-        
+      if (responseData && responseData.data) {   
         if (!apiConfig.dataField) {
             extractedContent = apiConfig.simulatedData? apiConfig.simulatedData : responseData.data
           }

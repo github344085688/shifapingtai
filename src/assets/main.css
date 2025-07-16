@@ -8,6 +8,13 @@ body,
   max-width: 1920px;
   margin: auto;
 }
+p {
+  line-height: 2;
+  padding: 4px 0;
+}
+hr {
+  padding: 4px 0;
+}
 
 .loading-dots {
   /* position: absolute;
