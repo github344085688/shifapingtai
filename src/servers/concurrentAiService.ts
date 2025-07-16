@@ -138,16 +138,17 @@ class ConcurrentAIService {
       
       // 过滤固定字段，提取实际的数组内容
       let extractedContent = ''
-      if (responseData && responseData.data) {
-        const filterKeys = ['t2wechat', 'expertview', 'qa', 'web']
+      if (responseData && responseData.data) { 
+           console.log('responseData', apiConfig.simulatedData)
+        alert(!apiConfig.dataField)
+     
         
-        // 查找第一个匹配的字段并提取其数组内容
-        for (const key of filterKeys) {
-          if (responseData.data[key] !== undefined) {
-            extractedContent = responseData.data[key]
-            break
+        if (!apiConfig.dataField) {
+            extractedContent = apiConfig.simulatedData? apiConfig.simulatedData : responseData.data
           }
-        }
+         else   {
+            extractedContent = responseData.data[apiConfig.dataField] 
+          } 
         
         // 如果没有找到匹配的字段，使用原始数据
         if (extractedContent === '') {

@@ -46,8 +46,10 @@
                 : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
             ]"
           >
+            <div v-if="message.aiLoading" class="">ai思考中...</div>
+            <AiText :popsMessage="message" />
             <!-- 并发结果显示区域 -->
-            <div class="grid grid-cols-3 gap-3 mb-4" v-if="message.sender != 'user'">
+            <div class="grid grid-cols-3 gap-3 mt-4" v-if="message.sender != 'user'">
               <div
                 v-for="item in concurrentLabels"
                 :key="item.key"
@@ -83,15 +85,13 @@
                     </div>
                   </div>
                   <!-- 相关法条特殊处理 -->
-                  <div v-else-if="item.key === 'xgft'" class="w-[20px] h-[20px] ml-1">
+
+                  <div v-else-if="item.key === 'xgft'" class="w-[20px] h-[20px] ml-1 mt4">
                     <div class="loader_item"></div>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div v-if="message.aiLoading" class="">ai思考中...</div>
-            <AiText :popsMessage="message" />
           </div>
         </div>
       </div>
@@ -199,36 +199,23 @@
                         </div>
 
                         <!-- URL链接和评分信息 -->
-                        <div
-                          class="flex justify-between items-center pt-3 border-t border-gray-100"
-                        >
+                        <div class="pt-3 border-t border-gray-100">
                           <div class="flex-1">
                             <!-- 修改后的查看原文逻辑 -->
                             <template v-if="item.url">
                               <!-- 如果是微信公众号链接，显示灰底div -->
                               <div
                                 v-if="isWeixinUrl(cleanUrl(item.url))"
-                                class="flex items-center justify-between p-3 bg-gray-100 rounded-lg"
+                                class="flex justify-between items-center p-3 bg-gray-100 rounded-lg"
                               >
-                                <div class="flex items-center flex-1 mr-3">
-                                  <svg
-                                    class="flex-shrink-0 mr-2 w-4 h-4 text-gray-600"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"
-                                      stroke-width="2"
-                                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                    ></path>
-                                  </svg>
-                                  <span class="text-sm text-gray-700 break-all">{{ cleanUrl(item.url) }}</span>
+                                <div class="flex flex-1 items-center mr-3">
+                                  <span class="text-sm text-gray-700 break-all">{{
+                                    cleanUrl(item.url)
+                                  }}</span>
                                 </div>
                                 <button
                                   @click="copyToClipboard(cleanUrl(item.url))"
-                                  class="px-3 py-1 text-xs text-white bg-blue-500 rounded hover:bg-blue-600 transition-colors"
+                                  class="px-3 py-1 text-xs text-white bg-blue-500 rounded transition-colors hover:bg-blue-600"
                                 >
                                   复制
                                 </button>
@@ -258,7 +245,10 @@
                           </div>
 
                           <!-- 相关性评分 -->
-                          <div v-if="item._score" class="flex items-center text-sm text-gray-500">
+                          <div
+                            v-if="item._score"
+                            class="flex items-center mt-2 text-sm text-gray-500"
+                          >
                             <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                               <path
                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
@@ -389,15 +379,12 @@
     <!-- URL全屏弹窗 -->
     <div v-if="showUrlModal" class="fixed inset-0 z-[60] bg-white">
       <!-- 弹窗头部 -->
-      <div class="flex justify-between items-center p-4 bg-white border-b border-gray-200 shadow-sm">
+      <div
+        class="flex justify-between items-center p-4 bg-white border-b border-gray-200 shadow-sm"
+      >
         <h2 class="text-lg font-semibold text-gray-800">查看原文</h2>
         <button @click="closeUrlModal" class="p-2 rounded-full transition-colors hover:bg-gray-100">
-          <svg
-            class="w-6 h-6 text-gray-600"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path
               stroke-linecap="round"
               stroke-linejoin="round"
@@ -407,7 +394,7 @@
           </svg>
         </button>
       </div>
-      
+
       <!-- iframe内容区域 -->
       <div class="h-[calc(100vh-64px)]">
         <iframe
@@ -489,7 +476,7 @@ const parsedModalContent = computed(() => {
 // 判断是否为微信公众号URL
 const isWeixinUrl = (url: string): boolean => {
   if (!url) return false
-  return url.includes('https://mp.weixin.qq.com/')
+  return url.startsWith('http://mp.weixin.qq.com') || url.includes('https://mp.weixin.qq.com/')
 }
 
 // 复制到剪贴板
@@ -603,7 +590,7 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
-  aiService.sendToAI(newMessage, setMessage)
+  // aiService.sendToAI(newMessage, setMessage)
 
   // 启动并发AI服务
   await concurrentAiService.sendConcurrentRequests(newMessage, handleConcurrentCallback)
@@ -664,7 +651,7 @@ const setMessage = (message: string, isDone: boolean, aiLoading: boolean) => {
 
   // 更新AI思考状态和内容
   lastMessage.aiLoading = aiLoading
-  // lastMessage.content = `${lastMessage.content}${message}`
+  lastMessage.content = `${lastMessage.content}${message}`
   scrollToBottom()
 }
 

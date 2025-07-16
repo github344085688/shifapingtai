@@ -22,6 +22,7 @@ class AIService {
         paramsBody[key] = value
       })
     }
+    
     // console.log('paramsBody', this.aiConfig)
     const response = await fetch(this.aiConfig.api, {
       method: 'POST',
