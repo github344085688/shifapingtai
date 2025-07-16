@@ -203,28 +203,58 @@
                           class="flex justify-between items-center pt-3 border-t border-gray-100"
                         >
                           <div class="flex-1">
-                            <a
-                              v-if="item.url"
-                              :href="cleanUrl(item.url)"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              class="inline-flex items-center mr-4 text-sm text-blue-600 underline break-all hover:text-blue-800"
-                            >
-                              <svg
-                                class="flex-shrink-0 mr-1 w-4 h-4"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+                            <!-- 修改后的查看原文逻辑 -->
+                            <template v-if="item.url">
+                              <!-- 如果是微信公众号链接，显示灰底div -->
+                              <div
+                                v-if="isWeixinUrl(cleanUrl(item.url))"
+                                class="flex items-center justify-between p-3 bg-gray-100 rounded-lg"
                               >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                ></path>
-                              </svg>
-                              查看原文
-                            </a>
+                                <div class="flex items-center flex-1 mr-3">
+                                  <svg
+                                    class="flex-shrink-0 mr-2 w-4 h-4 text-gray-600"
+                                    fill="none"
+                                    stroke="currentColor"
+                                    viewBox="0 0 24 24"
+                                  >
+                                    <path
+                                      stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="2"
+                                      d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                    ></path>
+                                  </svg>
+                                  <span class="text-sm text-gray-700 break-all">{{ cleanUrl(item.url) }}</span>
+                                </div>
+                                <button
+                                  @click="copyToClipboard(cleanUrl(item.url))"
+                                  class="px-3 py-1 text-xs text-white bg-blue-500 rounded hover:bg-blue-600 transition-colors"
+                                >
+                                  复制
+                                </button>
+                              </div>
+                              <!-- 如果不是微信公众号链接，显示查看原文按钮 -->
+                              <button
+                                v-else
+                                @click="openUrlModal(cleanUrl(item.url))"
+                                class="inline-flex items-center mr-4 text-sm text-blue-600 underline break-all hover:text-blue-800"
+                              >
+                                <svg
+                                  class="flex-shrink-0 mr-1 w-4 h-4"
+                                  fill="none"
+                                  stroke="currentColor"
+                                  viewBox="0 0 24 24"
+                                >
+                                  <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
+                                  ></path>
+                                </svg>
+                                查看原文
+                              </button>
+                            </template>
                           </div>
 
                           <!-- 相关性评分 -->
@@ -355,6 +385,47 @@
         </div>
       </div>
     </div>
+
+    <!-- URL全屏弹窗 -->
+    <div v-if="showUrlModal" class="fixed inset-0 z-[60] bg-white">
+      <!-- 弹窗头部 -->
+      <div class="flex justify-between items-center p-4 bg-white border-b border-gray-200 shadow-sm">
+        <h2 class="text-lg font-semibold text-gray-800">查看原文</h2>
+        <button @click="closeUrlModal" class="p-2 rounded-full transition-colors hover:bg-gray-100">
+          <svg
+            class="w-6 h-6 text-gray-600"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      
+      <!-- iframe内容区域 -->
+      <div class="h-[calc(100vh-64px)]">
+        <iframe
+          :src="currentUrl"
+          class="w-full h-full border-0"
+          frameborder="0"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+
+    <!-- 复制成功提示 -->
+    <div
+      v-if="showCopySuccess"
+      class="fixed top-4 left-1/2 transform -translate-x-1/2 z-[70] px-4 py-2 bg-green-500 text-white rounded-lg shadow-lg transition-all duration-300"
+    >
+      复制成功！
+    </div>
   </div>
 </template>
 
@@ -394,6 +465,13 @@ const currentModalKey = ref('')
 const currentModalContent = ref('')
 const currentModalTitle = ref('')
 
+// URL弹窗相关状态
+const showUrlModal = ref(false)
+const currentUrl = ref('')
+
+// 复制成功提示
+const showCopySuccess = ref(false)
+
 // 解析弹窗内容
 const parsedModalContent = computed(() => {
   if (!currentModalContent.value) return ''
@@ -407,6 +485,48 @@ const parsedModalContent = computed(() => {
     return currentModalContent.value
   }
 })
+
+// 判断是否为微信公众号URL
+const isWeixinUrl = (url: string): boolean => {
+  if (!url) return false
+  return url.includes('https://mp.weixin.qq.com/')
+}
+
+// 复制到剪贴板
+const copyToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text)
+    showCopySuccess.value = true
+    setTimeout(() => {
+      showCopySuccess.value = false
+    }, 2000)
+  } catch (err) {
+    console.error('复制失败:', err)
+    // 降级方案
+    const textArea = document.createElement('textarea')
+    textArea.value = text
+    document.body.appendChild(textArea)
+    textArea.select()
+    document.execCommand('copy')
+    document.body.removeChild(textArea)
+    showCopySuccess.value = true
+    setTimeout(() => {
+      showCopySuccess.value = false
+    }, 2000)
+  }
+}
+
+// 打开URL弹窗
+const openUrlModal = (url: string) => {
+  currentUrl.value = url
+  showUrlModal.value = true
+}
+
+// 关闭URL弹窗
+const closeUrlModal = () => {
+  showUrlModal.value = false
+  currentUrl.value = ''
+}
 
 // 清理URL，移除反引号和多余的空格
 const cleanUrl = (url: string): string => {

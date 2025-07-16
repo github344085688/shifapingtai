@@ -1,0 +1,22 @@
+
+/* 内容切换动画 */
+.content-fade-enter-active,
+.content-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.content-fade-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.content-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.content-fade-enter-to,
+.content-fade-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}

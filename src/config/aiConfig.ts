@@ -35,7 +35,7 @@ export const concurrentApis: Record<string, ApiConfig>= {
     key: 'xsyw',
     name: '相似疑问',
     api: apiMap.xsywApi,
-    top_k: 5,
+    top_k: 20,
     threshold: 0.7,
     version: 'v2',
     model: '中国法研LLM'
@@ -44,7 +44,7 @@ export const concurrentApis: Record<string, ApiConfig>= {
     key: 'wlgd', 
     name: '网络观点',
     api: apiMap.wlgdApi, 
-    top_k: 5,
+    top_k: 20,
     model: '中国法研LLM',
     version: 'v2'
   },
@@ -52,7 +52,7 @@ export const concurrentApis: Record<string, ApiConfig>= {
     key: 'cpgdz',
     name: '裁判观点', 
     api: apiMap.cpgdzApi,
-    top_k: 5,
+    top_k: 20,
     model: '中国法研LLM',
     version: 'v2',
     threshold: 0.65
@@ -61,7 +61,7 @@ export const concurrentApis: Record<string, ApiConfig>= {
     key: 'xsal',
     name: '相似案例',
     api: apiMap.xsalApi, 
-    top_k: 10,
+    top_k: 20,
     "casetype": [
     "刑事"
     ],
@@ -70,7 +70,7 @@ export const concurrentApis: Record<string, ApiConfig>= {
     key: 'swyj',
     name: '实务研究',
     api: apiMap.swyjApi,
-    top_k: 5,
+    top_k: 20,
     model: '中国法研LLM',
     threshold: 0.55,
     version: 'v2'
