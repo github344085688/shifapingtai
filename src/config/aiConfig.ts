@@ -11,7 +11,7 @@ export const api = {
  
   const apiMap = {
   xsywApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsywzsk',//相似疑问
-  // xgftApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfgzx',//相关法条
+  xgftApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsywzsk',//相关法条
   wlgdApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/wlgdzsk',//网络观点
   cpgdzApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/cpgdzsk',//裁判观点
   xsalApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsalzsk',//相似案例
@@ -44,6 +44,16 @@ export const concurrentApis: Record<string, ApiConfig>= {
     model: '中国法研LLM',
     dataField:'qa'
   },
+  xgft: {
+    key: 'xgft',
+    name: '相关法条',
+    api: apiMap.xgftApi,
+    top_k: 20,
+    model: '中国法研LLM',
+    version: 'v2',
+    threshold: 0.7,
+    dataField:'law'
+  },
   wlgd: {
     key: 'wlgd', 
     name: '网络观点',
@@ -62,6 +72,16 @@ export const concurrentApis: Record<string, ApiConfig>= {
     version: 'v2',
     threshold: 0.65,    
     dataField:'expertview'
+  },
+  swyj: {
+    key: 'swyj',
+    name: '实务研究',
+    api: apiMap.swyjApi,
+    top_k: 20,
+    model: '中国法研LLM',
+    threshold: 0.55,
+    version: 'v2',    
+    dataField:'t2wechat'
   },
   xsal: {
     key: 'xsal',
@@ -108,13 +128,13 @@ export const concurrentApis: Record<string, ApiConfig>= {
             "casecause": "民间借贷纠纷",
             "caseid": "（2018）湘0802民初3412号",
             "casetype": null,
-            "chunk": "借贷纠纷,是指公民之间、公民与非金融机构企业之间的借款行为 。 在本案中,双方的债权债务关系清楚,证据确实充分,故原告的诉讼请求,理由正当,法院予以支持 。",
+            "chunk": "借贷纠纷,是指公民之间、公民与非金融机构企业之间的借款行为 。 在本案,双方的债权债务关系清楚,证据确实充分,故原告bsol的<font style='color:red;'>诉讼</font><font style='color:red;'>请求</font>,理由正当,法院予以支持",
             "court": "张家界市永定区人民法院",
             "database": "es",
             "highlight_list": [
                 "本院认为,<font style='color:red;'>民间</font><font style='color:red;'>借贷</font><font style='color:red;'>纠纷</font>,是指公民之间、公民与非金融机构企业之间的借款行为",
-                "在本案中,原、被告双方的债权债务关系清楚,证据确实充分,故原告曲国斌的<font style='color:red;'>诉讼</font><font style='color:red;'>请求</font>,理由正当,本院予以支持",
-                "依照《中华人民共和国民法通则》第八十四条之规定,判决如下:"
+                "在本案,原、被告双方的债权债务关系清楚,证据确实充分,故原告曲国斌的<font style='color:red;'>诉讼</font><font style='color:red;'>请求</font>,理由正当,本院支持",
+                "依照《中华人民共和国民法通则》第八十四条之规定,判决书:"
             ],
             "judgedate": "2018-11-03",
             "judgeyear": "2018",
@@ -124,18 +144,8 @@ export const concurrentApis: Record<string, ApiConfig>= {
             "summyByrw": "",
             "title": "曲国斌与樊文青民间借贷纠纷一审民事判决书",
             "uniqid": "8b7c35af-1936-4fbe-b7bf-a9a8017ff210",
-            "purpose": "借贷纠纷,是指公民之间、公民与非金融机构企业之间的借款行为 。 在本案中,双方的债权债务关系清楚,证据确实充分,故原告的诉讼请求,理由正当,法院予以支持 。"
+            "purpose": "借贷纠纷,是指公民之间、公民与非金融机构企业之间的借款行为 。 在本案,双方的债权债务关系清楚,证据确实充分,故原告的诉讼请求,理由正当,法院予以支持"
         },  
     ]
-  },
-  swyj: {
-    key: 'swyj',
-    name: '实务研究',
-    api: apiMap.swyjApi,
-    top_k: 20,
-    model: '中国法研LLM',
-    threshold: 0.55,
-    version: 'v2',    
-    dataField:'t2wechat'
   }
 }

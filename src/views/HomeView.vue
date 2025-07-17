@@ -739,6 +739,7 @@ const getConcurrentResult = (
 
 // 处理并发结果点击
 const handleConcurrentResultClick = (message: any, key: string) => {
+  console.log('handleConcurrentResultClick', message.concurrentResults, key)
   const result = getConcurrentResult(message.aiLoading, message.concurrentResults, key)
 
   // 只有当结果完成且有内容时才显示

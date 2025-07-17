@@ -145,7 +145,7 @@ class ConcurrentAIService {
             extractedContent = apiConfig.simulatedData? apiConfig.simulatedData : responseData.data
           }
          else   {
-            extractedContent = responseData.data[apiConfig.dataField] 
+            extractedContent = apiConfig.simulatedData? apiConfig.simulatedData : responseData.data[apiConfig.dataField] 
           } 
         
         // 如果没有找到匹配的字段，使用原始数据
