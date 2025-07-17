@@ -51,18 +51,22 @@
             <!-- 并发结果显示区域 -->
             <div class="grid grid-cols-3 gap-2 mt-4" v-if="message.sender != 'user'">
               <div
-                v-for="item in concurrentLabels"
-                :key="item.key"
+                v-for="(result, index) in message.concurrentResults"
+                :key="result.key"
                 class="flex relative justify-center"
               >
                 <div
                   class="flex items-center text-[14px] px-1 py-1 bg-gray-100 rounded-sm transition-colors cursor-pointer hover:bg-gray-200"
-                  @click="handleConcurrentResultClick(message, item.key)"
+                  @click="handleConcurrentResultClick(message, result.key)"
                 >
-                  {{ item.label }} --{{ message.aiLoading }}--{{ message.isCompleted }}
-                  <div class="w-[20px] h-[20px] ml-1" v-if="message.aiLoading">
-                    <div class="loader_item"></div>
-                    <div v-if="message.isCompleted" class="text-green-500">✓</div>
+                  {{ concurrentLabels[index]?.label || result.name }}
+                  <div class="w-[20px] h-[20px] ml-1">
+                    <!-- 使用result.aiLoading来控制每个API的loading状态 -->
+                    <div v-if="result.aiLoading" class="loader_item"></div>
+                    <div v-else-if="result.isCompleted && !result.error" class="text-green-500">
+                      ✓
+                    </div>
+                    <div v-else-if="result.error" class="text-red-500">✗</div>
                   </div>
                 </div>
               </div>
@@ -211,7 +215,7 @@
                           v-if="caseItem.applicablelaw && caseItem.applicablelaw.length > 0"
                           class="mb-4"
                         >
-                          <h5 class="mb-2 text-sm font-medium text-gray-700">适用法律条文:</h5>
+                          <h5 class="mb-2 text-sm font-medium text-gray-700">法律依据条文:</h5>
                           <div class="space-y-1">
                             <div
                               v-for="(law, lawIndex) in caseItem.applicablelaw"
@@ -709,6 +713,12 @@ const handleConcurrentCallback = (
     // 更新并发结果
     lastMessage.concurrentResults = lastResult
 
+    // 针对每个API，分别处理aiLoading
+    lastResult.forEach((result) => {
+      // aiLoading 为未完成时 true，完成时 false
+      result.aiLoading = !result.isCompleted
+    })
+
     // 检查是否所有并发请求都完成了
     const allCompleted = lastResult.every((result) => result.isCompleted)
 
@@ -718,7 +728,12 @@ const handleConcurrentCallback = (
       globalState.aiResults = messages.value
     }
 
-    console.log(`API ${key} 完成:`, lastResult)
+    console.log(`API ${key} 状态更新:`, {
+      key,
+      isCompleted,
+      aiLoading: !isCompleted,
+      allResults: lastResult,
+    })
   }
 }
 
@@ -746,7 +761,7 @@ const setMessage = (message: string, isDone: boolean, aiLoading: boolean) => {
 
   // 更新AI思考状态和内容
   lastMessage.aiLoading = aiLoading
-  // lastMessage.content = `${lastMessage.content}${message}`
+  lastMessage.content = `${lastMessage.content}${message}`
   scrollToBottom()
 }
 
@@ -830,3 +845,5 @@ const getConcurrentContentByKey = (
   transform: translateX(0);
 }
 </style>
+
+// 并发结果显示区域的模板也需要更新 // 在模板中使用 result.aiLoading 来控制每个API的loading状态

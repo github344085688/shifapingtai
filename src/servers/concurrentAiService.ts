@@ -6,14 +6,14 @@ export interface ConcurrentResult {
   content: string
   isLoading: boolean
   isCompleted: boolean
+  aiLoading: boolean // 新增：每个API独立的aiLoading状态
   error?: string
 }
 
-
+// 修改回调接口，支持单个API的回调
 export interface ConcurrentCallback {
-  (allResults: ConcurrentResult[]): void
+  (key: string, content: string, isCompleted: boolean, error?: string): void
 }
-
 
 class ConcurrentAIService {
   private apiKey: string
@@ -32,7 +32,8 @@ class ConcurrentAIService {
         name: apiConfig.name,
         content: '',
         isLoading: false,
-        isCompleted: false
+        isCompleted: false,
+        aiLoading: false // 初始化aiLoading状态
       })
     })
   }
@@ -42,32 +43,29 @@ class ConcurrentAIService {
     return Array.from(this.results.values())
   }
 
-  // 并发调用所有API
+  // 并发调用所有API - 改为循环处理
   async sendConcurrentRequests(message: any, callback: ConcurrentCallback): Promise<void> {
     // 重置所有结果状态
     Object.values(concurrentApis).forEach(apiConfig => {
       const result = this.results.get(apiConfig.key)!
       result.isLoading = true
       result.isCompleted = false
+      result.aiLoading = true // 设置aiLoading为true
       result.content = ''
       result.error = undefined
     })
 
-    const promises = Object.values(concurrentApis).map(apiConfig => 
-      this.sendSingleRequest(apiConfig, message)
-    )
-
-    // 使用Promise.allSettled确保所有请求都完成，即使某些失败
-    await Promise.allSettled(promises)
-    
-    // 所有API完成后，调用回调函数一次
-    callback(this.getAllResults())
+    // 循环处理每个API，每个API独立处理
+    Object.values(concurrentApis).forEach(apiConfig => {
+      this.sendSingleRequest(apiConfig, message, callback)
+    })
   }
 
-  // 发送单个API请求
+  // 发送单个API请求 - 添加callback参数
   private async sendSingleRequest(
     apiConfig: typeof concurrentApis[keyof typeof concurrentApis], 
-    message: any
+    message: any,
+    callback: ConcurrentCallback
   ): Promise<void> {
     try {
       const abortController = new AbortController()
@@ -77,6 +75,10 @@ class ConcurrentAIService {
       const result = this.results.get(apiConfig.key)!
       result.isLoading = true
       result.isCompleted = false
+      result.aiLoading = true // API开始时设置aiLoading为true
+
+      // 立即回调通知API开始
+      callback(apiConfig.key, '', false)
 
       // 构建请求参数，根据配置动态添加参数
       let requestBody: any
@@ -157,17 +159,25 @@ class ConcurrentAIService {
       result.content = extractedContent
       result.isLoading = false
       result.isCompleted = true
+      result.aiLoading = false // API完成时设置aiLoading为false
+      
+      // 回调通知API完成
+      callback(apiConfig.key, extractedContent, true)
       
     } catch (error: any) {
       const result = this.results.get(apiConfig.key)!
       result.isLoading = false
       result.isCompleted = true
+      result.aiLoading = false // 出错时也设置aiLoading为false
       
       if (error.name === 'AbortError') {
         result.error = '请求已中断'
       } else {
         result.error = `网络请求失败: ${error.message}`
       }
+
+      // 回调通知API出错
+      callback(apiConfig.key, '', true, result.error)
     }
   }
 }
