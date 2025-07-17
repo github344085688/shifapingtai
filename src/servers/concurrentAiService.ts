@@ -11,7 +11,7 @@ export interface ConcurrentResult {
 
 
 export interface ConcurrentCallback {
-  (allResults: ConcurrentResult[]): void
+  (key: string, content: string, isCompleted: boolean, error?: string): void
 }
 
 
@@ -19,6 +19,7 @@ class ConcurrentAIService {
   private apiKey: string
   private model: string
   private results: Map<string, ConcurrentResult>
+  private callback?: ConcurrentCallback
 
   constructor(apiKey?: string) {
     this.apiKey = apiKey || aiConfig.apiKey
@@ -42,8 +43,10 @@ class ConcurrentAIService {
     return Array.from(this.results.values())
   }
 
-  // 并发调用所有API
+  // 并发调用所有API - 优化版本
   async sendConcurrentRequests(message: any, callback: ConcurrentCallback): Promise<void> {
+    this.callback = callback
+    
     // 重置所有结果状态
     Object.values(concurrentApis).forEach(apiConfig => {
       const result = this.results.get(apiConfig.key)!
@@ -51,32 +54,36 @@ class ConcurrentAIService {
       result.isCompleted = false
       result.content = ''
       result.error = undefined
+      
+      // 立即通知开始加载
+      this.callback?.(apiConfig.key, '', false)
     })
 
-    const promises = Object.values(concurrentApis).map(apiConfig => 
+    // 使用循环处理每个API请求
+    const apiConfigs = Object.values(concurrentApis)
+    const promises = apiConfigs.map(apiConfig => 
       this.sendSingleRequest(apiConfig, message)
     )
 
     // 使用Promise.allSettled确保所有请求都完成，即使某些失败
     await Promise.allSettled(promises)
-    
-    // 所有API完成后，调用回调函数一次
-    callback(this.getAllResults())
   }
 
-  // 发送单个API请求
+  // 发送单个API请求 - 优化版本
   private async sendSingleRequest(
     apiConfig: typeof concurrentApis[keyof typeof concurrentApis], 
     message: any
   ): Promise<void> {
+    const result = this.results.get(apiConfig.key)!
+    
     try {
       const abortController = new AbortController()
       const signal = abortController.signal
 
-      // 设置加载状态
-      const result = this.results.get(apiConfig.key)!
+      // 设置加载状态并通知
       result.isLoading = true
       result.isCompleted = false
+      this.callback?.(apiConfig.key, '', false)
 
       // 构建请求参数，根据配置动态添加参数
       let requestBody: any
@@ -158,8 +165,10 @@ class ConcurrentAIService {
       result.isLoading = false
       result.isCompleted = true
       
+      // 通知API完成
+      this.callback?.(apiConfig.key, extractedContent, true)
+      
     } catch (error: any) {
-      const result = this.results.get(apiConfig.key)!
       result.isLoading = false
       result.isCompleted = true
       
@@ -168,6 +177,9 @@ class ConcurrentAIService {
       } else {
         result.error = `网络请求失败: ${error.message}`
       }
+      
+      // 通知API出错
+      this.callback?.(apiConfig.key, '', true, result.error)
     }
   }
 }

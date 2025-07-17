@@ -59,10 +59,21 @@
                   class="flex items-center text-[14px] px-1 py-1 bg-gray-100 rounded-sm transition-colors cursor-pointer hover:bg-gray-200"
                   @click="handleConcurrentResultClick(message, item.key)"
                 >
-                  {{ item.label }} --{{ message.aiLoading }}--{{ message.isCompleted }}
-                  <div class="w-[20px] h-[20px] ml-1" v-if="message.aiLoading">
-                    <div class="loader_item"></div>
-                    <div v-if="message.isCompleted" class="text-green-500">✓</div>
+                  {{ item.label }}
+                  <div class="w-[20px] h-[20px] ml-1">
+                    <!-- 根据每个API的具体状态显示加载或完成状态 -->
+                    <div 
+                      v-if="getConcurrentApiStatus(message, item.key) === 'loading'" 
+                      class="loader_item"
+                    ></div>
+                    <div 
+                      v-else-if="getConcurrentApiStatus(message, item.key) === 'completed'" 
+                      class="text-green-500"
+                    >✓</div>
+                    <div 
+                      v-else-if="getConcurrentApiStatus(message, item.key) === 'error'" 
+                      class="text-red-500"
+                    >✗</div>
                   </div>
                 </div>
               </div>
@@ -211,7 +222,7 @@
                           v-if="caseItem.applicablelaw && caseItem.applicablelaw.length > 0"
                           class="mb-4"
                         >
-                          <h5 class="mb-2 text-sm font-medium text-gray-700">适用法律条文:</h5>
+                          <h5 class="mb-2 text-sm font-medium text-gray-700">法律依据条文:</h5>
                           <div class="space-y-1">
                             <div
                               v-for="(law, lawIndex) in caseItem.applicablelaw"
@@ -681,19 +692,36 @@ const sendMessages = async () => {
     isLoading: true, // 整体加载状态
     aiLoading: true, // AI思考状态，初始设为true
     concurrentResults: concurrentAiService.getAllResults(),
+    // 新增：每个API的独立状态跟踪
+    apiLoadingStates: initializeApiLoadingStates(),
   }
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
   aiService.sendToAI(newMessage, setMessage)
 
-  // 启动并发AI服务
+  // 启动并发AI服务 - 使用新的回调处理
   await concurrentAiService.sendConcurrentRequests(newMessage, handleConcurrentCallback)
 
   userInput.value = ''
 }
 
-// 处理并发请求的回调
+// 初始化API加载状态
+const initializeApiLoadingStates = () => {
+  const states: Record<string, 'loading' | 'completed' | 'error'> = {}
+  concurrentLabels.value.forEach(label => {
+    states[label.key] = 'loading'
+  })
+  return states
+}
+
+// 获取特定API的状态
+const getConcurrentApiStatus = (message: any, apiKey: string): 'loading' | 'completed' | 'error' | 'idle' => {
+  if (!message.apiLoadingStates) return 'idle'
+  return message.apiLoadingStates[apiKey] || 'idle'
+}
+
+// 处理并发请求的回调 - 优化版本
 const handleConcurrentCallback = (
   key: string,
   content: string,
@@ -704,21 +732,42 @@ const handleConcurrentCallback = (
   const lastMessage = messages.value[messages.value.length - 1]
   if (lastMessage && lastMessage.sender === 'assistant') {
     // 获取最新的结果
-    const lastResult = concurrentAiService.getAllResults()
+    const latestResults = concurrentAiService.getAllResults()
 
     // 更新并发结果
-    lastMessage.concurrentResults = lastResult
+    lastMessage.concurrentResults = latestResults
+
+    // 更新特定API的状态
+    if (!lastMessage.apiLoadingStates) {
+      lastMessage.apiLoadingStates = initializeApiLoadingStates()
+    }
+
+    // 根据API完成状态更新对应的加载状态
+    if (error) {
+      lastMessage.apiLoadingStates[key] = 'error'
+    } else if (isCompleted) {
+      lastMessage.apiLoadingStates[key] = 'completed'
+    } else {
+      lastMessage.apiLoadingStates[key] = 'loading'
+    }
 
     // 检查是否所有并发请求都完成了
-    const allCompleted = lastResult.every((result) => result.isCompleted)
+    const allApiCompleted = Object.values(lastMessage.apiLoadingStates).every(
+      status => status === 'completed' || status === 'error'
+    )
 
     // 如果所有并发请求都完成了，并且主要AI也完成了，则设置整体加载完成
-    if (allCompleted && !lastMessage.aiLoading) {
+    if (allApiCompleted && !lastMessage.aiLoading) {
       lastMessage.isLoading = false
       globalState.aiResults = messages.value
     }
 
-    console.log(`API ${key} 完成:`, lastResult)
+    console.log(`API ${key} 状态更新:`, {
+      key,
+      status: lastMessage.apiLoadingStates[key],
+      allCompleted: allApiCompleted,
+      content: content ? '有内容' : '无内容'
+    })
   }
 }
 
