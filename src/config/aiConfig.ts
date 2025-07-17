@@ -1,7 +1,5 @@
 export default {
-  api: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwtzx',
-  model: '中国法研LLM', 
-  apiKey: '8d0edca24a164c99bf804911fc16fd29',
+
 
   
  }
