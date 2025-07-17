@@ -319,27 +319,6 @@
                                   复制
                                 </button>
                               </div>
-                              <!-- 如果不是微信公众号链接，显示查看原文按钮 -->
-                              <!-- <button
-                                v-else
-                                @click="openUrlModal(cleanUrl(item.url))"
-                                class="inline-flex items-center mr-4 text-sm text-blue-600 underline break-all hover:text-blue-800"
-                              >
-                                <svg
-                                  class="flex-shrink-0 mr-1 w-4 h-4"
-                                  fill="none"
-                                  stroke="currentColor"
-                                  viewBox="0 0 24 24"
-                                >
-                                  <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                                  ></path>
-                                </svg>
-                                查看原文
-                              </button> -->
                             </template>
                           </div>
 
@@ -472,36 +451,6 @@
             </button>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- URL全屏弹窗 -->
-    <div v-if="showUrlModal" class="fixed inset-0 z-[60] bg-white">
-      <!-- 弹窗头部 -->
-      <div
-        class="flex justify-between items-center p-4 bg-white border-b border-gray-200 shadow-sm"
-      >
-        <h2 class="text-lg font-semibold text-gray-800">查看原文</h2>
-        <button @click="closeUrlModal" class="p-2 rounded-full transition-colors hover:bg-gray-100">
-          <svg class="w-6 h-6 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            ></path>
-          </svg>
-        </button>
-      </div>
-
-      <!-- iframe内容区域 -->
-      <div class="h-[calc(100vh-64px)]">
-        <iframe
-          :src="currentUrl"
-          class="w-full h-full border-0"
-          frameborder="0"
-          allowfullscreen
-        ></iframe>
       </div>
     </div>
 
