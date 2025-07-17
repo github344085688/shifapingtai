@@ -42,7 +42,7 @@
             class="relative rounded-xl"
             :class="[
               message.sender === 'user'
-                ? 'bg-[#B5D4FE] text-[#033968] rounded-tr-[4px] max-w-[80%]  p-[5px_15px]'
+                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  p-[5px_15px]'
                 : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
             ]"
           >
@@ -59,35 +59,10 @@
                   class="flex items-center text-[14px] px-1 py-1 bg-gray-100 rounded-sm transition-colors cursor-pointer hover:bg-gray-200"
                   @click="handleConcurrentResultClick(message, item.key)"
                 >
-                  {{ item.label }}
-                  <div
-                    class="w-[20px] h-[20px] ml-1"
-                    v-if="
-                      item.key !== 'xgft' &&
-                      getConcurrentResult(message.aiLoading, message.concurrentResults, item.key)
-                    "
-                  >
-                    <div
-                      v-if="
-                        getConcurrentResult(message.aiLoading, message.concurrentResults, item.key)
-                          ?.isLoading
-                      "
-                      class="loader_item"
-                    ></div>
-                    <div
-                      v-else-if="
-                        getConcurrentResult(message.aiLoading, message.concurrentResults, item.key)
-                          ?.isCompleted
-                      "
-                      class="text-green-500"
-                    >
-                      ✓
-                    </div>
-                  </div>
-                  <!-- 相关法条特殊处理 -->
-
-                  <div v-else-if="item.key === 'xgft'" class="w-[20px] h-[20px] ml-1 mt4">
+                  {{ item.label }} --{{ message.aiLoading }}--{{ message.isCompleted }}
+                  <div class="w-[20px] h-[20px] ml-1" v-if="message.aiLoading">
                     <div class="loader_item"></div>
+                    <div v-if="message.isCompleted" class="text-green-500">✓</div>
                   </div>
                 </div>
               </div>
@@ -134,18 +109,13 @@
       >
         <!-- 弹窗头部 -->
         <div
-          class="flex justify-between items-center px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200"
+          class="flex justify-between items-center px-4 py-2 bg-[#e23338] from-blue-50 to-indigo-50 border-b border-gray-200"
         >
-          <h2 class="text-lg font-semibold text-gray-800">
+          <h2 class="text-lg font-semibold text-white">
             {{ currentModalTitle }}
           </h2>
           <button @click="closeModal" class="p-2 rounded-full transition-colors hover:bg-gray-100">
-            <svg
-              class="w-6 h-6 text-gray-600"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 stroke-linecap="round"
                 stroke-linejoin="round"
@@ -492,7 +462,7 @@
             <div class="text-sm text-gray-500">数据来源：AI智能分析</div>
             <button
               @click="closeModal"
-              class="px-4 py-1 text-white bg-blue-600 rounded-lg transition-colors hover:bg-blue-700"
+              class="px-4 py-1 text-white bg-[#e23338] rounded-lg transition-colors hover:bg-[#e23338]"
             >
               关闭
             </button>
@@ -674,7 +644,7 @@ const messages = ref<
     isLoading?: boolean
     aiLoading?: boolean
     concurrentResults?: ConcurrentResult[]
-    selectedConcurrentResult?: string // 新增：选中的并发结果key
+    selectedConcurrentResult?: string
   }[]
 >([])
 
@@ -710,7 +680,43 @@ const sendMessages = async () => {
     sender: 'assistant' as const,
     isLoading: true, // 整体加载状态
     aiLoading: true, // AI思考状态，初始设为true
-    concurrentResults: concurrentAiService.getAllResults(),
+    concurrentResults: [
+      {
+        key: 'xsyw',
+        name: '相似疑问',
+        content: [],
+        isLoading: false,
+        isCompleted: false,
+      },
+      {
+        key: 'wlgd',
+        name: '网络观点',
+        content: {},
+        isLoading: false,
+        isCompleted: false,
+      },
+      {
+        key: 'cpgdz',
+        name: '裁判观点',
+        content: [],
+        isLoading: false,
+        isCompleted: false,
+      },
+      {
+        key: 'xsal',
+        name: '相似案例',
+        content: [],
+        isLoading: false,
+        isCompleted: false,
+      },
+      {
+        key: 'swyj',
+        name: '实务研究',
+        content: [],
+        isLoading: false,
+        isCompleted: false,
+      },
+    ],
   }
   messages.value.push(assistantMessage)
 
@@ -776,7 +782,7 @@ const setMessage = (message: string, isDone: boolean, aiLoading: boolean) => {
 
   // 更新AI思考状态和内容
   lastMessage.aiLoading = aiLoading
-  lastMessage.content = `${lastMessage.content}${message}`
+  // lastMessage.content = `${lastMessage.content}${message}`
   scrollToBottom()
 }
 
