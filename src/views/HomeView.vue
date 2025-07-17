@@ -644,7 +644,7 @@ const messages = ref<
     isLoading?: boolean
     aiLoading?: boolean
     concurrentResults?: ConcurrentResult[]
-    selectedConcurrentResult?: string
+    selectedConcurrentResult?: string // 新增：选中的并发结果key
   }[]
 >([])
 
@@ -680,43 +680,7 @@ const sendMessages = async () => {
     sender: 'assistant' as const,
     isLoading: true, // 整体加载状态
     aiLoading: true, // AI思考状态，初始设为true
-    concurrentResults: [
-      {
-        key: 'xsyw',
-        name: '相似疑问',
-        content: [],
-        isLoading: false,
-        isCompleted: false,
-      },
-      {
-        key: 'wlgd',
-        name: '网络观点',
-        content: {},
-        isLoading: false,
-        isCompleted: false,
-      },
-      {
-        key: 'cpgdz',
-        name: '裁判观点',
-        content: [],
-        isLoading: false,
-        isCompleted: false,
-      },
-      {
-        key: 'xsal',
-        name: '相似案例',
-        content: [],
-        isLoading: false,
-        isCompleted: false,
-      },
-      {
-        key: 'swyj',
-        name: '实务研究',
-        content: [],
-        isLoading: false,
-        isCompleted: false,
-      },
-    ],
+    concurrentResults: concurrentAiService.getAllResults(),
   }
   messages.value.push(assistantMessage)
 
