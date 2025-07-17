@@ -1,5 +1,7 @@
 export default {
-
+  api: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwtzx',
+  model: '中国法研LLM', 
+  apiKey: '8d0edca24a164c99bf804911fc16fd29',
 
   
  }
@@ -9,6 +11,7 @@ export const api = {
  
   const apiMap = {
   xsywApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsywzsk',//相似疑问
+  // xgftApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfgzx',//相关法条
   wlgdApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/wlgdzsk',//网络观点
   cpgdzApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/cpgdzsk',//裁判观点
   xsalApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsalzsk',//相似案例
