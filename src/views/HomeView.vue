@@ -83,7 +83,7 @@
       <button
         v-if="messages.length > 0"
         type="button"
-        class="w-[250rpx] flex items-center justify-center text-gray-500 border-none rounded-[10px] p-[10px_10px] text-sm cursor-pointer mr-2"
+        class="whitespace-nowrap flex items-center justify-center text-gray-500 border-none rounded-[10px] py-[10px] text-sm cursor-pointer mr-2"
         @click="newDialogue()"
       >
         <svg
@@ -110,7 +110,7 @@
 
       <button
         type="button"
-        class="bg-[#e23338] w-[250rpx] text-white border-none rounded-[20px] p-[10px_20px] text-sm cursor-pointer"
+        class="bg-[#e23338] whitespace-nowrap first-line: text-white border-none rounded-[20px] p-[10px_20px] text-sm cursor-pointer"
         @click="sendMessages()"
       >
         发送
@@ -681,7 +681,7 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
-  aiService.sendToAI(newMessage, setMessage)
+  // aiService.sendToAI(newMessage, setMessage)
 
   // 启动并发AI服务
   await concurrentAiService.sendConcurrentRequests(newMessage, handleConcurrentCallback)
@@ -839,5 +839,3 @@ const getConcurrentContentByKey = (
   transform: translateX(0);
 }
 </style>
-
-// 并发结果显示区域的模板也需要更新 // 在模板中使用 result.aiLoading 来控制每个API的loading状态

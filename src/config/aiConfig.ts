@@ -11,7 +11,7 @@ export const api = {
  
   const apiMap = {
   xsywApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsywzsk',//相似疑问
-  xgftApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsywzsk',//相关法条
+  xgftApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfgzsk',//相关法条
   wlgdApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/wlgdzsk',//网络观点
   cpgdzApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/cpgdzsk',//裁判观点
   xsalApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsalzsk',//相似案例
@@ -52,7 +52,7 @@ export const concurrentApis: Record<string, ApiConfig>= {
     model: '中国法研LLM',
     version: 'v2',
     threshold: 0.7,
-    dataField:'law'
+    dataField:'laws'
   },
   wlgd: {
     key: 'wlgd', 
