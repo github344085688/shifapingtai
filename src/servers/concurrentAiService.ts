@@ -142,18 +142,25 @@ class ConcurrentAIService {
       let extractedContent = ''
       if (responseData && responseData.data) {   
         if (!apiConfig.dataField) {
-            extractedContent = apiConfig.simulatedData? apiConfig.simulatedData : responseData.data
-          }
-         else   {
-            extractedContent = apiConfig.simulatedData? apiConfig.simulatedData : responseData.data[apiConfig.dataField] 
-          } 
+          // 没有指定dataField，直接使用responseData.data
+          extractedContent = responseData.data
+        } else {
+          // 有指定dataField，使用responseData.data[apiConfig.dataField]
+          extractedContent = responseData.data[apiConfig.dataField] 
+        } 
         
-        // 如果没有找到匹配的字段，使用原始数据
-        if (extractedContent === '') {
+        // 如果提取的内容为空或无效，且有simulatedData，则使用simulatedData作为备用
+        if ((!extractedContent || extractedContent === '') && apiConfig.simulatedData) {
+          extractedContent = apiConfig.simulatedData
+        }
+        
+        // 如果还是没有内容，使用原始响应数据
+        if (!extractedContent || extractedContent === '') {
           extractedContent = responseData
         }
       } else {
-        extractedContent = responseData
+        // 如果没有responseData.data，优先使用simulatedData，否则使用原始响应
+        extractedContent = apiConfig.simulatedData || responseData
       }
       
       result.content = extractedContent
