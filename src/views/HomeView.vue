@@ -294,6 +294,82 @@
                       </div>
                     </template>
 
+                    <!-- 相关法条特殊处理 -->
+                    <template
+                      v-if="currentModalKey === 'xgft' && Array.isArray(parsedModalContent)"
+                    >
+                      <div
+                        v-for="(lawItem, index) in parsedModalContent"
+                        :key="index"
+                        class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow-md"
+                      >
+                        <!-- 法条标题 -->
+                        <div class="pb-3 mb-4 border-b border-gray-100">
+                          <h4 class="mb-2 text-lg font-semibold leading-tight text-gray-800">
+                            {{ lawItem.title }}
+                          </h4>
+                          <div class="flex flex-wrap gap-2 text-sm">
+                            <span class="px-2 py-1 text-red-800 bg-red-100 rounded-full">
+                              {{ lawItem.law_type }}
+                            </span>
+                            <span class="px-2 py-1 text-green-800 bg-green-100 rounded-full">
+                              {{ lawItem.status }}
+                            </span>
+                            <span class="px-2 py-1 text-blue-800 bg-blue-100 rounded-full">
+                              {{ lawItem.department }}
+                            </span>
+                          </div>
+                        </div>
+
+                        <!-- 法条层级结构 -->
+                        <div v-if="lawItem.directory && lawItem.directory.length > 0" class="mb-4">
+                          <h5 class="mb-2 text-sm font-medium text-gray-700">法条层级:</h5>
+                          <div class="flex flex-wrap gap-2 items-center">
+                            <span
+                              v-for="(dir, dirIndex) in lawItem.directory"
+                              :key="dirIndex"
+                              class="flex items-center"
+                            >
+                              <span class="px-2 py-1 text-xs text-gray-600 rounded">
+                                {{ dir }}
+                              </span>
+                            </span>
+                          </div>
+                        </div>
+
+                        <!-- 法条内容 -->
+                        <div v-if="lawItem.content" class="mb-4">
+                          <h5 class="mb-2 text-sm font-medium text-gray-700">法条内容:</h5>
+                          <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
+                            <div class="text-sm leading-relaxed text-gray-800 whitespace-pre-wrap">
+                              {{ lawItem.content }}
+                            </div>
+                          </div>
+                        </div>
+
+                        <!-- 底部信息 -->
+                        <div
+                          class="flex justify-between items-center pt-3 border-t border-gray-100"
+                        >
+                          <div class="flex flex-wrap gap-2 text-xs text-gray-500">
+                            <span>颁布机关: {{ lawItem.department }}</span>
+                            <span>•</span>
+                            <span>法律类型: {{ lawItem.law_type }}</span>
+                            <span>•</span>
+                            <span>状态: {{ lawItem.status }}</span>
+                          </div>
+                          <div class="flex items-center text-xs text-gray-400">
+                            <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                              <path
+                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
+                              ></path>
+                            </svg>
+                            相关性: {{ (lawItem._score * 100).toFixed(1) }}%
+                          </div>
+                        </div>
+                      </div>
+                    </template>
+
                     <!-- 原有的通用格式处理 -->
                     <template v-else-if="Array.isArray(parsedModalContent)">
                       <!-- 如果是数组，遍历显示每个项目 -->
@@ -357,13 +433,6 @@
                         </div>
 
                         <!-- 类型标签 -->
-                        <div v-if="item.type" class="mt-2">
-                          <span
-                            class="inline-block px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full"
-                          >
-                            {{ item.type }}
-                          </span>
-                        </div>
                       </div>
                     </template>
 
@@ -434,13 +503,6 @@
                         </div>
 
                         <!-- 类型标签 -->
-                        <div v-if="parsedModalContent.type" class="mt-2">
-                          <span
-                            class="inline-block px-2 py-1 text-xs font-medium text-gray-600 bg-gray-100 rounded-full"
-                          >
-                            {{ parsedModalContent.type }}
-                          </span>
-                        </div>
                       </div>
                     </template>
 
