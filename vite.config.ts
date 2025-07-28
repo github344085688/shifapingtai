@@ -7,22 +7,26 @@ import autoprefixer from 'autoprefixer'
 import postcssPxtorem from 'postcss-pxtorem'
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/h5Aishifu/',
-  build: {
-    cssCodeSplit: true,
-    rollupOptions: {
-      output: {
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name?.endsWith('.css')) {
-            return 'css/[name]-[hash][extname]'
-          }
-          return 'assets/[name]-[hash][extname]'
-        },
-        chunkFileNames: 'js/[name]-[hash].js',
-        entryFileNames: 'js/[name]-[hash].js',
-      },
-    },
-    outDir: 'h5Aishifu', // 新增：指定输出目录为view
+  base: './',
+  // build: {
+  //   cssCodeSplit: true,
+  //   rollupOptions: {
+  //     output: {
+  //       assetFileNames: (assetInfo) => {
+  //         if (assetInfo.name?.endsWith('.css')) {
+  //           return 'css/[name]-[hash][extname]'
+  //         }
+  //         return 'assets/[name]-[hash][extname]'
+  //       },
+  //       chunkFileNames: 'js/[name]-[hash].js',
+  //       entryFileNames: 'js/[name]-[hash].js',
+  //     },
+  //   },
+  //   outDir: 'h5Aishifu', // 新增：指定输出目录为view
+  // },
+    build: {
+    cssCodeSplit: false,   
+    outDir: 'dist'
   },
   server: {
     fs: {

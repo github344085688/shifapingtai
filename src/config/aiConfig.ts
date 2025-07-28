@@ -15,7 +15,8 @@ export const api = {
   wlgdApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/wlgdzsk',//网络观点
   cpgdzApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/cpgdzsk',//裁判观点
   xsalApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsalzsk',//相似案例
-  swyjApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/swyjzsk'//实务研究
+  swyjApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/swyjzsk',//实务研究
+  qwsswd: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/qwsswd'//全网搜索问答
 }
 
 // 定义API配置接口
@@ -391,4 +392,15 @@ export const concurrentApis: Record<string, ApiConfig>= {
     }
 ]
   }
+}
+
+export const AcrossTheEntireNetwork ={
+    qwsswd: {
+    key: 'qwsswd',
+    name: '全网搜索问答',
+    api: apiMap.xsywApi, 
+    version: 'v2',
+    model: '中国法研LLM', 
+    stream: true
+  },
 }

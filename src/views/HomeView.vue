@@ -10,13 +10,13 @@
           </div>
         </div> -->
         <div class="text-[#ffffff] text-lg flex justify-center w-full font-bold">
-          Hi~我是法务助手！
+          Hi~我是法研智答法务助手！
         </div>
       </div>
 
       <!-- Intro Card -->
       <div class="bg-white rounded-b-xl p-5 mb-[15px] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-        司法研讨大模型服务——快速、准确、便捷的工具，帮助用户查询和获取各类法律法规信息！
+        基于大量通过AI提供专业的司法解答！
       </div>
 
       <!-- Examples Card -->
@@ -642,6 +642,7 @@ import { status } from 'juejin-state'
 import aiConfig, { api } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
 import ConcurrentAIService, { type ConcurrentResult } from '@/servers/concurrentAiService'
+import router from '@/router'
 
 const state = status()
 const globalState = state.state
@@ -649,6 +650,15 @@ const CACHE_DURATION = 12 * 60 * 60 * 1000
 defineComponent({
   name: 'Ai',
 })
+
+const gotopage = () => {
+  alert()
+  router.push({ name: 'AcrossTheEntireNetwork' })
+}
+
+// 自动滚动控制
+const autoScroll = ref(true) // 默认开启自动滚动
+const userScrolled = ref(false) // 用户是否手动滚动过
 
 onMounted(() => {
   // 3. 页面渲染前判断缓存是否有效
@@ -669,7 +679,24 @@ onMounted(() => {
     // 如果超过10分钟，不赋值（使用默认空数组）
   }
   if (globalState.aiResults) messages.value = globalState.aiResults
+
+  // 监听用户滚动事件
+  window.addEventListener('scroll', handleUserScroll)
+  window.addEventListener('touchmove', handleUserScroll)
 })
+
+// 处理用户滚动事件
+const handleUserScroll = () => {
+  const scrollTop = window.pageYOffset || document.documentElement.scrollTop
+  const windowHeight = window.innerHeight
+  const documentHeight = document.documentElement.scrollHeight
+
+  // 如果用户不在底部，说明用户手动滚动了
+  if (scrollTop + windowHeight < documentHeight - 50) {
+    userScrolled.value = true
+    autoScroll.value = false
+  }
+}
 
 // 并发标签配置
 const concurrentLabels = ref([
@@ -812,6 +839,10 @@ const sendMessages = async () => {
 
   if (message === '') return
 
+  // 重新开启自动滚动
+  autoScroll.value = true
+  userScrolled.value = false
+
   // 添加用户消息
   addMessage(message, 'user')
 
@@ -905,7 +936,11 @@ const setMessage = (message: string, isDone: boolean, aiLoading: boolean) => {
   // 更新AI思考状态和内容
   lastMessage.aiLoading = aiLoading
   lastMessage.content = `${lastMessage.content}${message}`
-  scrollToBottom()
+
+  // 只有在自动滚动开启且用户没有手动滚动时才自动滚动
+  if (autoScroll.value && !userScrolled.value) {
+    scrollToBottom()
+  }
 }
 
 const scrollToBottom = () => {
@@ -918,7 +953,11 @@ const scrollToBottom = () => {
 
 const addMessage = (content: string, sender: 'user' | 'assistant') => {
   messages.value.push({ content, sender })
-  scrollToBottom()
+
+  // 只有在自动滚动开启且用户没有手动滚动时才自动滚动
+  if (autoScroll.value && !userScrolled.value) {
+    scrollToBottom()
+  }
 }
 
 // 获取并发结果的辅助函数
