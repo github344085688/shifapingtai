@@ -42,7 +42,7 @@
             class="relative rounded-xl"
             :class="[
               message.sender === 'user'
-                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  p-[5px_15px]'
+                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px]'
                 : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
             ]"
           >
@@ -113,7 +113,7 @@
       </button>
       <input
         type="text"
-        class="flex-1 border-none bg-[#f5f7fa] rounded-[20px] p-[12px_15px] text-sm outline-none mr-2.5 text-[#666]"
+        class="flex-1 border-none mr-[50px] bg-[#f5f7fa] rounded-[20px] p-[12px_15px] text-sm outline-none text-[#666]"
         v-model="userInput"
         placeholder="向我提出问题吧"
         @keypress.enter="sendMessages()"
@@ -121,10 +121,25 @@
 
       <button
         type="button"
-        class="bg-[#e23338] whitespace-nowrap first-line: text-white border-none rounded-[20px] p-[10px_20px] text-sm cursor-pointer"
+        class="absolute mr-4 right-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-[#e23338] rounded-full flex items-center justify-center cursor-pointer hover:bg-[#d12329] transition-colors"
         @click="sendMessages()"
       >
-        发送
+        <svg
+          t="1753668793186"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="5335"
+          width="20"
+          height="20"
+        >
+          <path
+            d="M311.04 692.224L97.28 598.5792a38.0416 38.0416 0 0 1-3.6352-67.84l799.1808-457.472a38.0416 38.0416 0 0 1 56.6272 37.7856L854.016 866.8672a37.9904 37.9904 0 0 1-53.9136 29.6448l-223.5392-105.1648L471.04 937.9328a42.752 42.752 0 0 1-77.4656-25.0368l0.6656-190.5664 387.7376-455.0144z"
+            fill="#ffffff"
+            p-id="5336"
+          ></path>
+        </svg>
       </button>
     </div>
 
@@ -678,7 +693,7 @@ onMounted(() => {
       messages.value = globalState.aiResults
       // 如果有缓存的对话，更新title显示对话数量
       if (messages.value.length > 0) {
-        const userMessages = messages.value.filter(msg => msg.sender === 'user')
+        const userMessages = messages.value.filter((msg) => msg.sender === 'user')
         updateTitle(`法务助手 - 首页 (${userMessages.length}条对话)`)
       }
     } else {
@@ -859,7 +874,7 @@ const sendMessages = async () => {
   addMessage(message, 'user')
 
   // 更新title显示对话数量
-  const userMessages = messages.value.filter(msg => msg.sender === 'user')
+  const userMessages = messages.value.filter((msg) => msg.sender === 'user')
   updateTitle(`法务助手 - 首页 (${userMessages.length}条对话)`)
 
   const newMessage = {

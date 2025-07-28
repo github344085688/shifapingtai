@@ -1,21 +1,9 @@
 <template>
   <div class="w-full h-full pb-[64px] bg-gray-50">
-    <div class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
-      <div
-        class="flex items-center bg-gradient-to-r from-[#e23338] via-[#f04b4e] to-[#e23338] bg-cover bg-center p-[10px_15px] mt-5 rounded-t-xl"
-      >
-        <div class="text-[#ffffff] text-lg flex justify-center w-full font-bold">
-          Hi~我是法务助手！
-        </div>
-      </div>
+    <!-- Welcome Screen - 当没有消息时显示 -->
 
-      <!-- Intro Card -->
-      <div class="bg-white rounded-b-xl p-5 mb-[15px] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
-        司法研讨大模型服务——快速、准确、便捷的工具，帮助用户查询和获取各类法律法规信息！
-      </div>
-
-      <!-- Examples Card -->
-
+    <!-- Chat Interface - 当有消息时显示 -->
+    <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
       <!-- Chat Container -->
       <div class="mb-[70px] pb-5" ref="chatContainer">
         <div
@@ -27,7 +15,7 @@
             class="relative rounded-xl"
             :class="[
               message.sender === 'user'
-                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  p-[5px_15px]'
+                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px]'
                 : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
             ]"
           >
@@ -38,8 +26,67 @@
       </div>
     </div>
 
+    <!-- 没有数据初始化 -->
+    <div
+      v-if="messages.length < 1"
+      class="flex flex-col justify-center items-center px-4 w-full h-screen"
+    >
+      <div class="max-w-[400px] w-full">
+        <!-- DeepSeek Logo -->
+        <div class="flex justify-center mb-2">
+          <div class="w-[40px] h-[40px] rounded">
+            <img src="@/assets/img/logo.png" alt="" />
+          </div>
+        </div>
+
+        <!-- Welcome Text -->
+        <div class="mb-2">
+          <h1 class="text-[20px] font-bold text-red-700 text-center mb-8">
+            我是法驿通助手，很高兴见到你！
+          </h1>
+          <p class="text-sm leading-relaxed text-gray-600">
+            司法研讨大模型服务——快速、准确、便捷的工具，帮助用户查询和获取各类法律法规信息！
+          </p>
+        </div>
+
+        <!-- Input Area for Welcome Screen -->
+        <div class="relative">
+          <input
+            type="text"
+            class="w-full border border-gray-200 rounded-full py-3 px-4 pr-12 text-sm outline-none focus:border-[#e23338] transition-colors"
+            v-model="userInput"
+            placeholder="给助手发消息"
+            @keypress.enter="sendMessages()"
+          />
+          <button
+            type="button"
+            class="absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-[#e23338] rounded-full flex items-center justify-center cursor-pointer hover:bg-[#d12329] transition-colors"
+            @click="sendMessages()"
+          >
+            <svg
+              t="1753668793186"
+              class="icon"
+              viewBox="0 0 1024 1024"
+              version="1.1"
+              xmlns="http://www.w3.org/2000/svg"
+              p-id="5335"
+              width="20"
+              height="20"
+            >
+              <path
+                d="M311.04 692.224L97.28 598.5792a38.0416 38.0416 0 0 1-3.6352-67.84l799.1808-457.472a38.0416 38.0416 0 0 1 56.6272 37.7856L854.016 866.8672a37.9904 37.9904 0 0 1-53.9136 29.6448l-223.5392-105.1648L471.04 937.9328a42.752 42.752 0 0 1-77.4656-25.0368l0.6656-190.5664 387.7376-455.0144z"
+                fill="#ffffff"
+                p-id="5336"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
     <!-- Input Area -->
     <div
+      v-if="messages.length > 0"
       class="fixed bottom-0 left-0 right-0 w-full bg-white p-2.5 flex justify-between items-center shadow-[0_-2px_10px_rgba(0,0,0,0.05)]"
     >
       <button
@@ -64,7 +111,7 @@
       </button>
       <input
         type="text"
-        class="flex-1 border-none bg-[#f5f7fa] rounded-[20px] p-[12px_15px] text-sm outline-none mr-2.5 text-[#666]"
+        class="flex-1 mr-[50px] border-none bg-[#f5f7fa] rounded-[20px] p-[12px_15px] text-sm outline-none text-[#666]"
         v-model="userInput"
         placeholder="向我提出问题吧"
         @keypress.enter="sendMessages()"
@@ -72,10 +119,25 @@
 
       <button
         type="button"
-        class="bg-[#e23338] whitespace-nowrap first-line: text-white border-none rounded-[20px] p-[10px_20px] text-sm cursor-pointer"
+        class="absolute mr-4 right-1 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-[#e23338] rounded-full flex items-center justify-center cursor-pointer hover:bg-[#d12329] transition-colors"
         @click="sendMessages()"
       >
-        发送
+        <svg
+          t="1753668793186"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="5335"
+          width="20"
+          height="20"
+        >
+          <path
+            d="M311.04 692.224L97.28 598.5792a38.0416 38.0416 0 0 1-3.6352-67.84l799.1808-457.472a38.0416 38.0416 0 0 1 56.6272 37.7856L854.016 866.8672a37.9904 37.9904 0 0 1-53.9136 29.6448l-223.5392-105.1648L471.04 937.9328a42.752 42.752 0 0 1-77.4656-25.0368l0.6656-190.5664 387.7376-455.0144z"
+            fill="#ffffff"
+            p-id="5336"
+          ></path>
+        </svg>
       </button>
     </div>
   </div>
@@ -124,7 +186,7 @@ onMounted(() => {
       messages.value = globalState.acrossTheEntireNetwork.aiResults
       // 如果有缓存的对话，更新title显示对话数量
       if (messages.value.length > 0) {
-        const userMessages = messages.value.filter(msg => msg.sender === 'user')
+        const userMessages = messages.value.filter((msg) => msg.sender === 'user')
         updateTitle(`法务助手 - 全网搜索问答 (${userMessages.length}条对话)`)
       }
     } else {
@@ -216,7 +278,7 @@ const sendMessages = async () => {
   addMessage(message, 'user')
 
   // 更新title显示对话数量
-  const userMessages = messages.value.filter(msg => msg.sender === 'user')
+  const userMessages = messages.value.filter((msg) => msg.sender === 'user')
   updateTitle(`法务助手 - 全网搜索问答 (${userMessages.length}条对话)`)
 
   const newMessage = {
