@@ -643,10 +643,15 @@ import aiConfig, { api } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
 import ConcurrentAIService, { type ConcurrentResult } from '@/servers/concurrentAiService'
 import router from '@/router'
+import { useTitle } from '@/composables/useTitle'
 
 const state = status()
 const globalState = state.state
 const CACHE_DURATION = 12 * 60 * 60 * 1000
+
+// 使用动态title功能
+const { title, updateTitle } = useTitle('法务助手 - 首页')
+
 defineComponent({
   name: 'Ai',
 })
@@ -671,6 +676,11 @@ onMounted(() => {
     // 如果时间差小于常量（10分钟），则使用缓存
     if (timeDifference < CACHE_DURATION) {
       messages.value = globalState.aiResults
+      // 如果有缓存的对话，更新title显示对话数量
+      if (messages.value.length > 0) {
+        const userMessages = messages.value.filter(msg => msg.sender === 'user')
+        updateTitle(`法务助手 - 首页 (${userMessages.length}条对话)`)
+      }
     } else {
       messages.value = []
       delete globalState.aiResults
@@ -740,6 +750,8 @@ const newDialogue = () => {
   messages.value = []
   delete globalState.aiResults
   delete globalState.generalAiTime
+  // 重置title为默认值
+  updateTitle('法务助手 - 首页')
 }
 // 判断是否为微信公众号URL
 const isWeixinUrl = (url: string): boolean => {
@@ -845,6 +857,10 @@ const sendMessages = async () => {
 
   // 添加用户消息
   addMessage(message, 'user')
+
+  // 更新title显示对话数量
+  const userMessages = messages.value.filter(msg => msg.sender === 'user')
+  updateTitle(`法务助手 - 首页 (${userMessages.length}条对话)`)
 
   const newMessage = {
     role: 'user',
