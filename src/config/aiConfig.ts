@@ -18,6 +18,11 @@ export const api = {
   swyjApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/swyjzsk',//实务研究
   qwsswd: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/qwsswd',//全网搜索问答
   flfgzx: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfgzx',//法律法规
+  flwsxz: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwsxz',//法律文书写作
+  ssclsc: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/ssclsc',//诉讼策略生成
+  flfxjy: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfxjy',//法律分析建议(诉讼策略)
+  flfxyj: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfxyj',//法律分析意见(抗辩策略)
+  dsjsspgbg: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/dsjsspgbg',//大数据胜诉评估报告
 }
 
 // 定义API配置接口
@@ -398,17 +403,65 @@ export const concurrentApis: Record<string, ApiConfig>= {
 export const AcrossTheEntireNetwork:any ={ 
     key: 'qwsswd',
     name: '全网搜索问答',
-    api: apiMap.qwsswd, 
-    version: 'v2',
+    api: apiMap.qwsswd,  
     model: '中国法研LLM', 
     stream: true 
 }
 
 export const LawsAndRegulations:any ={ 
-    key: 'qwsswd',
+    key: 'flfgzx',
     name: '法律法规',
-    api: apiMap.flfgzx, 
-    version: 'v2',
+    api: apiMap.flfgzx,  
     model: '中国法研LLM', 
     stream: true 
+}
+
+export const legalDocumentWriting:any ={ 
+    key: 'flwsxz',
+    name: '法律文书写作',
+    api: apiMap.flwsxz,  
+    model: '中国法研LLM', 
+    stream: true 
+}
+
+export const litigationStrategyGeneration:any ={ 
+    key: 'ssclsc',
+    name: '诉讼策略生成',
+    api: apiMap.ssclsc, 
+    model: '中国法研LLM', 
+    stream: true 
+}
+
+
+export const litigationStrategy:any ={ 
+    key: 'flfxjy',
+    name: '法律分析意见诉讼策略',
+    api: apiMap.flfxjy, 
+    model: '中国法研LLM', 
+    stream: true 
+}
+
+
+export const defenseStrategy:any ={ 
+    key: 'flfxyj',
+    name: '法律分析意见抗辩策略',
+    api: apiMap.flfxyj, 
+    model: '中国法研LLM', 
+    stream: true 
+}
+
+export const bigDataVictoryAssessmentReport:any ={ 
+    key: 'dsjsspgbg',
+    name: '法律分析意见抗辩策略',
+    api: apiMap.dsjsspgbg,  
+    parameters:{
+      "amount": "1.456512345E7",
+      "caseCause": "离婚纠纷",
+      "province": "北京",
+      "offset": 0,
+      "limit": 10,
+      "claim": "请求获得子女抚养权",
+      "essentials": "0,原告是男 0,重婚或同居",
+      "order": "desc"
+      }
 }

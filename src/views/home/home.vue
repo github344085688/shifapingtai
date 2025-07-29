@@ -57,7 +57,7 @@
         >
           <div class="mb-4 text-4xl">🎯</div>
           <h3 class="mb-3 text-lg font-semibold text-gray-800">诉讼策略生成</h3>
-          <p class="text-sm leading-relaxed text-gray-600">为原告方提供诉讼、抗辩策略</p>
+          <p class="text-sm leading-relaxed text-gray-600">为原告方提供诉讼</p>
         </div>
 
         <div
@@ -65,7 +65,7 @@
           @click="navigateTo('/litigationStrategy')"
         >
           <div class="mb-4 text-4xl">⚔️</div>
-          <h3 class="mb-3 text-lg font-semibold text-gray-800">诉讼策略</h3>
+          <h3 class="mb-3 text-lg font-semibold text-gray-800">法律分析意见<br />诉讼策略</h3>
           <p class="text-sm leading-relaxed text-gray-600">法律分析意见-诉讼策略</p>
         </div>
 
@@ -74,7 +74,7 @@
           @click="navigateTo('/defenseStrategy')"
         >
           <div class="mb-4 text-4xl">🛡️</div>
-          <h3 class="mb-3 text-lg font-semibold text-gray-800">抗辩策略</h3>
+          <h3 class="mb-3 text-lg font-semibold text-gray-800">法律分析意见<br />抗辩策略</h3>
           <p class="text-sm leading-relaxed text-gray-600">法律分析意见-抗辩策略</p>
         </div>
 

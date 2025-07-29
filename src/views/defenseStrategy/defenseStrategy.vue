@@ -42,7 +42,7 @@
 import { ref, defineComponent, nextTick, onMounted } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
-import aiConfig, { AcrossTheEntireNetwork } from '@/config/aiConfig'
+import aiConfig, { defenseStrategy } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
@@ -52,10 +52,10 @@ const globalState = state.state
 const CACHE_DURATION = 12 * 60 * 60 * 1000
 
 // 使用动态title功能
-const { title, updateTitle } = useTitle('法务助手 - 全网搜索问答')
+const { title, updateTitle } = useTitle('法律分析意见-抗辩策略')
 
 defineComponent({
-  name: 'AcrossTheEntireNetwork',
+  name: 'defenseStrategy',
 })
 
 // 自动滚动控制
@@ -64,35 +64,31 @@ const userScrolled = ref(false)
 
 onMounted(() => {
   // 初始化 acrossTheEntireNetwork 对象（如果不存在）
-  if (!globalState.acrossTheEntireNetwork) {
-    globalState.acrossTheEntireNetwork = {}
+  if (!globalState.defenseStrategy) {
+    globalState.defenseStrategy = {}
   }
 
   // 页面渲染前判断缓存是否有效
-  if (
-    globalState.acrossTheEntireNetwork.aiResults &&
-    globalState.acrossTheEntireNetwork.generalAiTime
-  ) {
+  if (globalState.defenseStrategy.aiResults && globalState.defenseStrategy.generalAiTime) {
     const currentTime = Date.now()
-    const savedTime = globalState.acrossTheEntireNetwork.generalAiTime
+    const savedTime = globalState.defenseStrategy.generalAiTime
     const timeDifference = currentTime - savedTime
 
     // 如果时间差小于常量（12小时），则使用缓存
     if (timeDifference < CACHE_DURATION) {
-      messages.value = globalState.acrossTheEntireNetwork.aiResults
+      messages.value = globalState.defenseStrategy.aiResults
       // 如果有缓存的对话，更新title显示对话数量
       if (messages.value.length > 0) {
         const userMessages = messages.value.filter((msg) => msg.sender === 'user')
-        updateTitle(`法务助手 - 全网搜索问答 (${userMessages.length}条对话)`)
+        updateTitle(`法律分析意见-抗辩策略`)
       }
     } else {
       messages.value = []
-      delete globalState.acrossTheEntireNetwork.aiResults
-      delete globalState.acrossTheEntireNetwork.generalAiTime
+      delete globalState.defenseStrategy.aiResults
+      delete globalState.defenseStrategy.generalAiTime
     }
   }
-  if (globalState.acrossTheEntireNetwork.aiResults)
-    messages.value = globalState.acrossTheEntireNetwork.aiResults
+  if (globalState.defenseStrategy.aiResults) messages.value = globalState.defenseStrategy.aiResults
 
   // 监听用户滚动事件
   window.addEventListener('scroll', handleUserScroll)
@@ -115,12 +111,12 @@ const handleUserScroll = () => {
 // 开启新对话
 const newDialogue = () => {
   messages.value = []
-  if (globalState.acrossTheEntireNetwork) {
-    delete globalState.acrossTheEntireNetwork.aiResults
-    delete globalState.acrossTheEntireNetwork.generalAiTime
+  if (globalState.defenseStrategy) {
+    delete globalState.defenseStrategy.aiResults
+    delete globalState.defenseStrategy.generalAiTime
   }
   // 重置title为默认值
-  updateTitle('法务助手 - 全网搜索问答')
+  updateTitle('法律分析意见-抗辩策略')
 }
 
 // 从URL参数获取apiKey的函数
@@ -128,12 +124,12 @@ const getApiKeyFromUrl = (): string => {
   const urlParams = new URLSearchParams(window.location.search)
   return urlParams.get('apiKey') || aiConfig.apiKey
 }
-console.log(AcrossTheEntireNetwork)
+// console.log(defenseStrategy)
 // 创建AIService实例时传入配置
 const aiConfigs = {
-  api: AcrossTheEntireNetwork.api,
+  api: defenseStrategy.api,
   apiKey: getApiKeyFromUrl(),
-  model: AcrossTheEntireNetwork.model,
+  model: defenseStrategy.model,
 }
 
 const aiService = new AIService(aiConfigs)
@@ -175,8 +171,7 @@ const sendMessages = async () => {
   addMessage(message, 'user')
 
   // 更新title显示对话数量
-  const userMessages = messages.value.filter((msg) => msg.sender === 'user')
-  updateTitle(`法务助手 - 全网搜索问答 (${userMessages.length}条对话)`)
+  updateTitle(`法律分析意见-抗辩策略`)
 
   const newMessage = {
     role: 'user',
@@ -212,7 +207,7 @@ const setMessage = (
   if (!lastMessage || lastMessage.sender != 'assistant') {
     return
   }
-  console.log('setMessage', messages.value, isDone, isThinking, lastMessage)
+  // console.log('setMessage', messages.value, isDone, isThinking, lastMessage)
   if (isDone) {
     if (isError) {
       lastMessage.content = `${lastMessage.content}${message}`
@@ -221,12 +216,12 @@ const setMessage = (
     lastMessage.isLoading = false
 
     // 确保 acrossTheEntireNetwork 对象存在
-    if (!globalState.acrossTheEntireNetwork) {
-      globalState.acrossTheEntireNetwork = {}
+    if (!globalState.defenseStrategy) {
+      globalState.defenseStrategy = {}
     }
 
-    globalState.acrossTheEntireNetwork.aiResults = messages.value
-    globalState.acrossTheEntireNetwork.generalAiTime = Date.now()
+    globalState.defenseStrategy.aiResults = messages.value
+    globalState.defenseStrategy.generalAiTime = Date.now()
     return
   }
 

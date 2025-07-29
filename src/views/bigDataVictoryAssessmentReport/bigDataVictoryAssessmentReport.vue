@@ -7,34 +7,6 @@
       @sendMessages="sendMessages"
       @newDialogue="newDialogue"
     />
-    <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
-      <!-- Chat Container -->
-      <div class="pb-5" ref="chatContainer">
-        <div
-          v-for="(message, index) in messages"
-          :key="index"
-          :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
-        >
-          <div
-            class="relative rounded-xl"
-            :class="[
-              message.sender === 'user'
-                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px]'
-                : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
-            ]"
-          >
-            <div v-if="message.aiLoading" class="">ai思考中...</div>
-            <!-- 思考过程显示 -->
-            <div
-              v-if="message.thinkingProcess"
-              class="mb-4 thinking-process"
-              v-html="message.thinkingProcess"
-            ></div>
-            <AiText :popsMessage="message" />
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 
@@ -42,7 +14,7 @@
 import { ref, defineComponent, nextTick, onMounted } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
-import aiConfig, { AcrossTheEntireNetwork } from '@/config/aiConfig'
+import aiConfig, { bigDataVictoryAssessmentReport } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
@@ -55,7 +27,7 @@ const CACHE_DURATION = 12 * 60 * 60 * 1000
 const { title, updateTitle } = useTitle('法务助手 - 全网搜索问答')
 
 defineComponent({
-  name: 'AcrossTheEntireNetwork',
+  name: 'bigDataVictoryAssessmentReport',
 })
 
 // 自动滚动控制
@@ -63,23 +35,23 @@ const autoScroll = ref(true)
 const userScrolled = ref(false)
 
 onMounted(() => {
-  // 初始化 acrossTheEntireNetwork 对象（如果不存在）
-  if (!globalState.acrossTheEntireNetwork) {
-    globalState.acrossTheEntireNetwork = {}
+  // 初始化 bigDataVictoryAssessmentReport 对象（如果不存在）
+  if (!globalState.bigDataVictoryAssessmentReport) {
+    globalState.bigDataVictoryAssessmentReport = {}
   }
 
   // 页面渲染前判断缓存是否有效
   if (
-    globalState.acrossTheEntireNetwork.aiResults &&
-    globalState.acrossTheEntireNetwork.generalAiTime
+    globalState.bigDataVictoryAssessmentReport.aiResults &&
+    globalState.bigDataVictoryAssessmentReport.generalAiTime
   ) {
     const currentTime = Date.now()
-    const savedTime = globalState.acrossTheEntireNetwork.generalAiTime
+    const savedTime = globalState.bigDataVictoryAssessmentReport.generalAiTime
     const timeDifference = currentTime - savedTime
 
     // 如果时间差小于常量（12小时），则使用缓存
     if (timeDifference < CACHE_DURATION) {
-      messages.value = globalState.acrossTheEntireNetwork.aiResults
+      messages.value = globalState.bigDataVictoryAssessmentReport.aiResults
       // 如果有缓存的对话，更新title显示对话数量
       if (messages.value.length > 0) {
         const userMessages = messages.value.filter((msg) => msg.sender === 'user')
@@ -87,12 +59,12 @@ onMounted(() => {
       }
     } else {
       messages.value = []
-      delete globalState.acrossTheEntireNetwork.aiResults
-      delete globalState.acrossTheEntireNetwork.generalAiTime
+      delete globalState.bigDataVictoryAssessmentReport.aiResults
+      delete globalState.bigDataVictoryAssessmentReport.generalAiTime
     }
   }
-  if (globalState.acrossTheEntireNetwork.aiResults)
-    messages.value = globalState.acrossTheEntireNetwork.aiResults
+  if (globalState.bigDataVictoryAssessmentReport.aiResults)
+    messages.value = globalState.bigDataVictoryAssessmentReport.aiResults
 
   // 监听用户滚动事件
   window.addEventListener('scroll', handleUserScroll)
@@ -115,9 +87,9 @@ const handleUserScroll = () => {
 // 开启新对话
 const newDialogue = () => {
   messages.value = []
-  if (globalState.acrossTheEntireNetwork) {
-    delete globalState.acrossTheEntireNetwork.aiResults
-    delete globalState.acrossTheEntireNetwork.generalAiTime
+  if (globalState.bigDataVictoryAssessmentReport) {
+    delete globalState.bigDataVictoryAssessmentReport.aiResults
+    delete globalState.bigDataVictoryAssessmentReport.generalAiTime
   }
   // 重置title为默认值
   updateTitle('法务助手 - 全网搜索问答')
@@ -128,12 +100,12 @@ const getApiKeyFromUrl = (): string => {
   const urlParams = new URLSearchParams(window.location.search)
   return urlParams.get('apiKey') || aiConfig.apiKey
 }
-console.log(AcrossTheEntireNetwork)
+console.log(bigDataVictoryAssessmentReport)
 // 创建AIService实例时传入配置
 const aiConfigs = {
-  api: AcrossTheEntireNetwork.api,
+  api: bigDataVictoryAssessmentReport.api,
   apiKey: getApiKeyFromUrl(),
-  model: AcrossTheEntireNetwork.model,
+  model: bigDataVictoryAssessmentReport.model,
 }
 
 const aiService = new AIService(aiConfigs)
@@ -220,13 +192,13 @@ const setMessage = (
     lastMessage.aiLoading = false
     lastMessage.isLoading = false
 
-    // 确保 acrossTheEntireNetwork 对象存在
-    if (!globalState.acrossTheEntireNetwork) {
-      globalState.acrossTheEntireNetwork = {}
+    // 确保 bigDataVictoryAssessmentReport 对象存在
+    if (!globalState.bigDataVictoryAssessmentReport) {
+      globalState.bigDataVictoryAssessmentReport = {}
     }
 
-    globalState.acrossTheEntireNetwork.aiResults = messages.value
-    globalState.acrossTheEntireNetwork.generalAiTime = Date.now()
+    globalState.bigDataVictoryAssessmentReport.aiResults = messages.value
+    globalState.bigDataVictoryAssessmentReport.generalAiTime = Date.now()
     return
   }
 
