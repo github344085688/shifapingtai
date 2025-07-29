@@ -455,13 +455,13 @@ export const bigDataVictoryAssessmentReport:any ={
     name: '法律分析意见抗辩策略',
     api: apiMap.dsjsspgbg,  
     parameters:{
-      "amount": "1.456512345E7",
+      "amount": "1456512345",
       "caseCause": "离婚纠纷",
       "province": "北京",
       "offset": 0,
       "limit": 10,
       "claim": "请求获得子女抚养权",
-      "essentials": "0,原告是男 0,重婚或同居",
+      "essentials": "原告是男 重婚或同居",
       "order": "desc"
       }
 }
