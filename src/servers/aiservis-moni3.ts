@@ -10,8 +10,6 @@ class AIService {
   }
 
   async sendToAI(message: any, callback: any) {
-        
- 
     let systemMessages = [
       {
         role: 'system',
@@ -31,70 +29,24 @@ class AIService {
     }
     
     // console.log('paramsBody', this.aiConfig)
-    try {
-      const response = await fetch(this.aiConfig.api, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json', 
-          'Access-Control-Allow-Origin': '*', 
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE' , 
-          Authorization: 'Bearer ' + this.aiConfig.apiKey,
-        }, 
-        body: JSON.stringify({
-          model: this.aiConfig.model,
-          messages: [  message],
-          stream: true,
-        }),
-        signal: signal,
-      })
+    const response = await fetch(this.aiConfig.api, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+        'Access-Control-Allow-Origin': '*', 
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE' , 
+        Authorization: 'Bearer ' + this.aiConfig.apiKey,
+      }, 
+      body: JSON.stringify({
+        model: this.aiConfig.model,
+        messages: [  message],
+        stream: true,
+      }),
+      signal: signal,
+    })
 
-      // 检查HTTP状态码
-      if (!response.ok) {
-        if (response.status === 504) {
-          // 504 Gateway Timeout 错误处理
-          callback('<div style="color: red; font-weight: bold;">服务器错误</div>', true, false)
-          return
-        } else if (response.status === 401) {
-          // 401 未授权错误处理
-          callback('<div style="color: red; font-weight: bold;">账号未登录</div>', true, false)
-          return
-        } else {
-          // 其他HTTP错误
-          callback(`<div style="color: red; font-weight: bold;">请求失败 (${response.status})</div>`, true, false)
-          return
-        }
-      }
-
-      await this.responseReader(response, abortController, callback, hasShownThinkingHeader, hasShownAnswerHeader)
-    } catch (error: any) {
-       console.log('Failed to fetch', error  )  
-        // callback('<div style="color: red; font-weight: bold;">网络错误</div>', false, true)
  
-      // 处理网络错误或其他异常
-      if (error.name === 'AbortError') {
-        callback('<div style="color: orange; font-weight: bold;">【请求已中断】</div>', true, false,true);
-         return;
-      } else if (error.message && error.message.includes('504')) {
-        // 504 Gateway Timeout 错误（在网络层面抛出的异常）
-        callback('<div style="color: red; font-weight: bold;">服务器错误</div>',true, false,true);
-         return;
-      } else if (error.message && error.message.includes('timeout')) {
-        // 超时错误
-        callback('<div style="color: red; font-weight: bold;">请求超时</div>',true, false,true);
-         return;
-      } else if (error.message && error.message.includes('Failed to fetch')) {
-        // 网络连接失败
-        callback('<div style="color: red; font-weight: bold;">网络连接失败</div>',true, false,true);
-         return;
-      }else if (error.includes('Failed to fetch')) { 
-         callback('<div style="color: red; font-weight: bold;">网络错误</div>', true, false,true);
-        return;
-      } else { 
-        // 其他未知错误
-       
-       callback('<div style="color: red; font-weight: bold;">网络错误</div>', true, false,true);
-      }
-    }
+    await this.responseReader(response, abortController, callback, hasShownThinkingHeader, hasShownAnswerHeader)
   }
 
   private async responseReader(response: any, abortController: any, callback: any, hasShownThinkingHeader: boolean, hasShownAnswerHeader: boolean) {
@@ -162,7 +114,7 @@ class AIService {
                   case 'start_res':
                     // 处理搜索结果开始
                     if (!hasShownThinkingHeader) {
-                      callback('<div style="color: #888; margin: 8px 0;"><strong>搜索过程：</strong>📊 开始获取搜索结果...</div>', false, true)
+                      callback('<div style="color: #888; margin: 8px 0;"><strong>推理过程：</strong>📊 开始获取搜索结果...</div>', false, true)
                       hasShownThinkingHeader = true
                     } else {
                       callback('<div style="color: #888; margin: 8px 0;">📊 开始获取搜索结果...</div>', false, true)
@@ -181,10 +133,10 @@ class AIService {
                           formattedContent = this.processHtmlContent(formattedContent)
                           
                           if (!hasShownThinkingHeader) {
-                            callback(`<div style="color: #888; margin: 8px 0;"><strong>推理过程：</strong></div><div style="background: #f9f9f9;  text-gray-500  padding: 16px; margin: 8px 0; border-radius: 8px;   line-height: 1.6;">${formattedContent}</div>`, false, true)
+                            callback(`<div style="color: #888; margin: 8px 0;"><strong>推理过程：</strong></div><div style="background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px;   line-height: 1.6;">${formattedContent}</div>`, false, true)
                             hasShownThinkingHeader = true
                           } else {
-                            callback(`<div style="background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px; text-gray-500   line-height: 1.6;">${formattedContent}</div>`, false, true)
+                            callback(`<div style="background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px;   line-height: 1.6;">${formattedContent}</div>`, false, true)
                           }
                         }
                       } catch (e) {

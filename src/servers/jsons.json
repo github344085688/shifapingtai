@@ -1,8 +1,6831 @@
-{
-    "question": "被告人酒后驾驶",
-    "top_k": 10,
-    "casetype": [
-        "刑事"
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
     ],
-    "step": "5"
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "我",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "将",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "根",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "据",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "思",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "考",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "过",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "程",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "进",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "一",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "步",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "搜",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "索",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "相",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "关",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "网",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "络",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "知",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "识",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "进",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "行",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "完",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "善",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "、",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "验",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "证",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "网",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "络",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "搜",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "索",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "语",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "句",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "如",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "下",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "：",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\"交通事故后肇事者拒绝赔偿如何处理 2025年最新法律规定\"",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\"交通事故对方全责不赔偿如何申请法院先予执行\"",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "搜",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "索",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "到",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "的",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "相",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "关",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "网",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "页",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "内",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "容",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "如",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "下",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "：",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[交通事故处理流程及赔偿具体标准2025 - 大律师网](https://www.maxlaw.cn/n/20250513/11395011367031.shtml)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[2025年交通事故赔偿流程是？ - 法头条](https://www.6655.cn/toutiao/11271475390837.shtml)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[交通肇事伤人赔偿标准2025最新 - 法头条](https://www.6655.cn/toutiao/11326774386535.shtml)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[中国法院2024年度案例：道路交通纠纷| 交通事故律师网](https://www.jtsg.org/2025-04-06/11902.html)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[道路交通事故处理程序规定_公安部 - 中国政府网](https://www.gov.cn/zhengce/2021-12/25/content_5712900.htm)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[【以案释法】交通事故对方全责，但耍赖不给钱，咋办？ - 龙岗政府在线](https://www.lg.gov.cn/bmzz/bjjdb/tbgz/content/post_2750999.html)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[交通事故处理全流程 - 知乎专栏](https://zhuanlan.zhihu.com/p/46982381)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[遭遇交通事故后手忙脚乱？掌握这些法律知识就能从容不迫 - 北京政法网](https://www.bj148.org/wq/szfdw/bjssfj/201812/t20181224_1460967.html)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[交通事故对方全责但不赔偿该怎么办 - 律图](https://mip.64365.com/tuwen/aantwbh)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[最新整理版，关于交通事故赔付的20问答！](http://www.yichun.jcy.gov.cn/tzgg/202109/t20210922_3377321.shtml)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[交通事故后拒绝赔偿怎么办_易车百科](https://m.yiche.com/baike/524232.htm)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[【以案释法】交通事故对方全责，但耍赖不给钱，咋办？ - 龙岗政府在线](https://www.lg.gov.cn/bmzz/bjjdb/tbgz/content/post_2750999.html)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[交通事故肇事者不赔偿怎么办 - 汽车之家](https://www.autohome.com.cn/ask/4820885.html)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[出了交通事故肇事者不赔钱怎么办 - 法律咨询](https://m.66law.cn/laws/6416272.aspx)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[发生交通事故后，对方全责却联系不上，怎么办？](https://sft.hubei.gov.cn/fbjd/szcz/xy/202211/t20221111_4398890.shtml)",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "正",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "在",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "阅",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "读",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "相",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "关",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "网",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "页",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "请",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "稍",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "等",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": ".",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": ".",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": ".",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "网",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "页",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "阅",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "读",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "完",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "毕",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "正",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "在",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "整",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "理",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "答",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "案",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "请",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "稍",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "等",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": ".",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": ".",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": ".",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "*",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "\n",
+                "type": "step"
+            },
+            "delta": {
+                "content": "",
+                "type": "step"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "36cd0543c4b2aeac5891b35eb500c690",
+    "model": "fyllm"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "start_jx"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "start_jx"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "qacls"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "qacls"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "start_search"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "start_search"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "[\"\\\"交通事故后肇事者拒绝赔偿如何处理 2025年最新法律规定\\\"\", \"\\\"交通事故对方全责不赔偿如何申请法院先予执行\\\"\"]",
+                "type": "queries"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "queries"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "start_res"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "start_res"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "{\"url\": \"https://www.autohome.com.cn/ask/4820885.html\", \"title\": \"交通事故肇事者不赔偿怎么办-汽车之家\", \"content\": \"汽车之家看车买车用车换车行情本地优惠二手车优惠油价百科车标车对比选车新能源原创论坛口碑视频直播请输入您的问题搜索首页车问答问答详情交通事故肇事者不赔偿怎么办2024-04-0220:58发布交通事故肇事者不赔偿的情况怎么办？当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。向人民法院提起民事诉讼：如果经过调解仍无法达成协议，或者调解书生效后肇事者未履行，受害者可以向人民法院提起民事诉讼，维护自己的合法权益。需要注意的是，根据《中华人民共和国道路交通安全法》第七十四条，当事人可以请求公安机关交通管理部门调解，也可以直接向人民法院提起民事诉讼。在处理交通事故损害赔偿争议时，应当遵守相关法律法规，维护双方的合法权益。内容来自于网络，不代表汽车之家的观点和立场\\n交通事故肇事者不赔偿怎么办2024-04-0220:58发布交通事故肇事者不赔偿的情况怎么办？当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。向人民法院提起民事诉讼：如果经过调解仍无法达成协议，或者调解书生效后肇事者未履行，受害者可以向人民法院提起民事诉讼，维护自己的合法权益。需要注意的是，根据《中华人民共和国道路交通安全法》第七十四条，当事人可以请求公安机关交通管理部门调解，也可以直接向人民法院提起民事诉讼。在处理交通事故损害赔偿争议时，应当遵守相关法律法规，维护双方的合法权益。内容来自于网络，不代表汽车之家的观点和立场。有用反馈精彩栏目限时优惠查看更多其他问题换一换遇到刮擦他人车辆逃逸会有什么后果？在日常驾驶中，难免会发生一些意外情况，其中刮擦别人的车是最常见的事故之一。然而，有些车主在发生刮擦后，可能会因为害怕承担责任而选择逃逸\\n交通事故肇事者不赔偿怎么办2024-04-0220:58发布交通事故肇事者不赔偿的情况怎么办？当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。向人民法院提起民事诉讼：如果经过调解仍无法达成协议，或者调解书生效后肇事者未履行，受害者可以向人民法院提起民事诉讼，维护自己的合法权益。需要注意的是，根据《中华人民共和国道路交通安全法》第七十四条，当事人可以请求公安机关交通管理部门调解，也可以直接向人民法院提起民事诉讼。在处理交通事故损害赔偿争议时，应当遵守相关法律法规，维护双方的合法权益。内容来自于网络，不代表汽车之家的观点和立场。有用反馈\\n交通事故肇事者不赔偿的情况怎么办？当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。向人民法院提起民事诉讼：如果经过调解仍无法达成协议，或者调解书生效后肇事者未履行，受害者可以向人民法院提起民事诉讼，维护自己的合法权益。需要注意的是，根据《中华人民共和国道路交通安全法》第七十四条，当事人可以请求公安机关交通管理部门调解，也可以直接向人民法院提起民事诉讼。在处理交通事故损害赔偿争议时，应当遵守相关法律法规，维护双方的合法权益。\\n当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：\\n申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。\\n申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。\\n\", \"score\": 0.782557802080089, \"chunk\": {\"0.7978630545315628\": \"汽车之家看车买车用车换车行情本地优惠二手车优惠油价百科车标车对比选车新能源原创论坛口碑视频直播请输入您的问题搜索首页车问答问答详情交通事故肇事者不赔偿怎么办2024-04-0220:58发布交通事故肇事者不赔偿的情况怎么办？当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。向人民法院提起民事诉讼：如果经过调解仍无法达成协议，或者调解书生效后肇事者未履行，受害者可以向人民法院提起民事诉讼，维护自己的合法权益。需要注意的是，根据《中华人民共和国道路交通安全法》第七十四条，当事人可以请求公安机关交通管理部门调解，也可以直接向人民法院提起民事诉讼。在处理交通事故损害赔偿争议时，应当遵守相关法律法规，维护双方的合法权益。内容来自于网络，不代表汽车之家的观点和立场\", \"0.7896721896235968\": \"交通事故肇事者不赔偿怎么办2024-04-0220:58发布交通事故肇事者不赔偿的情况怎么办？当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。向人民法院提起民事诉讼：如果经过调解仍无法达成协议，或者调解书生效后肇事者未履行，受害者可以向人民法院提起民事诉讼，维护自己的合法权益。需要注意的是，根据《中华人民共和国道路交通安全法》第七十四条，当事人可以请求公安机关交通管理部门调解，也可以直接向人民法院提起民事诉讼。在处理交通事故损害赔偿争议时，应当遵守相关法律法规，维护双方的合法权益。内容来自于网络，不代表汽车之家的观点和立场。有用反馈精彩栏目限时优惠查看更多其他问题换一换遇到刮擦他人车辆逃逸会有什么后果？在日常驾驶中，难免会发生一些意外情况，其中刮擦别人的车是最常见的事故之一。然而，有些车主在发生刮擦后，可能会因为害怕承担责任而选择逃逸\", \"0.7853949895007752\": \"交通事故肇事者不赔偿怎么办2024-04-0220:58发布交通事故肇事者不赔偿的情况怎么办？当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。向人民法院提起民事诉讼：如果经过调解仍无法达成协议，或者调解书生效后肇事者未履行，受害者可以向人民法院提起民事诉讼，维护自己的合法权益。需要注意的是，根据《中华人民共和国道路交通安全法》第七十四条，当事人可以请求公安机关交通管理部门调解，也可以直接向人民法院提起民事诉讼。在处理交通事故损害赔偿争议时，应当遵守相关法律法规，维护双方的合法权益。内容来自于网络，不代表汽车之家的观点和立场。有用反馈\", \"0.7755342983710005\": \"交通事故肇事者不赔偿的情况怎么办？当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。向人民法院提起民事诉讼：如果经过调解仍无法达成协议，或者调解书生效后肇事者未履行，受害者可以向人民法院提起民事诉讼，维护自己的合法权益。需要注意的是，根据《中华人民共和国道路交通安全法》第七十四条，当事人可以请求公安机关交通管理部门调解，也可以直接向人民法院提起民事诉讼。在处理交通事故损害赔偿争议时，应当遵守相关法律法规，维护双方的合法权益。\\n当交通事故发生后，如果肇事者不愿意赔偿，受害者可以采取以下措施来解决问题：\\n申请人民调解委员会调解：根据《道路交通事故处理程序规定》第八十四条，当事人可以向人民调解委员会申请调解，以解决交通事故损害赔偿争议。\\n申请公安机关交通管理部门调解：当事人可以向公安机关交通管理部门申请调解，以解决交通事故损害赔偿争议。\"}, \"icon_url\": \"https://www.autohome.com.cn/favicon.ico\", \"site_name\": \"autohome\"}",
+                "type": "get_res"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_res"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "{\"url\": \"https://m.66law.cn/laws/6416272.aspx\", \"title\": \"出了交通事故肇事者不赔钱怎么办-法律知识|华律网\", \"content\": \"近期更新2025.07.23浏览941免责声明：该作品是结合法律法规政府官网及互联网相关知识所整合的内容。不代表任何平台立场，如若内容侵权或错误请通过投诉通道提交信息，我们将按照规定及时处理。\\n近期更新2025.07.23浏览941\\n近期更新2025.07.23\\n出了交通事故肇事者不赔钱怎么办？交通事故肇事者不赔钱，可按五步处理：先与对方及保险公司沟通协商；收集事故相关证据；申请交管部门或其他机构调解；协商和调解无果则向法院起诉；若判决后肇事者不履行，可申请法院强制执行。具体详细内容和华律网小编一起来看看。\\n一、出了交通事故肇事者不赔钱怎么办若出了交通事故肇事者不赔钱，可按以下步骤处理：第一，与对方沟通协商。尝试与肇事者及其保险公司沟通，明确告知对方应承担的赔偿责任，督促其履行赔偿义务。第二，收集证据。要保存好事故相关证据，如事故责任认定书、医疗费用发票、病历、诊断证明、误工证明、车辆维修发票等，为后续维权做准备。第三，申请调解。可请求公安机关交通管理部门或其他相关调解机构进行调解，促使双方达成赔偿协议。第四，提起诉讼。若协商和调解都无法解决，受害者可向有管辖权的人民法院提起民事诉讼。在诉讼过程中，将收集的证据提交给法院，要求肇事者及其保险公司承担赔偿责任。若肇事者有保险，保险公司会在保险责任范围内进行赔偿，超出部分由肇事者承担。第五，申请强制执行。若法院判决后肇事者仍不履行赔偿义务，受害者可在规定时间内向法院申请强制执行，法院有权采取查封、扣押、冻结等措施，强制肇事者履行赔偿义务。二、出了交通事故怎样理赔发生交通事故后，理赔步骤如下：1.及时报案：事故发生后，立即向交警部门和保险公司报案。向交警说明事故发生的地点、时间、人员伤亡等情况；向保险公司提供保单号、事故发生经过等信息\\n第一，与对方沟通协商。尝试与肇事者及其保险公司沟通，明确告知对方应承担的赔偿责任，督促其履行赔偿义务。\\n第二，收集证据。要保存好事故相关证据，如事故责任认定书、医疗费用发票、病历、诊断证明、误工证明、车辆维修发票等，为后续维权做准备。\\n第三，申请调解。可请求公安机关交通管理部门或其他相关调解机构进行调解，促使双方达成赔偿协议。\\n第四，提起诉讼。若协商和调解都无法解决，受害者可向有管辖权的人民法院提起民事诉讼。在诉讼过程中，将收集的证据提交给法院，要求肇事者及其保险公司承担赔偿责任。若肇事者有保险，保险公司会在保险责任范围内进行赔偿，超出部分由肇事者承担。\\n第五，申请强制执行。若法院判决后肇事者仍不履行赔偿义务，受害者可在规定时间内向法院申请强制执行，法院有权采取查封、扣押、冻结等措施，强制肇事者履行赔偿义务。\\n1.及时报案：事故发生后，立即向交警部门和保险公司报案。向交警说明事故发生的地点、时间、人员伤亡等情况；向保险公司提供保单号、事故发生经过等信息。\\n2.现场处理：配合交警进行现场勘查，提供真实信息。若有人员受伤，及时拨打急救电话送医治疗。同时，保护好事故现场，等待保险公司查勘人员来拍照定损。\\n30亿人次使用提问出了交通事故肇事者不赔钱怎么办近期更新2025.07.23浏览941免责声明：该作品是结合法律法规政府官网及互联网相关知识所整合的内容。不代表任何平台立场，如若内容侵权或错误请通过投诉通道提交信息，我们将按照规定及时处理。丰台区王小华律师北京-丰台区擅长交通事故专业官方认证咨询我咨询我出了交通事故肇事者不赔钱怎么办？交通事故肇事者不赔钱，可按五步处理：先与对方及保险公司沟通协商；收集事故相关证据；申请交管部门或其他机构调解；协商和调解无果则向法院起诉；若判决后肇事者不履行，可申请法院强制执行。具体详细内容和华律网小编一起来看看。一、出了交通事故肇事者不赔钱怎么办若出了交通事故肇事者不赔钱，可按以下步骤处理：第一，与对方沟通协商。尝试与肇事者及其保险公司沟通，明确告知对方应承担的赔偿责任，督促其履行赔偿义务。第二，收集证据。要保存好事故相关证据，如事故责任认定书、医疗费用发票、病历、诊断证明、误工证明、车辆维修发票等，为后续维权做准备。第三，申请调解。可请求公安机关交通管理部门或其他相关调解机构进行调解，促使双方达成赔偿协议。第四，提起诉讼\\n肇事者拖着不赔钱怎么办呢交通法规1K+人阅读2024.12.24\\n交通法规1K+人阅读2024.12.24\\n2024.12.24\\n肇事者不赔钱也不见人怎么办交通肇事知识3W+人阅读2016.06.23\\n交通肇事知识3W+人阅读2016.06.23\\n2016.06.23\\n肇事者不赔钱要在哪里起诉交通肇事知识1W+人阅读2016.06.23\\n交通肇事知识1W+人阅读2016.06.23\\n2016.06.23\\n肇事者不赔钱能把尸体放他家吗交通肇事知识5K+人阅读2018.11.13\\n交通肇事知识5K+人阅读2018.11.13\\n2018.11.13\\n推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师\\n推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师\\n交通肇事者不赔钱会坐牢吗交通肇事知识3W+人阅读2018.05.28\\n交通肇事知识3W+人阅读2018.05.28\\n2018.05.28\\n出了交通事故肇事者不赔钱怎么办近期更新2025.07.23浏览941免责声明：该作品是结合法律法规政府官网及互联网相关知识所整合的内容。不代表任何平台立场，如若内容侵权或错误请通过投诉通道提交信息，我们将按照规定及时处理。丰台区王小华律师北京-丰台区擅长交通事故专业官方认证咨询我咨询我出了交通事故肇事者不赔钱怎么办？交通事故肇事者不赔钱，可按五步处理：先与对方及保险公司沟通协商；收集事故相关证据；申请交管部门或其他机构调解；协商和调解无果则向法院起诉；若判决后肇事者不履行，可申请法院强制执行。具体详细内容和华律网小编一起来看看。一、出了交通事故肇事者不赔钱怎么办若出了交通事故肇事者不赔钱，可按以下步骤处理：第一，与对方沟通协商。尝试与肇事者及其保险公司沟通，明确告知对方应承担的赔偿责任，督促其履行赔偿义务。第二，收集证据。要保存好事故相关证据，如事故责任认定书、医疗费用发票、病历、诊断证明、误工证明、车辆维修发票等，为后续维权做准备。第三，申请调解。可请求公安机关交通管理部门或其他相关调解机构进行调解，促使双方达成赔偿协议。第四，提起诉讼。若协商和调解都无法解决，受害者可向有管辖权的人民法院提起民事诉讼\\n3.法院判决：若双方无法协商或调解不成，可向法院提起民事诉讼。法院受理后，会进行审理并作出判决。当事人按判决书履行义务，案件即告终结。4.保险理赔：涉及保险赔偿的事故，车主向保险公司报案，提供相关证明材料。保险公司审核通过后，按保险合同进行赔偿。赔偿完成，交通事故也视为结案。无论采用哪种方式，都要注意保存好相关证据，如事故现场照片、责任认定书、医疗费用发票等，以保障自身合法权益。以上是关于出了交通事故肇事者不赔钱怎么办的相关回答，若未解决您的问题，请您详细描述遇到的法律纠纷点与需求点，华律平台专业律师将为你1对1解答，给你详细的解决方案\\n延伸阅读主编精选推荐荐肇事者全责耍赖不赔钱该怎么办荐交通肇事者不赔钱会坐牢吗荐肇事者不赔钱要在哪里起诉报告编号：NO.20250723*****出了交通事故肇事者不赔钱怎么办【问题分析】您好，您所提出的是关于****的问题...【解决方案】**********【具体操作】**********免费查看今日已有5528人查看看完文章仍有疑惑？推荐咨询下方专业律师特邀答疑律师王小华律师经验足口碑好已帮助4W+人综评5.0拨打电话在线咨询\\n报告编号：NO.20250723*****出了交通事故肇事者不赔钱怎么办【问题分析】您好，您所提出的是关于****的问题...【解决方案】**********【具体操作】**********免费查看今日已有5528人查看\\n【问题分析】您好，您所提出的是关于****的问题...【解决方案】**********【具体操作】**********\\n【问题分析】您好，您所提出的是关于****的问题...\\n看完文章仍有疑惑？推荐咨询下方专业律师特邀答疑律师王小华律师经验足口碑好已帮助4W+人综评5.0拨打电话在线咨询\\n肇事者拖着不赔钱怎么办呢交通法规1K+人阅读2024.12.24肇事者不赔钱也不见人怎么办交通肇事知识3W+人阅读2016.06.23肇事者不赔钱要在哪里起诉交通肇事知识1W+人阅读2016.06.23肇事者不赔钱能把尸体放他家吗交通肇事知识5K+人阅读2018.11.13推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师交通肇事者不赔钱会坐牢吗交通肇事知识3W+人阅读2018.05.28在线问律师平台保障快速响应已为超过5000万人提供法律解决方案问题解决率99%13,796位律师在线立即咨询你好，问一下交通事故后逃逸，交通事故肇事者逃逸，不赔钱，选择坐牢，出监狱后还需要经济赔偿吗咨询53人阅读律师你出特大交通事故，对方不赔钱点办啊咨询41人阅读交通肇事者不赔钱，法院判肇事者全责咨询12人阅读肇事者不赔钱能把尸体放他家吗常识176人阅读交通肇事者不赔钱会坐牢吗常识565人阅读肇事者不赔钱要在哪里起诉常识9K+人阅读肇事者不赔钱也不见人怎么办常识1W+人阅读肇事者撞死人不赔钱怎么办常识1W+人阅读酒驾肇事者不赔钱可以起诉法院吗常识137人阅读推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师交通事故中肇事者垫钱，出院后保险公司赔钱后，受害人需要把肇事者垫的钱还给肇事者吗？咨询问题紧急？推荐咨询专业律师27W专业律师·平均3分钟快速获得回复快速咨询交通事故受害方出院后，和肇事者没有协商好，受害方如果不签字\\n4.保险理赔：涉及保险赔偿的事故，车主向保险公司报案，提供相关证明材料。保险公司审核通过后，按保险合同进行赔偿。赔偿完成，交通事故也视为结案。\\n无论采用哪种方式，都要注意保存好相关证据，如事故现场照片、责任认定书、医疗费用发票等，以保障自身合法权益。\\n以上是关于出了交通事故肇事者不赔钱怎么办的相关回答，若未解决您的问题，请您详细描述遇到的法律纠纷点与需求点，华律平台专业律师将为你1对1解答，给你详细的解决方案。\\n声明：该作品是结合法律法规、政府官网及互联网相关知识所整合的内容。不代表任何平台立场，如若内容侵权或错误请通过投诉通道提交信息，我们将按照规定及时处理。\\n王小华律师在线咨询我是北京丰台区王小华律师，擅长交通事故法律专业，如看完文章后您还有任何疑问，可向我在线咨询。\\n我是北京丰台区王小华律师，擅长交通事故法律专业，如看完文章后您还有任何疑问，可向我在线咨询。\\n网友都在问换一批正在输入...打开对话\\n正在输入...打开对话\\n正在输入...打开对话\\n正在输入...\\n展开全文节省70%阅读时间网友都在问换一批正在输入...打开对话延伸阅读主编精选推荐荐肇事者全责耍赖不赔钱该怎么办荐交通肇事者不赔钱会坐牢吗荐肇事者不赔钱要在哪里起诉报告编号：NO.20250723*****出了交通事故肇事者不赔钱怎么办【问题分析】您好，您所提出的是关于****的问题...【解决方案】**********【具体操作】**********免费查看今日已有5528人查看看完文章仍有疑惑？推荐咨询下方专业律师特邀答疑律师王小华律师经验足口碑好已帮助4W+人综评5.0拨打电话在线咨询交通事故相关分类推荐更多交通事故处理交通事故赔偿交通事故鉴定交通事故认定交通肇事交通事故诉讼交通法在线法律咨询99%问题解决率深度沟通27w律师在线高效解决严选律师快速响应隐私保障专业解答1分钟快速提问快速提问预计2分钟回复1分钟前澳门-市区用户使用了在线咨询服务1分钟前青海-海西用户使用了在线咨询服务1分钟前江苏-苏州用户使用了在线咨询服务1分钟前北京-石景山区用户使用了在线咨询服务1分钟前重庆-高新区用户使用了在线咨询服务2分钟前上海-崇明区用户使用了在线咨询服务2分钟前新疆-铁门关用户使用了在线咨询服务13,796位律师在线大家都在问99%问题解决率股份转让给自己，然后可以再转让给公司最大的股东吗？深度沟通26次14分钟律师团解答你好\\n咨询61人阅读如果肇事者不赔钱，接下来我们受害者如何进行咨询443人阅读你好，交通事故撞了对方不赔钱咋办咨询207人阅读事故伤残肇事者要赔钱吗常识交通事故不结案不销案对肇事者有什么影响咨询485人阅读发生交通事故对方不赔钱怎么办常识1K+人阅读交通事故全责不赔钱有什么后果音频2K+人阅读交通事故肇事方不赔钱可以吗常识652人阅读你好，发生交通事故对方不赔钱怎么办咨询54人阅读推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师交通事故罪不赔钱能判缓刑吗常识360人阅读问题紧急？推荐咨询专业律师27W专业律师·平均3分钟快速获得回复快速咨询省会律师按问题找律师北京律师长春律师长沙律师成都律师重庆律师福州律师广州律师贵阳律师哈尔滨律师海口律师杭州律师合肥律师呼和浩特律师济南律师昆明律师兰州律师拉萨律师南昌律师南京律师南宁律师上海律师沈阳律师石家庄律师太原律师天津律师武汉律师乌鲁木齐律师西安律师西宁律师银川律师郑州律师交通事故辩护律师机动车事故纠纷律师交通事故调解谈判律师交通事故起诉律师交通事故伤残赔偿律师交通事故纠纷律师交通肇事辩护律师社会保险纠纷律师保险理赔法律咨询律师交通事故赔偿律师交通事故处理律师车祸死亡赔偿律师醉驾律师交通事故诉讼律师危险驾驶罪律师交通事故保险理赔律师保险融资律师车祸律师车祸赔偿律师交通事故调解律师车辆保险律师保险纠纷律师交通事故保险理赔律师财产保险纠纷律师华律网>法律常识>交通事故>交通事故处理>交通事故处理规定>正文\\n\", \"score\": 0.7173405847588886, \"chunk\": {\"0.7805830460886084\": \"近期更新2025.07.23浏览941免责声明：该作品是结合法律法规政府官网及互联网相关知识所整合的内容。不代表任何平台立场，如若内容侵权或错误请通过投诉通道提交信息，我们将按照规定及时处理。\\n近期更新2025.07.23浏览941\\n近期更新2025.07.23\\n出了交通事故肇事者不赔钱怎么办？交通事故肇事者不赔钱，可按五步处理：先与对方及保险公司沟通协商；收集事故相关证据；申请交管部门或其他机构调解；协商和调解无果则向法院起诉；若判决后肇事者不履行，可申请法院强制执行。具体详细内容和华律网小编一起来看看。\", \"0.7591616890508887\": \"一、出了交通事故肇事者不赔钱怎么办若出了交通事故肇事者不赔钱，可按以下步骤处理：第一，与对方沟通协商。尝试与肇事者及其保险公司沟通，明确告知对方应承担的赔偿责任，督促其履行赔偿义务。第二，收集证据。要保存好事故相关证据，如事故责任认定书、医疗费用发票、病历、诊断证明、误工证明、车辆维修发票等，为后续维权做准备。第三，申请调解。可请求公安机关交通管理部门或其他相关调解机构进行调解，促使双方达成赔偿协议。第四，提起诉讼。若协商和调解都无法解决，受害者可向有管辖权的人民法院提起民事诉讼。在诉讼过程中，将收集的证据提交给法院，要求肇事者及其保险公司承担赔偿责任。若肇事者有保险，保险公司会在保险责任范围内进行赔偿，超出部分由肇事者承担。第五，申请强制执行。若法院判决后肇事者仍不履行赔偿义务，受害者可在规定时间内向法院申请强制执行，法院有权采取查封、扣押、冻结等措施，强制肇事者履行赔偿义务。二、出了交通事故怎样理赔发生交通事故后，理赔步骤如下：1.及时报案：事故发生后，立即向交警部门和保险公司报案。向交警说明事故发生的地点、时间、人员伤亡等情况；向保险公司提供保单号、事故发生经过等信息\", \"0.7486456384224485\": \"第一，与对方沟通协商。尝试与肇事者及其保险公司沟通，明确告知对方应承担的赔偿责任，督促其履行赔偿义务。\\n第二，收集证据。要保存好事故相关证据，如事故责任认定书、医疗费用发票、病历、诊断证明、误工证明、车辆维修发票等，为后续维权做准备。\\n第三，申请调解。可请求公安机关交通管理部门或其他相关调解机构进行调解，促使双方达成赔偿协议。\\n第四，提起诉讼。若协商和调解都无法解决，受害者可向有管辖权的人民法院提起民事诉讼。在诉讼过程中，将收集的证据提交给法院，要求肇事者及其保险公司承担赔偿责任。若肇事者有保险，保险公司会在保险责任范围内进行赔偿，超出部分由肇事者承担。\\n第五，申请强制执行。若法院判决后肇事者仍不履行赔偿义务，受害者可在规定时间内向法院申请强制执行，法院有权采取查封、扣押、冻结等措施，强制肇事者履行赔偿义务。\\n1.及时报案：事故发生后，立即向交警部门和保险公司报案。向交警说明事故发生的地点、时间、人员伤亡等情况；向保险公司提供保单号、事故发生经过等信息。\\n2.现场处理：配合交警进行现场勘查，提供真实信息。若有人员受伤，及时拨打急救电话送医治疗。同时，保护好事故现场，等待保险公司查勘人员来拍照定损。\", \"0.7437512125233338\": \"30亿人次使用提问出了交通事故肇事者不赔钱怎么办近期更新2025.07.23浏览941免责声明：该作品是结合法律法规政府官网及互联网相关知识所整合的内容。不代表任何平台立场，如若内容侵权或错误请通过投诉通道提交信息，我们将按照规定及时处理。丰台区王小华律师北京-丰台区擅长交通事故专业官方认证咨询我咨询我出了交通事故肇事者不赔钱怎么办？交通事故肇事者不赔钱，可按五步处理：先与对方及保险公司沟通协商；收集事故相关证据；申请交管部门或其他机构调解；协商和调解无果则向法院起诉；若判决后肇事者不履行，可申请法院强制执行。具体详细内容和华律网小编一起来看看。一、出了交通事故肇事者不赔钱怎么办若出了交通事故肇事者不赔钱，可按以下步骤处理：第一，与对方沟通协商。尝试与肇事者及其保险公司沟通，明确告知对方应承担的赔偿责任，督促其履行赔偿义务。第二，收集证据。要保存好事故相关证据，如事故责任认定书、医疗费用发票、病历、诊断证明、误工证明、车辆维修发票等，为后续维权做准备。第三，申请调解。可请求公安机关交通管理部门或其他相关调解机构进行调解，促使双方达成赔偿协议。第四，提起诉讼\", \"0.7405509719712999\": \"肇事者拖着不赔钱怎么办呢交通法规1K+人阅读2024.12.24\\n交通法规1K+人阅读2024.12.24\\n2024.12.24\\n肇事者不赔钱也不见人怎么办交通肇事知识3W+人阅读2016.06.23\\n交通肇事知识3W+人阅读2016.06.23\\n2016.06.23\\n肇事者不赔钱要在哪里起诉交通肇事知识1W+人阅读2016.06.23\\n交通肇事知识1W+人阅读2016.06.23\\n2016.06.23\\n肇事者不赔钱能把尸体放他家吗交通肇事知识5K+人阅读2018.11.13\\n交通肇事知识5K+人阅读2018.11.13\\n2018.11.13\\n推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师\\n推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师\\n交通肇事者不赔钱会坐牢吗交通肇事知识3W+人阅读2018.05.28\\n交通肇事知识3W+人阅读2018.05.28\\n2018.05.28\", \"0.739554582058852\": \"出了交通事故肇事者不赔钱怎么办近期更新2025.07.23浏览941免责声明：该作品是结合法律法规政府官网及互联网相关知识所整合的内容。不代表任何平台立场，如若内容侵权或错误请通过投诉通道提交信息，我们将按照规定及时处理。丰台区王小华律师北京-丰台区擅长交通事故专业官方认证咨询我咨询我出了交通事故肇事者不赔钱怎么办？交通事故肇事者不赔钱，可按五步处理：先与对方及保险公司沟通协商；收集事故相关证据；申请交管部门或其他机构调解；协商和调解无果则向法院起诉；若判决后肇事者不履行，可申请法院强制执行。具体详细内容和华律网小编一起来看看。一、出了交通事故肇事者不赔钱怎么办若出了交通事故肇事者不赔钱，可按以下步骤处理：第一，与对方沟通协商。尝试与肇事者及其保险公司沟通，明确告知对方应承担的赔偿责任，督促其履行赔偿义务。第二，收集证据。要保存好事故相关证据，如事故责任认定书、医疗费用发票、病历、诊断证明、误工证明、车辆维修发票等，为后续维权做准备。第三，申请调解。可请求公安机关交通管理部门或其他相关调解机构进行调解，促使双方达成赔偿协议。第四，提起诉讼。若协商和调解都无法解决，受害者可向有管辖权的人民法院提起民事诉讼\", \"0.7248580553284102\": \"3.法院判决：若双方无法协商或调解不成，可向法院提起民事诉讼。法院受理后，会进行审理并作出判决。当事人按判决书履行义务，案件即告终结。4.保险理赔：涉及保险赔偿的事故，车主向保险公司报案，提供相关证明材料。保险公司审核通过后，按保险合同进行赔偿。赔偿完成，交通事故也视为结案。无论采用哪种方式，都要注意保存好相关证据，如事故现场照片、责任认定书、医疗费用发票等，以保障自身合法权益。以上是关于出了交通事故肇事者不赔钱怎么办的相关回答，若未解决您的问题，请您详细描述遇到的法律纠纷点与需求点，华律平台专业律师将为你1对1解答，给你详细的解决方案\", \"0.7246544506237953\": \"延伸阅读主编精选推荐荐肇事者全责耍赖不赔钱该怎么办荐交通肇事者不赔钱会坐牢吗荐肇事者不赔钱要在哪里起诉报告编号：NO.20250723*****出了交通事故肇事者不赔钱怎么办【问题分析】您好，您所提出的是关于****的问题...【解决方案】**********【具体操作】**********免费查看今日已有5528人查看看完文章仍有疑惑？推荐咨询下方专业律师特邀答疑律师王小华律师经验足口碑好已帮助4W+人综评5.0拨打电话在线咨询\\n报告编号：NO.20250723*****出了交通事故肇事者不赔钱怎么办【问题分析】您好，您所提出的是关于****的问题...【解决方案】**********【具体操作】**********免费查看今日已有5528人查看\\n【问题分析】您好，您所提出的是关于****的问题...【解决方案】**********【具体操作】**********\\n【问题分析】您好，您所提出的是关于****的问题...\\n看完文章仍有疑惑？推荐咨询下方专业律师特邀答疑律师王小华律师经验足口碑好已帮助4W+人综评5.0拨打电话在线咨询\", \"0.7241217883850689\": \"肇事者拖着不赔钱怎么办呢交通法规1K+人阅读2024.12.24肇事者不赔钱也不见人怎么办交通肇事知识3W+人阅读2016.06.23肇事者不赔钱要在哪里起诉交通肇事知识1W+人阅读2016.06.23肇事者不赔钱能把尸体放他家吗交通肇事知识5K+人阅读2018.11.13推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师交通肇事者不赔钱会坐牢吗交通肇事知识3W+人阅读2018.05.28在线问律师平台保障快速响应已为超过5000万人提供法律解决方案问题解决率99%13,796位律师在线立即咨询你好，问一下交通事故后逃逸，交通事故肇事者逃逸，不赔钱，选择坐牢，出监狱后还需要经济赔偿吗咨询53人阅读律师你出特大交通事故，对方不赔钱点办啊咨询41人阅读交通肇事者不赔钱，法院判肇事者全责咨询12人阅读肇事者不赔钱能把尸体放他家吗常识176人阅读交通肇事者不赔钱会坐牢吗常识565人阅读肇事者不赔钱要在哪里起诉常识9K+人阅读肇事者不赔钱也不见人怎么办常识1W+人阅读肇事者撞死人不赔钱怎么办常识1W+人阅读酒驾肇事者不赔钱可以起诉法院吗常识137人阅读推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师交通事故中肇事者垫钱，出院后保险公司赔钱后，受害人需要把肇事者垫的钱还给肇事者吗？咨询问题紧急？推荐咨询专业律师27W专业律师·平均3分钟快速获得回复快速咨询交通事故受害方出院后，和肇事者没有协商好，受害方如果不签字\", \"0.7231348512132287\": \"4.保险理赔：涉及保险赔偿的事故，车主向保险公司报案，提供相关证明材料。保险公司审核通过后，按保险合同进行赔偿。赔偿完成，交通事故也视为结案。\\n无论采用哪种方式，都要注意保存好相关证据，如事故现场照片、责任认定书、医疗费用发票等，以保障自身合法权益。\\n以上是关于出了交通事故肇事者不赔钱怎么办的相关回答，若未解决您的问题，请您详细描述遇到的法律纠纷点与需求点，华律平台专业律师将为你1对1解答，给你详细的解决方案。\\n声明：该作品是结合法律法规、政府官网及互联网相关知识所整合的内容。不代表任何平台立场，如若内容侵权或错误请通过投诉通道提交信息，我们将按照规定及时处理。\\n王小华律师在线咨询我是北京丰台区王小华律师，擅长交通事故法律专业，如看完文章后您还有任何疑问，可向我在线咨询。\\n我是北京丰台区王小华律师，擅长交通事故法律专业，如看完文章后您还有任何疑问，可向我在线咨询。\\n网友都在问换一批正在输入...打开对话\\n正在输入...打开对话\\n正在输入...打开对话\\n正在输入...\", \"0.7157937572723219\": \"展开全文节省70%阅读时间网友都在问换一批正在输入...打开对话延伸阅读主编精选推荐荐肇事者全责耍赖不赔钱该怎么办荐交通肇事者不赔钱会坐牢吗荐肇事者不赔钱要在哪里起诉报告编号：NO.20250723*****出了交通事故肇事者不赔钱怎么办【问题分析】您好，您所提出的是关于****的问题...【解决方案】**********【具体操作】**********免费查看今日已有5528人查看看完文章仍有疑惑？推荐咨询下方专业律师特邀答疑律师王小华律师经验足口碑好已帮助4W+人综评5.0拨打电话在线咨询交通事故相关分类推荐更多交通事故处理交通事故赔偿交通事故鉴定交通事故认定交通肇事交通事故诉讼交通法在线法律咨询99%问题解决率深度沟通27w律师在线高效解决严选律师快速响应隐私保障专业解答1分钟快速提问快速提问预计2分钟回复1分钟前澳门-市区用户使用了在线咨询服务1分钟前青海-海西用户使用了在线咨询服务1分钟前江苏-苏州用户使用了在线咨询服务1分钟前北京-石景山区用户使用了在线咨询服务1分钟前重庆-高新区用户使用了在线咨询服务2分钟前上海-崇明区用户使用了在线咨询服务2分钟前新疆-铁门关用户使用了在线咨询服务13,796位律师在线大家都在问99%问题解决率股份转让给自己，然后可以再转让给公司最大的股东吗？深度沟通26次14分钟律师团解答你好\", \"0.7143304086696074\": \"咨询61人阅读如果肇事者不赔钱，接下来我们受害者如何进行咨询443人阅读你好，交通事故撞了对方不赔钱咋办咨询207人阅读事故伤残肇事者要赔钱吗常识交通事故不结案不销案对肇事者有什么影响咨询485人阅读发生交通事故对方不赔钱怎么办常识1K+人阅读交通事故全责不赔钱有什么后果音频2K+人阅读交通事故肇事方不赔钱可以吗常识652人阅读你好，发生交通事故对方不赔钱怎么办咨询54人阅读推荐昌平区交通事故处理规定专业王小华律师，可在线咨询严选律师严格认证·平台监督王小华律师帮助4W+人综评5.0咨询律师交通事故罪不赔钱能判缓刑吗常识360人阅读问题紧急？推荐咨询专业律师27W专业律师·平均3分钟快速获得回复快速咨询省会律师按问题找律师北京律师长春律师长沙律师成都律师重庆律师福州律师广州律师贵阳律师哈尔滨律师海口律师杭州律师合肥律师呼和浩特律师济南律师昆明律师兰州律师拉萨律师南昌律师南京律师南宁律师上海律师沈阳律师石家庄律师太原律师天津律师武汉律师乌鲁木齐律师西安律师西宁律师银川律师郑州律师交通事故辩护律师机动车事故纠纷律师交通事故调解谈判律师交通事故起诉律师交通事故伤残赔偿律师交通事故纠纷律师交通肇事辩护律师社会保险纠纷律师保险理赔法律咨询律师交通事故赔偿律师交通事故处理律师车祸死亡赔偿律师醉驾律师交通事故诉讼律师危险驾驶罪律师交通事故保险理赔律师保险融资律师车祸律师车祸赔偿律师交通事故调解律师车辆保险律师保险纠纷律师交通事故保险理赔律师财产保险纠纷律师华律网>法律常识>交通事故>交通事故处理>交通事故处理规定>正文\"}, \"icon_url\": \"https://m.66law.cn/favicon.ico\", \"site_name\": \"66law\"}",
+                "type": "get_res"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_res"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "{\"url\": \"https://www.6655.cn/toutiao/11326774386535.shtml\", \"title\": \"交通肇事伤人赔偿标准2025最新-法头条\", \"content\": \"只有在综合考虑后认为肇事者的行为情节较轻、社会危害较小且取得了受害者家属的谅解时，法院才可能酌情从轻处罚。交通事故肇事交通事故肇事赔偿相关阅读更多>>2025年交通事故肇事方不支付丧葬费怎么办？在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...时间：2024.12.15交通事故肇事者无赔偿能力怎么办？在交通事故中，如果肇事者被认定为责任方但无赔偿能力，受害者可以通过保险公司赔付、社会救助基金、分期赔偿等方式寻求救济。在此情况下，法律旨在平衡各方利益，确保受害人得到合理补偿，同时也考虑肇事者的实际经济状况。...时间：2024.11.272024年交通事故肇事逃逸如何处理法律上？交通事故肇事逃逸是指在发生道路交通事故后，当事人为了逃避法律追究而逃离事故现场的行为。此类行为不仅严重违反了交通管理法规，还可能因延误救助时机而导致受害者伤势加重甚至死亡，故法律对此有严厉的处罚规定。...时间：2024.08.25\\n只有在综合考虑后认为肇事者的行为情节较轻、社会危害较小且取得了受害者家属的谅解时，法院才可能酌情从轻处罚。交通事故肇事交通事故肇事赔偿相关阅读更多>>2025年交通事故肇事方不支付丧葬费怎么办？在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...时间：2024.12.15交通事故肇事者无赔偿能力怎么办？在交通事故中，如果肇事者被认定为责任方但无赔偿能力，受害者可以通过保险公司赔付、社会救助基金、分期赔偿等方式寻求救济。在此情况下，法律旨在平衡各方利益，确保受害人得到合理补偿，同时也考虑肇事者的实际经济状况。...时间：2024.11.272024年交通事故肇事逃逸如何处理法律上？交通事故肇事逃逸是指在发生道路交通事故后，当事人为了逃避法律追究而逃离事故现场的行为。此类行为不仅严重违反了交通管理法规，还可能因延误救助时机而导致受害者伤势加重甚至死亡，故法律对此有严厉的处罚规定\\n2025年交通事故肇事方不支付丧葬费怎么办？在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...时间：2024.12.15\\n2025年交通事故肇事方不支付丧葬费怎么办？在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...时间：2024.12.15\\n在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...\\n时间：2024.12.15\\n交通事故肇事者无赔偿能力怎么办？在交通事故中，如果肇事者被认定为责任方但无赔偿能力，受害者可以通过保险公司赔付、社会救助基金、分期赔偿等方式寻求救济。在此情况下，法律旨在平衡各方利益，确保受害人得到合理补偿，同时也考虑肇事者的实际经济状况。...时间：2024.11.27\\n\", \"score\": 0.7217535651703402, \"chunk\": {\"0.7294447479292122\": \"只有在综合考虑后认为肇事者的行为情节较轻、社会危害较小且取得了受害者家属的谅解时，法院才可能酌情从轻处罚。交通事故肇事交通事故肇事赔偿相关阅读更多>>2025年交通事故肇事方不支付丧葬费怎么办？在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...时间：2024.12.15交通事故肇事者无赔偿能力怎么办？在交通事故中，如果肇事者被认定为责任方但无赔偿能力，受害者可以通过保险公司赔付、社会救助基金、分期赔偿等方式寻求救济。在此情况下，法律旨在平衡各方利益，确保受害人得到合理补偿，同时也考虑肇事者的实际经济状况。...时间：2024.11.272024年交通事故肇事逃逸如何处理法律上？交通事故肇事逃逸是指在发生道路交通事故后，当事人为了逃避法律追究而逃离事故现场的行为。此类行为不仅严重违反了交通管理法规，还可能因延误救助时机而导致受害者伤势加重甚至死亡，故法律对此有严厉的处罚规定。...时间：2024.08.25\", \"0.7272949219257099\": \"只有在综合考虑后认为肇事者的行为情节较轻、社会危害较小且取得了受害者家属的谅解时，法院才可能酌情从轻处罚。交通事故肇事交通事故肇事赔偿相关阅读更多>>2025年交通事故肇事方不支付丧葬费怎么办？在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...时间：2024.12.15交通事故肇事者无赔偿能力怎么办？在交通事故中，如果肇事者被认定为责任方但无赔偿能力，受害者可以通过保险公司赔付、社会救助基金、分期赔偿等方式寻求救济。在此情况下，法律旨在平衡各方利益，确保受害人得到合理补偿，同时也考虑肇事者的实际经济状况。...时间：2024.11.272024年交通事故肇事逃逸如何处理法律上？交通事故肇事逃逸是指在发生道路交通事故后，当事人为了逃避法律追究而逃离事故现场的行为。此类行为不仅严重违反了交通管理法规，还可能因延误救助时机而导致受害者伤势加重甚至死亡，故法律对此有严厉的处罚规定\", \"0.7151372954132192\": \"2025年交通事故肇事方不支付丧葬费怎么办？在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...时间：2024.12.15\\n2025年交通事故肇事方不支付丧葬费怎么办？在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...时间：2024.12.15\\n在交通事故中，如果肇事方拒绝支付丧葬费，受害者家属可以通过法律途径强制要求赔偿。此过程涉及民事诉讼、事故责任认定及强制执行等环节，以确保受害者权益得到保障。...\\n时间：2024.12.15\\n交通事故肇事者无赔偿能力怎么办？在交通事故中，如果肇事者被认定为责任方但无赔偿能力，受害者可以通过保险公司赔付、社会救助基金、分期赔偿等方式寻求救济。在此情况下，法律旨在平衡各方利益，确保受害人得到合理补偿，同时也考虑肇事者的实际经济状况。...时间：2024.11.27\"}, \"icon_url\": \"https://www.6655.cn/favicon.ico\", \"site_name\": \"6655\"}",
+                "type": "get_res"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_res"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "role": "assistant",
+                "text": "",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "当",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "面对",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "交通事故",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "肇事者不愿给予",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "赔偿的情况时，",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "可以采取以下几种",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "措施来解决问题：\n\n",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "1. **与",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "对方及保险公司沟通",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "协商**：首先",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "尝试与肇事者",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "以及其保险公司进行",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "沟通，明确告知",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "对方应承担的",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "赔偿责任，鼓励",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "其履行赔偿义务",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "。这是解决问题的第一",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "步，有时通过",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "友好的沟通就能",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "达成赔偿协议。\n\n",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "2. **收集",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "事故相关证据**",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "：保留事故现场",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "的照片、视频、",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "事故责任认定书",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "、医疗费用发票",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "、病历、",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "诊断证明、误",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "工证明、车辆",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "维修发票等相关证据",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "。这些证据对于",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "后续的法律程序",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "至关重要，能够有效",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "支持您的索赔请求",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "。\n\n3. **",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "申请调解**：",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "如果直接沟通无",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "果，可以向",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "人民调解委员会或者",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "公安机关交通管理部门申请",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "调解。《道路",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "交通事故处理程序规定",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "》第八十四条指出",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "，当事人可以向",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "人民调解委员会申请",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "调解，以解决",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "交通事故损害赔偿争议",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "。此步骤有助于",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "双方在第三方的帮助下",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "达成和解。\n\n",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "4. **提起",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "民事诉讼**：",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "如果调解未能解决问题",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "，受害者有权向",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "人民法院提起民事诉讼",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "，通过法律途径",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "要求赔偿。在",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "提起诉讼时，",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "应准备好所有相关的",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "证据材料，确保",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "法院能够全面了解",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "案件事实，做出",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "公正的判决。\n\n",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "5. **申请",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "强制执行**：",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "若法院已经作出",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "判决，而肇事",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "者仍未履行赔偿",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "义务，受害者可以在",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "规定的时间内向",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "法院申请强制执行",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "。法院将依据",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "法定程序，采取",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "查封、扣押",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "、冻结等措施",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "，迫使肇事者",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "履行赔偿义务。\n\n",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "在整个过程中，遵守",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "相关法律法规，合理",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "合法地维护自身的",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "权益是非常重要的。",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "如果您在处理过程中",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "遇到困难，建议",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "咨询专业的律师，",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "获取更专业的法律",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "指导和支持。",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "answer"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "start_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "start_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "如",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "果",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "对",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "方",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "拒",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "绝",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "赔",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "偿",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "你",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "可",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "以",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "采",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "取",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "哪",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "些",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "法",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "律",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "手",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "段",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "来",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "维",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "护",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "自",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "己",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "的",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "权",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "益",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "？",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "在",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "交",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "通",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "事",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "故",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "中",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "如",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "果",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "对",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "方",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "拒",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "绝",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "赔",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "偿",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "应",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "该",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "怎",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "样",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "进",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "行",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "事",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "故",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "责",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "任",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "认",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "定",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "？",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "如",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "果",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "肇",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "事",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "者",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "不",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "愿",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "意",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "赔",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "偿",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "是",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "否",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "可",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "以",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "申",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "请",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "交",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "警",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "介",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "入",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "协",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "助",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "处",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "理",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "？",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "在",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "对",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "方",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "拒",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "绝",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "赔",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "偿",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "的",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "情",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "况",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "下",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "，",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "如",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "何",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "收",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "集",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "和",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "保",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "存",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "证",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "据",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "以",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "备",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "后",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "续",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "维",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "权",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "使",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "用",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "data": "？",
+                "type": "get_mat"
+            },
+            "delta": {
+                "content": "",
+                "role": "assistant",
+                "type": "get_mat"
+            },
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "model": "gpt4"
+}
+
+data: {
+    "choices": [
+        {
+            "additional": {
+                "type": "answer"
+            },
+            "delta": {
+                "content": "",
+                "type": "answer"
+            },
+            "finish_reason": "stop",
+            "index": 0
+        }
+    ],
+    "code": 1000,
+    "id": "",
+    "model": "gpt4"
 }

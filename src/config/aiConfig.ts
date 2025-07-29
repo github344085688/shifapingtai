@@ -1,5 +1,5 @@
 export default {
-  api: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwtzx',
+  api: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwtzx', 
   model: '中国法研LLM', 
   apiKey: '8d0edca24a164c99bf804911fc16fd29',
 
@@ -394,13 +394,11 @@ export const concurrentApis: Record<string, ApiConfig>= {
   }
 }
 
-export const AcrossTheEntireNetwork ={
-    qwsswd: {
+export const AcrossTheEntireNetwork:any ={ 
     key: 'qwsswd',
     name: '全网搜索问答',
-    api: apiMap.xsywApi, 
+    api: apiMap.qwsswd, 
     version: 'v2',
     model: '中国法研LLM', 
-    stream: true
-  },
+    stream: true 
 }

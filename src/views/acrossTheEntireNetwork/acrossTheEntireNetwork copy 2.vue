@@ -1,35 +1,5 @@
 <template>
   <div class="w-full h-full pb-[64px] bg-gray-50">
-    <!-- Welcome Screen - 当没有消息时显示 -->
-    <SendMessages
-      :messagesLength="messages.length"
-      v-model:userInput="userInput"
-      @sendMessages="sendMessages"
-      @newDialogue="newDialogue"
-    />
-    <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
-      <!-- Chat Container -->
-      <div class="mb-[70px] pb-5" ref="chatContainer">
-        <div
-          v-for="(message, index) in messages"
-          :key="index"
-          :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
-        >
-          <div
-            class="relative rounded-xl"
-            :class="[
-              message.sender === 'user'
-                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px]'
-                : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
-            ]"
-          >
-            <div v-if="message.aiLoading" class="">ai思考中...</div>
-            <!-- 思考过程显示 -->
-            <div
-              v-if="message.thinkingProcess"
-              class="mb-4 thinking-process"
-              v-html="message.thinkingProcess"
-            ></div>
             <AiText :popsMessage="message" />
           </div>
         </div>
@@ -43,7 +13,7 @@ import { ref, defineComponent, nextTick, onMounted } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
 import aiConfig, { AcrossTheEntireNetwork } from '@/config/aiConfig'
-import AIService from '@/servers/aiservis'
+          :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
 
@@ -53,10 +23,9 @@ const CACHE_DURATION = 12 * 60 * 60 * 1000
 
 // 使用动态title功能
 const { title, updateTitle } = useTitle('法务助手 - 全网搜索问答')
-
-defineComponent({
-  name: 'AcrossTheEntireNetwork',
-})
+            <div v-if="message.aiLoading" class="">ai思考中...</div>
+            <!-- 思考过程显示 -->
+            <div 
 
 // 自动滚动控制
 const autoScroll = ref(true)
@@ -192,31 +161,21 @@ const sendMessages = async () => {
   }
   messages.value.push(assistantMessage)
 
-  // 启动主要AI服务
-  await aiService.sendToAIMock('测试消息', setMessage)
-  // 启动主要AI服务
-  // aiService.sendToAI(newMessage, setMessage)
+  // 启动主要AI服务 - 使用模拟数据进行测试
+  aiService.sendToAIMock(newMessage, setMessage)
 
   userInput.value = ''
 }
 
-const setMessage = (
-  message: string,
-  isDone: boolean,
-  isThinking: boolean,
-  isError: boolean = false,
-) => {
+const setMessage = (message: string, isDone: boolean, isThinking: boolean) => {
   const lastMessage = messages.value[messages.value.length - 1]
 
   // 确保最后一条消息存在且是助手消息
-  if (!lastMessage || lastMessage.sender != 'assistant') {
+  if (!lastMessage || lastMessage.sender !== 'assistant') {
     return
   }
-  console.log('setMessage', messages.value, isDone, isThinking, lastMessage)
+
   if (isDone) {
-    if (isError) {
-      lastMessage.content = `${lastMessage.content}${message}`
-    }
     lastMessage.aiLoading = false
     lastMessage.isLoading = false
 

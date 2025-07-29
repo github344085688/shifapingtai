@@ -1,17 +1,11 @@
-import MockAIService from './moni'
-
 class AIService {
   private aiConfig: any
-  private mockService: MockAIService
 
   constructor(aiConfig: any) {
     this.aiConfig = aiConfig
-    this.mockService = new MockAIService(aiConfig)
   }
 
   async sendToAI(message: any, callback: any) {
-        
- 
     let systemMessages = [
       {
         role: 'system',
@@ -31,70 +25,24 @@ class AIService {
     }
     
     // console.log('paramsBody', this.aiConfig)
-    try {
-      const response = await fetch(this.aiConfig.api, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json', 
-          'Access-Control-Allow-Origin': '*', 
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE' , 
-          Authorization: 'Bearer ' + this.aiConfig.apiKey,
-        }, 
-        body: JSON.stringify({
-          model: this.aiConfig.model,
-          messages: [  message],
-          stream: true,
-        }),
-        signal: signal,
-      })
+    const response = await fetch(this.aiConfig.api, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+        'Access-Control-Allow-Origin': '*', 
+        'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE' , 
+        Authorization: 'Bearer ' + this.aiConfig.apiKey,
+      }, 
+      body: JSON.stringify({
+        model: this.aiConfig.model,
+        messages: [  message],
+        stream: true,
+      }),
+      signal: signal,
+    })
 
-      // 检查HTTP状态码
-      if (!response.ok) {
-        if (response.status === 504) {
-          // 504 Gateway Timeout 错误处理
-          callback('<div style="color: red; font-weight: bold;">服务器错误</div>', true, false)
-          return
-        } else if (response.status === 401) {
-          // 401 未授权错误处理
-          callback('<div style="color: red; font-weight: bold;">账号未登录</div>', true, false)
-          return
-        } else {
-          // 其他HTTP错误
-          callback(`<div style="color: red; font-weight: bold;">请求失败 (${response.status})</div>`, true, false)
-          return
-        }
-      }
-
-      await this.responseReader(response, abortController, callback, hasShownThinkingHeader, hasShownAnswerHeader)
-    } catch (error: any) {
-       console.log('Failed to fetch', error  )  
-        // callback('<div style="color: red; font-weight: bold;">网络错误</div>', false, true)
  
-      // 处理网络错误或其他异常
-      if (error.name === 'AbortError') {
-        callback('<div style="color: orange; font-weight: bold;">【请求已中断】</div>', true, false,true);
-         return;
-      } else if (error.message && error.message.includes('504')) {
-        // 504 Gateway Timeout 错误（在网络层面抛出的异常）
-        callback('<div style="color: red; font-weight: bold;">服务器错误</div>',true, false,true);
-         return;
-      } else if (error.message && error.message.includes('timeout')) {
-        // 超时错误
-        callback('<div style="color: red; font-weight: bold;">请求超时</div>',true, false,true);
-         return;
-      } else if (error.message && error.message.includes('Failed to fetch')) {
-        // 网络连接失败
-        callback('<div style="color: red; font-weight: bold;">网络连接失败</div>',true, false,true);
-         return;
-      }else if (error.includes('Failed to fetch')) { 
-         callback('<div style="color: red; font-weight: bold;">网络错误</div>', true, false,true);
-        return;
-      } else { 
-        // 其他未知错误
-       
-       callback('<div style="color: red; font-weight: bold;">网络错误</div>', true, false,true);
-      }
-    }
+    await this.responseReader(response, abortController, callback, hasShownThinkingHeader, hasShownAnswerHeader)
   }
 
   private async responseReader(response: any, abortController: any, callback: any, hasShownThinkingHeader: boolean, hasShownAnswerHeader: boolean) {
@@ -142,7 +90,7 @@ class AIService {
           }
           try { 
             const json = JSON.parse(eventData)
-            console.log('检查模型是否包含 "gpt" 字符串啊实打实')
+            
             // 检查模型是否包含 "gpt" 字符串
             const model = json.model || this.aiConfig.model || ''
             const isGptModel = model.toLowerCase().includes('gpt')
@@ -154,7 +102,7 @@ class AIService {
               const additionalData = json.choices[0]?.additional
               if (additionalData) {
                 // 排除不需要的类型：step, qacls, start_search
-                if (['step', 'qacls', 'start_search', 'get_mat'].includes(additionalData.type)) {
+                if (['step', 'qacls', 'start_search'].includes(additionalData.type)) {
                   continue
                 }
                 
@@ -162,7 +110,7 @@ class AIService {
                   case 'start_res':
                     // 处理搜索结果开始
                     if (!hasShownThinkingHeader) {
-                      callback('<div style="color: #888; margin: 8px 0;"><strong>搜索过程：</strong>📊 开始获取搜索结果...</div>', false, true)
+                      callback('<div style="color: #888; margin: 8px 0;"><strong>推理过程：</strong>📊 开始获取搜索结果...</div>', false, true)
                       hasShownThinkingHeader = true
                     } else {
                       callback('<div style="color: #888; margin: 8px 0;">📊 开始获取搜索结果...</div>', false, true)
@@ -181,10 +129,10 @@ class AIService {
                           formattedContent = this.processHtmlContent(formattedContent)
                           
                           if (!hasShownThinkingHeader) {
-                            callback(`<div style="color: #888; margin: 8px 0;"><strong>推理过程：</strong></div><div style="background: #f9f9f9;  text-gray-500  padding: 16px; margin: 8px 0; border-radius: 8px;   line-height: 1.6;">${formattedContent}</div>`, false, true)
+                            callback(`<div style="color: #888; margin: 8px 0;"><strong>推理过程：</strong></div><div style="background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px; border-left: 4px solid #007acc; line-height: 1.6;">${formattedContent}</div>`, false, true)
                             hasShownThinkingHeader = true
                           } else {
-                            callback(`<div style="background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px; text-gray-500   line-height: 1.6;">${formattedContent}</div>`, false, true)
+                            callback(`<div style="background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px; border-left: 4px solid #007acc; line-height: 1.6;">${formattedContent}</div>`, false, true)
                           }
                         }
                       } catch (e) {
@@ -209,7 +157,18 @@ class AIService {
                       }
                       callback(answerContent, false, false)
                     }
-                    break 
+                    break
+                  case 'get_mat':
+                    // 处理材料数据
+                    if (additionalData.data && additionalData.data.trim()) {
+                      if (!hasShownThinkingHeader) {
+                        callback(`<div style="color: #888; margin: 8px 0;"><strong>推理过程：</strong>📋 ${additionalData.data}</div>`, false, true)
+                        hasShownThinkingHeader = true
+                      } else {
+                        callback(`<div style="color: #888; margin: 8px 0;">📋 ${additionalData.data}</div>`, false, true)
+                      }
+                    }
+                    break
                   case 'queries':
                     // 搜索查询语句
                     try {
@@ -226,10 +185,10 @@ class AIService {
                       console.log('解析搜索查询失败:', e)
                     }
                     break
-                  // case 'start_jx': 
-                  //   // 在推理开始后添加分隔符，为推理结果做准备
-                  //   callback('<div style="height: 70px; display: flex; align-items: center; font-weight: bold; color: #333;"><strong>推理结果：</strong></div>', false, false)
-                  //   break
+                  case 'start_jx': 
+                    // 在推理开始后添加分隔符，为推理结果做准备
+                    callback('<div style="height: 70px; display: flex; align-items: center; font-weight: bold; color: #333;"><strong>推理结果：</strong></div>', false, false)
+                    break
                  default:
                     // 其他类型的additional数据
                     if (additionalData.data && additionalData.data.trim()) {
@@ -300,95 +259,6 @@ class AIService {
     
     return processedContent
   }
-
-  // 测试方法：使用模拟数据进行测试
-  // 🔄 改进：现在使用相同的 responseReader 处理模拟数据，确保与真实API行为一致
-  async sendToAIMock(message: any, callback: any) {
-    console.log('🧪 使用模拟数据进行测试...')
-    console.log('📝 测试消息:', message)
-    console.log('📄 数据源: jsons.json')
-    console.log('✨ 使用 responseReader 处理模拟数据，保持与真实API相同的处理逻辑')
-    
-    let hasShownThinkingHeader = false // 用于跟踪是否已显示"推理过程："标识
-    let hasShownAnswerHeader = false // 用于跟踪是否已显示"结果："标识
-    let abortController: any = null
-    abortController = new AbortController()
-    
-    try {
-      // 创建模拟的 Response 对象，模拟真实的 fetch 响应
-      const mockResponse = await this.createMockResponse()
-      
-      // 🎯 关键改进：使用相同的 responseReader 处理模拟数据
-      // 这确保了模拟测试与真实API使用完全相同的数据处理逻辑
-      await this.responseReader(mockResponse, abortController, callback, hasShownThinkingHeader, hasShownAnswerHeader)
-    } catch (error) {
-      console.error('模拟测试失败:', error)
-      callback('模拟测试失败', true, false)
-    }
-  }
-
-  // 创建模拟的 Response 对象
-  // 🔧 此方法将模拟数据包装成与真实 fetch Response 兼容的格式
-  private async createMockResponse(): Promise<any> {
-    const mockService = this.mockService // 保存引用避免作用域问题
-    
-    // 创建一个可读流来模拟真实的 Response.body
-    const stream = new ReadableStream({
-      async start(controller) {
-        try {
-          // 获取模拟数据流
-          const mockStream = mockService.simulateStream('')
-          
-          for await (const data of mockStream) {
-            // 将字符串转换为 Uint8Array，模拟网络传输的二进制数据
-            const encoder = new TextEncoder()
-            const chunk = encoder.encode(data)
-            controller.enqueue(chunk)
-            
-            // 模拟网络延迟，使测试更接近真实环境
-            await new Promise(resolve => setTimeout(resolve, 20 + Math.random() * 60))
-          }
-          
-          controller.close()
-        } catch (error) {
-          controller.error(error)
-        }
-      }
-    })
-
-    // 返回与真实 fetch Response 兼容的对象
-    return {
-      body: {
-        getReader() {
-          return stream.getReader()
-        }
-      },
-      ok: true,
-      status: 200
-    }
-  }
-
-  // 切换到模拟模式的方法
-  enableMockMode() {
-    // 备份原始方法
-    if (!this.originalSendToAI) {
-      this.originalSendToAI = this.sendToAI.bind(this)
-    }
-    
-    // 替换为模拟方法
-    this.sendToAI = this.sendToAIMock.bind(this)
-    console.log('🔄 已切换到模拟模式')
-  }
-
-  // 切换回真实API模式的方法
-  disableMockMode() {
-    if (this.originalSendToAI) {
-      this.sendToAI = this.originalSendToAI
-      console.log('🔄 已切换回真实API模式')
-    }
-  }
-
-  private originalSendToAI?: Function
 }
 
 export default AIService
