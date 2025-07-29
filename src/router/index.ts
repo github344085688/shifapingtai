@@ -1,14 +1,35 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import legalResearchSmartAnswer from '../views/legalResearchSmartAnswer/legalResearchSmartAnswer.vue'
 import AcrossTheEntireNetwork from '../views/acrossTheEntireNetwork/acrossTheEntireNetwork.vue'
+import lawsAndRegulations from '../views/lawsAndRegulations/lawsAndRegulations.vue'
+import legalDocumentWriting from '../views/legalDocumentWriting/legalDocumentWriting.vue'
+import bigDataVictoryAssessmentReport from '../views/bigDataVictoryAssessmentReport/bigDataVictoryAssessmentReport.vue'
+import litigationStrategyGeneration from '../views/litigationStrategyGeneration/litigationStrategyGeneration.vue'
+import litigationStrategy from '../views/litigationStrategy/litigationStrategy.vue'
+import defenseStrategy from '../views/defenseStrategy/defenseStrategy.vue'
+import administrativeLawEnforcementAssistant from '../views/administrativeLawEnforcementAssistant/administrativeLawEnforcementAssistant.vue'
+import administrativePenaltyAssistance from '../views/administrativePenaltyAssistance/administrativePenaltyAssistance.vue'
+import Home from '../views/home/home.vue'
 
 const router = createRouter({
    history: createWebHashHistory(),
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: HomeView,
+      redirect: '/home'
+    },
+    {
+      path: '/home',
+      name: 'Home',
+      component: Home,
+      meta: {
+        title: '法务智能助手平台'
+      }
+    },
+    {
+      path: '/legalResearchSmartAnswer',
+      name: 'LegalResearchSmartAnswer',
+      component: legalResearchSmartAnswer, 
       meta: {
         title: '法研智答'
       }
@@ -18,10 +39,71 @@ const router = createRouter({
       name: 'AcrossTheEntireNetwork',
       component: AcrossTheEntireNetwork,
       meta: {
-        title: '法务助手 - 全网搜索问答'
+        title: '全网搜索问答'
       }
     },
-    // 全网搜索问答
+    {
+      path: '/lawsAndRegulations', 
+      name: 'LawsAndRegulations',
+      component: lawsAndRegulations,
+      meta: {
+        title: '法律法规'
+      }
+    },
+    {
+      path: '/legalDocumentWriting', 
+      name: 'LegalDocumentWriting',
+      component: legalDocumentWriting,
+      meta: {
+        title: '法律文书写作-提供最专业的法律文书写作'
+      }
+    },
+    {
+      path: '/bigDataVictoryAssessmentReport', 
+      name: 'BigDataVictoryAssessmentReport',
+      component: bigDataVictoryAssessmentReport, 
+      meta: {
+        title: '大数据胜诉评估报告-为原告方提供诉讼、抗辩策略'
+      }
+    },    {
+      path: '/litigationStrategyGeneration', 
+      name: 'LitigationStrategyGeneration',
+      component: litigationStrategyGeneration, 
+      meta: {
+        title: '诉讼策略生成-为原告方提供诉讼、抗辩策略'
+      }
+    },    {
+      path: '/litigationStrategy', 
+      name: 'LitigationStrategy',
+      component: litigationStrategy, 
+      meta: {
+        title: '法律分析意见-诉讼策略'
+      }
+    },    {
+      path: '/defenseStrategy', 
+      name: 'DefenseStrategy',
+      component: defenseStrategy,   
+      meta: {
+        title: '法律分析意见-抗辩策略'
+      }
+    },
+      {
+      path: '/administrativeLawEnforcementAssistant', 
+      name: 'AdministrativeLawEnforcementAssistant',
+      component: administrativeLawEnforcementAssistant,    
+      meta: {
+        title: '行政执法助手-为执法部门提供行政执法辅助建议'
+      }
+    },
+      {
+      path: '/administrativePenaltyAssistance', 
+      name: 'AdministrativePenaltyAssistance',
+      component: administrativePenaltyAssistance,   
+      meta: {
+        title: '行政处罚辅助-为执法部门提供行政执法辅助建议'
+      }
+    },
+     
   ],
 })
 

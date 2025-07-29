@@ -11,10 +11,10 @@ const STYLES = {
 
 // 消息模板
 const MESSAGES = {
-  SEARCH_START: '获取搜索结果：',
+  SEARCH_START: '📊 开始获取搜索结果...',
   THINKING_PROCESS: '<strong>推理过程：</strong>',
   RESULT_HEADER: '<strong>结果：</strong>',
-  SEARCH_KEYWORDS: '搜索关键词: '
+  SEARCH_KEYWORDS: '🔎 搜索关键词: '
 }
 
 // 错误消息

@@ -52,7 +52,7 @@ const globalState = state.state
 const CACHE_DURATION = 12 * 60 * 60 * 1000
 
 // 使用动态title功能
-const { title, updateTitle } = useTitle('全网搜索问答')
+const { title, updateTitle } = useTitle('法务助手 - 全网搜索问答')
 
 defineComponent({
   name: 'AcrossTheEntireNetwork',
@@ -83,7 +83,7 @@ onMounted(() => {
       // 如果有缓存的对话，更新title显示对话数量
       if (messages.value.length > 0) {
         const userMessages = messages.value.filter((msg) => msg.sender === 'user')
-        updateTitle(`全网搜索问答`)
+        updateTitle(`法务助手 - 全网搜索问答 (${userMessages.length}条对话)`)
       }
     } else {
       messages.value = []
@@ -120,7 +120,7 @@ const newDialogue = () => {
     delete globalState.acrossTheEntireNetwork.generalAiTime
   }
   // 重置title为默认值
-  updateTitle('全网搜索问答')
+  updateTitle('法务助手 - 全网搜索问答')
 }
 
 // 从URL参数获取apiKey的函数
@@ -175,7 +175,8 @@ const sendMessages = async () => {
   addMessage(message, 'user')
 
   // 更新title显示对话数量
-  updateTitle(`全网搜索问答`)
+  const userMessages = messages.value.filter((msg) => msg.sender === 'user')
+  updateTitle(`法务助手 - 全网搜索问答 (${userMessages.length}条对话)`)
 
   const newMessage = {
     role: 'user',

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full pb-[64px] bg-gray-50">
+  <div class="w-full min-h-full pb-[68px] bg-gray-50">
     <div class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
       <div
         class="flex items-center bg-gradient-to-r from-[#e23338] via-[#f04b4e] to-[#e23338] bg-cover bg-center p-[10px_15px] mt-5 rounded-t-xl"
@@ -32,7 +32,7 @@
       </div>
 
       <!-- Chat Container -->
-      <div class="mb-[70px] pb-5" ref="chatContainer">
+      <div class="pb-5" ref="chatContainer">
         <div
           v-for="(message, index) in messages"
           :key="index"
@@ -458,10 +458,8 @@
 
                         <!-- URL链接和评分信息 -->
                         <div class="pt-3 border-t border-gray-100">
-                          <div class="flex-1">
-                            <!-- 修改后的查看原文逻辑 -->
+                          <!-- <div class="flex-1">
                             <template v-if="item.url">
-                              <!-- 如果是微信公众号链接，显示灰底div -->
                               <div
                                 class="flex justify-between items-center p-3 bg-gray-100 rounded-lg"
                               >
@@ -478,7 +476,7 @@
                                 </button>
                               </div>
                             </template>
-                          </div>
+                          </div> -->
 
                           <!-- 相关性评分 -->
                           <div

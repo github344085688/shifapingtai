@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full h-full pb-[64px] bg-gray-50">
+  <div class="w-full min-h-full pb-[68px] bg-gray-50">
     <!-- Welcome Screen - 当没有消息时显示 -->
     <SendMessages
       :messagesLength="messages.length"
@@ -9,7 +9,7 @@
     />
     <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
       <!-- Chat Container -->
-      <div class="mb-[70px] pb-5" ref="chatContainer">
+      <div class="pb-5" ref="chatContainer">
         <div
           v-for="(message, index) in messages"
           :key="index"
@@ -25,9 +25,9 @@
           >
             <div v-if="message.aiLoading" class="">ai思考中...</div>
             <!-- 思考过程显示 -->
-            <div 
-              v-if="message.thinkingProcess" 
-              class="thinking-process mb-4"
+            <div
+              v-if="message.thinkingProcess"
+              class="mb-4 thinking-process"
               v-html="message.thinkingProcess"
             ></div>
             <AiText :popsMessage="message" />
@@ -193,20 +193,30 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
+  // await aiService.sendToAIMock('测试消息', setMessage)
+  // 启动主要AI服务
   aiService.sendToAI(newMessage, setMessage)
 
   userInput.value = ''
 }
 
-const setMessage = (message: string, isDone: boolean, isThinking: boolean) => {
+const setMessage = (
+  message: string,
+  isDone: boolean,
+  isThinking: boolean,
+  isError: boolean = false,
+) => {
   const lastMessage = messages.value[messages.value.length - 1]
 
   // 确保最后一条消息存在且是助手消息
-  if (!lastMessage || lastMessage.sender !== 'assistant') {
+  if (!lastMessage || lastMessage.sender != 'assistant') {
     return
   }
-
+  console.log('setMessage', messages.value, isDone, isThinking, lastMessage)
   if (isDone) {
+    if (isError) {
+      lastMessage.content = `${lastMessage.content}${message}`
+    }
     lastMessage.aiLoading = false
     lastMessage.isLoading = false
 
