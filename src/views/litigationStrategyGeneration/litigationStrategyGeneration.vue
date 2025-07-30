@@ -6,6 +6,9 @@
       v-model:userInput="userInput"
       @sendMessages="sendMessages"
       @newDialogue="newDialogue"
+      :title="litigationStrategyGeneration.title"
+      :placeholder="litigationStrategyGeneration.placeholder"
+      :note="litigationStrategyGeneration.note"
     />
     <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
       <!-- Chat Container -->

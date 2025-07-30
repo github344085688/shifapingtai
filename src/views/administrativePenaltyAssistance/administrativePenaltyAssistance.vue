@@ -6,6 +6,9 @@
       v-model:userInput="userInput"
       @sendMessages="sendMessages"
       @newDialogue="newDialogue"
+      :title="administrativePenaltyAssistance.title"
+      :placeholder="administrativePenaltyAssistance.placeholder"
+      :note="administrativePenaltyAssistance.note"
     />
     <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
       <!-- Chat Container -->
@@ -42,7 +45,7 @@
 import { ref, defineComponent, nextTick, onMounted } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
-import aiConfig, { AcrossTheEntireNetwork } from '@/config/aiConfig'
+import aiConfig, { administrativePenaltyAssistance } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
@@ -52,10 +55,10 @@ const globalState = state.state
 const CACHE_DURATION = 12 * 60 * 60 * 1000
 
 // 使用动态title功能
-const { title, updateTitle } = useTitle('法务助手 - 全网搜索问答')
+const { title, updateTitle } = useTitle('行政处罚辅助')
 
 defineComponent({
-  name: 'AcrossTheEntireNetwork',
+  name: 'administrativePenaltyAssistance',
 })
 
 // 自动滚动控制
@@ -64,35 +67,35 @@ const userScrolled = ref(false)
 
 onMounted(() => {
   // 初始化 acrossTheEntireNetwork 对象（如果不存在）
-  if (!globalState.acrossTheEntireNetwork) {
-    globalState.acrossTheEntireNetwork = {}
+  if (!globalState.administrativePenaltyAssistance) {
+    globalState.administrativePenaltyAssistance = {}
   }
 
   // 页面渲染前判断缓存是否有效
   if (
-    globalState.acrossTheEntireNetwork.aiResults &&
-    globalState.acrossTheEntireNetwork.generalAiTime
+    globalState.administrativePenaltyAssistance.aiResults &&
+    globalState.administrativePenaltyAssistance.generalAiTime
   ) {
     const currentTime = Date.now()
-    const savedTime = globalState.acrossTheEntireNetwork.generalAiTime
+    const savedTime = globalState.administrativePenaltyAssistance.generalAiTime
     const timeDifference = currentTime - savedTime
 
     // 如果时间差小于常量（12小时），则使用缓存
     if (timeDifference < CACHE_DURATION) {
-      messages.value = globalState.acrossTheEntireNetwork.aiResults
+      messages.value = globalState.administrativePenaltyAssistance.aiResults
       // 如果有缓存的对话，更新title显示对话数量
       if (messages.value.length > 0) {
         const userMessages = messages.value.filter((msg) => msg.sender === 'user')
-        updateTitle(`法务助手 - 全网搜索问答 (${userMessages.length}条对话)`)
+        updateTitle(`行政处罚辅助`)
       }
     } else {
       messages.value = []
-      delete globalState.acrossTheEntireNetwork.aiResults
-      delete globalState.acrossTheEntireNetwork.generalAiTime
+      delete globalState.administrativePenaltyAssistance.aiResults
+      delete globalState.administrativePenaltyAssistance.generalAiTime
     }
   }
-  if (globalState.acrossTheEntireNetwork.aiResults)
-    messages.value = globalState.acrossTheEntireNetwork.aiResults
+  if (globalState.administrativePenaltyAssistance.aiResults)
+    messages.value = globalState.administrativePenaltyAssistance.aiResults
 
   // 监听用户滚动事件
   window.addEventListener('scroll', handleUserScroll)
@@ -115,12 +118,12 @@ const handleUserScroll = () => {
 // 开启新对话
 const newDialogue = () => {
   messages.value = []
-  if (globalState.acrossTheEntireNetwork) {
-    delete globalState.acrossTheEntireNetwork.aiResults
-    delete globalState.acrossTheEntireNetwork.generalAiTime
+  if (globalState.administrativePenaltyAssistance) {
+    delete globalState.administrativePenaltyAssistance.aiResults
+    delete globalState.administrativePenaltyAssistance.generalAiTime
   }
   // 重置title为默认值
-  updateTitle('法务助手 - 全网搜索问答')
+  updateTitle('行政处罚辅助')
 }
 
 // 从URL参数获取apiKey的函数
@@ -128,12 +131,12 @@ const getApiKeyFromUrl = (): string => {
   const urlParams = new URLSearchParams(window.location.search)
   return urlParams.get('apiKey') || aiConfig.apiKey
 }
-console.log(AcrossTheEntireNetwork)
+// console.log(administrativePenaltyAssistance)
 // 创建AIService实例时传入配置
 const aiConfigs = {
-  api: AcrossTheEntireNetwork.api,
+  api: administrativePenaltyAssistance.api,
   apiKey: getApiKeyFromUrl(),
-  model: AcrossTheEntireNetwork.model,
+  model: administrativePenaltyAssistance.model,
 }
 
 const aiService = new AIService(aiConfigs)
@@ -175,8 +178,7 @@ const sendMessages = async () => {
   addMessage(message, 'user')
 
   // 更新title显示对话数量
-  const userMessages = messages.value.filter((msg) => msg.sender === 'user')
-  updateTitle(`法务助手 - 全网搜索问答 (${userMessages.length}条对话)`)
+  updateTitle(`行政处罚辅助`)
 
   const newMessage = {
     role: 'user',
@@ -212,7 +214,7 @@ const setMessage = (
   if (!lastMessage || lastMessage.sender != 'assistant') {
     return
   }
-  console.log('setMessage', messages.value, isDone, isThinking, lastMessage)
+  // console.log('setMessage', messages.value, isDone, isThinking, lastMessage)
   if (isDone) {
     if (isError) {
       lastMessage.content = `${lastMessage.content}${message}`
@@ -221,12 +223,12 @@ const setMessage = (
     lastMessage.isLoading = false
 
     // 确保 acrossTheEntireNetwork 对象存在
-    if (!globalState.acrossTheEntireNetwork) {
-      globalState.acrossTheEntireNetwork = {}
+    if (!globalState.administrativePenaltyAssistance) {
+      globalState.administrativePenaltyAssistance = {}
     }
 
-    globalState.acrossTheEntireNetwork.aiResults = messages.value
-    globalState.acrossTheEntireNetwork.generalAiTime = Date.now()
+    globalState.administrativePenaltyAssistance.aiResults = messages.value
+    globalState.administrativePenaltyAssistance.generalAiTime = Date.now()
     return
   }
 

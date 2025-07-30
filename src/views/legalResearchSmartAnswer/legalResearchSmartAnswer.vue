@@ -1,26 +1,68 @@
 <template>
-  <div class="w-full min-h-full pb-[68px] bg-gray-50">
-    <div class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
-      <div
+  <div class="w-full min-h-full pb-[68px] bg-gray-50 box-border">
+    <SendMessages
+      :messagesLength="messages.length"
+      v-model:userInput="userInput"
+      @sendMessages="sendMessages"
+      @newDialogue="newDialogue"
+      :title="ConsultationOnLegalIssues.title"
+      :placeholder="ConsultationOnLegalIssues.placeholder"
+      :note="ConsultationOnLegalIssues.note"
+    >
+      <template #content>
+        <div class="box-border px-6 mb-6 w-full">
+          <div class="font-medium text-gray-600">热门问题</div>
+          <div class="mt-1">
+            <div
+              v-for="(example, index) in examples"
+              :key="index"
+              class="py-2 flex justify-between items-center text-red-600 bg-white border-0 border-b-[1px] border-gray-200 transition-colors duration-200 cursor-pointer hover:bg-gray-50"
+              @click="handleExampleClick(example)"
+            >
+              {{ example }}
+              <svg
+                t="1753862321982"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="4390"
+                width="20"
+                height="20"
+              >
+                <path
+                  d="M593.066667 793.6a32.170667 32.170667 0 0 1 0-45.226667L829.44 512 593.066667 275.626667a32.170667 32.170667 0 0 1 0-45.226667c12.373333-12.373333 32.853333-12.373333 45.226666 0l258.986667 258.986667c12.373333 12.373333 12.373333 32.853333 0 45.226666l-258.986667 258.986667c-6.4 6.4-14.506667 9.386667-22.613333 9.386667s-16.213333-2.986667-22.613333-9.386667z"
+                  p-id="4391"
+                  fill="#bfbfbf"
+                ></path>
+                <path
+                  d="M149.333333 544c-17.493333 0-32-14.506667-32-32s14.506667-32 32-32h718.08c17.493333 0 32 14.506667 32 32s-14.506667 32-32 32H149.333333z"
+                  p-id="4392"
+                  fill="#bfbfbf"
+                ></path>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </template>
+    </SendMessages>
+    <div class="max-w-[750px] mx-auto px-2.5 bg-gray-50 box-border">
+      <!-- <div
         class="flex items-center bg-gradient-to-r from-[#e23338] via-[#f04b4e] to-[#e23338] bg-cover bg-center p-[10px_15px] mt-5 rounded-t-xl"
-      >
-        <!-- <div class="w-[70px] h-[40px] relative mr-[15px]">
+      > -->
+      <!-- <div class="w-[70px] h-[40px] relative mr-[15px]">
           <div class="absolute top-[-30px] left-0 w-[100px]">
             <img src="@img/logo.png" mode="widthFix" alt="" class="object-contain w-full h-auto" />
           </div>
         </div> -->
-        <div class="text-[#ffffff] text-lg flex justify-center w-full font-bold">
+      <!-- <div class="text-[#ffffff] text-lg flex justify-center w-full font-bold">
           Hi~我是法研智答 助手！
-        </div>
-      </div>
+        </div> -->
+      <!-- </div> -->
 
       <!-- Intro Card -->
-      <div class="bg-white rounded-b-xl p-5 mb-[15px] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+      <!-- <div class="bg-white rounded-b-xl p-5 mb-[15px] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
         基于大量通过AI提供专业的司法解答！
-      </div>
-
-      <!-- Examples Card -->
-      <div class="bg-white rounded-xl p-5 mb-[15px] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
         <div
           v-for="(example, index) in examples"
           :key="index"
@@ -29,7 +71,12 @@
         >
           {{ example }}
         </div>
-      </div>
+      </div> -->
+
+      <!-- Examples Card -->
+      <!-- <div class="bg-white rounded-xl p-5 mb-[15px] shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
+        
+      </div> -->
 
       <!-- Chat Container -->
       <div class="pb-5" ref="chatContainer">
@@ -94,13 +141,13 @@
     </div>
 
     <!-- Input Area -->
-    <SendMessages
+    <!-- <SendMessages
       :messagesLength="messages.length"
       v-model:userInput="userInput"
       :isShalow="true"
       @sendMessages="sendMessages"
       @newDialogue="newDialogue"
-    />
+    /> -->
 
     <!-- 并发结果弹窗 -->
     <div v-if="showModal" class="flex fixed inset-0 z-50" @click="closeModal">
@@ -147,13 +194,15 @@
                 @leave="onContentLeave"
               >
                 <div :key="currentModalKey" class="max-w-none prose">
-                  <div class="p-4 mb-6 bg-blue-50 rounded-r-lg border-l-4 border-blue-500">
-                    <h3 class="mb-2 font-medium text-blue-800">{{ currentModalTitle }}</h3>
-                    <p class="text-sm text-blue-700">以下是相关的详细信息：</p>
+                  <div
+                    class="p-4 mb-6 bg-blue-50 rounded-r-lg"
+                    v-if="!parsedModalContent || parsedModalContent.length < 1"
+                  >
+                    <p class="text-blue-700">没有找到相关信息！</p>
                   </div>
 
                   <!-- 格式化显示内容 -->
-                  <div class="space-y-4">
+                  <div class="mb-6 space-y-4">
                     <!-- 相似案例特殊处理 -->
                     <template
                       v-if="currentModalKey === 'xsal' && Array.isArray(parsedModalContent)"
@@ -168,7 +217,7 @@
                           <h4 class="mb-2 text-lg font-semibold leading-tight text-gray-800">
                             {{ caseItem.title }}
                           </h4>
-                          <div class="flex flex-wrap gap-2 text-sm">
+                          <div class="flex flex-wrap gap-2">
                             <span class="px-2 py-1 text-blue-800 bg-blue-100 rounded-full">
                               {{ caseItem.caseid }}
                             </span>
@@ -191,56 +240,54 @@
                         <div class="grid grid-cols-1 gap-4 mb-4 md:grid-cols-2">
                           <div class="space-y-2">
                             <div class="flex items-start">
-                              <span class="flex-shrink-0 w-20 text-sm font-medium text-gray-600"
+                              <span class="flex-shrink-0 w-20 font-medium text-gray-600"
                                 >案件性质:</span
                               >
-                              <span class="text-sm text-gray-800">{{
-                                caseItem.casetype || '民事'
-                              }}</span>
+                              <span class="text-gray-800">{{ caseItem.casetype || '民事' }}</span>
                             </div>
                             <div class="flex items-start">
-                              <span class="flex-shrink-0 w-20 text-sm font-medium text-gray-600"
+                              <span class="flex-shrink-0 w-20 font-medium text-gray-600"
                                 >案由:</span
                               >
-                              <span class="text-sm text-gray-800">{{ caseItem.casecause }}</span>
+                              <span class="text-gray-800">{{ caseItem.casecause }}</span>
                             </div>
                             <div class="flex items-start">
-                              <span class="flex-shrink-0 w-20 text-sm font-medium text-gray-600"
+                              <span class="flex-shrink-0 w-20 font-medium text-gray-600"
                                 >审理程序:</span
                               >
-                              <span class="text-sm text-gray-800">{{ caseItem.procedure }}</span>
+                              <span class="text-gray-800">{{ caseItem.procedure }}</span>
                             </div>
                             <div class="flex items-start">
-                              <span class="flex-shrink-0 w-20 text-sm font-medium text-gray-600"
+                              <span class="flex-shrink-0 w-20 font-medium text-gray-600"
                                 >判决年份:</span
                               >
-                              <span class="text-sm text-gray-800">{{ caseItem.judgeyear }}</span>
+                              <span class="text-gray-800">{{ caseItem.judgeyear }}</span>
                             </div>
                           </div>
                           <div class="space-y-2">
                             <div class="flex items-start">
-                              <span class="flex-shrink-0 w-20 text-sm font-medium text-gray-600"
+                              <span class="flex-shrink-0 w-20 font-medium text-gray-600"
                                 >审理法院:</span
                               >
-                              <span class="text-sm text-gray-800">{{ caseItem.court }}</span>
+                              <span class="text-gray-800">{{ caseItem.court }}</span>
                             </div>
                             <div class="flex items-start">
-                              <span class="flex-shrink-0 w-20 text-sm font-medium text-gray-600"
+                              <span class="flex-shrink-0 w-20 font-medium text-gray-600"
                                 >判决日期:</span
                               >
-                              <span class="text-sm text-gray-800">{{ caseItem.judgedate }}</span>
+                              <span class="text-gray-800">{{ caseItem.judgedate }}</span>
                             </div>
                             <div class="flex items-start">
-                              <span class="flex-shrink-0 w-20 text-sm font-medium text-gray-600"
+                              <span class="flex-shrink-0 w-20 font-medium text-gray-600"
                                 >所属地区:</span
                               >
-                              <span class="text-sm text-gray-800">{{ caseItem.province }}</span>
+                              <span class="text-gray-800">{{ caseItem.province }}</span>
                             </div>
                             <div class="flex items-start">
-                              <span class="flex-shrink-0 w-20 text-sm font-medium text-gray-600"
+                              <span class="flex-shrink-0 w-20 font-medium text-gray-600"
                                 >数据来源:</span
                               >
-                              <span class="text-sm text-gray-800">{{ caseItem.database }}</span>
+                              <span class="text-gray-800">{{ caseItem.database }}</span>
                             </div>
                           </div>
                         </div>
@@ -250,12 +297,12 @@
                           v-if="caseItem.applicablelaw && caseItem.applicablelaw.length > 0"
                           class="mb-4"
                         >
-                          <h5 class="mb-2 text-sm font-medium text-gray-700">适用法律条文:</h5>
+                          <h5 class="mb-2 font-medium text-gray-700">适用法律条文:</h5>
                           <div class="space-y-1">
                             <div
                               v-for="(law, lawIndex) in caseItem.applicablelaw"
                               :key="lawIndex"
-                              class="p-2 pl-3 text-sm text-gray-600 bg-blue-50 rounded-r border-l-2 border-blue-200"
+                              class="p-2 pl-3 text-gray-600 bg-blue-50 rounded-r border-l-2 border-blue-200"
                             >
                               {{ law }}
                             </div>
@@ -267,7 +314,7 @@
                           v-if="caseItem.applicablelawonly && caseItem.applicablelawonly.length > 0"
                           class="mb-4"
                         >
-                          <h5 class="mb-2 text-sm font-medium text-gray-700">涉及法律法规:</h5>
+                          <h5 class="mb-2 font-medium text-gray-700">涉及法律法规:</h5>
                           <div class="flex flex-wrap gap-2">
                             <span
                               v-for="(lawName, lawIndex) in caseItem.applicablelawonly"
@@ -284,17 +331,14 @@
                           v-if="caseItem.highlight_list && caseItem.highlight_list.length > 0"
                           class="mb-4"
                         >
-                          <h5 class="mb-2 text-sm font-medium text-gray-700">关键内容片段:</h5>
+                          <h5 class="mb-2 font-medium text-gray-700">关键内容片段:</h5>
                           <div class="space-y-2">
                             <div
                               v-for="(highlight, highlightIndex) in caseItem.highlight_list"
                               :key="highlightIndex"
                               class="p-3 bg-yellow-50 rounded-r-lg border-l-4 border-yellow-400"
                             >
-                              <div
-                                class="text-sm leading-relaxed text-gray-700"
-                                v-html="highlight"
-                              ></div>
+                              <div class="leading-relaxed text-gray-700" v-html="highlight"></div>
                             </div>
                           </div>
                         </div>
@@ -309,29 +353,29 @@
                           "
                           class="mb-4"
                         >
-                          <h5 class="mb-2 text-sm font-medium text-gray-700">案例摘要:</h5>
+                          <h5 class="mb-2 font-medium text-gray-700">案例摘要:</h5>
                           <div class="space-y-2">
                             <div v-if="caseItem.summyBycm" class="p-3 bg-gray-50 rounded-lg">
                               <div class="mb-1 text-xs text-gray-500">案例摘要(CM):</div>
-                              <p class="text-sm leading-relaxed text-gray-700">
+                              <p class="leading-relaxed text-gray-700">
                                 {{ caseItem.summyBycm }}
                               </p>
                             </div>
                             <div v-if="caseItem.summyByrw" class="p-3 bg-gray-50 rounded-lg">
                               <div class="mb-1 text-xs text-gray-500">案例摘要(RW):</div>
-                              <p class="text-sm leading-relaxed text-gray-700">
+                              <p class="leading-relaxed text-gray-700">
                                 {{ caseItem.summyByrw }}
                               </p>
                             </div>
                             <div v-if="caseItem.purpose" class="p-3 bg-gray-50 rounded-lg">
                               <div class="mb-1 text-xs text-gray-500">案例目的:</div>
-                              <p class="text-sm leading-relaxed text-gray-700">
+                              <p class="leading-relaxed text-gray-700">
                                 {{ caseItem.purpose }}
                               </p>
                             </div>
                             <div v-if="caseItem.chunk" class="p-3 bg-gray-50 rounded-lg">
                               <div class="mb-1 text-xs text-gray-500">案例片段:</div>
-                              <p class="text-sm leading-relaxed text-gray-700">
+                              <p class="leading-relaxed text-gray-700">
                                 {{ caseItem.chunk }}
                               </p>
                             </div>
@@ -351,82 +395,6 @@
                           </div>
                           <div class="text-xs text-gray-400">
                             {{ caseItem.judgeyear }}年{{ caseItem.procedure }}案例
-                          </div>
-                        </div>
-                      </div>
-                    </template>
-
-                    <!-- 相关法条特殊处理 -->
-                    <template
-                      v-if="currentModalKey === 'xgft' && Array.isArray(parsedModalContent)"
-                    >
-                      <div
-                        v-for="(lawItem, index) in parsedModalContent"
-                        :key="index"
-                        class="p-4 bg-white rounded-lg border border-gray-200 shadow-sm transition-all duration-200 hover:shadow-md"
-                      >
-                        <!-- 法条标题 -->
-                        <div class="pb-3 mb-4 border-b border-gray-100">
-                          <h4 class="mb-2 text-lg font-semibold leading-tight text-gray-800">
-                            {{ lawItem.title }}
-                          </h4>
-                          <div class="flex flex-wrap gap-2 text-sm">
-                            <span class="px-2 py-1 text-red-800 bg-red-100 rounded-full">
-                              {{ lawItem.law_type }}
-                            </span>
-                            <span class="px-2 py-1 text-green-800 bg-green-100 rounded-full">
-                              {{ lawItem.status }}
-                            </span>
-                            <span class="px-2 py-1 text-blue-800 bg-blue-100 rounded-full">
-                              {{ lawItem.department }}
-                            </span>
-                          </div>
-                        </div>
-
-                        <!-- 法条层级结构 -->
-                        <div v-if="lawItem.directory && lawItem.directory.length > 0" class="mb-4">
-                          <h5 class="mb-2 text-sm font-medium text-gray-700">法条层级:</h5>
-                          <div class="flex flex-wrap gap-2 items-center">
-                            <span
-                              v-for="(dir, dirIndex) in lawItem.directory"
-                              :key="dirIndex"
-                              class="flex items-center"
-                            >
-                              <span class="px-2 py-1 text-xs text-gray-600 rounded">
-                                {{ dir }}
-                              </span>
-                            </span>
-                          </div>
-                        </div>
-
-                        <!-- 法条内容 -->
-                        <div v-if="lawItem.content" class="mb-4">
-                          <h5 class="mb-2 text-sm font-medium text-gray-700">法条内容:</h5>
-                          <div class="p-4 bg-blue-50 rounded-lg border-l-4 border-blue-500">
-                            <div class="text-sm leading-relaxed text-gray-800 whitespace-pre-wrap">
-                              {{ lawItem.content }}
-                            </div>
-                          </div>
-                        </div>
-
-                        <!-- 底部信息 -->
-                        <div
-                          class="flex justify-between items-center pt-3 border-t border-gray-100"
-                        >
-                          <div class="flex flex-wrap gap-2 text-xs text-gray-500">
-                            <span>颁布机关: {{ lawItem.department }}</span>
-                            <span>•</span>
-                            <span>法律类型: {{ lawItem.law_type }}</span>
-                            <span>•</span>
-                            <span>状态: {{ lawItem.status }}</span>
-                          </div>
-                          <div class="flex items-center text-xs text-gray-400">
-                            <svg class="mr-1 w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                              <path
-                                d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
-                              ></path>
-                            </svg>
-                            相关性: {{ (lawItem._score * 100).toFixed(1) }}%
                           </div>
                         </div>
                       </div>
@@ -464,7 +432,7 @@
                                 class="flex justify-between items-center p-3 bg-gray-100 rounded-lg"
                               >
                                 <div class="flex flex-1 items-center mr-3">
-                                  <span class="text-sm text-gray-700 break-all line-clamp-1">{{
+                                  <span class="text-gray-700 break-all  line-clamp-1">{{
                                     cleanUrl(item.url)
                                   }}</span>
                                 </div>
@@ -479,10 +447,7 @@
                           </div> -->
 
                           <!-- 相关性评分 -->
-                          <div
-                            v-if="item._score"
-                            class="flex items-center mt-2 text-sm text-gray-500"
-                          >
+                          <div v-if="item._score" class="flex items-center mt-2 text-gray-500">
                             <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                               <path
                                 d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
@@ -529,7 +494,7 @@
                               :href="cleanUrl(parsedModalContent.url)"
                               target="_blank"
                               rel="noopener noreferrer"
-                              class="inline-flex items-center mr-4 text-sm text-blue-600 underline break-all hover:text-blue-800"
+                              class="inline-flex items-center mr-4 text-blue-600 underline break-all hover:text-blue-800"
                             >
                               <svg
                                 class="flex-shrink-0 mr-1 w-4 h-4"
@@ -551,7 +516,7 @@
                           <!-- 相关性评分 -->
                           <div
                             v-if="parsedModalContent._score"
-                            class="flex items-center text-sm text-gray-500"
+                            class="flex items-center text-gray-500"
                           >
                             <svg class="mr-1 w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
                               <path
@@ -584,7 +549,7 @@
         <!-- 弹窗底部操作区 -->
         <div class="p-1 bg-gray-50 border-t border-gray-200">
           <div class="flex justify-between items-center">
-            <div class="text-sm text-gray-500">数据来源：AI智能分析</div>
+            <div class="text-gray-500">数据来源：AI智能分析</div>
             <button
               @click="closeModal"
               class="px-4 py-1 text-white bg-[#e23338] rounded-lg transition-colors hover:bg-[#e23338]"
@@ -611,7 +576,7 @@ import { ref, computed, defineComponent, nextTick, onMounted } from 'vue'
 
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
-import aiConfig, { api } from '@/config/aiConfig'
+import aiConfig, { api, ConsultationOnLegalIssues } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
 import ConcurrentAIService, { type ConcurrentResult } from '@/servers/concurrentAiService'
 import router from '@/router'
@@ -640,15 +605,19 @@ const userScrolled = ref(false) // 用户是否手动滚动过
 
 onMounted(() => {
   // 3. 页面渲染前判断缓存是否有效
-  if (globalState.aiResults && globalState.generalAiTime) {
+  if (
+    globalState.legalResearchSmartAnswer &&
+    globalState.legalResearchSmartAnswer.aiResults &&
+    globalState.legalResearchSmartAnswer.generalAiTime
+  ) {
     const currentTime = Date.now()
-    const savedTime = globalState.generalAiTime
+    const savedTime = globalState.legalResearchSmartAnswer.generalAiTime
     const timeDifference = currentTime - savedTime
     console.log('timeDifference', timeDifference, CACHE_DURATION, timeDifference < CACHE_DURATION)
 
     // 如果时间差小于常量（10分钟），则使用缓存
     if (timeDifference < CACHE_DURATION) {
-      messages.value = globalState.aiResults
+      messages.value = globalState.legalResearchSmartAnswer.aiResults
       // 如果有缓存的对话，更新title显示对话数量
       if (messages.value.length > 0) {
         const userMessages = messages.value.filter((msg) => msg.sender === 'user')
@@ -656,12 +625,13 @@ onMounted(() => {
       }
     } else {
       messages.value = []
-      delete globalState.aiResults
-      delete globalState.generalAiTime
+      delete globalState.legalResearchSmartAnswer.aiResults
+      delete globalState.legalResearchSmartAnswer.generalAiTime
     }
     // 如果超过10分钟，不赋值（使用默认空数组）
   }
-  if (globalState.aiResults) messages.value = globalState.aiResults
+  if (globalState.legalResearchSmartAnswer && globalState.legalResearchSmartAnswer.aiResults)
+    messages.value = globalState.legalResearchSmartAnswer.aiResults
 
   // 监听用户滚动事件
   window.addEventListener('scroll', handleUserScroll)
@@ -721,8 +691,8 @@ const parsedModalContent = computed(() => {
 // 开启新对话
 const newDialogue = () => {
   messages.value = []
-  delete globalState.aiResults
-  delete globalState.generalAiTime
+  delete globalState.legalResearchSmartAnswer.aiResults
+  delete globalState.legalResearchSmartAnswer.generalAiTime
   // 重置title为默认值
   updateTitle('法研智答')
 }
@@ -782,9 +752,9 @@ const getApiKeyFromUrl = (): string => {
 
 // 创建AIService实例时传入配置
 const aiConfigs = {
-  api: aiConfig.api,
+  api: ConsultationOnLegalIssues.api,
   apiKey: getApiKeyFromUrl(),
-  model: aiConfig.model,
+  model: ConsultationOnLegalIssues.model,
 }
 
 const aiService = new AIService(aiConfigs)
@@ -888,7 +858,7 @@ const handleConcurrentCallback = (
     // 如果所有并发请求都完成了，并且主要AI也完成了，则设置整体加载完成
     if (allCompleted && !lastMessage.aiLoading) {
       lastMessage.isLoading = false
-      globalState.aiResults = messages.value
+      globalState.legalResearchSmartAnswer.aiResults = messages.value
     }
 
     console.log(`API ${key} 状态更新:`, {
@@ -925,8 +895,9 @@ const setMessage = (
 
     if (allConcurrentCompleted) {
       lastMessage.isLoading = false // 整体加载完成
-      globalState.aiResults = messages.value
-      globalState.generalAiTime = Date.now()
+      globalState.legalResearchSmartAnswer = {}
+      globalState.legalResearchSmartAnswer.aiResults = messages.value
+      globalState.legalResearchSmartAnswer.generalAiTime = Date.now()
     }
     return
   }

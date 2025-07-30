@@ -1,11 +1,15 @@
 <template>
-  <div class="w-full min-h-full pb-[68px] bg-gray-50">
+  <div class="w-full min-h-full pb-[68px] box-border">
     <!-- Welcome Screen - 当没有消息时显示 -->
     <SendMessages
+      class="w-full h-full"
       :messagesLength="messages.length"
       v-model:userInput="userInput"
       @sendMessages="sendMessages"
       @newDialogue="newDialogue"
+      :title="AcrossTheEntireNetwork.title"
+      :placeholder="AcrossTheEntireNetwork.placeholder"
+      :note="AcrossTheEntireNetwork.note"
     />
     <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
       <!-- Chat Container -->
