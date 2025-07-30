@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="messagesLength > 0"
-    class="h-[40px] bg-white sticky top-0 z-[9999] flex items-center justify-between max-w-[750px] mx-auto"
+    class="h-[40px] bg-white sticky top-0 z-30 flex items-center justify-between max-w-[750px] mx-auto"
   >
     <div class=""></div>
     <button
@@ -106,7 +106,7 @@
     class="fixed bottom-0 left-0 z-[9999] right-0 w-full bg-white"
   >
     <div
-      class="max-w-[750px] m-auto p-2.5 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] border-0 border-t-[1px] border-slate-200"
+      class="max-w-[750px] m-auto w-full p-2.5 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] border-0 border-t-[1px] border-slate-200"
     >
       <div class="flex relative justify-between items-center">
         <!-- <div class="absolute right-0 left-0 bg-gray-300 -top-[54px]" v-if="messagesLength > 0">

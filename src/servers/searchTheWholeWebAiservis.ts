@@ -1,3 +1,5 @@
+import MockAIService from './moni'
+
 // 样式常量
 const STYLES = {
   THINKING_HEADER: 'color: #888; margin: 8px 0;',
@@ -26,27 +28,13 @@ const ERROR_MESSAGES = {
   CONNECTION_FAILED: '网络连接失败'
 }
 
-// 条件导入 MockAIService
-let MockAIService: any = null;
-if (typeof __ENABLE_MOCK__ !== 'undefined' && __ENABLE_MOCK__) {
-  MockAIService = (await import('./moni')).default;
-}
-
-import { createAIService, shouldUseMock } from './serviceFactory';
-
 class AIService {
   private aiConfig: any
-  private mockService: any
+  private mockService: MockAIService
 
   constructor(aiConfig: any) {
     this.aiConfig = aiConfig
-    this.initMockService();
-  }
-
-  private async initMockService() {
-    if (shouldUseMock()) {
-      this.mockService = await createAIService(this.aiConfig);
-    }
+    this.mockService = new MockAIService(aiConfig)
   }
 
   // 辅助方法：创建带样式的消息

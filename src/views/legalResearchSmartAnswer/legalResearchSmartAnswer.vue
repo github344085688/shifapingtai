@@ -432,7 +432,7 @@
                                 class="flex justify-between items-center p-3 bg-gray-100 rounded-lg"
                               >
                                 <div class="flex flex-1 items-center mr-3">
-                                  <span class="text-gray-700 break-all  line-clamp-1">{{
+                                  <span class="text-gray-700 break-all line-clamp-1">{{
                                     cleanUrl(item.url)
                                   }}</span>
                                 </div>
@@ -564,7 +564,7 @@
     <!-- 复制成功提示 -->
     <div
       v-if="showCopySuccess"
-      class="fixed top-4 left-1/2 transform -translate-x-1/2 z-[70] px-4 py-2 bg-green-500 text-white rounded-lg shadow-lg transition-all duration-300"
+      class="fixed top-4 left-1/2 transform -translate-x-1/2 z-[100] px-4 py-2 bg-green-500 text-white rounded-lg shadow-lg transition-all duration-300"
     >
       复制成功！
     </div>

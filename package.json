@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": " vite build",
+    "build": "vite build --mode production",
+    "build:dev": "vite build --mode development",
     "preview": "vite preview",
-    "build-only": "vite build",
+    "build-only": "vite build --mode production",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --  src/"
@@ -26,6 +27,7 @@
     "@vitejs/plugin-vue": "^5.2.3",
     "@vue/tsconfig": "^0.7.0",
     "autoprefixer": "^9.8.8",
+    "cross-env": "^7.0.3",
     "postcss": "^8.4.35",
     "postcss-pxtorem": "^6.1.0",
     "prettier": "3.5.3",

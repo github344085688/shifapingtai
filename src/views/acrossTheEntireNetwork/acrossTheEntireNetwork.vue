@@ -20,7 +20,7 @@
           :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
         >
           <div
-            class="relative rounded-xl"
+            class="relative rounded-xl w-full !overflow-x-hidden"
             :class="[
               message.sender === 'user'
                 ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px]'
@@ -47,7 +47,7 @@ import { ref, defineComponent, nextTick, onMounted } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
 import aiConfig, { AcrossTheEntireNetwork } from '@/config/aiConfig'
-import AIService from '@/servers/aiservis'
+import Aiservis from '@/servers/aiservis'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
 
@@ -133,14 +133,14 @@ const getApiKeyFromUrl = (): string => {
   return urlParams.get('apiKey') || aiConfig.apiKey
 }
 console.log(AcrossTheEntireNetwork)
-// 创建AIService实例时传入配置
+// 创建Aiservis实例时传入配置
 const aiConfigs = {
   api: AcrossTheEntireNetwork.api,
   apiKey: getApiKeyFromUrl(),
   model: AcrossTheEntireNetwork.model,
 }
 
-const aiService = new AIService(aiConfigs)
+const aiservis = new Aiservis(aiConfigs)
 
 // 预设问题示例
 // const examples = ref(['离婚纠纷诉讼请求', '民间借贷纠纷诉讼请求', '劳动争议诉讼请求'])
@@ -196,9 +196,9 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
-  // await aiService.sendToAIMock('测试消息', setMessage)
+  // await aiservis.sendToAIMock('测试消息', setMessage)
   // 启动主要AI服务
-  aiService.sendToAI(newMessage, setMessage)
+  aiservis.sendToAI(newMessage, setMessage)
 
   userInput.value = ''
 }
