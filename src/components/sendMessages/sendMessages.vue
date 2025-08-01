@@ -55,6 +55,7 @@
       <div class="box-border flex justify-center items-center px-4 mb-8 w-full">
         <div class="w-[40px] flex items-center justify-center">
           <FileContentExtractor
+            ref="fileContentExtractorRef"
             v-model="claim"
             @file-content-extracted="handleFileContentExtracted"
           />
@@ -109,12 +110,9 @@
       class="max-w-[750px] m-auto w-full p-2.5 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] border-0 border-t-[1px] border-slate-200"
     >
       <div class="flex relative justify-between items-center">
-        <!-- <div class="absolute right-0 left-0 bg-gray-300 -top-[54px]" v-if="messagesLength > 0">
-       
-      </div> -->
-
         <div class="w-[40px] flex items-center justify-center">
           <FileContentExtractor
+            ref="fileContentExtractorRef"
             v-model="claim"
             @file-content-extracted="handleFileContentExtracted"
           />
@@ -192,6 +190,10 @@ interface Emits {
 
 const emit = defineEmits<Emits>()
 const claim = ref('')
+
+// 添加对 FileContentExtractor 组件的引用
+const fileContentExtractorRef = ref<InstanceType<typeof FileContentExtractor>>()
+
 // 计算按钮是否应该被禁用
 const isButtonDisabled = computed(() => {
   return !claim.value && !inputValue.value
@@ -205,15 +207,15 @@ const handleFileContentExtracted = (content: string, fileName: string) => {
 }
 
 // 本地输入值
-const inputValue = ref(props.userInput)
+const inputValue = ref('')
 
 // 监听 props.userInput 的变化
-watch(
-  () => props.userInput,
-  (newValue) => {
-    inputValue.value = newValue
-  },
-)
+// watch(
+//   () => props.userInput,
+//   (newValue) => {
+//     inputValue.value = newValue
+//   },
+// )
 
 // 监听本地输入值的变化，向父组件发送更新
 watch(inputValue, (newValue) => {
@@ -229,6 +231,11 @@ const handleSendMessage = () => {
   const messageContent = claim.value ? claim.value + inputValue.value : inputValue.value
   emit('update:userInput', messageContent)
   emit('sendMessages')
+
+  // 发送消息后清除 claim 和通知 FileContentExtractor 组件清除数据
+  claim.value = ''
+  fileContentExtractorRef.value?.clearFileData()
+  inputValue.value = ''
 }
 
 // 处理新对话

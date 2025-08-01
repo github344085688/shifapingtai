@@ -2,9 +2,9 @@ import MockAIService from './moni'
 
 // 样式常量
 const STYLES = {
-  THINKING_HEADER: 'color: #888; margin: 8px 0;',
-  THINKING_CONTENT: 'background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px; text-gray-500 line-height: 1.6;',
-  ANSWER_HEADER: 'height: 70px; display: flex; align-items: center; font-weight: bold; color: #333;',
+  THINKING_HEADER: 'color: #000000; margin: 8px 0;',
+  THINKING_CONTENT: 'background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px; text-gray-500 line-height: 1.6; color: #676666;',
+  ANSWER_HEADER: 'height: 70px; display: flex; align-items: center; font-weight: bold; color: #000000;',
   ERROR_STYLE: 'color: red; font-weight: bold;',
   WARNING_STYLE: 'color: orange; font-weight: bold;'
 }
@@ -12,9 +12,10 @@ const STYLES = {
 // 消息模板
 const MESSAGES = {
   SEARCH_START: '获取搜索结果：',
-  THINKING_PROCESS: '<strong>推理过程：</strong>',
+  THINKING_PROCESS: '<strong></strong>',
   RESULT_HEADER: '<strong>结果：</strong>',
-  SEARCH_KEYWORDS: '搜索关键词: '
+  SEARCH_KEYWORDS: '搜索关键词: ',
+  SEARCH_PROCESS: '<strong>搜索过程：</strong>'
 }
 
 // 错误消息
@@ -28,13 +29,27 @@ const ERROR_MESSAGES = {
   CONNECTION_FAILED: '网络连接失败'
 }
 
+// 条件性导入 - 只在开发环境中导入
+let MockAIService: any = null;
+
+// 在开发环境中动态导入
+if (import.meta.env.DEV) {
+  try {
+    const mockModule = await import('./moni');
+    MockAIService = mockModule.default;
+  } catch (error) {
+    console.warn('Mock service not available:', error);
+  }
+}
+
 class AIService {
   private aiConfig: any
-  private mockService: MockAIService
+  private mockService: any
 
   constructor(aiConfig: any) {
     this.aiConfig = aiConfig
-    this.mockService = new MockAIService(aiConfig)
+    // 只在开发环境且 MockAIService 可用时创建实例
+    this.mockService = (import.meta.env.DEV && MockAIService) ? new MockAIService(aiConfig) : null
   }
 
   // 辅助方法：创建带样式的消息
@@ -55,9 +70,43 @@ class AIService {
     }
   }
 
-  async sendToAI(message: any, callback: any) {
+  // 在AIService类中添加重试方法
+  private async fetchWithRetry(url: string, options: RequestInit, maxRetries: number = 3): Promise<Response> {
+    let lastError: Error;
+    
+    for (let i = 0; i <= maxRetries; i++) {
+      try {
+        const response = await fetch(url, options);
+        return response;
+      } catch (error: any) {
+        lastError = error;
         
- 
+        // 如果是最后一次重试，抛出错误
+        if (i === maxRetries) {
+          throw error;
+        }
+        
+        // 等待一段时间后重试（指数退避）
+        const delay = Math.pow(2, i) * 1000; // 1s, 2s, 4s
+        await new Promise(resolve => setTimeout(resolve, delay));
+        
+        console.log(`网络请求失败，正在进行第 ${i + 1} 次重试...`);
+      }
+    }
+    
+    throw lastError!;
+  }
+
+  // 修改sendToAI方法使用重试机制
+  async sendToAI(message: any, callback: any, lastMessage: any) {
+    // 添加调试信息
+    console.log('🌐 发起网络请求:', {
+      api: this.aiConfig.api,
+      model: this.aiConfig.model,
+      environment: import.meta.env.MODE,
+      hasApiKey: !!this.aiConfig.apiKey
+    });
+    
     let systemMessages = [
       {
         role: 'system',
@@ -66,6 +115,7 @@ class AIService {
     ]
     let hasShownThinkingHeader = false // 用于跟踪是否已显示"推理过程："标识
     let hasShownAnswerHeader = false // 用于跟踪是否已显示"结果："标识
+    let hasShownSearchProcessHeader = false // 用于跟踪是否已显示"搜索过程："标识
     let abortController: any = null
     abortController = new AbortController()
     const signal = abortController.signal
@@ -76,24 +126,22 @@ class AIService {
       })
     }
     
-    // console.log('paramsBody', this.aiConfig)
+    console.log('paramsBody啊实打实大苏打大', this.aiConfig)
     try {
-      const response = await fetch(this.aiConfig.api, {
+      const response = await this.fetchWithRetry(this.aiConfig.api, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json', 
-          'Access-Control-Allow-Origin': '*', 
-          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE' , 
-          Authorization: 'Bearer ' + this.aiConfig.apiKey,
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + this.aiConfig.apiKey,
         }, 
         body: JSON.stringify({
           model: this.aiConfig.model,
-          messages: [  message],
+          messages: [message],
           stream: true,
         }),
         signal: signal,
-      })
-
+      });
+    
       // 检查HTTP状态码
       if (!response.ok) {
         if (response.status === 504) {
@@ -108,7 +156,7 @@ class AIService {
         }
       }
 
-      await this.responseReader(response, abortController, callback, hasShownThinkingHeader, hasShownAnswerHeader)
+      await this.responseReader(response, abortController, callback, hasShownThinkingHeader, hasShownAnswerHeader, lastMessage, hasShownSearchProcessHeader)
     } catch (error: any) {
        console.log('Failed to fetch', error)  
       
@@ -123,22 +171,24 @@ class AIService {
         callback(this.createStyledMessage(ERROR_MESSAGES.TIMEOUT, STYLES.ERROR_STYLE), true, false, true)
         return
       } else if (error.message && error.message.includes('Failed to fetch')) {
-        callback(this.createStyledMessage(ERROR_MESSAGES.CONNECTION_FAILED, STYLES.ERROR_STYLE), true, false, true)
-        return
-      } else if (error.includes && error.includes('Failed to fetch')) { 
-        callback(this.createStyledMessage(ERROR_MESSAGES.NETWORK_ERROR, STYLES.ERROR_STYLE), true, false, true)
+        // 添加更详细的网络错误信息
+        const detailedError = `${ERROR_MESSAGES.CONNECTION_FAILED}: ${error.message || '网络连接异常，请检查网络设置或API地址'}`
+        callback(this.createStyledMessage(detailedError, STYLES.ERROR_STYLE), true, false, true)
         return
       } else { 
-        callback(this.createStyledMessage(ERROR_MESSAGES.NETWORK_ERROR, STYLES.ERROR_STYLE), true, false, true)
+        callback(this.createStyledMessage(`${ERROR_MESSAGES.NETWORK_ERROR}: ${error.message || '未知网络错误'}`, STYLES.ERROR_STYLE), true, false, true)
       }
     }
   }
 
-  private async responseReader(response: any, abortController: any, callback: any, hasShownThinkingHeader: boolean, hasShownAnswerHeader: boolean) {
+  private async responseReader(response: any, abortController: any, callback: any, hasShownThinkingHeader: boolean, hasShownAnswerHeader: boolean, lastMessage?: any, hasShownSearchProcessHeader?: boolean) {
     const reader = response.body.getReader()
     const decoder = new TextDecoder() 
     let buffer = '' 
     let countershu = 0
+    let stepContent = '' // 用于累积 step 内容
+    hasShownSearchProcessHeader = hasShownSearchProcessHeader || false
+    
     try {
       while (true) {
         const { done, value } = await reader.read()
@@ -154,48 +204,89 @@ class AIService {
           // 检查是否包含错误代码401
           if(countershu ===0 && chunks[0].includes('"code":401')) {
             const errorData = JSON.parse(chunks[0]);  
-            callback(errorData.msg, false, false)
-            callback(null, true, false) // 标记流结束
-            countershu=1;
-            break
+            callback(this.createStyledMessage(errorData.message, STYLES.ERROR_STYLE), true, false)
+            return
           }
         }
-        buffer = chunks.pop() || '' // 保留未完整数据
-
+        
+        buffer = chunks.pop() || '' // 保留最后一个不完整的块
+        countershu++
+        
         for (const chunk of chunks) {
           const eventData = chunk.replace(/^data:\s*/, '').trim()
-          if(countershu===0 && eventData.includes('"data":"AI思考中……"')){
-            // console.log('eventData',eventData)
-            callback('', false, true)
-            break
-            //  return
-          }
-          if (!eventData) continue 
-          // 检查是否为[DONE]消息
-          countershu=1;
+          if (!eventData) continue
+          
           if (eventData === '[DONE]') {
             callback(null, true, false) // 标记流结束
             continue
           }
           try { 
             const json = JSON.parse(eventData)
-            console.log('检查模型是否包含 "gpt" 字符串啊实打实')
-            // 检查模型是否包含 "gpt" 字符串
+            // console.log('检查模型是否包含 "gpt" 字符串啊实打实')
+            // 检查模型是否包含 "gpt" 字符串或者是 "fyllm" 模型
             const model = json.model || this.aiConfig.model || ''
-            const isGptModel = model.toLowerCase().includes('gpt')
+            const isGptModel = model.toLowerCase().includes('gpt') || model.toLowerCase().includes('fyllm')
             
             if (isGptModel) {
-              // 如果是 GPT 模型，使用增强逻辑处理推理数据、搜索结果数据、材料数据
+              // 如果是 GPT 模型或 fyllm 模型，使用增强逻辑处理推理数据、搜索结果数据、材料数据
               
               // 处理思考和推理数据
               const additionalData = json.choices[0]?.additional
               if (additionalData) {
-                // 排除不需要的类型：step, qacls, start_search
-                if (['step', 'qacls', 'start_search', 'get_mat'].includes(additionalData.type)) {
+                // 移除对 step 类型的跳过处理，只排除其他不需要的类型
+                if (['qacls', 'start_search', 'get_mat'].includes(additionalData.type)) {
                   continue
                 }
                 
+                // 特殊处理：排除特定的 console 类型数据
+                if (additionalData.type === 'console' && additionalData.data === 'AI思考中……') {
+                  continue
+                }
                 switch (additionalData.type) {
+                  case 'step':
+                    // 处理 step 类型数据 - 属于"搜索过程"
+                    const stepData = additionalData.data
+                    
+                    // 先判断是否为换行符
+                    if (stepData === '\n') {
+                      // 如果是换行符，移除 lastMessage.content 中"搜索过程"下的内容，但保留标题
+                      if (lastMessage && lastMessage.content) {
+                        // 使用正则表达式移除"搜索过程"标题后的所有内容，但保留标题
+                        const searchProcessRegex = new RegExp(`(${MESSAGES.SEARCH_PROCESS})[\\s\\S]*?(?=<strong>|$)`, 'g')
+                        lastMessage.content = lastMessage.content.replace(searchProcessRegex, '$1')
+                        console.log('已从 lastMessage.content 中移除搜索过程下的内容，保留标题')
+                      }
+                      // 重置 stepContent，但不重置 hasShownSearchProcessHeader，保持"搜索过程"标题已显示的状态
+                      stepContent = ''
+                      continue // 跳过此次处理，不输出换行符
+                    } else {
+                      // 累积 step 内容
+                      stepContent += stepData
+                      
+                      // 在第一个 step 内容前添加"搜索过程："前缀（只显示一次）
+                      if (!hasShownSearchProcessHeader) {
+                        callback(this.createStyledMessage(MESSAGES.SEARCH_PROCESS, STYLES.THINKING_HEADER), false, false)
+                        hasShownSearchProcessHeader = true
+                      }
+                      
+                      // 返回 step 数据
+                      callback(stepData, false, false)
+                    }
+                    break
+
+                  case 'start_jx':
+                    // 处理 start_jx 类型 - 移除"搜索过程"及相关下的内容
+                    if (lastMessage && lastMessage.content) {
+                      // 使用正则表达式移除所有"搜索过程"相关内容（包括标题）
+                      const searchProcessRegex = new RegExp(MESSAGES.SEARCH_PROCESS + '[\\s\\S]*?(?=<strong>|$)', 'g')
+                      lastMessage.content = lastMessage.content.replace(searchProcessRegex, '')
+                      console.log('遇到 start_jx，已从 lastMessage.content 中移除所有搜索过程相关内容')
+                    }
+                    // 重置相关状态
+                    stepContent = ''
+                    hasShownSearchProcessHeader = false
+                    break
+
                   case 'start_res':
                     // 处理搜索结果开始
                     hasShownThinkingHeader = this.handleMessageWithHeader(
@@ -370,7 +461,7 @@ class AIService {
 
     // 如果有 title，添加灰黑色样式并另起一行
     if (title && title.trim()) {
-      const titleHtml = `<div style="color: #333; font-weight: bold; margin-bottom: 8px; line-height: 1.4;">${title}</div>`
+      const titleHtml = `<div style="  font-weight: bold; margin-bottom: 8px; line-height: 1.4;">${title}</div>`
       processedContent = titleHtml + processedContent
     }
 
@@ -447,8 +538,7 @@ class AIService {
   }
 
   // 测试方法：使用模拟数据进行测试
-  // 🔄 改进：现在使用相同的 responseReader 处理模拟数据，确保与真实API行为一致
-  async sendToAIMock(message: any, callback: any) {
+  async sendToAIMock(message: any, callback: any, lastMessage: any) {
     console.log('🧪 使用模拟数据进行测试...')
     console.log('📝 测试消息:', message)
     console.log('📄 数据源: jsons.json')
@@ -459,13 +549,16 @@ class AIService {
     let abortController: any = null
     abortController = new AbortController()
     
+    // 用于累积 step 类型的内容
+    let stepContent = ''
+    
     try {
       // 创建模拟的 Response 对象，模拟真实的 fetch 响应
       const mockResponse = await this.createMockResponse()
       
       // 🎯 关键改进：使用相同的 responseReader 处理模拟数据
       // 这确保了模拟测试与真实API使用完全相同的数据处理逻辑
-      await this.responseReader(mockResponse, abortController, callback, hasShownThinkingHeader, hasShownAnswerHeader)
+      await this.responseReader(mockResponse, abortController, callback, hasShownThinkingHeader, hasShownAnswerHeader, lastMessage, stepContent)
     } catch (error) {
       console.error('模拟测试失败:', error)
       callback('模拟测试失败', true, false)

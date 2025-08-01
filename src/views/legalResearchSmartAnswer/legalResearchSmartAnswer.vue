@@ -86,10 +86,10 @@
           :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
         >
           <div
-            class="relative rounded-xl"
+            class="relative rounded-xl markdown_text"
             :class="[
               message.sender === 'user'
-                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px]'
+                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px] markdownUser'
                 : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
             ]"
           >

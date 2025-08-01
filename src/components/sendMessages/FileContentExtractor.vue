@@ -156,6 +156,27 @@ const isLoading = ref(false)
 const errorMessage = ref('')
 const showConfirm = ref(false)
 
+// 清除文件数据的方法
+const clearFileData = () => {
+  // 清除文件输入
+  if (fileInput.value) {
+    fileInput.value.value = ''
+  }
+  
+  // 清除所有状态
+  isLoading.value = false
+  errorMessage.value = ''
+  showConfirm.value = false
+  
+  // 清除v-model值
+  emit('update:modelValue', '')
+}
+
+// 暴露清除方法给父组件
+defineExpose({
+  clearFileData
+})
+
 // 显示确认弹窗
 const showConfirmDialog = () => {
   showConfirm.value = true

@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full min-h-full pb-[68px] box-border">
+  <div class="w-full min-h-full pb-[68px] box-border bg-gray-50">
     <!-- Welcome Screen - 当没有消息时显示 -->
     <SendMessages
       class="w-full h-full"
@@ -11,7 +11,7 @@
       :placeholder="AcrossTheEntireNetwork.placeholder"
       :note="AcrossTheEntireNetwork.note"
     />
-    <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5 bg-gray-50">
+    <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5">
       <!-- Chat Container -->
       <div class="pb-5" ref="chatContainer">
         <div
@@ -20,10 +20,10 @@
           :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
         >
           <div
-            class="relative rounded-xl w-full !overflow-x-hidden"
+            class="relative rounded-xl w-full !overflow-x-hidden markdown_text"
             :class="[
               message.sender === 'user'
-                ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px]'
+                ? 'bg-[#e23338] !text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px]  markdownUser'
                 : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
             ]"
           >
@@ -47,7 +47,7 @@ import { ref, defineComponent, nextTick, onMounted } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
 import aiConfig, { AcrossTheEntireNetwork } from '@/config/aiConfig'
-import Aiservis from '@/servers/aiservis'
+import Aiservis from '@/servers/searchTheWholeWebAiservis'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
 
@@ -159,12 +159,6 @@ const messages = ref<
 const userInput = ref('')
 const chatContainer = ref<HTMLElement | null>(null)
 
-// 处理示例问题点击
-const handleExampleClick = (question: string) => {
-  userInput.value = question
-  sendMessages()
-}
-
 // 发送消息
 const sendMessages = async () => {
   const message = userInput.value
@@ -196,9 +190,10 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
-  // await aiservis.sendToAIMock('测试消息', setMessage)
+  const lastMessage = messages.value[messages.value.length - 1]
+  // await aiservis.sendToAIMock('测试消息', setMessage, lastMessage)
   // 启动主要AI服务
-  aiservis.sendToAI(newMessage, setMessage)
+  aiservis.sendToAI(newMessage, setMessage, lastMessage)
 
   userInput.value = ''
 }
@@ -215,10 +210,14 @@ const setMessage = (
   if (!lastMessage || lastMessage.sender != 'assistant') {
     return
   }
-  console.log('setMessage', messages.value, isDone, isThinking, lastMessage)
+
   if (isDone) {
     if (isError) {
-      lastMessage.content = `${lastMessage.content}${message}`
+      // 改进错误处理，避免显示技术性错误信息
+      const userFriendlyMessage = message.includes('404')
+        ? '抱歉，服务暂时不可用，请稍后重试。'
+        : message
+      lastMessage.content = `${lastMessage.content}${userFriendlyMessage}`
     }
     lastMessage.aiLoading = false
     lastMessage.isLoading = false
@@ -266,3 +265,8 @@ const addMessage = (content: string, sender: 'user' | 'assistant') => {
   }
 }
 </script>
+<style scoped>
+.markdown-content {
+  color: #000000 !important;
+}
+</style>

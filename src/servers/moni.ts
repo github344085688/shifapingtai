@@ -222,3 +222,30 @@ export class MockAIService {
 }
 
 export default MockAIService;
+
+// 修复jsons.json文件的加载路径
+const loadJsonsData = async (): Promise<string> => {
+  const possiblePaths = [
+    // 生产环境路径
+    './jsons.json',
+    '/jsons.json',
+    // 开发环境路径
+    '/src/servers/jsons.json',
+    './jsons.json'
+  ]
+
+  for (const path of possiblePaths) {
+    try {
+      const response = await fetch(path)
+      if (response.ok) {
+        return await response.text()
+      }
+    } catch (error) {
+      console.warn(`无法从路径 ${path} 加载 jsons.json:`, error)
+    }
+  }
+  
+  // 如果所有路径都失败，返回默认数据而不是抛出错误
+  console.warn('无法从任何路径加载 jsons.json 文件，使用默认数据')
+  return 'data:{"choices":[{"additional":{"data":"默认响应数据","type":"step"},"delta":{"content":"","type":"step"},"index":0}],"code":1000,"id":"default","model":"fyllm"}'
+}

@@ -17,20 +17,34 @@ export default defineConfig(({ mode }) => {
       outDir: 'dist',
       rollupOptions: {
         external: (id) => {
-          // 在生产构建时排除模拟数据相关的文件
+          // 在生产构建时完全排除模拟数据和测试相关的文件
           if (isProduction) {
             return id.includes('moni.ts') || 
+                   id.includes('moni.js') ||
                    id.includes('jsons.json') ||
                    id.includes('test-mock') ||
-                   id.includes('servers-222')
+                   id.includes('servers-222') ||
+                   id.includes('/moni') ||
+                   id.endsWith('moni')
           }
           return false
+        },
+        output: {
+          // 移除 manualChunks 中的 moni.ts 处理，避免在生产环境中包含
+          manualChunks: (id) => {
+            // 在生产环境中不处理 moni.ts 相关的分块
+            if (!isProduction && id.includes('moni.ts')) {
+              return 'mock-service';
+            }
+          }
         }
       }
     },
     define: {
       // 定义环境变量，用于在代码中判断是否启用模拟功能
-      __ENABLE_MOCK__: !isProduction
+      __ENABLE_MOCK__: !isProduction,
+      // 添加生产环境标识
+      __PRODUCTION__: isProduction
     },
     server: {
       fs: {
