@@ -25,6 +25,33 @@ export class TextProcessor {
       .replace(/\\n/g, '\n')
       .replace(/\\\"/g, '"')
 
+    // 添加对 ### 标题格式的处理（在编号处理之前）
+    processedContent = processedContent.replace(
+      /(^|[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z])###(\s*)/g,
+      (match, beforeChar, space, offset, string) => {
+        // 如果前面有内容，则添加换行
+        if (beforeChar && beforeChar !== '^') {
+          return `${beforeChar}<br>###${space}`
+        }
+        return `<br>###${space}`
+      },
+    )
+
+    // 添加对单独的 ### 的处理（没有后续内容的情况）
+    processedContent = processedContent.replace(
+      /(^|[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z])###$/g,
+      (match, beforeChar) => {
+        // 如果前面有内容，则添加换行
+        if (beforeChar && beforeChar !== '^') {
+          return `${beforeChar}<br>###`
+        }
+        return `<br>###`
+      },
+    )
+
+    // 处理行首的单独 ###
+    processedContent = processedContent.replace(/^###$/gm, '<br>###')
+
     // 处理编号格式的断行
     // 一、二、三等（前面带标点符号）
     processedContent = processedContent.replace(
@@ -99,6 +126,45 @@ export class TextProcessor {
       /([*]?)（([一二三四五六七八九十]+)）/g,
       (match, asterisk, number) => {
         return `<br>${asterisk}（${number}）`
+      },
+    )
+
+    // 处理带标点符号的中文编号：（一）、（二），（三）；等
+    processedContent = processedContent.replace(
+      /([*]?)（([一二三四五六七八九十]+)）([，。；：、])/g,
+      (match, asterisk, number, punctuation, offset, string) => {
+        // 检查前面是否有中文字符或标点符号，如果有则添加换行
+        const beforeChar = string[offset - 1]
+
+        // 如果前面是中文字符、标点符号或字母，则添加换行
+        if (
+          /[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z]/.test(
+            beforeChar,
+          )
+        ) {
+          return `<br>${asterisk}（${number}）${punctuation}`
+        }
+
+        return match
+      },
+    )
+
+    // 处理冒号后的中文编号：（一）：（二）：等
+    processedContent = processedContent.replace(
+      /([*]?)（([一二三四五六七八九十]+)）[:：]/g,
+      (match, asterisk, number, offset, string) => {
+        // 检查前面是否有中文字符或标点符号，如果有则添加换行
+        const beforeChar = string[offset - 1]
+
+        if (
+          /[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z]/.test(
+            beforeChar,
+          )
+        ) {
+          return `<br>${asterisk}（${number}）：`
+        }
+
+        return match
       },
     )
 
@@ -211,6 +277,24 @@ export class TextProcessor {
     processedContent = processedContent.replace(
       /<br>###\s+(.+?)(?=<br>|$)/g,
       '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
+    )
+
+    // 处理单独的 ### （没有后续内容的情况）
+    processedContent = processedContent.replace(
+      /<br>###$/g,
+      '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;"></h3>',
+    )
+
+    // 处理中间位置的单独 ###
+    processedContent = processedContent.replace(
+      /<br>###(?=<br>)/g,
+      '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;"></h3>',
+    )
+
+    // 处理行首的单独 ###
+    processedContent = processedContent.replace(
+      /^###$/gm,
+      '<h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;"></h3>',
     )
     processedContent = processedContent.replace(
       /<br>##\s+(.+?)(?=<br>|$)/g,

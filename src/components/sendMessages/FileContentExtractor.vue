@@ -2,7 +2,7 @@
   <div class="file-content-extractor">
     <!-- 文件选择按钮 -->
     <button
-      @click="showConfirmDialog"
+      @click="triggerFileInput"
       class="flex items-center justify-center w-[20px] h-[20px] text-gray-600 hover:text-[#e23338] transition-colors"
       title="选择文件提取内容"
     >
@@ -35,33 +35,6 @@
       @change="handleFileSelect"
       class="hidden"
     />
-
-    <!-- 确认弹窗 -->
-    <div
-      v-if="showConfirm"
-      class="flex fixed inset-0 z-50 justify-center items-center bg-black bg-opacity-50"
-      @click="hideConfirmDialog"
-    >
-      <div
-        class="bg-white rounded-lg shadow-lg overflow-hidden min-w-[300px] max-w-[90vw]"
-        @click.stop
-      >
-        <!-- 弹窗头部 -->
-        <h4 class="px-6 py-4 text-lg font-medium text-gray-900 whitespace-nowrap">
-          仅支持.txt和.docx识别文字
-          <p class="text-sm text-gray-600 whitespace-nowrap">最多 1 个，每个 1MB</p>
-        </h4>
-        <!-- 弹窗按钮 -->
-        <div class="px-6 pb-4">
-          <button
-            @click="confirmFileUpload"
-            class="w-full bg-[#e23338] text-white py-2 px-4 rounded hover:bg-[#d12329] transition-colors font-medium"
-          >
-            确定
-          </button>
-        </div>
-      </div>
-    </div>
 
     <!-- 加载状态 -->
     <div
@@ -154,7 +127,6 @@ const emit = defineEmits<{
 const fileInput = ref<HTMLInputElement>()
 const isLoading = ref(false)
 const errorMessage = ref('')
-const showConfirm = ref(false)
 
 // 清除文件数据的方法
 const clearFileData = () => {
@@ -162,36 +134,19 @@ const clearFileData = () => {
   if (fileInput.value) {
     fileInput.value.value = ''
   }
-  
+
   // 清除所有状态
   isLoading.value = false
   errorMessage.value = ''
-  showConfirm.value = false
-  
+
   // 清除v-model值
   emit('update:modelValue', '')
 }
 
 // 暴露清除方法给父组件
 defineExpose({
-  clearFileData
+  clearFileData,
 })
-
-// 显示确认弹窗
-const showConfirmDialog = () => {
-  showConfirm.value = true
-}
-
-// 隐藏确认弹窗
-const hideConfirmDialog = () => {
-  showConfirm.value = false
-}
-
-// 确认文件上传
-const confirmFileUpload = () => {
-  hideConfirmDialog()
-  triggerFileInput()
-}
 
 // 触发文件选择
 const triggerFileInput = () => {
@@ -262,7 +217,18 @@ const handleFileSelect = async (event: Event) => {
   const fileExtension = '.' + file.name.split('.').pop()?.toLowerCase()
 
   if (!allowedTypes.includes(fileExtension)) {
-    showError('只支持 .txt 和 .docx 文件格式')
+    showError('仅支持.txt和.docx文件格式')
+    // 清空文件输入
+    if (target) target.value = ''
+    return
+  }
+
+  // 检查文件大小（1MB = 1024 * 1024 bytes）
+  const maxSize = 1024 * 1024 // 1MB
+  if (file.size > maxSize) {
+    showError('文件大小不能超过1MB')
+    // 清空文件输入
+    if (target) target.value = ''
     return
   }
 
