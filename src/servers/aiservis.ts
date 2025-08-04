@@ -1,4 +1,5 @@
 import MockAIService from './moni'
+import { TextProcessor } from './processingData'
 
 // 样式常量
 const STYLES = {
@@ -54,11 +55,6 @@ class AIService {
     this.mockService = import.meta.env.DEV && MockAIService ? new MockAIService(aiConfig) : null
   }
 
-  // 辅助方法：创建带样式的消息
-  private createStyledMessage(content: string, style: string): string {
-    return `<div style="${style}">${content}</div>`
-  }
-
   // 辅助方法：处理带头部的消息
   private handleMessageWithHeader(
     content: string,
@@ -68,14 +64,14 @@ class AIService {
     isThinking: boolean = true,
   ): boolean {
     const style = isThinking ? STYLES.THINKING_HEADER : STYLES.ANSWER_HEADER
-
-    if (!hasShownHeader) {
-      callback(this.createStyledMessage(`${headerText}${content}`, style), false, isThinking)
-      return true
-    } else {
-      callback(this.createStyledMessage(content, style), false, isThinking)
-      return hasShownHeader
-    }
+    return TextProcessor.handleMessageWithHeader(
+      content,
+      hasShownHeader,
+      headerText,
+      callback,
+      isThinking,
+      style,
+    )
   }
 
   async sendToAI(message: any, callback: any, lastMessage: any) {
@@ -350,8 +346,8 @@ class AIService {
                         if (resData.content) {
                           let formattedContent = resData.content.replace(/\\n/g, '\n')
 
-                          // 处理搜索结果的特殊格式
-                          formattedContent = this.processSearchResultContent(
+                          // 使用公共方法处理搜索结果的特殊格式
+                          formattedContent = TextProcessor.processSearchResultContent(
                             formattedContent,
                             resData.title,
                           )
@@ -360,7 +356,7 @@ class AIService {
 
                           if (!hasShownThinkingHeader) {
                             callback(
-                              this.createStyledMessage(
+                              TextProcessor.createStyledMessage(
                                 MESSAGES.THINKING_PROCESS,
                                 STYLES.THINKING_HEADER,
                               ) + contentDiv,
@@ -457,198 +453,6 @@ class AIService {
     } finally {
       abortController = null
     }
-  }
-
-  private processSearchResultContent(content: string, title?: string): string {
-    let processedContent = content
-
-    // 清理不需要的文字
-    processedContent = processedContent
-      .replace(/正在输入\.\.\./g, '')
-      .replace(/\.打开对话/g, '')
-      .replace(/\\n/g, '\n')
-      .replace(/\\\"/g, '"')
-
-    // 处理编号格式的断行
-    // 一、二、三等（前面带标点符号）
-    processedContent = processedContent.replace(
-      /([*]?)([一二三四五六七八九十]+)、/g,
-      (match, asterisk, number) => {
-        return `<br>${asterisk}${number}、`
-      },
-    )
-
-    // 第一步、第二步、第三步等
-    processedContent = processedContent.replace(
-      /([*]?)第([一二三四五六七八九十]+|[0-9]+)步，/g,
-      (match, asterisk, number) => {
-        return `<br>${asterisk}第${number}步，`
-      },
-    )
-
-    // 1. 2. 3. 等（排除时间格式）
-    processedContent = processedContent.replace(
-      /([*]?)([0-9]+)\.\s/g,
-      (match, asterisk, number, offset, string) => {
-        // 检查前后文是否为时间格式（如 12:30 或 2023.01.01）
-        const beforeChar = string[offset - 1]
-        const afterChars = string.substring(offset + match.length, offset + match.length + 3)
-
-        // 如果前面是数字或冒号，或后面是数字和冒号，可能是时间格式，不处理
-        if (/[0-9:]/.test(beforeChar) || /[0-9]{2}:/.test(afterChars)) {
-          return match
-        }
-
-        return `<br>${asterisk}${number}. `
-      },
-    )
-
-    // （一）（二）（三）等
-    processedContent = processedContent.replace(
-      /([*]?)（([一二三四五六七八九十]+)）/g,
-      (match, asterisk, number) => {
-        return `<br>${asterisk}（${number}）`
-      },
-    )
-
-    // 1，2，3，等（排除时间）
-    processedContent = processedContent.replace(
-      /([*]?)([0-9]+)，/g,
-      (match, asterisk, number, offset, string) => {
-        // 检查前后文是否为时间格式
-        const beforeChar = string[offset - 1]
-        const afterChars = string.substring(offset + match.length, offset + match.length + 3)
-
-        // 如果前面是数字或冒号，或后面是数字和冒号，可能是时间格式，不处理
-        if (/[0-9:]/.test(beforeChar) || /[0-9]{2}:/.test(afterChars)) {
-          return match
-        }
-
-        return `<br>${asterisk}${number}，`
-      },
-    )
-
-    // 第一、第二等
-    processedContent = processedContent.replace(
-      /([*]?)第([一二三四五六七八九十]+)/g,
-      (match, asterisk, number) => {
-        return `<br>${asterisk}第${number}`
-      },
-    )
-
-    // 处理 HTML 内容
-    processedContent = this.processHtmlContent(processedContent)
-
-    // 如果有 title，添加灰黑色样式并另起一行
-    if (title && title.trim()) {
-      const titleHtml = `<div style="  font-weight: bold; margin-bottom: 8px; line-height: 1.4;">${title}</div>`
-      processedContent = titleHtml + processedContent
-    }
-
-    return processedContent
-  }
-
-  private processHtmlContent(content: string): string {
-    // 将换行符转换为 <br> 标签
-    let processedContent = content.replace(/\n/g, '<br>')
-
-    // 处理 Markdown 标题格式
-    // ### 三级标题
-    processedContent = processedContent.replace(
-      /^###\s+(.+)$/gm,
-      '<h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
-    )
-
-    // ## 二级标题
-    processedContent = processedContent.replace(
-      /^##\s+(.+)$/gm,
-      '<h2 style="font-size: 1.4em; font-weight: bold; margin: 20px 0 10px 0; color: #333;">$1</h2>',
-    )
-
-    // # 一级标题
-    processedContent = processedContent.replace(
-      /^#\s+(.+)$/gm,
-      '<h1 style="font-size: 1.6em; font-weight: bold; margin: 24px 0 12px 0; color: #333;">$1</h1>',
-    )
-
-    // 处理带<br>标签的markdown标题（因为前面已经将\n转换为<br>）
-    processedContent = processedContent.replace(
-      /<br>###\s+(.+?)(?=<br>|$)/g,
-      '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
-    )
-    processedContent = processedContent.replace(
-      /<br>##\s+(.+?)(?=<br>|$)/g,
-      '<br><h2 style="font-size: 1.4em; font-weight: bold; margin: 20px 0 10px 0; color: #333;">$1</h2>',
-    )
-    processedContent = processedContent.replace(
-      /<br>#\s+(.+?)(?=<br>|$)/g,
-      '<br><h1 style="font-size: 1.6em; font-weight: bold; margin: 24px 0 12px 0; color: #333;">$1</h1>',
-    )
-
-    // 清理不需要的标签
-    processedContent = processedContent
-      .replace(/<img[^>]*>/gi, '') // 去掉 img 标签
-      .replace(/<a[^>]*>(.*?)<\/a>/gi, '$1') // 去掉 a 标签但保留文本内容
-      .replace(/<url[^>]*>(.*?)<\/url>/gi, '$1') // 去掉 url 相关的标签
-      .replace(/<(?!\/?(?:p|h[1-6]|ul|ol|li|strong|b|em|i|br|div|span)\b)[^>]*>/gi, '') // 移除不允许的标签但保留内容
-
-    // 去除 URL 链接（http/https）
-    processedContent = processedContent.replace(/https?:\/\/[^\s<>"']+/gi, '') // 去掉 http 和 https 链接
-
-    // 去除邮箱地址
-    processedContent = processedContent.replace(
-      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi,
-      '',
-    ) // 去掉邮箱地址
-
-    // 去除热线电话号码
-    processedContent = processedContent
-      .replace(/热线[:：]\s*[\d-]+/gi, '') // 去掉热线电话
-      .replace(/报料热线[:：]\s*[\d-]+/gi, '') // 去掉报料热线
-      .replace(/电话[:：]\s*[\d-]+/gi, '') // 去掉电话号码
-
-    // 去除浏览器升级提示相关内容
-    processedContent = processedContent
-      .replace(/您使用的浏览器版本过低[^。]*。[^。]*升级浏览器/gi, '') // 去掉浏览器升级提示
-      .replace(/建议升级或更换浏览器访问[^。]*升级浏览器/gi, '') // 去掉浏览器升级建议
-
-    // 去除澎湃新闻相关的无用信息
-    processedContent = processedContent
-      .replace(/仅提供信息发布平台[^。]*申请澎湃号请用电脑访问/gi, '') // 去掉澎湃号申请提示
-      .replace(/http:\/\/renzheng\.thepaper\.cn[^。]*/gi, '') // 去掉澎湃认证链接
-      .replace(/\+\d+收藏我要举报/gi, '') // 去掉收藏举报按钮
-      .replace(/#[^#]*#/gi, '') // 去掉话题标签
-      .replace(/查看更多/gi, '') // 去掉查看更多
-      .replace(/开始答题/gi, '') // 去掉开始答题
-      .replace(/扫码下载[^。]*客户端/gi, '') // 去掉扫码下载提示
-
-    // 去除版权和法律声明相关信息
-    processedContent = processedContent
-      .replace(/关于澎湃[^。]*开放平台/gi, '') // 去掉关于澎湃相关信息
-      .replace(/IPSHANGHAISIXTHTONE/gi, '') // 去掉特殊标识
-      .replace(/新闻报料[^。]*报料邮箱[^。]*/gi, '') // 去掉新闻报料信息
-      .replace(/沪ICP备[^。]*号/gi, '') // 去掉ICP备案号
-      .replace(/沪公网安备[^。]*号/gi, '') // 去掉公网安备号
-      .replace(/互联网新闻信息服务许可证[^。]*号/gi, '') // 去掉服务许可证
-      .replace(/增值电信业务经营许可证[^。]*号/gi, '') // 去掉经营许可证
-      .replace(/©\d{4}-\d{4}[^。]*有限公司/gi, '') // 去掉版权信息
-      .replace(/反馈/gi, '') // 去掉反馈按钮
-
-    // 去除其他常见的无用信息
-    processedContent = processedContent
-      .replace(/Android版iPhone版iPad版/gi, '') // 去掉版本信息
-      .replace(/微博公众号抖音号/gi, '') // 去掉社交媒体信息
-      .replace(/派生万物/gi, '') // 去掉派生万物
-
-    // 清理多余的空白字符和标点符号
-    processedContent = processedContent
-      .replace(/\s+/g, ' ') // 合并多个空格为一个
-      .replace(/(<br>\s*){2,}/gi, '<br>') // 合并多个连续的换行
-      .replace(/[:：]\s*$/gi, '') // 去掉行末的冒号
-      .replace(/^\s*[:：]/gi, '') // 去掉行首的冒号
-      .trim() // 去掉首尾空白
-
-    return processedContent
   }
 
   // 测试方法：使用模拟数据进行测试

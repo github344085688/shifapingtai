@@ -535,7 +535,7 @@
                     <template v-else>
                       <div class="p-5 bg-white rounded-lg border border-gray-200 shadow-sm">
                         <div class="leading-relaxed text-gray-700 whitespace-pre-wrap">
-                          {{ parsedModalContent }}
+                          <div class="" v-html="parsedModalContent"></div>
                         </div>
                       </div>
                     </template>

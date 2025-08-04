@@ -1,4 +1,5 @@
-import aiConfig,{concurrentApis} from '@/config/aiConfig'
+import aiConfig, { concurrentApis } from '@/config/aiConfig'
+import TextProcessor from './processingData'
 
 export interface ConcurrentResult {
   key: string
@@ -24,16 +25,16 @@ class ConcurrentAIService {
     this.apiKey = apiKey || aiConfig.apiKey
     this.model = aiConfig.model
     this.results = new Map()
-    
+
     // 初始化结果对象
-    Object.values(concurrentApis).forEach(apiConfig => {
+    Object.values(concurrentApis).forEach((apiConfig) => {
       this.results.set(apiConfig.key, {
         key: apiConfig.key,
         name: apiConfig.name,
         content: '',
         isLoading: false,
         isCompleted: false,
-        aiLoading: false // 初始化aiLoading状态
+        aiLoading: false, // 初始化aiLoading状态
       })
     })
   }
@@ -46,7 +47,7 @@ class ConcurrentAIService {
   // 并发调用所有API - 改为循环处理
   async sendConcurrentRequests(message: any, callback: ConcurrentCallback): Promise<void> {
     // 重置所有结果状态
-    Object.values(concurrentApis).forEach(apiConfig => {
+    Object.values(concurrentApis).forEach((apiConfig) => {
       const result = this.results.get(apiConfig.key)!
       result.isLoading = true
       result.isCompleted = false
@@ -56,16 +57,88 @@ class ConcurrentAIService {
     })
 
     // 循环处理每个API，每个API独立处理
-    Object.values(concurrentApis).forEach(apiConfig => {
+    Object.values(concurrentApis).forEach((apiConfig) => {
       this.sendSingleRequest(apiConfig, message, callback)
     })
   }
 
+  // 处理特定API的响应数据
+  private processApiResponse(apiKey: string, extractedContent: any): string {
+    if ((apiKey === 'xgft' || apiKey === 'wlgd') && Array.isArray(extractedContent)) {
+      // 处理相关法条数据
+      return extractedContent
+        .map((law: any) => {
+          if (law.content && law.title) {
+            const processedContent = TextProcessor.processSearchResultContent(
+              law.content,
+              law.title,
+            )
+
+            // 添加法条的额外信息
+            let additionalInfo = ''
+            if (law.department) {
+              additionalInfo += `<div style="color: #666; font-size: 0.9em; margin-top: 8px;">发布机关：${law.department}</div>`
+            }
+            if (law.status) {
+              additionalInfo += `<div style="color: #666; font-size: 0.9em;">状态：${law.status}</div>`
+            }
+            if (law.law_type) {
+              additionalInfo += `<div style="color: #666; font-size: 0.9em;">类型：${law.law_type}</div>`
+            }
+            if (law.directory && Array.isArray(law.directory)) {
+              additionalInfo += `<div style="color: #666; font-size: 0.9em;">条文路径：${law.directory.join(' > ')}</div>`
+            }
+
+            return (
+              processedContent +
+              additionalInfo +
+              '<hr style="margin: 16px 0; border: none; border-top: 1px solid #eee;">'
+            )
+          }
+          return law.content || ''
+        })
+        .join('')
+    } else if (apiKey === 'wlgd' && Array.isArray(extractedContent)) {
+      // 处理网络观点数据
+      return extractedContent
+        .map((web: any) => {
+          if (web.content && web.title) {
+            const processedContent = TextProcessor.processSearchResultContent(
+              web.content,
+              web.title,
+            )
+
+            // 添加网络观点的额外信息
+            let additionalInfo = ''
+            if (web.url) {
+              additionalInfo += `<div style="color: #666; font-size: 0.9em; margin-top: 8px;">来源：<a href="${web.url}" target="_blank" style="color: #1890ff;">${web.url}</a></div>`
+            }
+            if (web.score) {
+              additionalInfo += `<div style="color: #666; font-size: 0.9em;">相关度：${(web.score * 100).toFixed(1)}%</div>`
+            }
+
+            return (
+              processedContent +
+              additionalInfo +
+              '<hr style="margin: 16px 0; border: none; border-top: 1px solid #eee;">'
+            )
+          }
+          return web.content || ''
+        })
+        .join('')
+    }
+
+    // 对于其他API或非数组数据，返回原始内容
+    return typeof extractedContent === 'string'
+      ? extractedContent
+      : JSON.stringify(extractedContent)
+  }
+
   // 发送单个API请求 - 添加callback参数
   private async sendSingleRequest(
-    apiConfig: typeof concurrentApis[keyof typeof concurrentApis], 
+    apiConfig: (typeof concurrentApis)[keyof typeof concurrentApis],
     message: any,
-    callback: ConcurrentCallback
+    callback: ConcurrentCallback,
   ): Promise<void> {
     try {
       const abortController = new AbortController()
@@ -86,13 +159,13 @@ class ConcurrentAIService {
       // 特殊处理相似案例API
       if (apiConfig.name === '相似案例') {
         requestBody = {
-          question: message.content , 
+          question: message.content,
         }
       } else {
         // 其他API使用原有格式
         requestBody = {
           messages: [message],
-          stream: false
+          stream: false,
         }
 
         // 优先使用配置中的model，如果没有则使用默认的this.model
@@ -137,23 +210,23 @@ class ConcurrentAIService {
 
       // 获取响应数据
       const responseData = await response.json()
-      
+
       // 过滤固定字段，提取实际的数组内容
       let extractedContent = ''
-      if (responseData && responseData.data) {   
+      if (responseData && responseData.data) {
         if (!apiConfig.dataField) {
           // 没有指定dataField，直接使用responseData.data
           extractedContent = responseData.data
         } else {
           // 有指定dataField，使用responseData.data[apiConfig.dataField]
-          extractedContent = responseData.data[apiConfig.dataField] 
-        } 
-        
+          extractedContent = responseData.data[apiConfig.dataField]
+        }
+
         // 如果提取的内容为空或无效，且有simulatedData，则使用simulatedData作为备用
         if ((!extractedContent || extractedContent === '') && apiConfig.simulatedData) {
           extractedContent = apiConfig.simulatedData
         }
-        
+
         // 如果还是没有内容，使用原始响应数据
         if (!extractedContent || extractedContent === '') {
           extractedContent = responseData
@@ -162,21 +235,23 @@ class ConcurrentAIService {
         // 如果没有responseData.data，优先使用simulatedData，否则使用原始响应
         extractedContent = apiConfig.simulatedData || responseData
       }
-      
-      result.content = extractedContent
+
+      // 对特定API进行文字处理
+      const processedContent = this.processApiResponse(apiConfig.key, extractedContent)
+
+      result.content = processedContent
       result.isLoading = false
       result.isCompleted = true
       result.aiLoading = false // API完成时设置aiLoading为false
-      
+
       // 回调通知API完成
-      callback(apiConfig.key, extractedContent, true)
-      
+      callback(apiConfig.key, processedContent, true)
     } catch (error: any) {
       const result = this.results.get(apiConfig.key)!
       result.isLoading = false
       result.isCompleted = true
       result.aiLoading = false // 出错时也设置aiLoading为false
-      
+
       if (error.name === 'AbortError') {
         result.error = '请求已中断'
       } else {
