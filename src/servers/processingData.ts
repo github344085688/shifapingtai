@@ -69,6 +69,14 @@ export class TextProcessor {
       },
     )
 
+    // 处理 \n（一）、\n（二）、\n（三）等格式
+    processedContent = processedContent.replace(
+      /\\n（([一二三四五六七八九十]+)）/g,
+      (match, number) => {
+        return `<br>（${number}）`
+      },
+    )
+
     // 1. 2. 3. 等（排除时间格式）- 修改为同时处理有空格和无空格的情况
     processedContent = processedContent.replace(
       /([*]?)([0-9]+)\.(\s|(?=[\u4e00-\u9fff]))/g,

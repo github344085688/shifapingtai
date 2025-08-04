@@ -66,6 +66,11 @@ p {
   color: #333;
 }
 
+.markdown_text strong {
+  line-height: 1.8;
+  color: #333;
+}
+
 .markdown_text ul,
 .markdown_text ol {
   margin: 0;

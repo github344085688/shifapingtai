@@ -251,14 +251,16 @@ class AIService {
           }
           try {
             const json = JSON.parse(eventData)
-            // console.log('检查模型是否包含 "gpt" 字符串啊实打实')
             // 检查模型是否包含 "gpt" 字符串或者是 "fyllm" 模型
             const model = json.model || this.aiConfig.model || ''
             const isGptModel =
               model.toLowerCase().includes('gpt') || model.toLowerCase().includes('fyllm')
 
-            if (isGptModel) {
-              // 如果是 GPT 模型或 fyllm 模型，使用增强逻辑处理推理数据、搜索结果数据、材料数据
+            // 检查是否为法律相关接口
+            const isLegalInterface = this.isLegalInterface()
+
+            if (isGptModel || isLegalInterface) {
+              // 如果是 GPT 模型、fyllm 模型或法律接口，使用增强逻辑处理推理数据、搜索结果数据、材料数据
 
               // 处理思考和推理数据
               const additionalData = json.choices[0]?.additional
@@ -346,11 +348,20 @@ class AIService {
                         if (resData.content) {
                           let formattedContent = resData.content.replace(/\\n/g, '\n')
 
-                          // 使用公共方法处理搜索结果的特殊格式
-                          formattedContent = TextProcessor.processSearchResultContent(
-                            formattedContent,
-                            resData.title,
-                          )
+                          // 根据接口类型选择不同的处理方法
+                          if (this.isLawInterface()) {
+                            // 法律法规接口使用法条处理
+                            formattedContent = TextProcessor.processLawContent(resData)
+                          } else if (this.isWebSearchInterface()) {
+                            // 网络搜索接口使用网络内容处理
+                            formattedContent = TextProcessor.processWebContent(resData)
+                          } else {
+                            // 其他接口使用通用搜索结果处理
+                            formattedContent = TextProcessor.processSearchResultContent(
+                              formattedContent,
+                              resData.title,
+                            )
+                          }
 
                           const contentDiv = `<div style="${STYLES.THINKING_CONTENT}">${formattedContent}</div>`
 
@@ -381,8 +392,13 @@ class AIService {
                     break
                   case 'answer':
                     // 处理答案数据，添加"结果："前缀
-                    const answerContent = json.choices[0]?.delta?.content || ''
+                    let answerContent = json.choices[0]?.delta?.content || ''
                     if (answerContent) {
+                      // 对法律接口的答案内容进行特殊处理
+                      if (isLegalInterface) {
+                        answerContent = this.processLegalAnswerContent(answerContent)
+                      }
+
                       // 在第一个answer内容前添加"结果："前缀
                       if (!hasShownAnswerHeader) {
                         callback(
@@ -411,11 +427,57 @@ class AIService {
                       console.log('解析搜索查询失败:', e)
                     }
                     break
+                  // 新增：处理法律相关的特殊数据类型
+                  case 'law_article':
+                    // 处理法条数据
+                    if (additionalData.data && additionalData.data.trim()) {
+                      try {
+                        const lawData = JSON.parse(additionalData.data)
+                        const formattedContent = TextProcessor.processLawContent(lawData)
+                        const contentDiv = `<div style="${STYLES.THINKING_CONTENT}">${formattedContent}</div>`
+
+                        hasShownThinkingHeader = this.handleMessageWithHeader(
+                          contentDiv,
+                          hasShownThinkingHeader,
+                          MESSAGES.THINKING_PROCESS,
+                          callback,
+                        )
+                      } catch (e) {
+                        console.error('解析法条数据失败:', e)
+                      }
+                    }
+                    break
+                  case 'web_search':
+                    // 处理网络搜索数据
+                    if (additionalData.data && additionalData.data.trim()) {
+                      try {
+                        const webData = JSON.parse(additionalData.data)
+                        const formattedContent = TextProcessor.processWebContent(webData)
+                        const contentDiv = `<div style="${STYLES.THINKING_CONTENT}">${formattedContent}</div>`
+
+                        hasShownThinkingHeader = this.handleMessageWithHeader(
+                          contentDiv,
+                          hasShownThinkingHeader,
+                          MESSAGES.THINKING_PROCESS,
+                          callback,
+                        )
+                      } catch (e) {
+                        console.error('解析网络搜索数据失败:', e)
+                      }
+                    }
+                    break
                   default:
                     // 其他类型的additional数据
                     if (additionalData.data && additionalData.data.trim()) {
+                      let processedData = additionalData.data
+
+                      // 对法律接口的其他数据也进行处理
+                      if (isLegalInterface) {
+                        processedData = this.processLegalContent(processedData)
+                      }
+
                       hasShownThinkingHeader = this.handleMessageWithHeader(
-                        additionalData.data,
+                        processedData,
                         hasShownThinkingHeader,
                         MESSAGES.THINKING_PROCESS,
                         callback,
@@ -431,15 +493,25 @@ class AIService {
               const deltaType = json.choices[0]?.delta?.type
 
               if (content && deltaType !== 'answer') {
+                // 对法律接口的普通内容也进行处理
+                let processedContent = content
+                if (isLegalInterface) {
+                  processedContent = this.processLegalContent(content)
+                }
+
                 // 实时输出内容
-                callback(content, false, false) // 第三个参数为false表示这是正常内容
+                callback(processedContent, false, false) // 第三个参数为false表示这是正常内容
               }
             } else {
-              // 如果不是 GPT 模型，使用原有的简单逻辑
+              // 如果不是 GPT 模型和法律接口，json.choices[0].delta.content 需要进行文字处理
               const content =
                 json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
+              
+              // 使用 TextProcessor 进行文字处理
+              const processedContent = content ? TextProcessor.processSearchResultContent(content) : content
+              
               // 实时输出内容
-              callback(content, false, false)
+              callback(processedContent, false, false)
             }
           } catch (e) {
             console.error('解析 JSON 失败:', e)
@@ -453,6 +525,47 @@ class AIService {
     } finally {
       abortController = null
     }
+  }
+
+  // 新增：判断是否为法律相关接口
+  private isLegalInterface(): boolean {
+    const legalKeys = [
+      'flwtzx', // 法律问题咨询
+      'qwsswd', // 全网搜索问答
+      'flfgzx', // 法律法规
+      'flwsxz', // 法律文书写作
+      'ssclsc', // 诉讼策略生成
+      'flfxjy', // 法律分析意见-诉讼策略
+      'flfxyj', // 法律分析意见抗辩策略
+      'dsjsspgbg', // 大数据胜诉评估报告
+      'xzzfzs', // acee
+      'xzfcfz', // 行政处罚辅助
+    ]
+    return legalKeys.includes(this.aiConfig.key)
+  }
+
+  // 新增：判断是否为法律法规接口
+  private isLawInterface(): boolean {
+    const lawKeys = ['flfgzx'] // 法律法规
+    return lawKeys.includes(this.aiConfig.key)
+  }
+
+  // 新增：判断是否为网络搜索接口
+  private isWebSearchInterface(): boolean {
+    const webSearchKeys = ['qwsswd'] // 全网搜索问答
+    return webSearchKeys.includes(this.aiConfig.key)
+  }
+
+  // 新增：处理法律接口的答案内容
+  private processLegalAnswerContent(content: string): string {
+    // 使用 TextProcessor 的通用处理方法
+    return TextProcessor.processSearchResultContent(content)
+  }
+
+  // 新增：处理法律接口的通用内容
+  private processLegalContent(content: string): string {
+    // 使用 TextProcessor 的通用处理方法
+    return TextProcessor.processSearchResultContent(content)
   }
 
   // 测试方法：使用模拟数据进行测试
