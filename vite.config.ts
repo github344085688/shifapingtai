@@ -15,6 +15,8 @@ export default defineConfig(({ mode }) => {
     build: {
       cssCodeSplit: false,   
       outDir: 'dist',
+      // 增加块大小警告限制
+      chunkSizeWarningLimit: 1000,
       rollupOptions: {
         external: (id) => {
           // 在生产构建时完全排除模拟数据和测试相关的文件
@@ -30,11 +32,25 @@ export default defineConfig(({ mode }) => {
           return false
         },
         output: {
-          // 移除 manualChunks 中的 moni.ts 处理，避免在生产环境中包含
+          // 优化代码分割
           manualChunks: (id) => {
             // 在生产环境中不处理 moni.ts 相关的分块
             if (!isProduction && id.includes('moni.ts')) {
               return 'mock-service';
+            }
+            
+            // 将 node_modules 中的大型库分离到单独的 chunk
+            if (id.includes('node_modules')) {
+              // Vue 相关
+              if (id.includes('vue') || id.includes('@vue')) {
+                return 'vue-vendor';
+              }
+              // 其他第三方库
+              if (id.includes('mammoth') || id.includes('html5-qrcode')) {
+                return 'libs-vendor';
+              }
+              // 其余的 node_modules 依赖
+              return 'vendor';
             }
           }
         }

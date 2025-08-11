@@ -1,6 +1,6 @@
 import aiConfig, { concurrentApis } from '@/config/aiConfig'
 import TextProcessor from './processingData'
-
+import { getApiKeyFromUrl } from './units'
 export interface ConcurrentResult {
   key: string
   name: string
@@ -191,14 +191,15 @@ class ConcurrentAIService {
           requestBody.step = apiConfig.step
         }
       }
-
+      const KeyFromUrl = getApiKeyFromUrl()
+      console.log('paramsBody啊实打实大苏打大', KeyFromUrl)
       const response = await fetch(apiConfig.api, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-          Authorization: 'Bearer ' + this.apiKey,
+          Authorization: 'Bearer ' + KeyFromUrl,
         },
         body: JSON.stringify(requestBody),
         signal: signal,

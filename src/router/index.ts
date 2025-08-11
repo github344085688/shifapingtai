@@ -16,7 +16,7 @@ const router = createRouter({
       },
     },
     {
-      path: '/legalResearchSmartAnswer',
+      path: "/legalResearchSmartAnswer",
       name: 'LegalResearchSmartAnswer',
       component: () => import('../views/legalResearchSmartAnswer/legalResearchSmartAnswer.vue'),
       meta: {

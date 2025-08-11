@@ -25,6 +25,9 @@ export class TextProcessor {
       .replace(/\\n/g, '\n')
       .replace(/\\\"/g, '"')
 
+    // 添加离婚后子女抚养费问题的特殊处理
+    processedContent = processedContent.replace(/(离婚后子女抚养费问题)([1-9]\d*、)/g, '$1<br>$2')
+
     // 添加对 ### 标题格式的处理（在编号处理之前）
     processedContent = processedContent.replace(
       /(^|[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z])###(\s*)/g,
@@ -216,7 +219,7 @@ export class TextProcessor {
       },
     )
 
-    // 1，2，3，等（排除时间）
+    // 修复数字编号处理：1，2，3，等（排除时间）
     processedContent = processedContent.replace(
       /([*]?)([0-9]+)，/g,
       (match, asterisk, number, offset, string) => {
@@ -230,6 +233,34 @@ export class TextProcessor {
         }
 
         return `<br>${asterisk}${number}，`
+      },
+    )
+
+    // 修复数字顿号处理：1、2、3、等 - 重新编写逻辑确保正确断行
+    processedContent = processedContent.replace(
+      /([*]?)([0-9]+)、/g,
+      (match, asterisk, number, offset, string) => {
+        // 直接在所有数字顿号前添加换行，不做复杂判断
+        return `<br>${asterisk}${number}、`
+      },
+    )
+
+    // 新增：处理圆圈数字编号 ①②③④⑤⑥⑦⑧⑨⑩
+    processedContent = processedContent.replace(
+      /([*]?)([①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳])/g,
+      (match, asterisk, circleNumber, offset, string) => {
+        // 检查前面是否有中文字符或其他内容，如果有则添加换行
+        const beforeChar = string[offset - 1]
+
+        if (
+          /[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z]/.test(
+            beforeChar,
+          )
+        ) {
+          return `<br>${asterisk}${circleNumber}`
+        }
+
+        return `<br>${asterisk}${circleNumber}`
       },
     )
 
@@ -406,6 +437,9 @@ export class TextProcessor {
       .replace(/[:：]\s*$/gi, '') // 去掉行末的冒号
       .replace(/^\s*[:：]/gi, '') // 去掉行首的冒号
       .trim() // 去掉首尾空白
+
+    // 新增：处理连续的 <br><br> 中间没有内容的情况，去掉一个
+    processedContent = processedContent.replace(/<br>\s*<br>/gi, '<br>')
 
     return processedContent
   }
@@ -593,82 +627,82 @@ export class TextProcessor {
     return webHeader + processedContent
   }
 
-  /**
-   * 处理网络搜索内容（wlgd API专用）
-   * @param webData 网络搜索数据对象
-   * @returns 格式化后的网络内容
-   */
-  static processWebContent(webData: {
-    url: string
-    title: string
-    content: string
-    score: number
-    type: string
-    name: string
-  }): string {
-    let processedContent = webData.content
+  // /**
+  //  * 处理网络搜索内容（wlgd API专用）
+  //  * @param webData 网络搜索数据对象
+  //  * @returns 格式化后的网络内容
+  //  */
+  // static processWebContent(webData: {
+  //   url: string
+  //   title: string
+  //   content: string
+  //   score: number
+  //   type: string
+  //   name: string
+  // }): string {
+  //   let processedContent = webData.content
 
-    // 基础文本清理
-    processedContent = processedContent
-      .replace(/正在输入\.\.\./g, '')
-      .replace(/\.打开对话/g, '')
-      .replace(/\\n/g, '\n')
-      .replace(/\\\"/g, '"')
+  //   // 基础文本清理
+  //   processedContent = processedContent
+  //     .replace(/正在输入\.\.\./g, '')
+  //     .replace(/\.打开对话/g, '')
+  //     .replace(/\\n/g, '\n')
+  //     .replace(/\\\"/g, '"')
 
-    // 去除重复内容 - 检测并移除重复的段落
-    const paragraphs = processedContent.split(/\n+/)
-    const uniqueParagraphs: string[] = []
-    const seenContent = new Set<string>()
+  //   // 去除重复内容 - 检测并移除重复的段落
+  //   const paragraphs = processedContent.split(/\n+/)
+  //   const uniqueParagraphs: string[] = []
+  //   const seenContent = new Set<string>()
 
-    for (const paragraph of paragraphs) {
-      const cleanParagraph = paragraph.trim()
-      if (cleanParagraph.length > 10) {
-        // 只处理有意义的段落
-        const normalizedContent = cleanParagraph.replace(/\s+/g, ' ').toLowerCase()
-        if (!seenContent.has(normalizedContent)) {
-          seenContent.add(normalizedContent)
-          uniqueParagraphs.push(cleanParagraph)
-        }
-      } else if (cleanParagraph.length > 0) {
-        uniqueParagraphs.push(cleanParagraph)
-      }
-    }
+  //   for (const paragraph of paragraphs) {
+  //     const cleanParagraph = paragraph.trim()
+  //     if (cleanParagraph.length > 10) {
+  //       // 只处理有意义的段落
+  //       const normalizedContent = cleanParagraph.replace(/\s+/g, ' ').toLowerCase()
+  //       if (!seenContent.has(normalizedContent)) {
+  //         seenContent.add(normalizedContent)
+  //         uniqueParagraphs.push(cleanParagraph)
+  //       }
+  //     } else if (cleanParagraph.length > 0) {
+  //       uniqueParagraphs.push(cleanParagraph)
+  //     }
+  //   }
 
-    processedContent = uniqueParagraphs.join('\n')
+  //   processedContent = uniqueParagraphs.join('\n')
 
-    // 移除无用信息
-    processedContent = processedContent
-      .replace(/首页[>＞][^【]*?【/g, '【') // 移除导航路径
-      .replace(/\[[0-9]{4}-[0-9]{2}-[0-9]{2}\]/g, '') // 移除日期标记
-      .replace(/【法律依据】[^【]*$/g, '') // 移除法律依据部分（通常在末尾且很长）
-      .replace(/【注意事项】[^【]*$/g, '') // 移除注意事项部分
-      .replace(/更多相关内容.*/g, '') // 移除"更多相关内容"及后续
-      .replace(/相关推荐.*/g, '') // 移除相关推荐
-      .replace(/扫码关注.*/g, '') // 移除扫码关注
-      .replace(/关注微信.*/g, '') // 移除关注微信
+  //   // 移除无用信息
+  //   processedContent = processedContent
+  //     .replace(/首页[>＞][^【]*?【/g, '【') // 移除导航路径
+  //     .replace(/\[[0-9]{4}-[0-9]{2}-[0-9]{2}\]/g, '') // 移除日期标记
+  //     .replace(/【法律依据】[^【]*$/g, '') // 移除法律依据部分（通常在末尾且很长）
+  //     .replace(/【注意事项】[^【]*$/g, '') // 移除注意事项部分
+  //     .replace(/更多相关内容.*/g, '') // 移除"更多相关内容"及后续
+  //     .replace(/相关推荐.*/g, '') // 移除相关推荐
+  //     .replace(/扫码关注.*/g, '') // 移除扫码关注
+  //     .replace(/关注微信.*/g, '') // 移除关注微信
 
-    // 处理标题和段落格式
-    processedContent = processedContent.replace(
-      /【([^】]+)】/g,
-      '<br><strong style="color: #2c5aa0;">【$1】</strong><br>',
-    )
+  //   // 处理标题和段落格式
+  //   processedContent = processedContent.replace(
+  //     /【([^】]+)】/g,
+  //     '<br><strong style="color: #2c5aa0;">【$1】</strong><br>',
+  //   )
 
-    // 处理HTML内容
-    processedContent = this.processHtmlContent(processedContent)
+  //   // 处理HTML内容
+  //   processedContent = this.processHtmlContent(processedContent)
 
-    // 构建网络内容信息头部（不显示URL）
-    const webHeader = `
-      <div style="background: #f0f8ff; padding: 12px; margin: 8px 0; border-left: 4px solid #28a745; border-radius: 4px;">
-        <div style="font-weight: bold; color: #333; margin-bottom: 4px;">${webData.name || webData.title}</div>
-        <div style="font-size: 0.9em; color: #666;">
-          <span style="margin-right: 12px;">来源：${webData.name}</span>
-          <span>相关度评分：${(webData.score * 100).toFixed(1)}%</span>
-        </div>
-      </div>
-    `
+  //   // 构建网络内容信息头部（不显示URL）
+  //   const webHeader = `
+  //     <div style="background: #f0f8ff; padding: 12px; margin: 8px 0; border-left: 4px solid #28a745; border-radius: 4px;">
+  //       <div style="font-weight: bold; color: #333; margin-bottom: 4px;">${webData.name || webData.title}</div>
+  //       <div style="font-size: 0.9em; color: #666;">
+  //         <span style="margin-right: 12px;">来源：${webData.name}</span>
+  //         <span>相关度评分：${(webData.score * 100).toFixed(1)}%</span>
+  //       </div>
+  //     </div>
+  //   `
 
-    return webHeader + processedContent
-  }
+  //   return webHeader + processedContent
+  // }
 }
 
 export default TextProcessor

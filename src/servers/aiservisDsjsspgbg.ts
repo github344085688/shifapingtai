@@ -1,5 +1,5 @@
-import aiConfig,{concurrentApis} from '@/config/aiConfig'
-
+import aiConfig, { concurrentApis } from '@/config/aiConfig'
+import { getApiKeyFromUrl } from './units'
 export interface ConcurrentResult {
   key: string
   name: string
@@ -24,16 +24,16 @@ class ConcurrentAIService {
     this.apiKey = apiKey || aiConfig.apiKey
     this.model = aiConfig.model
     this.results = new Map()
-    
+
     // 初始化结果对象
-    Object.values(concurrentApis).forEach(apiConfig => {
+    Object.values(concurrentApis).forEach((apiConfig) => {
       this.results.set(apiConfig.key, {
         key: apiConfig.key,
         name: apiConfig.name,
         content: '',
         isLoading: false,
         isCompleted: false,
-        aiLoading: false // 初始化aiLoading状态
+        aiLoading: false, // 初始化aiLoading状态
       })
     })
   }
@@ -46,7 +46,7 @@ class ConcurrentAIService {
   // 并发调用所有API - 改为循环处理
   async sendConcurrentRequests(message: any, callback: ConcurrentCallback): Promise<void> {
     // 重置所有结果状态
-    Object.values(concurrentApis).forEach(apiConfig => {
+    Object.values(concurrentApis).forEach((apiConfig) => {
       const result = this.results.get(apiConfig.key)!
       result.isLoading = true
       result.isCompleted = false
@@ -56,16 +56,16 @@ class ConcurrentAIService {
     })
 
     // 循环处理每个API，每个API独立处理
-    Object.values(concurrentApis).forEach(apiConfig => {
+    Object.values(concurrentApis).forEach((apiConfig) => {
       this.sendSingleRequest(apiConfig, message, callback)
     })
   }
 
   // 发送单个API请求 - 添加callback参数
   private async sendSingleRequest(
-    apiConfig: typeof concurrentApis[keyof typeof concurrentApis], 
+    apiConfig: (typeof concurrentApis)[keyof typeof concurrentApis],
     message: any,
-    callback: ConcurrentCallback
+    callback: ConcurrentCallback,
   ): Promise<void> {
     try {
       const abortController = new AbortController()
@@ -86,13 +86,13 @@ class ConcurrentAIService {
       // 特殊处理相似案例API
       if (apiConfig.name === '相似案例') {
         requestBody = {
-          question: message.content , 
+          question: message.content,
         }
       } else {
         // 其他API使用原有格式
         requestBody = {
           messages: [message],
-          stream: false
+          stream: false,
         }
 
         // 优先使用配置中的model，如果没有则使用默认的this.model
@@ -118,14 +118,14 @@ class ConcurrentAIService {
           requestBody.step = apiConfig.step
         }
       }
-
+      const KeyFromUrl = getApiKeyFromUrl()
       const response = await fetch(apiConfig.api, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-          Authorization: 'Bearer ' + this.apiKey,
+          Authorization: 'Bearer ' + KeyFromUrl,
         },
         body: JSON.stringify(requestBody),
         signal: signal,
@@ -137,23 +137,23 @@ class ConcurrentAIService {
 
       // 获取响应数据
       const responseData = await response.json()
-      
+
       // 过滤固定字段，提取实际的数组内容
       let extractedContent = ''
-      if (responseData && responseData.data) {   
+      if (responseData && responseData.data) {
         if (!apiConfig.dataField) {
           // 没有指定dataField，直接使用responseData.data
           extractedContent = responseData.data
         } else {
           // 有指定dataField，使用responseData.data[apiConfig.dataField]
-          extractedContent = responseData.data[apiConfig.dataField] 
-        } 
-        
+          extractedContent = responseData.data[apiConfig.dataField]
+        }
+
         // 如果提取的内容为空或无效，且有simulatedData，则使用simulatedData作为备用
         if ((!extractedContent || extractedContent === '') && apiConfig.simulatedData) {
           extractedContent = apiConfig.simulatedData
         }
-        
+
         // 如果还是没有内容，使用原始响应数据
         if (!extractedContent || extractedContent === '') {
           extractedContent = responseData
@@ -162,21 +162,20 @@ class ConcurrentAIService {
         // 如果没有responseData.data，优先使用simulatedData，否则使用原始响应
         extractedContent = apiConfig.simulatedData || responseData
       }
-      
+
       result.content = extractedContent
       result.isLoading = false
       result.isCompleted = true
       result.aiLoading = false // API完成时设置aiLoading为false
-      
+
       // 回调通知API完成
       callback(apiConfig.key, extractedContent, true)
-      
     } catch (error: any) {
       const result = this.results.get(apiConfig.key)!
       result.isLoading = false
       result.isCompleted = true
       result.aiLoading = false // 出错时也设置aiLoading为false
-      
+
       if (error.name === 'AbortError') {
         result.error = '请求已中断'
       } else {
@@ -226,7 +225,7 @@ class BigDataAssessmentService {
   // 发送大数据胜诉评估报告请求
   async sendAssessmentRequest(
     parameters: BigDataAssessmentParams,
-    callback: BigDataAssessmentCallback
+    callback: BigDataAssessmentCallback,
   ): Promise<void> {
     try {
       const abortController = new AbortController()
@@ -236,7 +235,7 @@ class BigDataAssessmentService {
       callback('', false)
 
       const requestBody = {
-        ...parameters
+        ...parameters,
       }
 
       const response = await fetch(this.api, {
@@ -257,17 +256,16 @@ class BigDataAssessmentService {
 
       // 获取响应数据
       const responseData = await response.json()
-      
+
       let extractedContent = ''
       if (responseData && responseData.data) {
         extractedContent = responseData.data
       } else {
         extractedContent = responseData
       }
-      
+
       // 回调通知完成
       callback(extractedContent, true)
-      
     } catch (error: any) {
       let errorMessage = ''
       if (error.name === 'AbortError') {

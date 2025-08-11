@@ -27,12 +27,13 @@
                 : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
             ]"
           >
-            <div v-if="message.aiLoading" class="">ai思考中...</div>
-            <!-- 思考过程显示 -->
+            <!-- 使用v-show替代v-if，避免DOM的频繁创建和销毁 -->
+            <div v-show="message.aiLoading" class="">ai思考中...</div>
+            <!-- 思考过程显示 - 使用v-show并添加防抖 -->
             <div
-              v-if="message.thinkingProcess"
+              v-show="message.thinkingProcess && !message.aiLoading"
               class="mb-4 thinking-process"
-              v-html="message.thinkingProcess"
+              v-html="debouncedThinkingProcess(message.thinkingProcess, index)"
             ></div>
             <AiText :popsMessage="message" />
           </div>
@@ -43,7 +44,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, defineComponent, nextTick, onMounted } from 'vue'
+import { ref, defineComponent, nextTick, onMounted, computed, watch } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
 import aiConfig, { AcrossTheEntireNetwork } from '@/config/aiConfig'
@@ -65,6 +66,32 @@ defineComponent({
 // 自动滚动控制
 const autoScroll = ref(true)
 const userScrolled = ref(false)
+
+// 添加防抖处理思考过程的更新
+const thinkingProcessDebounceMap = new Map<number, string>()
+const thinkingProcessTimers = new Map<number, NodeJS.Timeout>()
+
+const debouncedThinkingProcess = (content: string, messageIndex: number) => {
+  // 如果内容为空，直接返回
+  if (!content) return ''
+
+  // 清除之前的定时器
+  const existingTimer = thinkingProcessTimers.get(messageIndex)
+  if (existingTimer) {
+    clearTimeout(existingTimer)
+  }
+
+  // 设置新的防抖定时器
+  const timer = setTimeout(() => {
+    thinkingProcessDebounceMap.set(messageIndex, content)
+    thinkingProcessTimers.delete(messageIndex)
+  }, 100) // 100ms 防抖延迟
+
+  thinkingProcessTimers.set(messageIndex, timer)
+
+  // 返回当前缓存的内容，如果没有则返回新内容
+  return thinkingProcessDebounceMap.get(messageIndex) || content
+}
 
 onMounted(() => {
   // 初始化 acrossTheEntireNetwork 对象（如果不存在）
@@ -229,22 +256,35 @@ const setMessage = (
 
     globalState.acrossTheEntireNetwork.aiResults = messages.value
     globalState.acrossTheEntireNetwork.generalAiTime = Date.now()
+
+    // 完成后强制更新一次，确保最终状态正确
+    nextTick(() => {
+      if (autoScroll.value && !userScrolled.value) {
+        scrollToBottom()
+      }
+    })
     return
   }
 
-  // 根据isThinking参数决定更新思考过程还是正常内容
+  // 批量更新，减少响应式触发次数
   if (isThinking) {
-    // 更新思考过程
-    lastMessage.thinkingProcess = `${lastMessage.thinkingProcess || ''}${message}`
+    // 使用 Object.assign 进行批量更新，减少响应式触发
+    Object.assign(lastMessage, {
+      thinkingProcess: `${lastMessage.thinkingProcess || ''}${message}`,
+    })
   } else {
-    // 更新正常内容和AI思考状态
-    lastMessage.aiLoading = false // 当开始输出正常内容时，思考状态结束
-    lastMessage.content = `${lastMessage.content}${message}`
+    // 批量更新正常内容和AI思考状态
+    Object.assign(lastMessage, {
+      aiLoading: false,
+      content: `${lastMessage.content}${message}`,
+    })
   }
 
-  // 只有在自动滚动开启且用户没有手动滚动时才自动滚动
+  // 使用 requestAnimationFrame 优化滚动性能
   if (autoScroll.value && !userScrolled.value) {
-    scrollToBottom()
+    requestAnimationFrame(() => {
+      scrollToBottom()
+    })
   }
 }
 

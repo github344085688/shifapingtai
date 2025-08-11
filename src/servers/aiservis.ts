@@ -1,5 +1,6 @@
 import MockAIService from './moni'
 import { TextProcessor } from './processingData'
+import { getApiKeyFromUrl } from './units'
 
 // 样式常量
 const STYLES = {
@@ -93,8 +94,8 @@ class AIService {
         paramsBody[key] = value
       })
     }
-
-    console.log('paramsBody啊实打实大苏打大', this.aiConfig)
+    const KeyFromUrl = getApiKeyFromUrl()
+    console.log('paramsBody------------------------', KeyFromUrl)
     try {
       const response = await fetch(this.aiConfig.api, {
         method: 'POST',
@@ -102,7 +103,7 @@ class AIService {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
           'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-          Authorization: 'Bearer ' + this.aiConfig.apiKey,
+          Authorization: 'Bearer ' + KeyFromUrl,
         },
         body: JSON.stringify({
           model: this.aiConfig.model,
@@ -506,10 +507,12 @@ class AIService {
               // 如果不是 GPT 模型和法律接口，json.choices[0].delta.content 需要进行文字处理
               const content =
                 json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
-              
+
               // 使用 TextProcessor 进行文字处理
-              const processedContent = content ? TextProcessor.processSearchResultContent(content) : content
-              
+              const processedContent = content
+                ? TextProcessor.processSearchResultContent(content)
+                : content
+
               // 实时输出内容
               callback(processedContent, false, false)
             }

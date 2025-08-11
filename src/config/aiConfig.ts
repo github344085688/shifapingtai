@@ -1,31 +1,29 @@
 export default {
   api: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwtzx',
   model: '中国法研LLM',
-  apiKey: '8d0edca24a164c99bf804911fc16fd29',
-
-
+  apiKey: '05432954ab614837b45230d37679763d',
 }
 export const api = {
   baseUrl: 'https://lxx.lanxiaoxiang.net',
 }
 
 const apiMap = {
-  flwtzx: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwtzx',//法律问题咨询DS(
-  xsywApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsywzsk',//相似疑问
-  xgftApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfgzsk',//相关法条
-  wlgdApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/wlgdzsk',//网络观点
-  cpgdzApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/cpgdzsk',//裁判观点
-  xsalApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsalzsk',//相似案例
-  swyjApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/swyjzsk',//实务研究
-  qwsswd: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/qwsswd',//全网搜索问答
-  flfgzx: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfgzx',//法律法规
-  flwsxz: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwsxz',//法律文书写作
-  ssclsc: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/ssclsc',//诉讼策略生成
-  flfxjy: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfxjy',//法律分析建议(诉讼策略)
-  flfxyj: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfxyj',//法律分析意见(抗辩策略)
-  dsjsspgbg: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/dsjsspgbg',//大数据胜诉评估报告
-  xzzfzs: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzzfzs',//行政执法助手
-  xzfcfz: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzfcfz',//行政处罚辅助
+  flwtzx: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwtzx', //法律问题咨询DS(
+  xsywApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsywzsk', //相似疑问
+  xgftApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfgzsk', //相关法条
+  wlgdApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/wlgdzsk', //网络观点
+  cpgdzApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/cpgdzsk', //裁判观点
+  xsalApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsalzsk', //相似案例
+  swyjApi: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/swyjzsk', //实务研究
+  qwsswd: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/qwsswd', //全网搜索问答
+  flfgzx: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfgzx', //法律法规
+  flwsxz: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flwsxz', //法律文书写作
+  ssclsc: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/ssclsc', //诉讼策略生成
+  flfxjy: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfxjy', //法律分析建议(诉讼策略)
+  flfxyj: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/flfxyj', //法律分析意见(抗辩策略)
+  dsjsspgbg: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/dsjsspgbg', //大数据胜诉评估报告
+  xzzfzs: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzzfzs', //行政执法助手
+  xzfcfz: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzfcfz', //行政处罚辅助
 }
 
 // 定义API配置接口
@@ -52,7 +50,7 @@ export const concurrentApis: Record<string, ApiConfig> = {
     threshold: 0.7,
     version: 'v2',
     model: '中国法研LLM',
-    dataField: 'qa'
+    dataField: 'qa',
   },
   xgft: {
     key: 'xgft',
@@ -62,7 +60,7 @@ export const concurrentApis: Record<string, ApiConfig> = {
     model: '中国法研LLM',
     version: 'v2',
     threshold: 0.7,
-    dataField: 'laws'
+    dataField: 'laws',
   },
   wlgd: {
     key: 'wlgd',
@@ -71,7 +69,7 @@ export const concurrentApis: Record<string, ApiConfig> = {
     top_k: 20,
     model: '中国法研LLM',
     version: 'v2',
-    dataField: 'web'
+    dataField: 'web',
   },
   cpgdz: {
     key: 'cpgdz',
@@ -81,7 +79,7 @@ export const concurrentApis: Record<string, ApiConfig> = {
     model: '中国法研LLM',
     version: 'v2',
     threshold: 0.65,
-    dataField: 'expertview'
+    dataField: 'expertview',
   },
   swyj: {
     key: 'swyj',
@@ -91,7 +89,7 @@ export const concurrentApis: Record<string, ApiConfig> = {
     model: '中国法研LLM',
     threshold: 0.55,
     version: 'v2',
-    dataField: 't2wechat'
+    dataField: 't2wechat',
   },
   xsal: {
     key: 'xsal',
@@ -400,7 +398,7 @@ export const concurrentApis: Record<string, ApiConfig> = {
     //         "purpose": "劳动者与用人单位之间的纠纷,应属劳动者与用人单位之间的纠纷,故劳动者以用人单位为被告提起的劳动争议诉讼请求不符合法律规定,法院不予支持 。"
     //     }
     // ]
-  }
+  },
 }
 //法律问题咨询
 export const ConsultationOnLegalIssues: any = {
@@ -409,9 +407,9 @@ export const ConsultationOnLegalIssues: any = {
   api: apiMap.flwtzx,
   model: '中国法研LLM',
   stream: true,
-  title: "我是法研智答。",
-  placeholder: "请输入案情内容",
-  note: "根据案情、法律问题提供网络观点、相似案例、相关法条、法相似问题、法律知识、裁判观点",
+  title: '我是法研智答。',
+  placeholder: '请输入案情内容',
+  note: '根据案情、法律问题提供网络观点、相似案例、相关法条、法相似问题、法律知识、裁判观点',
 }
 
 export const AcrossTheEntireNetwork: any = {
@@ -420,9 +418,9 @@ export const AcrossTheEntireNetwork: any = {
   api: apiMap.qwsswd,
   model: '中国法研LLM',
   stream: true,
-  title: "我是关于法律全网搜索助手。",
-  placeholder: "请输入搜索内容",
-  note: "快速、准确的查找全网络法律法规信息！",
+  title: '我是关于法律全网搜索助手。',
+  placeholder: '请输入搜索内容',
+  note: '快速、准确的查找全网络法律法规信息！',
 }
 
 export const LawsAndRegulations: any = {
@@ -431,9 +429,9 @@ export const LawsAndRegulations: any = {
   api: apiMap.flfgzx,
   model: '中国法研LLM',
   stream: true,
-  title: "我是法律法规助手。",
-  placeholder: "请输入查询内容",
-  note: "根据案情、法律问题描述查找相关法规、法条",
+  title: '我是法律法规助手。',
+  placeholder: '请输入查询内容',
+  note: '根据案情、法律问题描述查找相关法规、法条',
 }
 
 export const legalDocumentWriting: any = {
@@ -442,9 +440,9 @@ export const legalDocumentWriting: any = {
   api: apiMap.flwsxz,
   model: '中国法研LLM',
   stream: true,
-  title: "我是法律文书写作助手。",
-  placeholder: "请输入内容",
-  note: "提供法律文书写作服务，包括起诉状、调解协议书、法律分析意见书等。",
+  title: '我是法律文书写作助手。',
+  placeholder: '请输入内容',
+  note: '提供法律文书写作服务，包括起诉状、调解协议书、法律分析意见书等。',
 }
 
 export const litigationStrategyGeneration: any = {
@@ -453,11 +451,10 @@ export const litigationStrategyGeneration: any = {
   api: apiMap.ssclsc,
   model: '中国法研LLM',
   stream: true,
-  title: "我是诉讼策略生成助手。",
-  placeholder: "请输入内容",
-  note: "根据详细案情提供诉请、胜算分析证据建议等信息",
+  title: '我是诉讼策略生成助手。',
+  placeholder: '请输入内容',
+  note: '根据详细案情提供诉请、胜算分析证据建议等信息',
 }
-
 
 export const litigationStrategy: any = {
   key: 'flfxjy',
@@ -465,11 +462,10 @@ export const litigationStrategy: any = {
   api: apiMap.flfxjy,
   model: '中国法研LLM',
   stream: true,
-  title: "我是法律分析意见助手。",
-  placeholder: "请输入内容",
-  note: "诉讼策略",
+  title: '我是法律分析意见助手。',
+  placeholder: '请输入内容',
+  note: '诉讼策略',
 }
-
 
 export const defenseStrategy: any = {
   key: 'flfxyj',
@@ -477,9 +473,9 @@ export const defenseStrategy: any = {
   api: apiMap.flfxyj,
   model: '中国法研LLM',
   stream: true,
-  title: "我是法律分析意见助手。",
-  placeholder: "请输入内容",
-  note: "抗辩策略",
+  title: '我是法律分析意见助手。',
+  placeholder: '请输入内容',
+  note: '抗辩策略',
 }
 
 export const bigDataVictoryAssessmentReport: any = {
@@ -487,36 +483,35 @@ export const bigDataVictoryAssessmentReport: any = {
   name: '法律分析意见抗辩策略',
   api: apiMap.dsjsspgbg,
   parameters: {
-    "amount": "1456512345",
-    "caseCause": "离婚纠纷",
-    "province": "北京",
-    "offset": 0,
-    "limit": 10,
-    "claim": "请求获得子女抚养权",
-    "essentials": "原告是男 重婚或同居",
-    "order": "desc"
-  }
+    amount: '1456512345',
+    caseCause: '离婚纠纷',
+    province: '北京',
+    offset: 0,
+    limit: 10,
+    claim: '请求获得子女抚养权',
+    essentials: '原告是男 重婚或同居',
+    order: 'desc',
+  },
 }
 
 export const administrativeLawEnforcementAssistant: any = {
   key: 'xzzfzs',
-  name: '行政执法助手', 
+  name: '行政执法助手',
   api: apiMap.xzzfzs,
   model: '中国法研LLM',
   stream: true,
-  title: "我是行政执法助手助手。",
-  placeholder: "请输入内容",
-  note: "为执法部门提供行政执法辅助建议",
+  title: '我是行政执法助手助手。',
+  placeholder: '请输入内容',
+  note: '为执法部门提供行政执法辅助建议',
 }
 
 export const administrativePenaltyAssistance: any = {
   key: 'xzfcfz',
-  name: '行政处罚辅助', 
+  name: '行政处罚辅助',
   api: apiMap.xzfcfz,
   model: '中国法研LLM',
   stream: true,
-  title: "我是行政处罚辅助助手。",
-  placeholder: "请输入内容",
-  note: "为执法部门提供行政执法辅助建议",
+  title: '我是行政处罚辅助助手。',
+  placeholder: '请输入内容',
+  note: '为执法部门提供行政执法辅助建议',
 }
-
