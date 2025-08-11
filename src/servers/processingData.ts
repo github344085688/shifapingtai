@@ -199,6 +199,25 @@ export class TextProcessor {
       },
     )
 
+    // 新增：专门处理标点符号+（数字）格式的断行，如：。（1）、，（2）、；（3）等
+    // 同时支持全角数字（１２３）和半角数字（123）
+    processedContent = processedContent.replace(
+      /([。，、；：！？""''）】》])(\([1-9１-９][0-9０-９]*\))/g,
+      (match, punctuation, numberPart) => {
+        // 在标点符号后的括号数字前添加换行
+        return `${punctuation}<br>${numberPart}`
+      },
+    )
+
+    // 新增：处理全角数字的括号格式，如（１）（２）（３）等
+    processedContent = processedContent.replace(
+      /([。，、；：！？""''）】》])(\([１-９][０-９]*\))/g,
+      (match, punctuation, numberPart) => {
+        // 在标点符号后的全角数字括号前添加换行
+        return `${punctuation}<br>${numberPart}`
+      },
+    )
+
     // 添加对 (1), (2). (3)， 等括号+标点符号格式的处理
     processedContent = processedContent.replace(
       /([*]?)(\([0-9]+\))([，。；：,.])/g,

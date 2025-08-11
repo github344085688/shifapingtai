@@ -15,11 +15,9 @@ export default defineConfig(({ mode }) => {
     build: {
       cssCodeSplit: false,   
       outDir: 'dist',
-      // 增加块大小警告限制
       chunkSizeWarningLimit: 1000,
       rollupOptions: {
         external: (id) => {
-          // 在生产构建时完全排除模拟数据和测试相关的文件
           if (isProduction) {
             return id.includes('moni.ts') || 
                    id.includes('moni.js') ||
@@ -32,34 +30,16 @@ export default defineConfig(({ mode }) => {
           return false
         },
         output: {
-          // 优化代码分割
-          manualChunks: (id) => {
-            // 在生产环境中不处理 moni.ts 相关的分块
-            if (!isProduction && id.includes('moni.ts')) {
-              return 'mock-service';
-            }
-            
-            // 将 node_modules 中的大型库分离到单独的 chunk
-            if (id.includes('node_modules')) {
-              // Vue 相关
-              if (id.includes('vue') || id.includes('@vue')) {
-                return 'vue-vendor';
-              }
-              // 其他第三方库
-              if (id.includes('mammoth') || id.includes('html5-qrcode')) {
-                return 'libs-vendor';
-              }
-              // 其余的 node_modules 依赖
-              return 'vendor';
-            }
+          manualChunks: {
+            'vue-vendor': ['vue', 'vue-router'],
+            'vendor': ['juejin-state', 'juejin-puts'],
+            'libs': ['mammoth', 'html5-qrcode']
           }
         }
       }
     },
     define: {
-      // 定义环境变量，用于在代码中判断是否启用模拟功能
       __ENABLE_MOCK__: !isProduction,
-      // 添加生产环境标识
       __PRODUCTION__: isProduction
     },
     server: {

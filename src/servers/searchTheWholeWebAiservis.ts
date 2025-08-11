@@ -1,5 +1,7 @@
 import MockAIService from './moni'
 import { getApiKeyFromUrl } from './units'
+import { TextProcessor } from './processingData'
+
 // 样式常量
 const STYLES = {
   THINKING_HEADER: 'color: #000000; margin: 8px 0;',
@@ -56,7 +58,7 @@ class AIService {
 
   // 辅助方法：创建带样式的消息
   private createStyledMessage(content: string, style: string): string {
-    return `<div style="${style}">${content}</div>`
+    return TextProcessor.createStyledMessage(content, style)
   }
 
   // 辅助方法：处理带头部的消息
@@ -68,14 +70,14 @@ class AIService {
     isThinking: boolean = true,
   ): boolean {
     const style = isThinking ? STYLES.THINKING_HEADER : STYLES.ANSWER_HEADER
-
-    if (!hasShownHeader) {
-      callback(this.createStyledMessage(`${headerText}${content}`, style), false, isThinking)
-      return true
-    } else {
-      callback(this.createStyledMessage(content, style), false, isThinking)
-      return hasShownHeader
-    }
+    return TextProcessor.handleMessageWithHeader(
+      content,
+      hasShownHeader,
+      headerText,
+      callback,
+      isThinking,
+      style,
+    )
   }
 
   // 在AIService类中添加重试方法
@@ -341,11 +343,12 @@ class AIService {
                         hasShownSearchProcessHeader = true
                       }
 
-                      // 返回 step 数据
-                      callback(stepData, false, false)
+                      // 添加延迟显示机制，让每个step内容显示更久
+                      setTimeout(() => {
+                        callback(stepData, false, false)
+                      }, 200) // 延迟200毫秒显示，您可以根据需要调整这个时间
                     }
                     break
-
                   case 'start_jx':
                     // 处理 start_jx 类型 - 移除"搜索过程"及相关下的内容
                     if (lastMessage && lastMessage.content) {
@@ -382,7 +385,7 @@ class AIService {
                           let formattedContent = resData.content.replace(/\\n/g, '\n')
 
                           // 处理搜索结果的特殊格式
-                          formattedContent = this.processSearchResultContent(
+                          formattedContent = TextProcessor.processSearchResultContent(
                             formattedContent,
                             resData.title,
                           )
@@ -417,6 +420,7 @@ class AIService {
                   case 'answer':
                     // 处理答案数据，添加"结果："前缀
                     const answerContent = json.choices[0]?.delta?.content || ''
+                    console.log('answerContent~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', answerContent)
                     if (answerContent) {
                       // 在第一个answer内容前添加"结果："前缀
                       if (!hasShownAnswerHeader) {
@@ -489,6 +493,9 @@ class AIService {
       abortController = null
     }
   }
+
+  // 删除原有的 processSearchResultContent 和 processHtmlContent 方法
+  // 因为现在使用 TextProcessor 类中的方法
 
   private processSearchResultContent(content: string, title?: string): string {
     let processedContent = content
