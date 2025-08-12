@@ -1,7 +1,7 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes: [
     {
       path: '/',
@@ -16,7 +16,7 @@ const router = createRouter({
       },
     },
     {
-      path: "/legalResearchSmartAnswer",
+      path: '/legalResearchSmartAnswer',
       name: 'LegalResearchSmartAnswer',
       component: () => import('../views/legalResearchSmartAnswer/legalResearchSmartAnswer.vue'),
       meta: {

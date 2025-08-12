@@ -395,10 +395,8 @@ class AIService {
                     // 处理答案数据，添加"结果："前缀
                     let answerContent = json.choices[0]?.delta?.content || ''
                     if (answerContent) {
-                      // 对法律接口的答案内容进行特殊处理
-                      if (isLegalInterface) {
-                        answerContent = this.processLegalAnswerContent(answerContent)
-                      }
+                      // 对所有答案内容进行 processSearchResultContent 处理
+                      answerContent = TextProcessor.processSearchResultContent(answerContent)
 
                       // 在第一个answer内容前添加"结果："前缀
                       if (!hasShownAnswerHeader) {
@@ -470,12 +468,8 @@ class AIService {
                   default:
                     // 其他类型的additional数据
                     if (additionalData.data && additionalData.data.trim()) {
-                      let processedData = additionalData.data
-
-                      // 对法律接口的其他数据也进行处理
-                      if (isLegalInterface) {
-                        processedData = this.processLegalContent(processedData)
-                      }
+                      // 对所有其他数据也进行 processSearchResultContent 处理
+                      let processedData = TextProcessor.processSearchResultContent(additionalData.data)
 
                       hasShownThinkingHeader = this.handleMessageWithHeader(
                         processedData,
@@ -494,11 +488,8 @@ class AIService {
               const deltaType = json.choices[0]?.delta?.type
 
               if (content && deltaType !== 'answer') {
-                // 对法律接口的普通内容也进行处理
-                let processedContent = content
-                if (isLegalInterface) {
-                  processedContent = this.processLegalContent(content)
-                }
+                // 对所有普通内容都进行 processSearchResultContent 处理
+                let processedContent = TextProcessor.processSearchResultContent(content)
 
                 // 实时输出内容
                 callback(processedContent, false, false) // 第三个参数为false表示这是正常内容
@@ -559,15 +550,13 @@ class AIService {
     return webSearchKeys.includes(this.aiConfig.key)
   }
 
-  // 新增：处理法律接口的答案内容
+  // 修改：处理法律接口的答案内容 - 统一使用 processSearchResultContent
   private processLegalAnswerContent(content: string): string {
-    // 使用 TextProcessor 的通用处理方法
     return TextProcessor.processSearchResultContent(content)
   }
 
-  // 新增：处理法律接口的通用内容
+  // 修改：处理法律接口的通用内容 - 统一使用 processSearchResultContent  
   private processLegalContent(content: string): string {
-    // 使用 TextProcessor 的通用处理方法
     return TextProcessor.processSearchResultContent(content)
   }
 
