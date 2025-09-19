@@ -47,14 +47,13 @@
 import { ref, defineComponent, nextTick, onMounted, computed, watch } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
-import aiConfig, { AcrossTheEntireNetwork } from '@/config/aiConfig'
+import aiConfig, { AcrossTheEntireNetwork, CACHE_DURATION } from '@/config/aiConfig'
 import Aiservis from '@/servers/searchTheWholeWebAiservis'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
 
 const state = status()
 const globalState = state.state
-const CACHE_DURATION = 12 * 60 * 60 * 1000
 
 // 使用动态title功能
 const { title, updateTitle } = useTitle('全网搜索问答')

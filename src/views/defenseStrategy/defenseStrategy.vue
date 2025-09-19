@@ -45,14 +45,13 @@
 import { ref, defineComponent, nextTick, onMounted } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
-import aiConfig, { defenseStrategy } from '@/config/aiConfig'
+import aiConfig, { defenseStrategy, CACHE_DURATION } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
 
 const state = status()
 const globalState = state.state
-const CACHE_DURATION = 12 * 60 * 60 * 1000
 
 // 使用动态title功能
 const { title, updateTitle } = useTitle('法律分析意见-抗辩策略')
@@ -191,9 +190,9 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
-  // await aiService.sendToAIMock('测试消息', setMessage)
+  await aiService.sendToAIMock('测试消息', setMessage)
   // 启动主要AI服务
-  aiService.sendToAI(newMessage, setMessage)
+  // aiService.sendToAI(newMessage, setMessage)
 
   userInput.value = ''
 }

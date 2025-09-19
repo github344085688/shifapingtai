@@ -3,6 +3,7 @@ export default {
   model: '中国法研LLM',
   apiKey: '05432954ab614837b45230d37679763d',
 }
+export const CACHE_DURATION = 15 * 24 * 60 * 60 * 1000
 export const api = {
   baseUrl: 'https://lxx.lanxiaoxiang.net',
 }
@@ -96,6 +97,7 @@ export const concurrentApis: Record<string, ApiConfig> = {
     name: '相似案例',
     api: apiMap.xsalApi,
     top_k: 20,
+    dataField: 'data',
     //     simulatedData: [
     //     {
     //         "applicablelaw": [

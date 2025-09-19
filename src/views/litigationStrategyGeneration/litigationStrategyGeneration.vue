@@ -45,14 +45,13 @@
 import { ref, defineComponent, nextTick, onMounted } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
-import aiConfig, { litigationStrategyGeneration } from '@/config/aiConfig'
+import aiConfig, { litigationStrategyGeneration, CACHE_DURATION } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
 
 const state = status()
 const globalState = state.state
-const CACHE_DURATION = 12 * 60 * 60 * 1000
 
 // 使用动态title功能
 const { title, updateTitle } = useTitle('诉讼策略生成')

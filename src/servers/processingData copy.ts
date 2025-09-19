@@ -28,12 +28,6 @@ export class TextProcessor {
     // 新增：处理 "---\n\n" 转为断行
     processedContent = processedContent.replace(/---\n\n/g, '<br>')
 
-    // 新增：去掉断行后面跟着单独星号行的情况
-    processedContent = processedContent.replace(/\n\s*\*\s*\n/g, '\n')
-
-    // 新增：去掉多个连续的空行（2个或3个以上）
-    processedContent = processedContent.replace(/\n\s*\n\s*\n+/g, '\n\n')
-
     // 添加离婚后子女抚养费问题的特殊处理
     processedContent = processedContent.replace(/(离婚后子女抚养费问题)([1-9]\d*、)/g, '$1<br>$2')
 
@@ -301,7 +295,6 @@ export class TextProcessor {
     )
 
     // 处理 HTML 内容
-
     processedContent = this.processHtmlContent(processedContent)
 
     // 如果有 title，添加灰黑色样式并另起一行
@@ -322,54 +315,48 @@ export class TextProcessor {
     // 将换行符转换为 <br> 标签
     let processedContent = content.replace(/\n/g, '<br>')
 
-    // 新增：在处理标题之前，先清理单独的星号行
-    processedContent = processedContent.replace(/<br>\s*\*\s*<br>/g, '<br>')
-    processedContent = processedContent.replace(/^\s*\*\s*<br>/g, '')
-    processedContent = processedContent.replace(/<br>\s*\*\s*$/g, '<br>')
-    processedContent = processedContent.replace(/^\s*\*\s*$/gm, '')
-
     // 处理 Markdown 标题格式
-    // ### 三级标题 - 修改正则表达式确保有实际内容
+    // ### 三级标题
     processedContent = processedContent.replace(
       /^###\s+(.+)$/gm,
       '<h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
     )
 
-    // ## 二级标题 - 修改正则表达式确保有实际内容
+    // ## 二级标题
     processedContent = processedContent.replace(
       /^##\s+(.+)$/gm,
       '<h2 style="font-size: 1.4em; font-weight: bold; margin: 20px 0 10px 0; color: #333;">$1</h2>',
     )
 
-    // # 一级标题 - 修改正则表达式确保有实际内容
+    // # 一级标题
     processedContent = processedContent.replace(
       /^#\s+(.+)$/gm,
       '<h1 style="font-size: 1.6em; font-weight: bold; margin: 24px 0 12px 0; color: #333;">$1</h1>',
     )
 
-    // 处理带<br>标签的markdown标题（因为前面已经将\n转换为<br>）- 确保有实际内容
+    // 处理带<br>标签的markdown标题（因为前面已经将\n转换为<br>）
     processedContent = processedContent.replace(
       /<br>###\s+(.+?)(?=<br>|$)/g,
       '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
     )
 
-    // 删除这些会创建空标题的规则
-    // processedContent = processedContent.replace(
-    //   /<br>###$/g,
-    //   '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;"></h3>',
-    // )
+    // 处理单独的 ### （没有后续内容的情况）
+    processedContent = processedContent.replace(
+      /<br>###$/g,
+      '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;"></h3>',
+    )
 
-    // processedContent = processedContent.replace(
-    //   /<br>###(?=<br>)/g,
-    //   '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;"></h3>',
-    // )
+    // 处理中间位置的单独 ###
+    processedContent = processedContent.replace(
+      /<br>###(?=<br>)/g,
+      '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;"></h3>',
+    )
 
-    // processedContent = processedContent.replace(
-    //   /^###$/gm,
-    //   '<h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;"></h3>',
-    // )
-
-    // 修改这些规则确保有实际内容
+    // 处理行首的单独 ###
+    processedContent = processedContent.replace(
+      /^###$/gm,
+      '<h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;"></h3>',
+    )
     processedContent = processedContent.replace(
       /<br>##\s+(.+?)(?=<br>|$)/g,
       '<br><h2 style="font-size: 1.4em; font-weight: bold; margin: 20px 0 10px 0; color: #333;">$1</h2>',
@@ -503,42 +490,6 @@ export class TextProcessor {
     // 清理多余的换行
     processedContent = processedContent.replace(/(<br>\s*){3,}/gi, '<br><br>')
 
-    // 新增：去掉单独的星号行（在转换为标题标签之前处理）
-    processedContent = processedContent.replace(/<br>\s*\*\s*<br>/g, '<br>')
-    processedContent = processedContent.replace(/^\s*\*\s*<br>/g, '')
-    processedContent = processedContent.replace(/<br>\s*\*\s*$/g, '<br>')
-
-    // 新增：去掉空的标题标签和只包含星号的标题标签
-    processedContent = processedContent.replace(/<h[1-6][^>]*>\s*\*?\s*<\/h[1-6]>/gi, '')
-    processedContent = processedContent.replace(/<h[1-6][^>]*>\s*<\/h[1-6]>/gi, '')
-
-    // 新增：去掉多个连续的空行（最终清理）
-    processedContent = processedContent.replace(/(<br>\s*){3,}/gi, '<br><br>')
-
-    //hsdfhajdshfhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-    // 1. 压缩多个 <br> 只保留一个
-    processedContent = processedContent.replace(/(<br>\s*){2,}/gi, '<br>')
-
-    // 2. ***文字*** → 斜体 + 加粗
-    processedContent = processedContent.replace(
-      /\*\*\*(.+?)\*\*\*/g,
-      '<strong><em>$1</em></strong>',
-    )
-
-    // 3. **文字** → 加粗
-    processedContent = processedContent.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-
-    // 4. *文字* 或 _文字_ → 斜体
-    processedContent = processedContent.replace(/(\*|_)(.+?)\1/g, '<em>$2</em>')
-
-    // 5. 清理 HTML 标签前后的孤立星号
-    processedContent = processedContent.replace(/<\/(em|strong)>\*/g, '</$1>') // 标签后面多余 *
-    processedContent = processedContent.replace(/\*<(em|strong)>/g, '<$1>') // 标签前面多余 *
-
-    // 6. 去掉最后的中文逗号 "，"
-    processedContent = processedContent.replace(/，\s*$/, '')
-
-    console.log('~~~~~~~~~~', processedContent)
     return processedContent
   }
 

@@ -1,6 +1,6 @@
 import MockAIService from './moni'
-import { getApiKeyFromUrl } from './units'
 import { TextProcessor } from './processingData'
+import { getApiKeyFromUrl } from './units'
 
 // 样式常量
 const STYLES = {
@@ -8,7 +8,7 @@ const STYLES = {
   THINKING_CONTENT:
     'background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px; text-gray-500 line-height: 1.6; color: #676666;',
   ANSWER_HEADER:
-    'height: 70px; display: flex; align-items: center; font-weight: bold; color: #000000;',
+    'height: 70px; display: flex; align-items: center; font-weight: bold; color: #000000; font-size: 1.85rem; font-weight: 700;',
   ERROR_STYLE: 'color: red; font-weight: bold;',
   WARNING_STYLE: 'color: orange; font-weight: bold;',
 }
@@ -17,7 +17,7 @@ const STYLES = {
 const MESSAGES = {
   SEARCH_START: '获取搜索结果：',
   THINKING_PROCESS: '<strong></strong>',
-  RESULT_HEADER: '<strong>结果：</strong>',
+  RESULT_HEADER: '<strong style="font-size: 1.85rem; font-weight: 700;">结果：</strong>',
   SEARCH_KEYWORDS: '搜索关键词: ',
   SEARCH_PROCESS: '<strong>搜索过程：</strong>',
 }
@@ -80,47 +80,7 @@ class AIService {
     )
   }
 
-  // 在AIService类中添加重试方法
-  private async fetchWithRetry(
-    url: string,
-    options: RequestInit,
-    maxRetries: number = 3,
-  ): Promise<Response> {
-    let lastError: Error
-
-    for (let i = 0; i <= maxRetries; i++) {
-      try {
-        const response = await fetch(url, options)
-        return response
-      } catch (error: any) {
-        lastError = error
-
-        // 如果是最后一次重试，抛出错误
-        if (i === maxRetries) {
-          throw error
-        }
-
-        // 等待一段时间后重试（指数退避）
-        const delay = Math.pow(2, i) * 1000 // 1s, 2s, 4s
-        await new Promise((resolve) => setTimeout(resolve, delay))
-
-        console.log(`网络请求失败，正在进行第 ${i + 1} 次重试...`)
-      }
-    }
-
-    throw lastError!
-  }
-
-  // 修改sendToAI方法使用重试机制
   async sendToAI(message: any, callback: any, lastMessage: any) {
-    // 添加调试信息
-    console.log('🌐 发起网络请求:', {
-      api: this.aiConfig.api,
-      model: this.aiConfig.model,
-      environment: import.meta.env.MODE,
-      hasApiKey: !!getApiKeyFromUrl(),
-    })
-
     let systemMessages = [
       {
         role: 'system',
@@ -140,13 +100,14 @@ class AIService {
       })
     }
     const KeyFromUrl = getApiKeyFromUrl()
-
-    console.log('paramsBody啊实打实大苏打大', this.aiConfig)
+    console.log('paramsBody------------------------', KeyFromUrl)
     try {
-      const response = await this.fetchWithRetry(this.aiConfig.api, {
+      const response = await fetch(this.aiConfig.api, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*',
+          'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
           Authorization: 'Bearer ' + KeyFromUrl,
         },
         body: JSON.stringify({
@@ -221,16 +182,24 @@ class AIService {
         )
         return
       } else if (error.message && error.message.includes('Failed to fetch')) {
-        // 添加更详细的网络错误信息
-        const detailedError = `${ERROR_MESSAGES.CONNECTION_FAILED}: ${error.message || '网络连接异常，请检查网络设置或API地址'}`
-        callback(this.createStyledMessage(detailedError, STYLES.ERROR_STYLE), true, false, true)
+        callback(
+          this.createStyledMessage(ERROR_MESSAGES.CONNECTION_FAILED, STYLES.ERROR_STYLE),
+          true,
+          false,
+          true,
+        )
+        return
+      } else if (error.includes && error.includes('Failed to fetch')) {
+        callback(
+          this.createStyledMessage(ERROR_MESSAGES.NETWORK_ERROR, STYLES.ERROR_STYLE),
+          true,
+          false,
+          true,
+        )
         return
       } else {
         callback(
-          this.createStyledMessage(
-            `${ERROR_MESSAGES.NETWORK_ERROR}: ${error.message || '未知网络错误'}`,
-            STYLES.ERROR_STYLE,
-          ),
+          this.createStyledMessage(ERROR_MESSAGES.NETWORK_ERROR, STYLES.ERROR_STYLE),
           true,
           false,
           true,
@@ -264,25 +233,14 @@ class AIService {
         }
 
         buffer += decoder.decode(value, { stream: true })
-        
-        // 清理缓冲区中的无效字符
-        buffer = buffer.replace(/\r/g, '')
-        
         // 按事件分割数据（每个事件以 \n\n 结尾）
         const chunks = buffer.split('\n\n')
         if (chunks[0]) {
           // 检查是否包含错误代码401
-          if (countershu === 0 && chunks[0].includes('"code":401') && !chunks[0].startsWith('retry:')) {
-            const firstChunkData = chunks[0].replace(/^data:\s*/, '').trim()
-            if (firstChunkData && firstChunkData.startsWith('{')) {
-              try {
-                const errorData = JSON.parse(firstChunkData)
-                callback(this.createStyledMessage(errorData.message, STYLES.ERROR_STYLE), true, false)
-                return
-              } catch (e) {
-                console.warn('Failed to parse error data:', e)
-              }
-            }
+          if (countershu === 0 && chunks[0].includes('"code":401')) {
+            const errorData = JSON.parse(chunks[0])
+            callback(this.createStyledMessage(errorData.message, STYLES.ERROR_STYLE), true, false)
+            return
           }
         }
 
@@ -290,16 +248,6 @@ class AIService {
         countershu++
 
         for (const chunk of chunks) {
-          // 跳过空chunk或只包含空白字符的chunk
-          if (!chunk || !chunk.trim()) {
-            continue
-          }
-          
-          // 跳过 retry: 行
-          if (chunk.startsWith('retry:')) {
-            continue
-          }
-          
           const eventData = chunk.replace(/^data:\s*/, '').trim()
           if (!eventData) continue
 
@@ -307,29 +255,18 @@ class AIService {
             callback(null, true, false) // 标记流结束
             continue
           }
-          
-          // 验证是否为有效的JSON格式（必须以{开头）
-          if (!eventData.startsWith('{')) {
-            console.warn('Skipping non-JSON data:', eventData.substring(0, 50))
-            continue
-          }
-          
           try {
-            // 使用专门的SSE JSON解析方法
-            const json = this.parseSSEJsonData(eventData)
-            
-            // 如果解析失败，跳过这个chunk
-            if (!json) {
-              continue
-            }
-            // console.log('检查模型是否包含 "gpt" 字符串啊实打实')
+            const json = JSON.parse(eventData)
             // 检查模型是否包含 "gpt" 字符串或者是 "fyllm" 模型
             const model = json.model || this.aiConfig.model || ''
             const isGptModel =
               model.toLowerCase().includes('gpt') || model.toLowerCase().includes('fyllm')
 
-            if (isGptModel) {
-              // 如果是 GPT 模型或 fyllm 模型，使用增强逻辑处理推理数据、搜索结果数据、材料数据
+            // 检查是否为法律相关接口
+            const isLegalInterface = this.isLegalInterface()
+
+            if (isGptModel || isLegalInterface) {
+              // 如果是 GPT 模型、fyllm 模型或法律接口，使用增强逻辑处理推理数据、搜索结果数据、材料数据
 
               // 处理思考和推理数据
               const additionalData = json.choices[0]?.additional
@@ -377,12 +314,11 @@ class AIService {
                         hasShownSearchProcessHeader = true
                       }
 
-                      // 添加延迟显示机制，让每个step内容显示更久
-                      setTimeout(() => {
-                        callback(stepData, false, false)
-                      }, 200) // 延迟200毫秒显示，您可以根据需要调整这个时间
+                      // 返回 step 数据
+                      callback(stepData, false, false)
                     }
                     break
+
                   case 'start_jx':
                     // 处理 start_jx 类型 - 移除"搜索过程"及相关下的内容
                     if (lastMessage && lastMessage.content) {
@@ -418,17 +354,26 @@ class AIService {
                         if (resData.content) {
                           let formattedContent = resData.content.replace(/\\n/g, '\n')
 
-                          // 处理搜索结果的特殊格式
-                          formattedContent = TextProcessor.processSearchResultContent(
-                            formattedContent,
-                            resData.title,
-                          )
+                          // 根据接口类型选择不同的处理方法
+                          if (this.isLawInterface()) {
+                            // 法律法规接口使用法条处理
+                            formattedContent = TextProcessor.processLawContent(resData)
+                          } else if (this.isWebSearchInterface()) {
+                            // 网络搜索接口使用网络内容处理
+                            formattedContent = TextProcessor.processWebContent(resData)
+                          } else {
+                            // 其他接口使用通用搜索结果处理
+                            formattedContent = TextProcessor.processSearchResultContent(
+                              formattedContent,
+                              resData.title,
+                            )
+                          }
 
                           const contentDiv = `<div style="${STYLES.THINKING_CONTENT}">${formattedContent}</div>`
 
                           if (!hasShownThinkingHeader) {
                             callback(
-                              this.createStyledMessage(
+                              TextProcessor.createStyledMessage(
                                 MESSAGES.THINKING_PROCESS,
                                 STYLES.THINKING_HEADER,
                               ) + contentDiv,
@@ -453,9 +398,11 @@ class AIService {
                     break
                   case 'answer':
                     // 处理答案数据，添加"结果："前缀
-                    const answerContent = json.choices[0]?.delta?.content || ''
-                    console.log('answerContent~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~', answerContent)
+                    let answerContent = json.choices[0]?.delta?.content || ''
                     if (answerContent) {
+                      // 对所有答案内容进行 processSearchResultContent 处理
+                      answerContent = TextProcessor.processSearchResultContent(answerContent)
+
                       // 在第一个answer内容前添加"结果："前缀
                       if (!hasShownAnswerHeader) {
                         callback(
@@ -484,11 +431,55 @@ class AIService {
                       console.log('解析搜索查询失败:', e)
                     }
                     break
+                  // 新增：处理法律相关的特殊数据类型
+                  case 'law_article':
+                    // 处理法条数据
+                    if (additionalData.data && additionalData.data.trim()) {
+                      try {
+                        const lawData = JSON.parse(additionalData.data)
+                        const formattedContent = TextProcessor.processLawContent(lawData)
+                        const contentDiv = `<div style="${STYLES.THINKING_CONTENT}">${formattedContent}</div>`
+
+                        hasShownThinkingHeader = this.handleMessageWithHeader(
+                          contentDiv,
+                          hasShownThinkingHeader,
+                          MESSAGES.THINKING_PROCESS,
+                          callback,
+                        )
+                      } catch (e) {
+                        console.error('解析法条数据失败:', e)
+                      }
+                    }
+                    break
+                  case 'web_search':
+                    // 处理网络搜索数据
+                    if (additionalData.data && additionalData.data.trim()) {
+                      try {
+                        const webData = JSON.parse(additionalData.data)
+                        const formattedContent = TextProcessor.processWebContent(webData)
+                        const contentDiv = `<div style="${STYLES.THINKING_CONTENT}">${formattedContent}</div>`
+
+                        hasShownThinkingHeader = this.handleMessageWithHeader(
+                          contentDiv,
+                          hasShownThinkingHeader,
+                          MESSAGES.THINKING_PROCESS,
+                          callback,
+                        )
+                      } catch (e) {
+                        console.error('解析网络搜索数据失败:', e)
+                      }
+                    }
+                    break
                   default:
                     // 其他类型的additional数据
                     if (additionalData.data && additionalData.data.trim()) {
-                      hasShownThinkingHeader = this.handleMessageWithHeader(
+                      // 对所有其他数据也进行 processSearchResultContent 处理
+                      let processedData = TextProcessor.processSearchResultContent(
                         additionalData.data,
+                      )
+
+                      hasShownThinkingHeader = this.handleMessageWithHeader(
+                        processedData,
                         hasShownThinkingHeader,
                         MESSAGES.THINKING_PROCESS,
                         callback,
@@ -503,22 +494,31 @@ class AIService {
                 json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
               const deltaType = json.choices[0]?.delta?.type
 
-              if (content && deltaType !== 'answer') {
+              // 检查是否已经处理了answer类型的数据
+              const hasAnswerType = json.choices[0]?.additional?.type === 'answer'
+
+              if (content && deltaType !== 'answer' && !hasAnswerType) {
+                // 对所有普通内容都进行 processSearchResultContent 处理
+                let processedContent = TextProcessor.processSearchResultContent(content)
+
                 // 实时输出内容
-                callback(content, false, false) // 第三个参数为false表示这是正常内容
+                callback(processedContent, false, false) // 第三个参数为false表示这是正常内容
               }
             } else {
-              // 如果不是 GPT 模型，使用原有的简单逻辑
+              // 如果不是 GPT 模型和法律接口，json.choices[0].delta.content 需要进行文字处理
               const content =
                 json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
+
+              // 使用 TextProcessor 进行文字处理
+              const processedContent = content
+                ? TextProcessor.processSearchResultContent(content)
+                : content
+
               // 实时输出内容
-              callback(content, false, false)
+              callback(processedContent, false, false)
             }
           } catch (e) {
-            console.error('解析 JSON 失败:', e)
-            console.error('原始数据:', eventData)
-            // 继续处理下一个chunk，不中断整个流程
-            continue
+            // console.error('解析 JSON 失败:', e)
           }
         }
       }
@@ -531,218 +531,43 @@ class AIService {
     }
   }
 
-  // 删除原有的 processSearchResultContent 和 processHtmlContent 方法
-  // 因为现在使用 TextProcessor 类中的方法
-
-  private parseSSEJsonData(eventData: string): any | null {
-    try {
-      // 清理数据
-      let cleanData = eventData.trim()
-      
-      // 移除可能的前缀
-      if (cleanData.startsWith('data:')) {
-        cleanData = cleanData.substring(5).trim()
-      }
-      
-      // 检查是否为空或特殊标记
-      if (!cleanData || cleanData === '[DONE]') {
-        return null
-      }
-      
-      // 验证JSON格式
-      if (!cleanData.startsWith('{')) {
-        return null
-      }
-      
-      // 查找完整的JSON对象
-      let braceCount = 0
-      let jsonEnd = -1
-      
-      for (let i = 0; i < cleanData.length; i++) {
-        if (cleanData[i] === '{') {
-          braceCount++
-        } else if (cleanData[i] === '}') {
-          braceCount--
-          if (braceCount === 0) {
-            jsonEnd = i
-            break
-          }
-        }
-      }
-      
-      if (jsonEnd === -1) {
-        return null
-      }
-      
-      const jsonString = cleanData.substring(0, jsonEnd + 1)
-      return JSON.parse(jsonString)
-      
-    } catch (error) {
-      console.warn('Failed to parse SSE JSON data:', {
-        error: error,
-        data: eventData.substring(0, 100)
-      })
-      return null
-    }
+  // 新增：判断是否为法律相关接口
+  private isLegalInterface(): boolean {
+    const legalKeys = [
+      'flwtzx', // 法律问题咨询
+      'qwsswd', // 全网搜索问答
+      'flfgzx', // 法律法规
+      'flwsxz', // 法律文书写作
+      'ssclsc', // 诉讼策略生成
+      'flfxjy', // 法律分析意见-诉讼策略
+      'flfxyj', // 法律分析意见抗辩策略
+      'dsjsspgbg', // 大数据胜诉评估报告
+      'xzzfzs', // acee
+      'xzfcfz', // 行政处罚辅助
+    ]
+    return legalKeys.includes(this.aiConfig.key)
   }
 
-  private processSearchResultContent(content: string, title?: string): string {
-    let processedContent = content
-
-    // 清理不需要的文字
-    processedContent = processedContent
-      .replace(/正在输入\.\.\./g, '')
-      .replace(/\.打开对话/g, '')
-      .replace(/\\n/g, '\n')
-      .replace(/\\\"/g, '"')
-
-    // 处理编号格式的断行
-    // 一、二、三等（前面带标点符号）
-    processedContent = processedContent.replace(
-      /([*]?)([一二三四五六七八九十]+)、/g,
-      (match, asterisk, number) => {
-        return `<br>${asterisk}${number}、`
-      },
-    )
-
-    // 第一步、第二步、第三步等
-    processedContent = processedContent.replace(
-      /([*]?)第([一二三四五六七八九十]+|[0-9]+)步，/g,
-      (match, asterisk, number) => {
-        return `<br>${asterisk}第${number}步，`
-      },
-    )
-
-    // 1. 2. 3. 等（排除时间格式）
-    processedContent = processedContent.replace(
-      /([*]?)([0-9]+)\.\s/g,
-      (match, asterisk, number, offset, string) => {
-        // 检查前后文是否为时间格式（如 12:30 或 2023.01.01）
-        const beforeChar = string[offset - 1]
-        const afterChars = string.substring(offset + match.length, offset + match.length + 3)
-
-        // 如果前面是数字或冒号，或后面是数字和冒号，可能是时间格式，不处理
-        if (/[0-9:]/.test(beforeChar) || /[0-9]{2}:/.test(afterChars)) {
-          return match
-        }
-
-        return `<br>${asterisk}${number}. `
-      },
-    )
-
-    // （一）（二）（三）等
-    processedContent = processedContent.replace(
-      /([*]?)（([一二三四五六七八九十]+)）/g,
-      (match, asterisk, number) => {
-        return `<br>${asterisk}（${number}）`
-      },
-    )
-
-    // 1，2，3，等（排除时间）
-    processedContent = processedContent.replace(
-      /([*]?)([0-9]+)，/g,
-      (match, asterisk, number, offset, string) => {
-        // 检查前后文是否为时间格式
-        const beforeChar = string[offset - 1]
-        const afterChars = string.substring(offset + match.length, offset + match.length + 3)
-
-        // 如果前面是数字或冒号，或后面是数字和冒号，可能是时间格式，不处理
-        if (/[0-9:]/.test(beforeChar) || /[0-9]{2}:/.test(afterChars)) {
-          return match
-        }
-
-        return `<br>${asterisk}${number}，`
-      },
-    )
-
-    // 第一、第二等
-    processedContent = processedContent.replace(
-      /([*]?)第([一二三四五六七八九十]+)/g,
-      (match, asterisk, number) => {
-        return `<br>${asterisk}第${number}`
-      },
-    )
-
-    // 处理 HTML 内容
-    processedContent = this.processHtmlContent(processedContent)
-
-    // 如果有 title，添加灰黑色样式并另起一行
-    if (title && title.trim()) {
-      const titleHtml = `<div style="  font-weight: bold; margin-bottom: 8px; line-height: 1.4;">${title}</div>`
-      processedContent = titleHtml + processedContent
-    }
-
-    return processedContent
+  // 新增：判断是否为法律法规接口
+  private isLawInterface(): boolean {
+    const lawKeys = ['flfgzx'] // 法律法规
+    return lawKeys.includes(this.aiConfig.key)
   }
 
-  private processHtmlContent(content: string): string {
-    // 将换行符转换为 <br> 标签
-    let processedContent = content.replace(/\n/g, '<br>')
+  // 新增：判断是否为网络搜索接口
+  private isWebSearchInterface(): boolean {
+    const webSearchKeys = ['qwsswd'] // 全网搜索问答
+    return webSearchKeys.includes(this.aiConfig.key)
+  }
 
-    // 清理不需要的标签
-    processedContent = processedContent
-      .replace(/<img[^>]*>/gi, '') // 去掉 img 标签
-      .replace(/<a[^>]*>(.*?)<\/a>/gi, '$1') // 去掉 a 标签但保留文本内容
-      .replace(/<url[^>]*>(.*?)<\/url>/gi, '$1') // 去掉 url 相关的标签
-      .replace(/<(?!\/?(?:p|h[1-6]|ul|ol|li|strong|b|em|i|br|div|span)\b)[^>]*>/gi, '') // 移除不允许的标签但保留内容
+  // 修改：处理法律接口的答案内容 - 统一使用 processSearchResultContent
+  private processLegalAnswerContent(content: string): string {
+    return TextProcessor.processSearchResultContent(content)
+  }
 
-    // 去除 URL 链接（http/https）
-    processedContent = processedContent.replace(/https?:\/\/[^\s<>"']+/gi, '') // 去掉 http 和 https 链接
-
-    // 去除邮箱地址
-    processedContent = processedContent.replace(
-      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi,
-      '',
-    ) // 去掉邮箱地址
-
-    // 去除热线电话号码
-    processedContent = processedContent
-      .replace(/热线[:：]\s*[\d-]+/gi, '') // 去掉热线电话
-      .replace(/报料热线[:：]\s*[\d-]+/gi, '') // 去掉报料热线
-      .replace(/电话[:：]\s*[\d-]+/gi, '') // 去掉电话号码
-
-    // 去除浏览器升级提示相关内容
-    processedContent = processedContent
-      .replace(/您使用的浏览器版本过低[^。]*。[^。]*升级浏览器/gi, '') // 去掉浏览器升级提示
-      .replace(/建议升级或更换浏览器访问[^。]*升级浏览器/gi, '') // 去掉浏览器升级建议
-
-    // 去除澎湃新闻相关的无用信息
-    processedContent = processedContent
-      .replace(/仅提供信息发布平台[^。]*申请澎湃号请用电脑访问/gi, '') // 去掉澎湃号申请提示
-      .replace(/http:\/\/renzheng\.thepaper\.cn[^。]*/gi, '') // 去掉澎湃认证链接
-      .replace(/\+\d+收藏我要举报/gi, '') // 去掉收藏举报按钮
-      .replace(/#[^#]*#/gi, '') // 去掉话题标签
-      .replace(/查看更多/gi, '') // 去掉查看更多
-      .replace(/开始答题/gi, '') // 去掉开始答题
-      .replace(/扫码下载[^。]*客户端/gi, '') // 去掉扫码下载提示
-
-    // 去除版权和法律声明相关信息
-    processedContent = processedContent
-      .replace(/关于澎湃[^。]*开放平台/gi, '') // 去掉关于澎湃相关信息
-      .replace(/IPSHANGHAISIXTHTONE/gi, '') // 去掉特殊标识
-      .replace(/新闻报料[^。]*报料邮箱[^。]*/gi, '') // 去掉新闻报料信息
-      .replace(/沪ICP备[^。]*号/gi, '') // 去掉ICP备案号
-      .replace(/沪公网安备[^。]*号/gi, '') // 去掉公网安备号
-      .replace(/互联网新闻信息服务许可证[^。]*号/gi, '') // 去掉服务许可证
-      .replace(/增值电信业务经营许可证[^。]*号/gi, '') // 去掉经营许可证
-      .replace(/©\d{4}-\d{4}[^。]*有限公司/gi, '') // 去掉版权信息
-      .replace(/反馈/gi, '') // 去掉反馈按钮
-
-    // 去除其他常见的无用信息
-    processedContent = processedContent
-      .replace(/Android版iPhone版iPad版/gi, '') // 去掉版本信息
-      .replace(/微博公众号抖音号/gi, '') // 去掉社交媒体信息
-      .replace(/派生万物/gi, '') // 去掉派生万物
-
-    // 清理多余的空白字符和标点符号
-    processedContent = processedContent
-      .replace(/\s+/g, ' ') // 合并多个空格为一个
-      .replace(/(<br>\s*){2,}/gi, '<br>') // 合并多个连续的换行
-      .replace(/[:：]\s*$/gi, '') // 去掉行末的冒号
-      .replace(/^\s*[:：]/gi, '') // 去掉行首的冒号
-      .trim() // 去掉首尾空白
-
-    return processedContent
+  // 修改：处理法律接口的通用内容 - 统一使用 processSearchResultContent
+  private processLegalContent(content: string): string {
+    return TextProcessor.processSearchResultContent(content)
   }
 
   // 测试方法：使用模拟数据进行测试

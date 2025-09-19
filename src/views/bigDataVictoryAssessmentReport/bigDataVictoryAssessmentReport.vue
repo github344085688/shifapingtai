@@ -29,43 +29,105 @@
             <label class="block mb-2 text-sm font-medium text-gray-700">
               省份 <span class="text-red-500">*</span>
             </label>
-            <select
-              v-model="parameters.province"
-              class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#e23338] focus:ring-1 focus:ring-[#e23338]"
+            <div
+              @click="showProvincePicker = true"
+              class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#e23338] focus:ring-1 focus:ring-[#e23338] cursor-pointer bg-white flex items-center justify-between"
             >
-              <option value="">请选择省份</option>
-              <option value="北京">北京</option>
-              <option value="上海">上海</option>
-              <option value="广东">广东</option>
-              <option value="江苏">江苏</option>
-              <option value="浙江">浙江</option>
-              <option value="山东">山东</option>
-              <option value="河南">河南</option>
-              <option value="四川">四川</option>
-              <option value="湖北">湖北</option>
-              <option value="湖南">湖南</option>
-              <option value="河北">河北</option>
-              <option value="福建">福建</option>
-              <option value="安徽">安徽</option>
-              <option value="江西">江西</option>
-              <option value="辽宁">辽宁</option>
-              <option value="黑龙江">黑龙江</option>
-              <option value="吉林">吉林</option>
-              <option value="山西">山西</option>
-              <option value="陕西">陕西</option>
-              <option value="甘肃">甘肃</option>
-              <option value="青海">青海</option>
-              <option value="新疆">新疆</option>
-              <option value="西藏">西藏</option>
-              <option value="内蒙古">内蒙古</option>
-              <option value="广西">广西</option>
-              <option value="宁夏">宁夏</option>
-              <option value="海南">海南</option>
-              <option value="贵州">贵州</option>
-              <option value="云南">云南</option>
-              <option value="重庆">重庆</option>
-              <option value="天津">天津</option>
-            </select>
+              <span :class="parameters.province ? 'text-gray-900' : 'text-gray-400'">
+                {{ parameters.province || '请选择省份' }}
+              </span>
+              <svg
+                class="w-4 h-4 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                ></path>
+              </svg>
+            </div>
+
+            <!-- 原生底部弹窗选择器 -->
+            <div
+              v-if="showProvincePicker"
+              class="flex fixed inset-0 z-50 justify-center items-end bg-black bg-opacity-50"
+              @click="showProvincePicker = false"
+            >
+              <div
+                class="w-full max-w-md bg-white rounded-t-2xl shadow-xl transition-transform duration-300 transform"
+                @click.stop
+              >
+                <!-- 头部 -->
+                <div class="flex justify-between items-center p-4 border-b border-gray-200">
+                  <button
+                    @click="showProvincePicker = false"
+                    class="text-gray-500 hover:text-gray-700"
+                  >
+                    取消
+                  </button>
+                  <h3 class="text-lg font-medium text-gray-900">选择省份</h3>
+                  <input
+                    v-model="provinceSearchQuery"
+                    type="text"
+                    placeholder="搜索省份"
+                    class="text-[#e23338] px-2 hover:text-[#d12329] font-medium py-2 border-solid border-[1px] border-[#e23338] rounded-lg"
+                  />
+                </div>
+
+                <!-- 滚动选择区域 -->
+                <div class="overflow-y-auto max-h-80">
+                  <div
+                    v-for="province in filteredProvinceList"
+                    :key="province.value"
+                    @click="selectProvinceAndClose(province)"
+                    class="flex justify-between items-center px-4 py-3 transition-colors cursor-pointer hover:bg-gray-50"
+                    :class="
+                      selectedProvince?.value === province.value
+                        ? 'bg-blue-50 text-[#e23338]'
+                        : 'text-gray-900'
+                    "
+                  >
+                    <span class="text-base">{{ province.label }}</span>
+                    <svg
+                      v-if="selectedProvince?.value === province.value"
+                      class="w-5 h-5 text-[#e23338]"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                        clip-rule="evenodd"
+                      ></path>
+                    </svg>
+                  </div>
+                  <!-- 无搜索结果提示 -->
+                  <div
+                    v-if="filteredProvinceList.length === 0"
+                    class="px-4 py-8 text-center text-gray-500"
+                  >
+                    <svg
+                      class="mx-auto mb-2 w-12 h-12 text-gray-300"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                      ></path>
+                    </svg>
+                    <p>未找到匹配的省份</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <!-- 诉讼请求 -->
@@ -77,7 +139,7 @@
             <textarea
               v-model="parameters.claim"
               rows="3"
-              class="w-full border border-gray-300 rounded-lg px-3 pt-2 pb-6 text-sm focus:outline-none focus:border-[#e23338] focus:ring-1 focus:ring-[#e23338]"
+              class="w-full border border-gray-300 min-h-[300rpx] rounded-lg px-3 pt-2 pb-6 text-sm focus:outline-none focus:border-[#e23338] focus:ring-1 focus:ring-[#e23338]"
               placeholder="例如：请求获得子女抚养权"
             ></textarea>
             <div class="absolute -top-[2px] right-[5px] w-[24px] h-[24px]">
@@ -143,6 +205,7 @@
 
           <!-- 生成报告按钮 -->
           <button
+            ref="generateReportButton"
             @click="generateReport"
             :disabled="isLoading || !isFormValid"
             class="w-full bg-[#e23338] text-white py-3 px-4 rounded-lg font-medium hover:bg-[#d12329] transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
@@ -485,11 +548,41 @@
         <p class="text-gray-600">正在生成胜诉评估报告...</p>
       </div>
     </div>
+
+    <!-- 固定的滚动到生成报告按钮 -->
+    <button
+      v-show="showScrollButton"
+      @click="scrollToGenerateButton"
+      class="fixed right-1 bottom-6 p-2 w-[42rpx] h-[42rpx] bg-[#e23338] text-white rounded-full shadow-lg hover:bg-[#d12329] transition-all duration-300 flex items-center justify-center z-50 hover:scale-110"
+      title="滚动到生成报告按钮"
+    >
+      <svg
+        t="1755140562912"
+        class="icon"
+        viewBox="0 0 1024 1024"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        p-id="4243"
+        width="20"
+        height="20"
+      >
+        <path
+          d="M512 614.656 857.344 960 945.344 872 512 438.656 78.656 872 166.656 959.872Z"
+          p-id="4244"
+          fill="#ffffff"
+        ></path>
+        <path
+          d="M512 240.064 857.344 585.344 945.344 497.344 512 64 78.656 497.344 166.656 585.344Z"
+          p-id="4245"
+          fill="#ffffff"
+        ></path>
+      </svg>
+    </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, computed } from 'vue'
+import { ref, onMounted, computed, onUnmounted, watch } from 'vue'
 import { useTitle } from '@/composables/useTitle'
 import { BigDataAssessmentService } from '@/servers/aiservisDsjsspgbg'
 import FileContentExtractor from '@/components/sendMessages/FileContentExtractor.vue'
@@ -513,6 +606,46 @@ const isLoading = ref(false)
 const reportData = ref<any>(null)
 const amountInputEnabled = ref(false) // 争议金额输入开关
 const showValidationError = ref(false) // 是否显示验证错误
+const generateReportButton = ref<HTMLElement | null>(null) // 生成报告按钮的引用
+const showScrollButton = ref(false) // 是否显示滚动按钮
+const showProvincePicker = ref(false) // 是否显示省份选择器
+const provinceSearchQuery = ref('') // 省份搜索关键词
+const selectedProvince = ref<{ label: string; value: string } | null>(null) // 当前选中的省份
+
+// 省份数据
+const provinceList = ref([
+  { label: '北京', value: '北京' },
+  { label: '上海', value: '上海' },
+  { label: '广东', value: '广东' },
+  { label: '江苏', value: '江苏' },
+  { label: '浙江', value: '浙江' },
+  { label: '山东', value: '山东' },
+  { label: '河南', value: '河南' },
+  { label: '四川', value: '四川' },
+  { label: '湖北', value: '湖北' },
+  { label: '湖南', value: '湖南' },
+  { label: '河北', value: '河北' },
+  { label: '福建', value: '福建' },
+  { label: '安徽', value: '安徽' },
+  { label: '江西', value: '江西' },
+  { label: '辽宁', value: '辽宁' },
+  { label: '黑龙江', value: '黑龙江' },
+  { label: '吉林', value: '吉林' },
+  { label: '山西', value: '山西' },
+  { label: '陕西', value: '陕西' },
+  { label: '甘肃', value: '甘肃' },
+  { label: '青海', value: '青海' },
+  { label: '新疆', value: '新疆' },
+  { label: '西藏', value: '西藏' },
+  { label: '内蒙古', value: '内蒙古' },
+  { label: '广西', value: '广西' },
+  { label: '宁夏', value: '宁夏' },
+  { label: '海南', value: '海南' },
+  { label: '贵州', value: '贵州' },
+  { label: '云南', value: '云南' },
+  { label: '重庆', value: '重庆' },
+  { label: '天津', value: '天津' },
+])
 
 // 表单验证计算属性
 const isFormValid = computed(() => {
@@ -523,9 +656,63 @@ const isFormValid = computed(() => {
     parameters.value.essentials.trim() !== ''
   )
 })
+const filteredProvinceList = computed(() => {
+  if (!provinceSearchQuery.value.trim()) {
+    return provinceList.value
+  }
+  return provinceList.value.filter(
+    (province) =>
+      province.label.toLowerCase().includes(provinceSearchQuery.value.toLowerCase()) ||
+      province.value.toLowerCase().includes(provinceSearchQuery.value.toLowerCase()),
+  )
+})
 
+// 选择省份并关闭弹窗
+const selectProvinceAndClose = (province: { label: string; value: string }) => {
+  parameters.value.province = province.value
+  selectedProvince.value = province
+  showProvincePicker.value = false
+  provinceSearchQuery.value = '' // 清空搜索框
+}
+
+// 监听弹窗显示状态，重置搜索框
+watch(showProvincePicker, (newValue) => {
+  if (newValue) {
+    provinceSearchQuery.value = '' // 打开弹窗时清空搜索框
+  }
+})
 // 创建服务实例
 const bigDataService = new BigDataAssessmentService()
+
+// 选择省份
+const selectProvince = (province: { label: string; value: string }) => {
+  selectedProvince.value = province
+  if (selectedProvince.value) {
+    parameters.value.province = selectedProvince.value.value
+  }
+  showProvincePicker.value = false
+}
+
+// 确认省份选择
+const confirmProvinceSelection = () => {
+  if (selectedProvince.value) {
+    parameters.value.province = selectedProvince.value.value
+  }
+  showProvincePicker.value = false
+}
+
+// 监听省份参数变化，同步选中状态
+watch(
+  () => parameters.value.province,
+  (newProvince) => {
+    if (newProvince) {
+      selectedProvince.value = provinceList.value.find((p) => p.value === newProvince) || null
+    } else {
+      selectedProvince.value = null
+    }
+  },
+  { immediate: true },
+)
 
 // 切换争议金额输入开关
 const toggleAmountInput = () => {
@@ -539,9 +726,41 @@ const toggleAmountInput = () => {
   }
 }
 
+// 滚动到生成报告按钮
+const scrollToGenerateButton = () => {
+  if (generateReportButton.value) {
+    generateReportButton.value.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+    })
+  }
+}
+
+// 监听滚动事件，控制滚动按钮的显示
+const handleScroll = () => {
+  if (generateReportButton.value) {
+    const buttonRect = generateReportButton.value.getBoundingClientRect()
+    const windowHeight = window.innerHeight
+
+    // 当生成报告按钮不在视窗中时显示滚动按钮
+    // 按钮在视窗上方或下方时显示滚动按钮
+    showScrollButton.value = buttonRect.top < 0 || buttonRect.bottom > windowHeight
+  }
+}
+
 // 页面加载时的初始化
 onMounted(async () => {
   console.log('页面已加载，等待用户生成报告')
+
+  // 添加滚动事件监听
+  window.addEventListener('scroll', handleScroll)
+  // 初始检查
+  handleScroll()
+})
+
+// 组件卸载时移除事件监听
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
 })
 
 // 生成报告函数
@@ -555,6 +774,10 @@ const generateReport = async () => {
   }
 
   showValidationError.value = false
+
+  // 清除上次请求的数据
+  reportData.value = null
+
   isLoading.value = true
 
   try {

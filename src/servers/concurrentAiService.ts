@@ -1,5 +1,5 @@
 import aiConfig, { concurrentApis } from '@/config/aiConfig'
-import TextProcessor from './processingData'
+import { TextProcessor } from './processingData'
 import { getApiKeyFromUrl } from './units'
 export interface ConcurrentResult {
   key: string
@@ -95,7 +95,7 @@ class ConcurrentAIService {
               '<hr style="margin: 16px 0; border: none; border-top: 1px solid #eee;">'
             )
           }
-          return law.content || ''
+          return TextProcessor.processSearchResultContent(law.content || '')
         })
         .join('')
     } else if (apiKey === 'wlgd' && Array.isArray(extractedContent)) {
@@ -123,15 +123,16 @@ class ConcurrentAIService {
               '<hr style="margin: 16px 0; border: none; border-top: 1px solid #eee;">'
             )
           }
-          return web.content || ''
+          return TextProcessor.processSearchResultContent(web.content || '')
         })
         .join('')
     }
 
-    // 对于其他API或非数组数据，返回原始内容
-    return typeof extractedContent === 'string'
-      ? extractedContent
-      : JSON.stringify(extractedContent)
+    // 对于其他API或非数组数据，也使用TextProcessor处理
+    const contentString =
+      typeof extractedContent === 'string' ? extractedContent : JSON.stringify(extractedContent)
+
+    return TextProcessor.processSearchResultContent(contentString)
   }
 
   // 发送单个API请求 - 添加callback参数
