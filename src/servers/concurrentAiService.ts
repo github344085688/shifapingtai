@@ -215,16 +215,19 @@ class ConcurrentAIService {
 
       // 过滤固定字段，提取实际的数组内容
       let extractedContent = ''
-      if (responseData && responseData.data) {
-        if (!apiConfig.dataField) {
-          // 没有指定dataField，直接使用responseData.data
+      // 在 sendSingleRequest 方法中，大约在第200-240行之间
+      // 修改数据提取逻辑
+      if (responseData && responseData.data !== undefined) {
+        // 对于相似案例API，特殊处理数据格式
+        if (apiConfig.key === 'xsal') {
+          // 相似案例返回格式: { code: 0, data: [...], msg: "成功" }
           extractedContent = responseData.data
         } else {
-          // 有指定dataField，使用responseData.data[apiConfig.dataField]
-          extractedContent = responseData.data[apiConfig.dataField]
+          // 其他API使用原有逻辑
+          extractedContent = responseData.data[apiConfig.dataField] || responseData.data
         }
 
-        // 如果提取的内容为空或无效，且有simulatedData，则使用simulatedData作为备用
+        // 如果提取的内容为空，尝试使用模拟数据
         if ((!extractedContent || extractedContent === '') && apiConfig.simulatedData) {
           extractedContent = apiConfig.simulatedData
         }
@@ -238,8 +241,14 @@ class ConcurrentAIService {
         extractedContent = apiConfig.simulatedData || responseData
       }
 
-      // 对特定API进行文字处理
-      const processedContent = this.processApiResponse(apiConfig.key, extractedContent)
+      // 对特定API进行文字处理 - 需要确保相似案例数据被正确处理
+      let processedContent
+      if (apiConfig.key === 'xsal') {
+        // 相似案例直接返回JSON字符串，让前端处理
+        processedContent = JSON.stringify(extractedContent)
+      } else {
+        processedContent = this.processApiResponse(apiConfig.key, extractedContent)
+      }
 
       result.content = processedContent
       result.isLoading = false
