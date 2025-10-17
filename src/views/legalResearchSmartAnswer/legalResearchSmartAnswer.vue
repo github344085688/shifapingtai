@@ -805,7 +805,7 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
-  // aiService.sendToAI(newMessage, setMessage)
+  aiService.sendToAI(newMessage, setMessage)
 
   // 启动并发AI服务
   await concurrentAiService.sendConcurrentRequests(newMessage, handleConcurrentCallback)

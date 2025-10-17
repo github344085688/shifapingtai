@@ -97,7 +97,6 @@ export const concurrentApis: Record<string, ApiConfig> = {
     name: '相似案例',
     api: apiMap.xsalApi,
     top_k: 20,
-    dataField: 'data',
     //     simulatedData: [
     //     {
     //         "applicablelaw": [
