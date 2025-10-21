@@ -136,6 +136,7 @@ const aiConfigs = {
   api: litigationStrategyGeneration.api,
   apiKey: getApiKeyFromUrl(),
   model: litigationStrategyGeneration.model,
+  isTimer: true,
 }
 
 const aiService = new AIService(aiConfigs)

@@ -4,6 +4,7 @@ export default {
   apiKey: '05432954ab614837b45230d37679763d',
 }
 export const CACHE_DURATION = 15 * 24 * 60 * 60 * 1000
+export const SET_TIMES = `https://sfdsj.juejinvr.cn/app-api/sfdsj/reqtimes/setTimes`
 export const api = {
   baseUrl: 'https://lxx.lanxiaoxiang.net',
 }

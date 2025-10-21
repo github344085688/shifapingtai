@@ -15,7 +15,7 @@
       >
         <div
           class="p-6 text-center bg-white rounded-xl shadow-lg transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-2xl"
-          @click="navigateTo('/legalResearchSmartAnswer')"
+          @click="navigateTo('/legalResearchSmartAnswe2')"
         >
           <div class="mb-4 text-4xl">⚖️</div>
           <h3 class="mb-3 text-lg font-semibold text-gray-800">法研智答</h3>

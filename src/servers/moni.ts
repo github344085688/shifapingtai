@@ -47,7 +47,7 @@ export class MockAIService {
           if (response.ok) {
             jsonContent = await response.text()
             loaded = true
-            console.log(`[MockAI] 成功从 ${path} 加载模拟数据`)
+            // console.log(`[MockAI] 成功从 ${path} 加载模拟数据`)
             break
           }
         } catch (e) {
@@ -66,7 +66,7 @@ export class MockAIService {
       // 直接使用原始数据，不做任何修改
       this.mockData = lines.map((line) => line + '\n\n')
 
-      console.log(`[MockAI] 成功加载 ${this.mockData.length} 条模拟数据`)
+      // console.log(`[MockAI] 成功加载 ${this.mockData.length} 条模拟数据`)
     } catch (error) {
       console.error('加载模拟数据失败:', error)
       console.log('[MockAI] 使用默认模拟数据')
@@ -92,7 +92,7 @@ export class MockAIService {
     let hasShownAnswerHeader = false
     let abortController = new AbortController()
 
-    console.log(`[MockAI] 开始模拟响应: ${JSON.stringify(message)}`)
+    // console.log(`[MockAI] 开始模拟响应: ${JSON.stringify(message)}`)
 
     // 模拟网络延迟
     await new Promise((resolve) => setTimeout(resolve, 100))
@@ -154,7 +154,7 @@ export class MockAIService {
 
   // 新增的流式响应方法
   async *simulateStream(message: string): AsyncGenerator<string, void, unknown> {
-    console.log(`[MockAI] 开始模拟流式响应: ${message}`)
+    // console.log(`[MockAI] 开始模拟流式响应: ${message}`)
 
     // 重置索引
     this.currentIndex = 0
@@ -179,7 +179,7 @@ export class MockAIService {
       yield 'data:[DONE]\n\n'
     }
 
-    console.log('[MockAI] 模拟流式响应完成')
+    // console.log('[MockAI] 模拟流式响应完成')
   }
 
   // 解析流数据
@@ -214,7 +214,7 @@ export class MockAIService {
   // 重置模拟器
   reset() {
     this.currentIndex = 0
-    console.log('[MockAI] 模拟器已重置')
+    // console.log('[MockAI] 模拟器已重置')
   }
 
   private delay(ms: number): Promise<void> {

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build --mode production",
-    "build:dev": "vite build --mode development", 
+    "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "build-only": "vite build --mode production",
     "type-check": "vue-tsc --build --force",
@@ -16,11 +16,12 @@
   },
   "dependencies": {
     "html5-qrcode": "^2.3.8",
-    "juejin-puts": "^1.0.1",
+    "juejin-puts": "^1.0.2",
     "juejin-state": "^2.0.45",
     "mammoth": "^1.9.1",
     "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue-router": "^4.5.0",
+    "weixin-js-sdk": "^1.6.5"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.1",

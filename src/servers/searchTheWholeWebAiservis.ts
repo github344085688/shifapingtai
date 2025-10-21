@@ -1,5 +1,5 @@
 import MockAIService from './moni'
-import { getApiKeyFromUrl } from './units'
+import { getApiKeyFromUrl, setTimes, interceptData } from './units'
 import { TextProcessor } from './processingData'
 
 // 样式常量
@@ -114,13 +114,8 @@ class AIService {
   // 修改sendToAI方法使用重试机制
   async sendToAI(message: any, callback: any, lastMessage: any) {
     // 添加调试信息
-    console.log('🌐 发起网络请求:', {
-      api: this.aiConfig.api,
-      model: this.aiConfig.model,
-      environment: import.meta.env.MODE,
-      hasApiKey: !!getApiKeyFromUrl(),
-    })
 
+    if (this.aiConfig.isTimer) await setTimes()
     let systemMessages = [
       {
         role: 'system',
@@ -141,7 +136,7 @@ class AIService {
     }
     const KeyFromUrl = getApiKeyFromUrl()
 
-    console.log('paramsBody啊实打实大苏打大', this.aiConfig)
+    // console.log('paramsBody啊实打实大苏打大22', this.aiConfig)
     try {
       const response = await this.fetchWithRetry(this.aiConfig.api, {
         method: 'POST',
@@ -157,6 +152,11 @@ class AIService {
         signal: signal,
       })
 
+      const Intercepted: any = await interceptData(response)
+      if (Intercepted && Intercepted.code === 500) {
+        callback(Intercepted.msg, true, false, true)
+        return
+      }
       // 检查HTTP状态码
       if (!response.ok) {
         if (response.status === 504) {
@@ -193,7 +193,8 @@ class AIService {
         hasShownSearchProcessHeader,
       )
     } catch (error: any) {
-      console.log('Failed to fetch', error)
+      // console.log('555555', error)
+      // console.log('Failed to fetch', error)
 
       // 处理网络错误或其他异常
       if (error.name === 'AbortError') {
@@ -264,20 +265,28 @@ class AIService {
         }
 
         buffer += decoder.decode(value, { stream: true })
-        
+
         // 清理缓冲区中的无效字符
         buffer = buffer.replace(/\r/g, '')
-        
+
         // 按事件分割数据（每个事件以 \n\n 结尾）
         const chunks = buffer.split('\n\n')
         if (chunks[0]) {
           // 检查是否包含错误代码401
-          if (countershu === 0 && chunks[0].includes('"code":401') && !chunks[0].startsWith('retry:')) {
+          if (
+            countershu === 0 &&
+            chunks[0].includes('"code":401') &&
+            !chunks[0].startsWith('retry:')
+          ) {
             const firstChunkData = chunks[0].replace(/^data:\s*/, '').trim()
             if (firstChunkData && firstChunkData.startsWith('{')) {
               try {
                 const errorData = JSON.parse(firstChunkData)
-                callback(this.createStyledMessage(errorData.message, STYLES.ERROR_STYLE), true, false)
+                callback(
+                  this.createStyledMessage(errorData.message, STYLES.ERROR_STYLE),
+                  true,
+                  false,
+                )
                 return
               } catch (e) {
                 console.warn('Failed to parse error data:', e)
@@ -294,12 +303,12 @@ class AIService {
           if (!chunk || !chunk.trim()) {
             continue
           }
-          
+
           // 跳过 retry: 行
           if (chunk.startsWith('retry:')) {
             continue
           }
-          
+
           const eventData = chunk.replace(/^data:\s*/, '').trim()
           if (!eventData) continue
 
@@ -307,17 +316,17 @@ class AIService {
             callback(null, true, false) // 标记流结束
             continue
           }
-          
+
           // 验证是否为有效的JSON格式（必须以{开头）
           if (!eventData.startsWith('{')) {
             console.warn('Skipping non-JSON data:', eventData.substring(0, 50))
             continue
           }
-          
+
           try {
             // 使用专门的SSE JSON解析方法
             const json = this.parseSSEJsonData(eventData)
-            
+
             // 如果解析失败，跳过这个chunk
             if (!json) {
               continue
@@ -538,26 +547,26 @@ class AIService {
     try {
       // 清理数据
       let cleanData = eventData.trim()
-      
+
       // 移除可能的前缀
       if (cleanData.startsWith('data:')) {
         cleanData = cleanData.substring(5).trim()
       }
-      
+
       // 检查是否为空或特殊标记
       if (!cleanData || cleanData === '[DONE]') {
         return null
       }
-      
+
       // 验证JSON格式
       if (!cleanData.startsWith('{')) {
         return null
       }
-      
+
       // 查找完整的JSON对象
       let braceCount = 0
       let jsonEnd = -1
-      
+
       for (let i = 0; i < cleanData.length; i++) {
         if (cleanData[i] === '{') {
           braceCount++
@@ -569,18 +578,17 @@ class AIService {
           }
         }
       }
-      
+
       if (jsonEnd === -1) {
         return null
       }
-      
+
       const jsonString = cleanData.substring(0, jsonEnd + 1)
       return JSON.parse(jsonString)
-      
     } catch (error) {
       console.warn('Failed to parse SSE JSON data:', {
         error: error,
-        data: eventData.substring(0, 100)
+        data: eventData.substring(0, 100),
       })
       return null
     }

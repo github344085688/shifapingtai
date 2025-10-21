@@ -133,6 +133,7 @@ const aiConfigs = {
   api: LawsAndRegulations.api,
   apiKey: getApiKeyFromUrl(),
   model: LawsAndRegulations.model,
+  isTimer: true,
 }
 
 const aiService = new AIService(aiConfigs)

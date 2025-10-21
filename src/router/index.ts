@@ -24,6 +24,14 @@ const router = createRouter({
       },
     },
     {
+      path: '/legalResearchSmartAnswe2',
+      name: 'legalResearchSmartAnswe2',
+      component: () => import('../views/legalResearchSmartAnswe2/legal.vue'),
+      meta: {
+        title: '法研智答',
+      },
+    },
+    {
       path: '/acrossTheEntireNetwork',
       name: 'AcrossTheEntireNetwork',
       component: () => import('../views/acrossTheEntireNetwork/acrossTheEntireNetwork.vue'),

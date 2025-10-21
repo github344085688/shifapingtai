@@ -1,6 +1,6 @@
 import MockAIService from './moni'
 import { TextProcessor } from './processingData'
-import { getApiKeyFromUrl } from './units'
+import { getApiKeyFromUrl, setTimes, interceptData } from './units'
 
 // 样式常量
 const STYLES = {
@@ -52,6 +52,7 @@ class AIService {
   constructor(aiConfig: any) {
     this.aiConfig = aiConfig
     // 只在开发环境且 MockAIService 可用时创建实例
+
     this.mockService = import.meta.env.DEV && MockAIService ? new MockAIService(aiConfig) : null
   }
 
@@ -80,6 +81,10 @@ class AIService {
   }
 
   async sendToAI(message: any, callback: any, lastMessage: any) {
+    // console.log('import.meta.env.DEV2222222222', this.aiConfig)
+
+    // 在发送到 AI 之前先记录次数，确保 POST 成功后再继续
+    if (this.aiConfig.isTimer) await setTimes()
     let systemMessages = [
       {
         role: 'system',
@@ -99,7 +104,7 @@ class AIService {
       })
     }
     const KeyFromUrl = getApiKeyFromUrl()
-    console.log('paramsBody------------------------', KeyFromUrl)
+    // console.log('paramsBody------------------------', KeyFromUrl)
     try {
       const response = await fetch(this.aiConfig.api, {
         method: 'POST',
@@ -116,7 +121,11 @@ class AIService {
         }),
         signal: signal,
       })
-
+      const Intercepted: any = await interceptData(response)
+      if (Intercepted && Intercepted.code === 500) {
+        callback(Intercepted.msg, true, false, true)
+        return
+      }
       // 检查HTTP状态码
       if (!response.ok) {
         if (response.status === 504) {
@@ -216,6 +225,7 @@ class AIService {
     lastMessage?: any,
     hasShownSearchProcessHeader?: boolean,
   ) {
+    // numberOfInterceptions('')
     const reader = response.body.getReader()
     const decoder = new TextDecoder()
     let buffer = ''

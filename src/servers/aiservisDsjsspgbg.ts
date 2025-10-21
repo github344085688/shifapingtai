@@ -1,5 +1,5 @@
 import aiConfig, { concurrentApis } from '@/config/aiConfig'
-import { getApiKeyFromUrl } from './units'
+import { getApiKeyFromUrl, setTimes, interceptData } from './units'
 export interface ConcurrentResult {
   key: string
   name: string
@@ -118,6 +118,7 @@ class ConcurrentAIService {
           requestBody.step = apiConfig.step
         }
       }
+
       const KeyFromUrl = getApiKeyFromUrl()
       const response = await fetch(apiConfig.api, {
         method: 'POST',
@@ -130,6 +131,7 @@ class ConcurrentAIService {
         body: JSON.stringify(requestBody),
         signal: signal,
       })
+      alert('请求成功')
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
@@ -230,6 +232,7 @@ class BigDataAssessmentService {
     try {
       const abortController = new AbortController()
       const signal = abortController.signal
+      await setTimes()
 
       // 立即回调通知开始
       callback('', false)
@@ -249,6 +252,11 @@ class BigDataAssessmentService {
         body: JSON.stringify(requestBody),
         signal: signal,
       })
+      const Intercepted: any = await interceptData(response)
+      if (Intercepted && Intercepted.code === 500) {
+        callback('', true, Intercepted.msg)
+        return
+      }
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)

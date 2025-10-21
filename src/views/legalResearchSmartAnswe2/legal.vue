@@ -562,6 +562,7 @@ import AIService from '@/servers/aiservis'
 import ConcurrentAIService, { type ConcurrentResult } from '@/servers/concurrentAiService'
 import router from '@/router'
 import { useTitle } from '@/composables/useTitle'
+import { numberOfInterceptions } from '@/servers/units'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
 
 const state = status()

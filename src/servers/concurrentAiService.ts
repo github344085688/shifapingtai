@@ -141,6 +141,7 @@ class ConcurrentAIService {
     message: any,
     callback: ConcurrentCallback,
   ): Promise<void> {
+    // console.log('🌐 发起网络请求:ssssssssssssssssssssss', apiConfig)
     try {
       const abortController = new AbortController()
       const signal = abortController.signal
@@ -193,7 +194,6 @@ class ConcurrentAIService {
         }
       }
       const KeyFromUrl = getApiKeyFromUrl()
-      console.log('paramsBody啊实打实大苏打大', KeyFromUrl)
       const response = await fetch(apiConfig.api, {
         method: 'POST',
         headers: {

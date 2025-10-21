@@ -136,6 +136,7 @@ const aiConfigs = {
   api: legalDocumentWriting.api,
   apiKey: getApiKeyFromUrl(),
   model: legalDocumentWriting.model,
+  isTimer: true,
 }
 
 const aiService = new AIService(aiConfigs)

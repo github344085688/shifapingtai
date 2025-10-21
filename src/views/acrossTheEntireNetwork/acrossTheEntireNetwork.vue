@@ -164,6 +164,7 @@ const aiConfigs = {
   api: AcrossTheEntireNetwork.api,
   apiKey: getApiKeyFromUrl(),
   model: AcrossTheEntireNetwork.model,
+  isTimer: true,
 }
 
 const aiservis = new Aiservis(aiConfigs)

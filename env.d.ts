@@ -11,3 +11,15 @@ declare module 'vue-router' {
     [key: string]: any
   }
 }
+
+declare global {
+  interface Window {
+    wx?: {
+      miniProgram?: {
+        postMessage: (payload: { data: any }) => void
+      }
+    }
+    __wxjs_environment?: string
+  }
+}
+export {}

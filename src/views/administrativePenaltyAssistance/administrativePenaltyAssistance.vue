@@ -136,6 +136,7 @@ const aiConfigs = {
   api: administrativePenaltyAssistance.api,
   apiKey: getApiKeyFromUrl(),
   model: administrativePenaltyAssistance.model,
+  isTimer: true,
 }
 
 const aiService = new AIService(aiConfigs)

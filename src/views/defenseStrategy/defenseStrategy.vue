@@ -132,6 +132,7 @@ const aiConfigs = {
   api: defenseStrategy.api,
   apiKey: getApiKeyFromUrl(),
   model: defenseStrategy.model,
+  isTimer: true,
 }
 
 const aiService = new AIService(aiConfigs)
