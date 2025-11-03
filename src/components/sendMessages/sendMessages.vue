@@ -3,7 +3,31 @@
     v-if="messagesLength > 0"
     class="h-[40px] bg-white sticky top-0 z-30 flex items-center justify-between max-w-[750px] mx-auto"
   >
-    <div class=""></div>
+    <div
+      v-if="isH5"
+      class="w-[70rpx] h-[70rpx] rounded-full pl-4 flex items-center justify-center cursor-pointer"
+      @click="handleH5Back"
+    >
+      <div class="w-[32px] h-[32px]">
+        <svg
+          t="1762162915985"
+          class="icon"
+          viewBox="0 0 1024 1024"
+          version="1.1"
+          xmlns="http://www.w3.org/2000/svg"
+          p-id="2069"
+          width="28"
+          height="28"
+        >
+          <path
+            d="M481.233 904c8.189 0 16.379-3.124 22.628-9.372 12.496-12.497 12.496-32.759 0-45.256L166.488 512l337.373-337.373c12.496-12.497 12.496-32.758 0-45.255-12.498-12.497-32.758-12.497-45.256 0l-360 360c-12.496 12.497-12.496 32.758 0 45.255l360 360c6.249 6.249 14.439 9.373 22.628 9.373z"
+            fill=""
+            p-id="2070"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <div class="flex items-end pl-4 text-gray-400 text-[12px] mr-auto">内容由AI生成，仅供参考</div>
     <button
       type="button"
       class="whitespace-nowrap bg-white px-3 flex items-center justify-center text-gray-500 border-none rounded-[10px] py-[5px] cursor-pointer mr-2"
@@ -30,7 +54,7 @@
     v-if="messagesLength < 1 && !props.isShalow"
     class="fixed w-full h-full top-0 bottom-0 left-0 right-0 z-[9999] bg-white"
   >
-    <div class="max-w-[750px] h-full flex flex-col items-center justify-center m-auto">
+    <div class="max-w-[750px] h-full flex flex-col items-center justify-center m-auto relative">
       <!-- DeepSeek Logo -->
       <div class="flex justify-center mb-4">
         <div class="w-[40px] h-[40px] rounded">
@@ -98,6 +122,108 @@
           </button>
         </div>
       </div>
+
+      <div
+        v-if="messagesLength < 1 && !props.isShalow"
+        class="fixed w-full h-full top-0 bottom-0 left-0 right-0 z-[9999] bg-white"
+      >
+        <div class="max-w-[750px] h-full flex flex-col items-center justify-center m-auto relative">
+          <!-- DeepSeek Logo -->
+          <div class="flex justify-center mb-4">
+            <div class="w-[40px] h-[40px] rounded">
+              <img src="@/assets/img/logo.png" alt="" />
+            </div>
+          </div>
+
+          <!-- Welcome Text -->
+          <div class="px-4 mb-4">
+            <h1 class="text-[20px] font-bold text-red-700 text-center mb-2">
+              {{ props.title }}
+            </h1>
+            <p class="leading-relaxed text-gray-600">
+              {{ props.note }}
+            </p>
+          </div>
+          <div class="w-full">
+            <slot name="content"></slot>
+          </div>
+
+          <!-- Input Area for Welcome Screen -->
+          <div class="box-border flex justify-center items-center px-4 mb-8 w-full">
+            <div class="w-[40px] flex items-center justify-center">
+              <FileContentExtractor
+                ref="fileContentExtractorRef"
+                v-model="claim"
+                @file-content-extracted="handleFileContentExtracted"
+              />
+            </div>
+            <div class="relative flex-1">
+              <input
+                type="text"
+                class="w-full border border-gray-200 rounded-full py-3 px-4 pr-12 outline-none focus:border-[#e23338] transition-colors"
+                v-model="inputValue"
+                :placeholder="props.placeholder"
+                @keypress.enter="handleSendMessage"
+              />
+              <button
+                type="button"
+                :class="[
+                  'absolute right-2 top-1/2 transform -translate-y-1/2 w-8 h-8 rounded-full flex items-center justify-center transition-colors',
+                  isButtonDisabled
+                    ? 'bg-gray-400 cursor-not-allowed'
+                    : 'bg-[#e23338] cursor-pointer hover:bg-[#d12329]',
+                ]"
+                :disabled="isButtonDisabled"
+                @click="handleSendMessage"
+              >
+                <svg
+                  t="1753668793186"
+                  class="icon"
+                  viewBox="0 0 1024 1024"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                  p-id="5335"
+                  width="20"
+                  height="20"
+                >
+                  <path
+                    d="M311.04 692.224L97.28 598.5792a38.0416 38.0416 0 0 1-3.6352-67.84l799.1808-457.472a38.0416 38.0416 0 0 1 56.6272 37.7856L854.016 866.8672a37.9904 37.9904 0 0 1-53.9136 29.6448l-223.5392-105.1648L471.04 937.9328a42.752 42.752 0 0 1-77.4656-25.0368l0.6656-190.5664 387.7376-455.0144z"
+                    fill="#ffffff"
+                    p-id="5336"
+                  ></path>
+                </svg>
+              </button>
+            </div>
+          </div>
+          <div
+            v-if="isH5"
+            class="w-[70rpx] h-[70rpx] fixed top-[18px] left-[10px] rounded-full pl-4 flex items-center justify-center cursor-pointer"
+            @click="handleH5Back"
+          >
+            <div class="w-[32px] h-[32px]">
+              <svg
+                t="1762162915985"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="2069"
+                width="28"
+                height="28"
+              >
+                <path
+                  d="M481.233 904c8.189 0 16.379-3.124 22.628-9.372 12.496-12.497 12.496-32.759 0-45.256L166.488 512l337.373-337.373c12.496-12.497 12.496-32.758 0-45.255-12.498-12.497-32.758-12.497-45.256 0l-360 360c-12.496 12.497-12.496 32.758 0 45.255l360 360c6.249 6.249 14.439 9.373 22.628 9.373z"
+                  fill=""
+                  p-id="2070"
+                ></path>
+              </svg>
+            </div>
+          </div>
+          <div class="absolute bottom-[50px] text-gray-400 flex items-end text-[14px]">
+            内容由AI生成，仅供参考ss
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -161,7 +287,7 @@
 </template>
 
 <script setup lang="ts">
-import { isShallow, ref, watch, computed } from 'vue'
+import { isShallow, ref, watch, computed, onMounted } from 'vue'
 import FileContentExtractor from '@/components/sendMessages/FileContentExtractor.vue'
 // Props
 interface Props {
@@ -241,5 +367,22 @@ const handleSendMessage = () => {
 // 处理新对话
 const handleNewDialogue = () => {
   emit('newDialogue')
+}
+
+// 是否为 H5 环境：根据 URL 参数 h5=1 决定
+const isH5 = ref(false)
+
+onMounted(() => {
+  const params = new URLSearchParams(window.location.search)
+  isH5.value = params.get('h5') === '1'
+})
+
+// 点击返回时向当前页广播 navback
+const handleH5Back = () => {
+  const payload = 'navback'
+  if (typeof window.postMessage === 'function') {
+    window.postMessage(payload, '*')
+    console.log('H5在当前页广播消息:', payload)
+  }
 }
 </script>

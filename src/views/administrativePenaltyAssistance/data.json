@@ -1,0 +1,293 @@
+ 
+
+相似案例=> data= [
+    {
+        "applicablelaw": [
+            "中华人民共和国婚姻法第三十二条",
+            "中华人民共和国民事诉讼法第六十四条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国婚姻法",
+            "中华人民共和国民事诉讼法"
+        ],
+        "casecause": "离婚纠纷",
+        "caseid": "（2019）鄂1102民初2429号",
+        "casetype": "民事",
+        "chunk": "夫妻双方自缔结婚姻关系以来,因性格差异及双方缺少交流等原因,导致夫妻感情不和,一方认为夫妻感情已经彻底破裂的主张,依据不足,法院不予采信,故其离婚的诉讼请求,法院不予支持 。",
+        "court": "黄冈市黄州区人民法院",
+        "database": "es",
+        "highlight_list": [
+            "周某与李某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>一审民事判决书\n湖北省黄冈市黄州区人民法院\n民 事 判 决 书\n(2019)鄂1102民初2429号\n原告：周某，女，1987年5月28日出生，汉族，住黄冈市黄州区。",
+            "案由：<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>\n<font style='color:red;'><font style='color:red;'>诉讼</font><font style='color:red;'>请求</font></font>：1、判令原告与被告<font style='color:red;'><font style='color:red;'>离婚</font></font>；\n2、婚生女儿由原告抚养，被告每月承担抚养费用共计800元；\n3、本案<font style='color:red;'><font style='color:red;'>诉讼</font></font>费用由被告承担。",
+            "原告诉被告<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>一案，本院于2019年8月15日立案，对本案适用简易程序公开开庭进行了审理，原、被告双方均到庭参加<font style='color:red;'><font style='color:red;'>诉讼</font></font>，本案现已审理终结。"
+        ],
+        "judgedate": "2019-10-09",
+        "judgeyear": "2019",
+        "procedure": "一审",
+        "province": "湖北省",
+        "summyBycm": "",
+        "summyByrw": "",
+        "title": "周某与李某离婚纠纷一审民事判决书",
+        "uniqid": "eb399dd0-6be7-453c-ac1f-aaf600aad5b1",
+        "purpose": "夫妻双方自缔结婚姻关系以来,因性格差异及双方缺少交流等原因,导致夫妻感情不和,一方认为夫妻感情已经彻底破裂的主张,依据不足,法院不予采信,故其离婚的诉讼请求,法院不予支持 。"
+    },
+    {
+        "applicablelaw": [
+            "中华人民共和国民事诉讼法第一百二十四条",
+            "最高人民法院关于适用中华人民共和国民事诉讼法的解释第二百四十七条",
+            "中华人民共和国民事诉讼法第一百一十九条",
+            "中华人民共和国民事诉讼法第一百五十四条",
+            "最高人民法院关于适用中华人民共和国民事诉讼法的解释第二百零八条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国民事诉讼法",
+            "最高人民法院关于适用中华人民共和国民事诉讼法的解释"
+        ],
+        "casecause": "离婚后财产纠纷",
+        "caseid": "（2020）川0192民初3436号",
+        "casetype": "民事",
+        "chunk": null,
+        "court": "四川天府新区人民法院",
+        "database": "es",
+        "highlight_list": [
+            "经庭前审查,万某于2020年4月8日向本院起诉<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>,<font style='color:red;'><font style='color:red;'>诉讼</font><font style='color:red;'>请求</font></font>如下:判令原告万某与被告何某1<font style='color:red;'>离婚</font> 。"
+        ],
+        "judgedate": "2020-10-22",
+        "judgeyear": "2020",
+        "procedure": "一审",
+        "province": "四川省",
+        "summyBycm": null,
+        "summyByrw": null,
+        "title": "万某与何某1离婚后财产纠纷一审民事裁定书",
+        "uniqid": "ff9def5e-08e0-412f-b1c8-ac94005576af",
+        "purpose": null
+    },
+    {
+        "applicablelaw": [
+            "中华人民共和国民事诉讼法第一百五十四条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国民事诉讼法"
+        ],
+        "casecause": "离婚纠纷",
+        "caseid": "（2016）内0624民初3394号",
+        "casetype": "民事",
+        "chunk": null,
+        "court": "内蒙古鄂托克旗人民法院",
+        "database": "es",
+        "highlight_list": [
+            "高某某诉冯某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>民事裁定书\n内蒙古鄂托克旗人民法院\n民 事 裁 定 书\n（2016）内0624民初3394号\n原告高某某，1973年6月25日出生，女，汉族，现住内蒙古鄂尔多斯市。",
+            "本院在审理原告高某某与被告冯某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>一案中，原告于2016年8月1日主动向本院提出撤诉申请，要求撤回与被告冯某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font><font style='color:red;'><font style='color:red;'>诉讼</font><font style='color:red;'>请求</font></font>。\n本院认为，原告的申请符合法律规定，应准予原告撤诉。",
+            "依照《中华人民共和国民事<font style='color:red;'><font style='color:red;'>诉讼</font></font>法》第一百四十五第一款条、第一百五十四条第五项之规定，裁定如下：\n准予原告高某某撤回对被冯某的起诉。\n案件受理费200元，减半收取100元，由原告高某某负担。"
+        ],
+        "judgedate": "2016-09-23",
+        "judgeyear": "2016",
+        "procedure": "一审",
+        "province": "内蒙古自治区",
+        "summyBycm": null,
+        "summyByrw": null,
+        "title": "高某某诉冯某离婚纠纷民事裁定书",
+        "uniqid": "f5691fe8-c101-4d1b-baf5-87414a008362",
+        "purpose": null
+    },
+    {
+        "applicablelaw": [
+            "中华人民共和国民事诉讼法第一百五十四条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国民事诉讼法"
+        ],
+        "casecause": "离婚纠纷",
+        "caseid": "（2015）鄂托民初字第03825号",
+        "casetype": "民事",
+        "chunk": null,
+        "court": "内蒙古鄂托克旗人民法院",
+        "database": "es",
+        "highlight_list": [
+            "原告吕某某诉被告折某某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>民事裁定书\n内蒙古鄂托克旗人民法院\n 民 事 裁 定 书\n （2015）鄂托民初字第03825号\n 原告吕某某。\n 被告折某某。",
+            "本院在审理原告与被告<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>一案中，原告于2016年1月13日向本院提出撤诉申请，要求撤回与被告<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font><font style='color:red;'><font style='color:red;'>诉讼</font><font style='color:red;'>请求</font></font>。\n 本院认为，原告的申请符合法律规定，应准予原告撤诉。",
+            "依照《中华人民共和国民事<font style='color:red;'><font style='color:red;'>诉讼</font></font>法》第一百四十五第一款条、第一百五十四条第五项之规定，裁定如下：\n 准予原告吕某某撤回起诉。\n 案件受理费200元，减半收取100元，由原告吕某某负担。"
+        ],
+        "judgedate": "2016-01-13",
+        "judgeyear": "2016",
+        "procedure": "一审",
+        "province": "内蒙古自治区",
+        "summyBycm": null,
+        "summyByrw": null,
+        "title": "原告吕某某诉被告折某某离婚纠纷民事裁定书",
+        "uniqid": "27536149-49b4-4df0-b083-c9ccab0e1f45",
+        "purpose": null
+    },
+    {
+        "applicablelaw": [
+            "中华人民共和国民事诉讼法第一百五十四条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国民事诉讼法"
+        ],
+        "casecause": "离婚纠纷",
+        "caseid": "（2014）鄂托民初字第2870号",
+        "casetype": "民事",
+        "chunk": null,
+        "court": "内蒙古鄂托克旗人民法院",
+        "database": "es",
+        "highlight_list": [
+            "原告罗某某诉被告乔某某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>民事裁定书\n内蒙古鄂托克旗人民法院\n 民 事 裁 定 书\n （2014）鄂托民初字第2870号\n 原告罗某某。\n 被告乔某某。",
+            "本院在审理原告与被告<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>一案中，原告于2015年3月5日因证据不足向本院提出撤诉申请，要求撤回与被告<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font><font style='color:red;'><font style='color:red;'>诉讼</font><font style='color:red;'>请求</font></font>。\n 本院认为，原告的申请符合法律规定，应准予原告撤诉。",
+            "依照《中华人民共和国民事<font style='color:red;'><font style='color:red;'>诉讼</font></font>法》第一百四十五第一款条、第一百五十四条第五项之规定，裁定如下：\n 准予原告罗某某撤回起诉。\n 案件受理费200元，减半收取100元，由原告罗某某负担。"
+        ],
+        "judgedate": "2015-03-05",
+        "judgeyear": "2015",
+        "procedure": "一审",
+        "province": "内蒙古自治区",
+        "summyBycm": null,
+        "summyByrw": null,
+        "title": "原告罗某某诉被告乔某某离婚纠纷民事裁定书",
+        "uniqid": "a073003b-3944-4ae2-ab33-4c05b631d3ca",
+        "purpose": null
+    },
+    {
+        "applicablelaw": [
+            "中华人民共和国民事诉讼法第一百五十四条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国民事诉讼法"
+        ],
+        "casecause": "离婚纠纷",
+        "caseid": "（2016）内0624民初344号",
+        "casetype": "民事",
+        "chunk": null,
+        "court": "内蒙古鄂托克旗人民法院",
+        "database": "es",
+        "highlight_list": [
+            "原告王某与被告梁某某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>民事裁定书\n内蒙古鄂托克旗人民法院\n 民 事 裁 定 书\n （2016）内0624民初344号\n 原告王某。\n 被告梁某某。",
+            "本院在审理原告王某与被告梁某某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>一案中，原告于2016年1月29日向本院提出撤诉申请，要求撤回与被告<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font><font style='color:red;'><font style='color:red;'>诉讼</font><font style='color:red;'>请求</font></font>。\n 本院认为，原告的申请符合法律规定，应准予原告撤诉。",
+            "依照《中华人民共和国民事<font style='color:red;'><font style='color:red;'>诉讼</font></font>法》第一百四十五第一款条、第一百五十四条第五项之规定，裁定如下：\n 准予原告王某撤回起诉。\n 案件受理费200元，减半收取100元，由原告王某负担。"
+        ],
+        "judgedate": "2016-01-29",
+        "judgeyear": "2016",
+        "procedure": "一审",
+        "province": "内蒙古自治区",
+        "summyBycm": null,
+        "summyByrw": null,
+        "title": "原告王某与被告梁某某离婚纠纷民事裁定书",
+        "uniqid": "24c1976d-28d9-401a-a934-f3408a575d31",
+        "purpose": null
+    },
+    {
+        "applicablelaw": [
+            "中华人民共和国民事诉讼法第一百五十四条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国民事诉讼法"
+        ],
+        "casecause": "离婚纠纷",
+        "caseid": "（2014）鄂托法民初字第2901号",
+        "casetype": "民事",
+        "chunk": null,
+        "court": "内蒙古鄂托克旗人民法院",
+        "database": "es",
+        "highlight_list": [
+            "原告郭某某诉刘某某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>民事裁定书\n内蒙古鄂托克旗人民法院\n 民 事 裁 定 书\n （2014）鄂托法民初字第2901号\n 原告郭某某。\n 被告刘某某。",
+            "本院在审理原告与被告<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>一案中，原告于2015年3月5日因证据不足向本院提出撤诉申请，要求撤回与被告<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font><font style='color:red;'><font style='color:red;'>诉讼</font><font style='color:red;'>请求</font></font>。\n 本院认为，原告的申请符合法律规定，应准予原告撤诉。",
+            "依照《中华人民共和国民事<font style='color:red;'><font style='color:red;'>诉讼</font></font>法》第一百四十五第一款条、第一百五十四条第五项之规定，裁定如下：\n 准予原告郭某某撤回起诉。\n 案件受理费200元，减半收取100元，由原告郭某某负担。"
+        ],
+        "judgedate": "2015-03-05",
+        "judgeyear": "2015",
+        "procedure": "一审",
+        "province": "内蒙古自治区",
+        "summyBycm": null,
+        "summyByrw": null,
+        "title": "原告郭某某诉刘某某离婚纠纷民事裁定书",
+        "uniqid": "c49d5546-5cbb-45df-a59b-6d3252dd31ae",
+        "purpose": null
+    },
+    {
+        "applicablelaw": [
+            "中华人民共和国民事诉讼法第一百五十四条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国民事诉讼法"
+        ],
+        "casecause": "离婚纠纷",
+        "caseid": "（2016）内0624民初428号",
+        "casetype": "民事",
+        "chunk": null,
+        "court": "内蒙古鄂托克旗人民法院",
+        "database": "es",
+        "highlight_list": [
+            "原告王某诉被告赵某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>民事裁定书\n内蒙古鄂托克旗人民法院\n 民 事 裁 定 书\n （2016）内0624民初428号\n 原告王某，女。\n 被告赵某，男。",
+            "本院在审理原告王某与被告赵某<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font>一案中，原告于2016年3月10日向本院提出撤诉申请，要求撤回与被告<font style='color:red;'><font style='color:red;'>离婚</font></font><font style='color:red;'><font style='color:red;'>纠纷</font></font><font style='color:red;'><font style='color:red;'>诉讼</font><font style='color:red;'>请求</font></font>。\n 本院认为，原告的申请符合法律规定，应准予原告撤诉。",
+            "依照《中华人民共和国民事<font style='color:red;'><font style='color:red;'>诉讼</font></font>法》第一百四十五第一款条、第一百五十四条第五项之规定，裁定如下：\n 准予原告王某撤回起诉。\n 案件受理费200元，减半收取100元，由原告王某负担。"
+        ],
+        "judgedate": "2016-03-10",
+        "judgeyear": "2016",
+        "procedure": "一审",
+        "province": "内蒙古自治区",
+        "summyBycm": null,
+        "summyByrw": null,
+        "title": "原告王某诉被告赵某离婚纠纷民事裁定书",
+        "uniqid": "8e114e4c-57d0-46de-8584-aeae1f59a56c",
+        "purpose": null
+    },
+    {
+        "applicablelaw": [
+            "中华人民共和国婚姻法第三十二条",
+            "中华人民共和国民事诉讼法第六十四条",
+            "中华人民共和国民事诉讼法第一百四十二条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国婚姻法",
+            "中华人民共和国民事诉讼法"
+        ],
+        "casecause": "离婚纠纷",
+        "caseid": "（2015）深罗法民一初字第866号",
+        "casetype": null,
+        "chunk": "夫妻双方感情尚未完全破裂,法院判决不准离婚 。",
+        "court": "深圳市罗湖区人民法院",
+        "database": "es",
+        "highlight_list": [
+            "原告<font style='color:red;'>诉讼</font><font style='color:red;'>请求</font>:判决原、被告<font style='color:red;'>离婚</font>"
+        ],
+        "judgedate": "2015-09-01",
+        "judgeyear": "2015",
+        "procedure": "一审",
+        "province": "广东省",
+        "summyBycm": "",
+        "summyByrw": "本院认为，离婚纠纷案中，被告未出庭且缺席，原告主张感情破裂但未提供证据支持。法院依据婚姻基础、双方关系状况及感情破裂程度判定夫妻感情未破裂。因此，原告离婚请求被驳回，判决维持原婚姻。",
+        "title": "邱某与胡某1离婚纠纷一审民事判决书",
+        "uniqid": "a2886a3c-a3ba-4cea-907a-a9ce0120ccc4",
+        "purpose": "夫妻双方感情尚未完全破裂,法院判决不准离婚 。"
+    },
+    {
+        "applicablelaw": [
+            "中华人民共和国婚姻法第二十条",
+            "中华人民共和国婚姻法第四十二条",
+            "最高人民法院关于适用中华人民共和国民事诉讼法的解释第三百三十四条",
+            "中华人民共和国民事诉讼法第一百七十条"
+        ],
+        "applicablelawonly": [
+            "中华人民共和国婚姻法",
+            "最高人民法院关于适用中华人民共和国民事诉讼法的解释",
+            "中华人民共和国民事诉讼法"
+        ],
+        "casecause": "离婚纠纷",
+        "caseid": "（2015）河市民一终字第453号",
+        "casetype": null,
+        "chunk": "离婚纠纷诉讼系混合之诉,除当事人合意不予审理,法院均应围绕夫妻感情是否破裂、子女抚养、财产分割、困难补偿、损害赔偿等问题进行合并审理,并不受当事人请求与否的影响 。",
+        "court": "广西壮族自治区河池市中级人民法院",
+        "database": "es",
+        "highlight_list": [
+            "<font style='color:red;'>离婚</font><font style='color:red;'>纠纷</font><font style='color:red;'>诉讼</font>系混合之诉,除当事人合意不予审理,法院均应围绕夫妻感情是否破裂、子女抚养、财产分割、困难补偿、损害赔偿等问题进行合并审理,并不受当事人<font style='color:red;'>请求</font>与否的影响"
+        ],
+        "judgedate": "2015-12-11",
+        "judgeyear": "2015",
+        "procedure": "二审",
+        "province": "广西壮族自治区",
+        "summyBycm": "",
+        "summyByrw": "本院认为原审离婚纠纷未超出法定程序，未受当事人请求影响。一审关于当事人就医费用和生活困难帮助的处理合法，确认了一方对患病配偶的医疗与生活援助义务。上诉人杨某关于隐瞒事实和缺乏照顾的指责被驳斥，因其非共同生活过程中羞辱配偶，实际是拒绝扶养和物质帮助，一审判决支持了一次性生活困难帮助费。维持原判，因法律适用和程序公正，认定上诉理由成立，不影响原判决。判决维持离婚判决及部分生活补助请求。",
+        "title": "杨某与李某离婚纠纷二审民事判决书",
+        "uniqid": "7eb15eeb-262c-4dea-8b6f-fb30e899f967",
+        "purpose": "离婚纠纷诉讼系混合之诉,除当事人合意不予审理,法院均应围绕夫妻感情是否破裂、子女抚养、财产分割、困难补偿、损害赔偿等问题进行合并审理,并不受当事人请求与否的影响 。"
+    }
+]

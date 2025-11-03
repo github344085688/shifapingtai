@@ -1,6 +1,5 @@
 <template>
-  <div class="w-full min-h-full pb-[68px] bg-gray-50">
-    <!-- Welcome Screen - 当没有消息时显示 -->
+  <div class="w-full min-h-full pb-[68px] bg-gray-50 box-border">
     <SendMessages
       :messagesLength="messages.length"
       v-model:userInput="userInput"
@@ -9,17 +8,18 @@
       :title="administrativePenaltyAssistance.title"
       :placeholder="administrativePenaltyAssistance.placeholder"
       :note="administrativePenaltyAssistance.note"
-    />
-    <div v-if="messages.length > 0" class="max-w-[600px] mx-auto p-2.5">
-      <!-- Chat Container -->
-      <div class="pb-5" ref="chatContainer">
+    >
+    </SendMessages>
+
+    <div class="max-w-[750px] mx-auto px-2.5 bg-gray-50 w-full box-border">
+      <div class="pb-5" ref="chatContainer  w-full box-border">
         <div
           v-for="(message, index) in messages"
           :key="index"
           :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
         >
           <div
-            class="relative rounded-xl markdown_text"
+            class="box-border relative w-full rounded-xl markdown_text"
             :class="[
               message.sender === 'user'
                 ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px] markdownUser'
@@ -34,6 +34,65 @@
               v-html="message.thinkingProcess"
             ></div>
             <AiText :popsMessage="message" />
+            <!-- 相似案例：卡片内折叠（移除整体折叠头） -->
+            <div v-if="message.concurrentResults && message.concurrentResults.length" class="mt-3">
+              <div class="overflow-hidden bg-white rounded-lg">
+                <div class="p-2 text-gray-700 truncate bg-gray-200" v-if="isSimilarCases">
+                  相似案例
+                </div>
+
+                <div
+                  v-for="(item, i) in toArray(
+                    getParsedContent(getConcurrentContentByKey(message.concurrentResults, 'xsal')),
+                  )"
+                  :key="item.uniqid || i"
+                  class="overflow-hidden bg-white border-gray-200 border-b-[1px] border-solid"
+                >
+                  <!-- 卡片头：点击折叠当前案例 -->
+                  <div
+                    class="flex justify-between items-center px-3 py-2 cursor-pointer hover:bg-gray-50"
+                    @click="toggleCaseDetail(message, i)"
+                  >
+                    <div class="text-gray-700 truncate">{{ item.title || '未命名案例' }}</div>
+                    <svg
+                      class="transition-transform icon"
+                      viewBox="0 0 1024 1024"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      :style="{
+                        transform: isCaseExpanded(message, i) ? 'rotate(180deg)' : 'rotate(0deg)',
+                      }"
+                    >
+                      <path
+                        d="M593.066667 793.6a32.170667 32.170667 0 0 1 0-45.226667L829.44 512 593.066667 275.626667a32.170667 32.170667 0 0 1 0-45.226667c12.373333-12.373333 32.853333-12.373333 45.226666 0l258.986667 258.986667c12.373333 12.373333 12.373333 32.853333 0 45.226666l-258.986667 258.986667c-6.4 6.4-14.506667 9.386667-22.613333 9.386667s-16.213333-2.986667-22.613333-9.386667z"
+                        fill="#bfbfbf"
+                      ></path>
+                    </svg>
+                  </div>
+                  <!-- 卡片内容：折叠详情 -->
+                  <transition name="content-fade">
+                    <div
+                      v-if="isCaseExpanded(message, i)"
+                      class="px-3 pb-3 text-sm leading-loose text-gray-600"
+                    >
+                      <div v-if="item.casecause">案由：{{ item.casecause }}</div>
+                      <div v-if="item.caseid">案号：{{ item.caseid }}</div>
+                      <div v-if="item.court">法院：{{ item.court }}</div>
+                      <div v-if="item.judgedate">裁判日期：{{ item.judgedate }}</div>
+                      <div v-if="item.province">省份：{{ item.province }}</div>
+                      <div v-if="item.chunk || item.summyByrw" class="mt-1">
+                        摘要：{{ (item.summyByrw || item.chunk || '').trim() }}
+                      </div>
+                      <div v-if="item.highlight_list && item.highlight_list.length" class="mt-1">
+                        选摘：{{ formatHighlight(item.highlight_list) }}
+                      </div>
+                    </div>
+                  </transition>
+                </div>
+              </div>
+            </div>
+            <!-- 相似案例卡片结束 -->
           </div>
         </div>
       </div>
@@ -47,31 +106,30 @@ import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
 import aiConfig, { administrativePenaltyAssistance, CACHE_DURATION } from '@/config/aiConfig'
 import AIService from '@/servers/aiservis'
+import ConcurrentAIService, { type ConcurrentResult } from '@/servers/concurrentAiOnezsk'
+import router from '@/router'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
 
 const state = status()
 const globalState = state.state
 
-// 使用动态title功能
 const { title, updateTitle } = useTitle('行政处罚辅助')
 
-defineComponent({
-  name: 'administrativePenaltyAssistance',
-})
+defineComponent({ name: 'Ai' })
 
-// 自动滚动控制
+const gotopage = () => {
+  alert()
+  router.push({ name: 'AcrossTheEntireNetwork' })
+}
+
 const autoScroll = ref(true)
 const userScrolled = ref(false)
+const isSimilarCases = ref(false)
 
 onMounted(() => {
-  // 初始化 acrossTheEntireNetwork 对象（如果不存在）
-  if (!globalState.administrativePenaltyAssistance) {
-    globalState.administrativePenaltyAssistance = {}
-  }
-
-  // 页面渲染前判断缓存是否有效
   if (
+    globalState.administrativePenaltyAssistance &&
     globalState.administrativePenaltyAssistance.aiResults &&
     globalState.administrativePenaltyAssistance.generalAiTime
   ) {
@@ -79,127 +137,152 @@ onMounted(() => {
     const savedTime = globalState.administrativePenaltyAssistance.generalAiTime
     const timeDifference = currentTime - savedTime
 
-    // 如果时间差小于常量（12小时），则使用缓存
     if (timeDifference < CACHE_DURATION) {
       messages.value = globalState.administrativePenaltyAssistance.aiResults
-      // 如果有缓存的对话，更新title显示对话数量
-      if (messages.value.length > 0) {
-        const userMessages = messages.value.filter((msg) => msg.sender === 'user')
-        updateTitle(`行政处罚辅助`)
-      }
+      if (messages.value.length > 0) updateTitle(`行政处罚辅助`)
     } else {
       messages.value = []
       delete globalState.administrativePenaltyAssistance.aiResults
       delete globalState.administrativePenaltyAssistance.generalAiTime
     }
   }
-  if (globalState.administrativePenaltyAssistance.aiResults)
+  if (
+    globalState.administrativePenaltyAssistance &&
+    globalState.administrativePenaltyAssistance.aiResults
+  )
     messages.value = globalState.administrativePenaltyAssistance.aiResults
 
-  // 监听用户滚动事件
   window.addEventListener('scroll', handleUserScroll)
   window.addEventListener('touchmove', handleUserScroll)
 })
 
-// 处理用户滚动事件
 const handleUserScroll = () => {
   const scrollTop = window.pageYOffset || document.documentElement.scrollTop
   const windowHeight = window.innerHeight
   const documentHeight = document.documentElement.scrollHeight
-
-  // 如果用户不在底部，说明用户手动滚动了
   if (scrollTop + windowHeight < documentHeight - 50) {
     userScrolled.value = true
     autoScroll.value = false
   }
 }
 
-// 开启新对话
-const newDialogue = () => {
-  messages.value = []
-  if (globalState.administrativePenaltyAssistance) {
-    delete globalState.administrativePenaltyAssistance.aiResults
-    delete globalState.administrativePenaltyAssistance.generalAiTime
-  }
-  // 重置title为默认值
-  updateTitle('行政处罚辅助')
+const concurrentLabels = ref([{ key: 'xsal', label: '相似案例' }])
+
+// 复制成功提示/无数据提示
+const showCopySuccess = ref(false)
+const showNoDataTip = ref(false)
+
+const isWeixinUrl = (url: string): boolean => {
+  if (!url) return false
+  return url.startsWith('http://mp.weixin.qq.com') || url.includes('https://mp.weixin.qq.com/')
 }
 
-// 从URL参数获取apiKey的函数
+const copyToClipboard = async (text: string) => {
+  try {
+    await navigator.clipboard.writeText(text)
+    showCopySuccess.value = true
+    setTimeout(() => (showCopySuccess.value = false), 2000)
+  } catch {
+    const textArea = document.createElement('textarea')
+    textArea.value = text
+    document.body.appendChild(textArea)
+    textArea.select()
+    document.execCommand('copy')
+    document.body.removeChild(textArea)
+    showCopySuccess.value = true
+    setTimeout(() => (showCopySuccess.value = false), 2000)
+  }
+}
+
+const cleanUrl = (url: string): string => (url ? url.replace(/`/g, '').trim() : '')
+
 const getApiKeyFromUrl = (): string => {
   const urlParams = new URLSearchParams(window.location.search)
   return urlParams.get('apiKey') || aiConfig.apiKey
 }
-// console.log(administrativePenaltyAssistance)
-// 创建AIService实例时传入配置
+
 const aiConfigs = {
   api: administrativePenaltyAssistance.api,
   apiKey: getApiKeyFromUrl(),
   model: administrativePenaltyAssistance.model,
   isTimer: true,
 }
-
 const aiService = new AIService(aiConfigs)
+const concurrentAiService = new ConcurrentAIService(getApiKeyFromUrl())
 
-// 预设问题示例
-// const examples = ref(['离婚纠纷诉讼请求', '民间借贷纠纷诉讼请求', '劳动争议诉讼请求'])
+const examples = ref()
 
-// 聊天消息
 const messages = ref<
   {
     content: string
     sender: 'user' | 'assistant'
     isLoading?: boolean
     aiLoading?: boolean
-    thinkingProcess?: string // 新增：思考过程内容
+    concurrentResults?: ConcurrentResult[]
+    selectedConcurrentResult?: string
+    thinkingProcess?: string
   }[]
 >([])
 
 const userInput = ref('')
 const chatContainer = ref<HTMLElement | null>(null)
+const concurrentResults = ref<ConcurrentResult[]>([])
 
-// 处理示例问题点击
 const handleExampleClick = (question: string) => {
   userInput.value = question
   sendMessages()
 }
 
-// 发送消息
 const sendMessages = async () => {
   const message = userInput.value
-
   if (message === '') return
 
-  // 重新开启自动滚动
   autoScroll.value = true
   userScrolled.value = false
 
-  // 添加用户消息
   addMessage(message, 'user')
-
-  // 更新title显示对话数量
   updateTitle(`行政处罚辅助`)
 
-  const newMessage = {
-    role: 'user',
-    content: message,
-  }
+  const newMessage = { role: 'user', content: message }
 
-  // 添加助手消息
   const assistantMessage = {
     content: '',
     sender: 'assistant' as const,
     isLoading: true,
     aiLoading: true,
+    // 仅保留并发标签对应的结果（当前为 xsal）
+    concurrentResults: concurrentAiService
+      .getAllResults()
+      .filter((r) => concurrentLabels.value.some((l) => l.key === r.key)),
   }
+
   messages.value.push(assistantMessage)
 
-  // 启动主要AI服务
-  // await aiService.sendToAIMock('测试消息', setMessage)
-  // 启动主要AI服务
   aiService.sendToAI(newMessage, setMessage)
+  await concurrentAiService.sendConcurrentRequests(newMessage, handleConcurrentCallback)
 
   userInput.value = ''
+}
+
+const handleConcurrentCallback = (
+  key: string,
+  content: string,
+  isCompleted: boolean,
+  error?: string,
+) => {
+  const lastMessage = messages.value[messages.value.length - 1]
+  if (lastMessage && lastMessage.sender === 'assistant') {
+    const lastResult = concurrentAiService.getAllResults()
+    // 仅保留并发标签对应的结果（当前为 xsal）
+    const filtered = lastResult.filter((r) => concurrentLabels.value.some((l) => l.key === r.key))
+    lastMessage.concurrentResults = filtered
+    filtered.forEach((result) => (result.aiLoading = !result.isCompleted))
+    const allCompleted = filtered.every((result) => result.isCompleted)
+    if (allCompleted && !lastMessage.aiLoading) {
+      lastMessage.isLoading = false
+      globalState.administrativePenaltyAssistance.aiResults = messages.value
+    }
+  }
 }
 
 const setMessage = (
@@ -209,40 +292,29 @@ const setMessage = (
   isError: boolean = false,
 ) => {
   const lastMessage = messages.value[messages.value.length - 1]
+  if (!lastMessage || lastMessage.sender !== 'assistant') return
 
-  // 确保最后一条消息存在且是助手消息
-  if (!lastMessage || lastMessage.sender != 'assistant') {
-    return
-  }
-  // console.log('setMessage', messages.value, isDone, isThinking, lastMessage)
   if (isDone) {
-    if (isError) {
-      lastMessage.content = `${lastMessage.content}${message}`
-    }
+    if (isError) lastMessage.content = `${lastMessage.content}${message}`
     lastMessage.aiLoading = false
-    lastMessage.isLoading = false
-
-    // 确保 acrossTheEntireNetwork 对象存在
-    if (!globalState.administrativePenaltyAssistance) {
+    const allConcurrentCompleted =
+      lastMessage.concurrentResults?.every((result) => result.isCompleted) ?? true
+    if (allConcurrentCompleted) {
+      lastMessage.isLoading = false
       globalState.administrativePenaltyAssistance = {}
+      globalState.administrativePenaltyAssistance.aiResults = messages.value
+      globalState.administrativePenaltyAssistance.generalAiTime = Date.now()
     }
-
-    globalState.administrativePenaltyAssistance.aiResults = messages.value
-    globalState.administrativePenaltyAssistance.generalAiTime = Date.now()
     return
   }
 
-  // 根据isThinking参数决定更新思考过程还是正常内容
   if (isThinking) {
-    // 更新思考过程
     lastMessage.thinkingProcess = `${lastMessage.thinkingProcess || ''}${message}`
   } else {
-    // 更新正常内容和AI思考状态
-    lastMessage.aiLoading = false // 当开始输出正常内容时，思考状态结束
+    lastMessage.aiLoading = false
     lastMessage.content = `${lastMessage.content}${message}`
   }
 
-  // 只有在自动滚动开启且用户没有手动滚动时才自动滚动
   if (autoScroll.value && !userScrolled.value) {
     scrollToBottom()
   }
@@ -258,10 +330,133 @@ const scrollToBottom = () => {
 
 const addMessage = (content: string, sender: 'user' | 'assistant') => {
   messages.value.push({ content, sender })
-
-  // 只有在自动滚动开启且用户没有手动滚动时才自动滚动
   if (autoScroll.value && !userScrolled.value) {
     scrollToBottom()
   }
 }
+
+const getConcurrentResult = (
+  aiLoading: boolean,
+  results: ConcurrentResult[] | undefined,
+  key: string,
+): ConcurrentResult | undefined => {
+  if (!aiLoading) false
+  return results?.find((result) => result.key === key)
+}
+
+// 修正：相似案例的按钮禁用判断，兼容 data.json 的 "data= [...]" 格式
+const isConcurrentButtonDisabled = (message: any, key: string): boolean => {
+  if (!message.concurrentResults || message.concurrentResults.length === 0) return true
+  const result = message.concurrentResults.find((item: any) => item.key === key)
+  if (!result || !result.content) return true
+
+  const parsed = getParsedContent(result.content)
+  if (key === 'xsal') {
+    return !(Array.isArray(parsed) && parsed.length > 0)
+  }
+  return false
+}
+
+// 新增：解析并发内容（容错）
+const getParsedContent = (content: string) => {
+  if (!content) return ''
+  const str = String(content).trim()
+  isSimilarCases.value = true
+  try {
+    return JSON.parse(str)
+  } catch {}
+  const start = str.indexOf('{')
+  const end = str.lastIndexOf('}')
+  if (start !== -1 && end !== -1 && end > start) {
+    const jsonPart = str.slice(start, end + 1)
+    try {
+      return JSON.parse(jsonPart)
+    } catch {}
+  }
+  const eqIdx = str.indexOf('data=')
+  if (eqIdx !== -1) {
+    const maybe = str.slice(eqIdx + 5).trim()
+    try {
+      return JSON.parse(maybe)
+    } catch {}
+  }
+  return str
+}
+
+// 新增：切换折叠卡片
+const toggleConcurrentCard = (message: any, key: string) => {
+  if (isConcurrentButtonDisabled(message, key)) {
+    showNoDataTip.value = true
+    setTimeout(() => (showNoDataTip.value = false), 2000)
+    return
+  }
+  message.selectedConcurrentResult = message.selectedConcurrentResult === key ? '' : key
+}
+
+const newDialogue = () => {
+  messages.value = []
+  delete globalState.administrativePenaltyAssistance.aiResults
+  delete globalState.administrativePenaltyAssistance.generalAiTime
+  updateTitle('行政处罚辅助')
+}
+
+const getConcurrentLabelByKey = (key: string): string => {
+  const label = concurrentLabels.value.find((item) => item.key === key)
+  return label ? label.label : key
+}
+
+const getConcurrentContentByKey = (
+  results: ConcurrentResult[] | undefined,
+  key: string,
+): string => {
+  if (!results) return ''
+  const result = results.find((item) => item.key === key)
+  return result ? result.content : ''
+}
+
+// 新增：将任意值安全转为数组用于 v-for
+const toArray = (data: any): any[] => {
+  return Array.isArray(data) ? data : []
+}
+
+// 新增：每条案例展开/折叠状态管理
+const toggleCaseDetail = (message: any, idx: number) => {
+  if (!message._expandedMap) message._expandedMap = {}
+  message._expandedMap[idx] = !message._expandedMap[idx]
+}
+const isCaseExpanded = (message: any, idx: number): boolean => {
+  return !!(message._expandedMap && message._expandedMap[idx])
+}
+
+// 新增：高亮字段去掉 HTML 标签并合并展示
+const formatHighlight = (list: string[]) => {
+  const strip = (s: string) => s.replace(/<[^>]*>/g, '')
+  return strip(list.join('\n')).trim()
+}
 </script>
+
+<style scoped>
+/* 内容切换动画 */
+.content-fade-enter-active,
+.content-fade-leave-active {
+  transition: all 0.3s ease;
+}
+
+.content-fade-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.content-fade-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.content-fade-enter-to,
+.content-fade-leave-from {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* 其余样式保持不变 */
+</style>

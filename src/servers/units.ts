@@ -43,6 +43,7 @@ export function getApiKeyFromUrl(paramName: string = 'modelKey'): string {
     return processedKey
   }
   console.log('API Key 无需处理，返回原始值')
+
   return modelKey
 }
 
@@ -65,7 +66,9 @@ export function getUserIdFromUrl(paramName: string = 'userId'): string {
   } else {
     urlParams = new URLSearchParams(window.location.search)
   }
+
   const userId = urlParams.get(paramName)
+  // alert(userId)
   if (!userId) {
     console.warn(`URL 参数 ${paramName} 未找到`)
     return ''
@@ -79,24 +82,79 @@ export function numberOfInterceptions(msg: any) {
   const messageText =
     typeof msg === 'string' && msg.trim() ? msg : '您的免费次数已用用完，请充值后再使用。'
 
-  if (hasMiniProgram) {
-    const message = {
-      type: 'fromH5',
-      data: messageText,
-      action: 'updateUserInfo',
-    }
+  // 统一的消息载荷
+  const payload = {
+    type: 'fromH5',
+    data: messageText,
+    action: 'updateUserInfo',
+  }
+
+  // H5 通信：父窗口（iframe / 宿主容器）
+  const postToParent = () => {
     try {
-      ;(window as any).wx.miniProgram.postMessage({ data: [message] })
-      console.log('H5发送消息:', message)
-    } catch (error) {
-      return
+      if (
+        typeof window !== 'undefined' &&
+        window.parent &&
+        window.parent !== window &&
+        typeof window.parent.postMessage === 'function'
+      ) {
+        window.parent.postMessage(payload, '*')
+        console.log('H5向父窗口发送消息:', payload)
+      }
+    } catch (e) {
+      // 忽略父窗口通信错误
     }
+  }
+
+  // H5 通信：React Native WebView
+  const postToRN = () => {
+    try {
+      const rn = (window as any).ReactNativeWebView
+      if (rn && typeof rn.postMessage === 'function') {
+        rn.postMessage(JSON.stringify(payload))
+        console.log('H5向ReactNativeWebView发送消息:', payload)
+      }
+    } catch (e) {
+      // 忽略RN通信错误
+    }
+  }
+
+  // H5 通信：本页广播（供同域监听者使用）
+  const postToSelf = () => {
+    try {
+      if (typeof window.postMessage === 'function') {
+        window.postMessage(payload, '*')
+        console.log('H5在当前页广播消息:', payload)
+      }
+    } catch (e) {
+      // 忽略自广播错误
+    }
+  }
+
+  if (hasMiniProgram) {
+    // 保留原小程序通信逻辑
+    try {
+      ;(window as any).wx.miniProgram.postMessage({ data: [payload] })
+      console.log('H5发送消息到小程序:', payload)
+    } catch (error) {
+      // 小程序通信失败不影响 H5 通道
+    }
+
+    // 额外向H5宿主广播，便于宿主也能感知
+    postToParent()
+    postToRN()
+    postToSelf()
+
     setTimeout(() => {
       try {
         ;(window as any).wx.miniProgram.navigateBack()
       } catch (error) {}
     }, 200)
   } else {
+    // 非小程序环境：走H5通信并提示
+    postToParent()
+    postToRN()
+    postToSelf()
     alert(messageText)
   }
 }
