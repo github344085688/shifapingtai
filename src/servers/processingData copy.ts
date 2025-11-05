@@ -322,9 +322,6 @@ export class TextProcessor {
     // 将换行符转换为 <br> 标签
     let processedContent = content.replace(/\n/g, '<br>')
 
-    // 新增：处理带 <br> 的 "####"（确保只保留一个空行）
-    processedContent = processedContent.replace(/<br>\s*####\s*(?=<br>|$)/g, '<br>')
-
     // 新增：在处理标题之前，先清理单独的星号行
     processedContent = processedContent.replace(/<br>\s*\*\s*<br>/g, '<br>')
     processedContent = processedContent.replace(/^\s*\*\s*<br>/g, '')

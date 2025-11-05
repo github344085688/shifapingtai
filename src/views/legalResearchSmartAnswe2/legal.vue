@@ -47,15 +47,15 @@
       </template>
     </SendMessages>
 
-    <div class="max-w-[750px] mx-auto px-2.5 bg-gray-50 box-border">
-      <div class="pb-5" ref="chatContainer">
+    <div class="box-border px-2.5 mx-auto w-full bg-gray-50">
+      <div class="pb-5 w-full" ref="chatContainer">
         <div
           v-for="(message, index) in messages"
           :key="index"
-          :class="['my-[15px] flex', message.sender === 'user' ? 'justify-end' : 'justify-start']"
+          :class="['my-[15px] flex ', message.sender === 'user' ? 'justify-end' : 'justify-start']"
         >
           <div
-            class="relative rounded-xl markdown_text"
+            class="relative !w-full rounded-xl markdown_text"
             :class="[
               message.sender === 'user'
                 ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px] markdownUser'
@@ -66,7 +66,7 @@
             <!-- 思考过程显示 -->
             <div
               v-if="message.thinkingProcess"
-              class="mb-4 thinking-process"
+              class="mb-4 w-full thinking-process"
               v-html="message.thinkingProcess"
             ></div>
             <AiText :popsMessage="message" />

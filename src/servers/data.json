@@ -1,0 +1,415 @@
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328899,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "违法",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 24.898
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328899,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "、拒不",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 24.913
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328899,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "整改",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 24.928
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328899,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "或造成",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 24.976
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "患者损害",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 24.976
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "等情形，应",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 24.976
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "依法",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 24.991
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "从重处罚。",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.021
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "若",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.021
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "当事人",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.037
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "拒不改正，可",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.052
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "依法责令其",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.068
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "停止执业活动。",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.130
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": "[\"laws_1\"]",
+                "type": "citation"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "",
+                "type": "citation",
+                "text": ""
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.130
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "\n\n#### 四",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.145
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "、程序",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.161
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "正当性要求\n\n行政处罚",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.208
+message	{
+    "id": "ab3dffb97f5d4a45bf3a07614059c878",
+    "created": 1762328900,
+    "model": "gpt4",
+    "code": 1000,
+    "msg": null,
+    "choices": [
+        {
+            "index": 0,
+            "additional": {
+                "data": null,
+                "type": "answer"
+            },
+            "additionalHis": null,
+            "delta": {
+                "content": "必须严格",
+                "type": "answer"
+            },
+            "finish_reason": null
+        }
+    ]
+}	
+15: 48: 25.208

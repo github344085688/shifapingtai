@@ -331,10 +331,50 @@ class AIService {
                 if (additionalData.type === 'console' && additionalData.data === 'AI思考中……') {
                   continue
                 }
+
+                // 新增：屏蔽 citation 中包含 t2we*、laws1、laws_1 的ID；以及单行只有一个 “#”
+                const dataStrFilter = (additionalData.data || '').trim()
+                if (additionalData.type === 'citation') {
+                  const blockedExact = new Set(['laws1', 'laws_1'])
+                  const isBlockedId = (id: string) =>
+                    typeof id === 'string' &&
+                    (id.toLowerCase().startsWith('t2we') || blockedExact.has(id))
+
+                  let shouldBlock = false
+                  try {
+                    if (dataStrFilter.startsWith('[')) {
+                      const ids = JSON.parse(dataStrFilter)
+                      if (Array.isArray(ids)) {
+                        shouldBlock = ids.some((id) => isBlockedId(id))
+                      }
+                    }
+                  } catch {}
+
+                  // 解析失败时的兜底：直接字符串命中
+                  if (!shouldBlock) {
+                    if (/"t2we[^"]*"/i.test(dataStrFilter) || dataStrFilter.includes('laws_1') || dataStrFilter.includes('laws1')) {
+                      shouldBlock = true
+                    }
+                  }
+
+                  if (shouldBlock) {
+                    continue
+                  }
+                }
+
+                if (dataStrFilter === '#') {
+                  continue
+                }
+
                 switch (additionalData.type) {
                   case 'step':
                     // 处理 step 类型数据 - 属于"搜索过程"
                     const stepData = additionalData.data
+
+                    // 屏蔽单行 '#' 的 step
+                    if (stepData && String(stepData).trim() === '#') {
+                      continue
+                    }
 
                     // 先判断是否为换行符
                     if (stepData === '\n') {
@@ -455,6 +495,10 @@ class AIService {
                   case 'answer':
                     // 处理答案数据，添加"结果："前缀
                     let answerContent = json.choices[0]?.delta?.content || ''
+                    // 屏蔽单行 '#' 的 answer
+                    if (!answerContent || answerContent.trim() === '#') {
+                      break
+                    }
                     if (answerContent) {
                       // 对所有答案内容进行 processSearchResultContent 处理
                       answerContent = TextProcessor.processSearchResultContent(answerContent)

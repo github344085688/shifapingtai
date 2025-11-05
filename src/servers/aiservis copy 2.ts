@@ -1,14 +1,13 @@
 import MockAIService from './moni'
 import { TextProcessor } from './processingData'
-import { getApiKeyFromUrl } from './units'
+import { getApiKeyFromUrl, setTimes, interceptData } from './units'
 
 // 样式常量
 const STYLES = {
   THINKING_HEADER: 'color: #000000; margin: 8px 0;',
   THINKING_CONTENT:
     'background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px; text-gray-500 line-height: 1.6; color: #676666;',
-  ANSWER_HEADER:
-    'height: 70px; display: flex; align-items: center; font-weight: bold; color: #000000; font-size: 1.85rem; font-weight: 700;',
+  ANSWER_HEADER: 'display: flex; align-items: center; font-weight: bold; color: #000000; ',
   ERROR_STYLE: 'color: red; font-weight: bold;',
   WARNING_STYLE: 'color: orange; font-weight: bold;',
 }
@@ -17,7 +16,7 @@ const STYLES = {
 const MESSAGES = {
   SEARCH_START: '获取搜索结果：',
   THINKING_PROCESS: '<strong></strong>',
-  RESULT_HEADER: '<strong style="font-size: 1.85rem; font-weight: 700;">结果：</strong>',
+  RESULT_HEADER: ' ',
   SEARCH_KEYWORDS: '搜索关键词: ',
   SEARCH_PROCESS: '<strong>搜索过程：</strong>',
 }
@@ -53,6 +52,7 @@ class AIService {
   constructor(aiConfig: any) {
     this.aiConfig = aiConfig
     // 只在开发环境且 MockAIService 可用时创建实例
+
     this.mockService = import.meta.env.DEV && MockAIService ? new MockAIService(aiConfig) : null
   }
 
@@ -81,6 +81,10 @@ class AIService {
   }
 
   async sendToAI(message: any, callback: any, lastMessage: any) {
+    // console.log('import.meta.env.DEV2222222222', this.aiConfig)
+
+    // 在发送到 AI 之前先记录次数，确保 POST 成功后再继续
+    if (this.aiConfig.isTimer) await setTimes()
     let systemMessages = [
       {
         role: 'system',
@@ -100,7 +104,7 @@ class AIService {
       })
     }
     const KeyFromUrl = getApiKeyFromUrl()
-    console.log('paramsBody------------------------', KeyFromUrl)
+    // console.log('paramsBody------------------------', KeyFromUrl)
     try {
       const response = await fetch(this.aiConfig.api, {
         method: 'POST',
@@ -117,7 +121,11 @@ class AIService {
         }),
         signal: signal,
       })
-
+      const Intercepted: any = await interceptData(response)
+      if (Intercepted && Intercepted.code === 500) {
+        callback(Intercepted.msg, true, false, true)
+        return
+      }
       // 检查HTTP状态码
       if (!response.ok) {
         if (response.status === 504) {
@@ -217,6 +225,7 @@ class AIService {
     lastMessage?: any,
     hasShownSearchProcessHeader?: boolean,
   ) {
+    // numberOfInterceptions('')
     const reader = response.body.getReader()
     const decoder = new TextDecoder()
     let buffer = ''
@@ -233,14 +242,33 @@ class AIService {
         }
 
         buffer += decoder.decode(value, { stream: true })
+
+        // 清理缓冲区中的无效字符
+        buffer = buffer.replace(/\r/g, '')
+
         // 按事件分割数据（每个事件以 \n\n 结尾）
         const chunks = buffer.split('\n\n')
         if (chunks[0]) {
           // 检查是否包含错误代码401
-          if (countershu === 0 && chunks[0].includes('"code":401')) {
-            const errorData = JSON.parse(chunks[0])
-            callback(this.createStyledMessage(errorData.message, STYLES.ERROR_STYLE), true, false)
-            return
+          if (
+            countershu === 0 &&
+            chunks[0].includes('"code":401') &&
+            !chunks[0].startsWith('retry:')
+          ) {
+            const firstChunkData = chunks[0].replace(/^data:\s*/, '').trim()
+            if (firstChunkData && firstChunkData.startsWith('{')) {
+              try {
+                const errorData = JSON.parse(firstChunkData)
+                callback(
+                  this.createStyledMessage(errorData.message, STYLES.ERROR_STYLE),
+                  true,
+                  false,
+                )
+                return
+              } catch (e) {
+                console.warn('Failed to parse error data:', e)
+              }
+            }
           }
         }
 
@@ -248,6 +276,16 @@ class AIService {
         countershu++
 
         for (const chunk of chunks) {
+          // 跳过空chunk或只包含空白字符的chunk
+          if (!chunk || !chunk.trim()) {
+            continue
+          }
+
+          // 跳过 retry: 行
+          if (chunk.startsWith('retry:')) {
+            continue
+          }
+
           const eventData = chunk.replace(/^data:\s*/, '').trim()
           if (!eventData) continue
 
@@ -255,8 +293,21 @@ class AIService {
             callback(null, true, false) // 标记流结束
             continue
           }
+
+          // 验证是否为有效的JSON格式（必须以{开头）
+          if (!eventData.startsWith('{')) {
+            console.warn('Skipping non-JSON data:', eventData.substring(0, 50))
+            continue
+          }
+
           try {
-            const json = JSON.parse(eventData)
+            // 使用专门的SSE JSON解析方法
+            const json = this.parseSSEJsonData(eventData)
+
+            // 如果解析失败，跳过这个chunk
+            if (!json) {
+              continue
+            }
             // 检查模型是否包含 "gpt" 字符串或者是 "fyllm" 模型
             const model = json.model || this.aiConfig.model || ''
             const isGptModel =
@@ -350,7 +401,12 @@ class AIService {
                     // 处理搜索结果数据，只显示 content 内容
                     if (additionalData.data && additionalData.data.trim()) {
                       try {
-                        const resData = JSON.parse(additionalData.data)
+                        const dataStr = additionalData.data.trim()
+                        if (!dataStr.startsWith('{') && !dataStr.startsWith('[')) {
+                          console.warn('Skipping non-JSON additionalData:', dataStr)
+                          break
+                        }
+                        const resData = JSON.parse(dataStr)
                         if (resData.content) {
                           let formattedContent = resData.content.replace(/\\n/g, '\n')
 
@@ -418,7 +474,12 @@ class AIService {
                   case 'queries':
                     // 搜索查询语句
                     try {
-                      const queries = JSON.parse(additionalData.data)
+                      const dataStr = additionalData.data.trim()
+                      if (!dataStr.startsWith('[') && !dataStr.startsWith('{')) {
+                        console.warn('Skipping non-JSON queries data:', dataStr)
+                        break
+                      }
+                      const queries = JSON.parse(dataStr)
                       if (Array.isArray(queries) && queries.length > 0) {
                         hasShownThinkingHeader = this.handleMessageWithHeader(
                           `${MESSAGES.SEARCH_KEYWORDS}${queries.join(', ')}`,
@@ -436,7 +497,12 @@ class AIService {
                     // 处理法条数据
                     if (additionalData.data && additionalData.data.trim()) {
                       try {
-                        const lawData = JSON.parse(additionalData.data)
+                        const dataStr = additionalData.data.trim()
+                        if (!dataStr.startsWith('{') && !dataStr.startsWith('[')) {
+                          console.warn('Skipping non-JSON law data:', dataStr)
+                          break
+                        }
+                        const lawData = JSON.parse(dataStr)
                         const formattedContent = TextProcessor.processLawContent(lawData)
                         const contentDiv = `<div style="${STYLES.THINKING_CONTENT}">${formattedContent}</div>`
 
@@ -455,7 +521,12 @@ class AIService {
                     // 处理网络搜索数据
                     if (additionalData.data && additionalData.data.trim()) {
                       try {
-                        const webData = JSON.parse(additionalData.data)
+                        const dataStr = additionalData.data.trim()
+                        if (!dataStr.startsWith('{') && !dataStr.startsWith('[')) {
+                          console.warn('Skipping non-JSON web data:', dataStr)
+                          break
+                        }
+                        const webData = JSON.parse(dataStr)
                         const formattedContent = TextProcessor.processWebContent(webData)
                         const contentDiv = `<div style="${STYLES.THINKING_CONTENT}">${formattedContent}</div>`
 
@@ -518,7 +589,14 @@ class AIService {
               callback(processedContent, false, false)
             }
           } catch (e) {
-            // console.error('解析 JSON 失败:', e)
+            console.error('解析 JSON 失败:', {
+              error: e,
+              eventData: eventData.substring(0, 200),
+              position: eventData.length,
+              chunk: chunk.substring(0, 100),
+            })
+            // 继续处理下一个chunk，不中断整个流程
+            continue
           }
         }
       }
@@ -558,6 +636,62 @@ class AIService {
   private isWebSearchInterface(): boolean {
     const webSearchKeys = ['qwsswd'] // 全网搜索问答
     return webSearchKeys.includes(this.aiConfig.key)
+  }
+
+  /**
+   * 解析SSE数据流中的JSON数据
+   * @param eventData 原始事件数据
+   * @returns 解析后的JSON对象或null
+   */
+  private parseSSEJsonData(eventData: string): any | null {
+    try {
+      // 清理数据
+      let cleanData = eventData.trim()
+
+      // 移除可能的前缀
+      if (cleanData.startsWith('data:')) {
+        cleanData = cleanData.substring(5).trim()
+      }
+
+      // 检查是否为空或特殊标记
+      if (!cleanData || cleanData === '[DONE]') {
+        return null
+      }
+
+      // 验证JSON格式
+      if (!cleanData.startsWith('{')) {
+        return null
+      }
+
+      // 查找完整的JSON对象
+      let braceCount = 0
+      let jsonEnd = -1
+
+      for (let i = 0; i < cleanData.length; i++) {
+        if (cleanData[i] === '{') {
+          braceCount++
+        } else if (cleanData[i] === '}') {
+          braceCount--
+          if (braceCount === 0) {
+            jsonEnd = i
+            break
+          }
+        }
+      }
+
+      if (jsonEnd === -1) {
+        return null
+      }
+
+      const jsonString = cleanData.substring(0, jsonEnd + 1)
+      return JSON.parse(jsonString)
+    } catch (error) {
+      console.warn('Failed to parse SSE JSON data:', {
+        error: error,
+        data: eventData.substring(0, 100),
+      })
+      return null
+    }
   }
 
   // 修改：处理法律接口的答案内容 - 统一使用 processSearchResultContent

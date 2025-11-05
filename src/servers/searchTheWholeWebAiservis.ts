@@ -684,8 +684,15 @@ class AIService {
   }
 
   private processHtmlContent(content: string): string {
+    // ... existing code ...
+    // 新增：将独立的 "####" 转换为单独的空白行
+    content = content.replace(/^\s*####\s*$/gm, '\n')
+
     // 将换行符转换为 <br> 标签
     let processedContent = content.replace(/\n/g, '<br>')
+
+    // 新增：处理带 <br> 的 "####"（确保只保留一个空行）
+    processedContent = processedContent.replace(/<br>\s*####\s*(?=<br>|$)/g, '<br>')
 
     // 清理不需要的标签
     processedContent = processedContent
