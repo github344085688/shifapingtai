@@ -151,53 +151,6 @@
                       </div>
                     </template>
 
-                    <!-- 新增：网络观点（data.web） -->
-                    <template
-                      v-else-if="
-                        result.key === 'wlgd' &&
-                        Array.isArray(getParsedContent(result.content)?.web)
-                      "
-                    >
-                      <div
-                        v-for="(webItem, wIdx) in getParsedContent(result.content).web"
-                        :key="wIdx"
-                        class="mb-2 bg-white rounded-lg border border-gray-200"
-                      >
-                        <details>
-                          <summary
-                            class="flex justify-between items-center px-3 py-2 cursor-pointer hover:bg-gray-50"
-                          >
-                            <div class="flex-1">
-                              <div class="text-[15px] font-medium text-gray-800">
-                                {{ webItem.title || '网络观点' }}
-                              </div>
-                              <div class="mt-1 text-xs text-gray-600 break-all">
-                                {{ cleanUrl(webItem.url) }}
-                              </div>
-                            </div>
-                            <span v-if="webItem.score" class="ml-2 text-xs text-gray-500">
-                              相关性: {{ (Number(webItem.score || 0) * 100).toFixed(1) }}%
-                            </span>
-                          </summary>
-                          <div class="px-3 pb-3">
-                            <div class="mt-2 leading-relaxed text-gray-700 whitespace-pre-wrap">
-                              {{ webItem.content }}
-                            </div>
-                            <div class="mt-2">
-                              <a
-                                v-if="webItem.url"
-                                :href="cleanUrl(webItem.url)"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-flex items-center mr-4 text-blue-600 underline break-all hover:text-blue-800"
-                                >查看原文</a
-                              >
-                            </div>
-                          </div>
-                        </details>
-                      </div>
-                    </template>
-
                     <!-- 专用：裁判观点（data.expertview） -->
                     <template
                       v-else-if="
@@ -233,7 +186,7 @@
                       </div>
                     </template>
 
-                    <!-- 更新：相似案例（按内容分块折叠） -->
+                    <!-- 专用：相似案例（数组结构） -->
                     <template
                       v-else-if="
                         result.key === 'xsal' && Array.isArray(getParsedContent(result.content))
@@ -242,159 +195,101 @@
                       <div
                         v-for="(caseItem, index) in getParsedContent(result.content)"
                         :key="index"
-                        class="mb-2 bg-white rounded-lg border border-gray-200"
+                        class="p-4 mb-4 bg-white rounded-lg border border-gray-200 shadow-sm"
                       >
-                        <details>
-                          <summary
-                            class="flex justify-between items-center px-3 py-2 cursor-pointer hover:bg-gray-50"
-                          >
-                            <div class="flex-1">
-                              <div class="text-[15px] font-medium text-gray-800">
-                                {{ caseItem.title }}
-                              </div>
-                            </div>
-                          </summary>
-
-                          <div class="px-3 pb-3">
-                            <div class="mb-4">
-                              <div class="flex flex-wrap gap-2 m2-1">
-                                <span
-                                  v-if="caseItem.caseid"
-                                  class="px-2 py-1 text-blue-800 bg-blue-100 rounded-full"
-                                  >{{ caseItem.caseid }}</span
-                                >
-                                <span
-                                  v-if="caseItem.court"
-                                  class="px-2 py-1 text-green-800 bg-green-100 rounded-full"
-                                  >{{ caseItem.court }}</span
-                                >
-                                <span
-                                  v-if="caseItem.judgedate"
-                                  class="px-2 py-1 text-purple-800 bg-purple-100 rounded-full"
-                                  >{{ caseItem.judgedate }}</span
-                                >
-                                <span
-                                  v-if="caseItem.procedure"
-                                  class="px-2 py-1 text-pink-800 bg-pink-100 rounded-full"
-                                  >{{ caseItem.procedure }}</span
-                                >
-                              </div>
-                              <div class="flex flex-wrap gap-2">
-                                <span
-                                  v-if="caseItem.typeofcase"
-                                  class="px-2 py-1 text-gray-800 bg-gray-100 rounded-full"
-                                  >{{ caseItem.typeofcase }}</span
-                                >
-                                <span
-                                  v-if="caseItem.causeofaction"
-                                  class="px-2 py-1 text-gray-800 bg-gray-100 rounded-full"
-                                  >{{ caseItem.causeofaction }}</span
-                                >
-                                <span
-                                  v-if="caseItem.level"
-                                  class="px-2 py-1 text-gray-800 bg-gray-100 rounded-full"
-                                  >{{ caseItem.level }}</span
-                                >
-                              </div>
-                            </div>
-
-                            <div v-if="caseItem.abstract" class="mb-3">
-                              <details>
-                                <summary class="px-3 py-2 rounded cursor-pointer hover:bg-gray-50">
-                                  <span class="text-[15px] font-medium text-gray-800"
-                                    >案件摘要</span
-                                  >
-                                </summary>
-                                <div
-                                  class="px-3 pb-2 leading-relaxed text-gray-700 whitespace-pre-wrap"
-                                >
-                                  {{ caseItem.abstract }}
-                                </div>
-                              </details>
-                            </div>
-
-                            <div
-                              v-if="caseItem.applicablelaw && caseItem.applicablelaw.length > 0"
-                              class="mb-3"
+                        <div class="pb-3 mb-4 border-b border-gray-100">
+                          <h4 class="mb-2 text-lg font-semibold leading-tight text-gray-800">
+                            {{ caseItem.title }}
+                          </h4>
+                          <div class="flex flex-wrap gap-2">
+                            <span class="px-2 py-1 text-blue-800 bg-blue-100 rounded-full">{{
+                              caseItem.caseid
+                            }}</span>
+                            <span class="px-2 py-1 text-green-800 bg-green-100 rounded-full">{{
+                              caseItem.court
+                            }}</span>
+                            <span class="px-2 py-1 text-purple-800 bg-purple-100 rounded-full">{{
+                              caseItem.judgedate
+                            }}</span>
+                            <span
+                              v-if="caseItem.procedure"
+                              class="px-2 py-1 text-pink-800 bg-pink-100 rounded-full"
+                              >{{ caseItem.procedure }}</span
                             >
-                              <details>
-                                <summary class="px-3 py-2 rounded cursor-pointer hover:bg-gray-50">
-                                  <span class="text-[15px] font-medium text-gray-800"
-                                    >适用法律条文</span
-                                  >
-                                </summary>
-                                <div class="px-3 pb-2 space-y-1">
-                                  <div
-                                    v-for="(law, lawIndex) in caseItem.applicablelaw"
-                                    :key="lawIndex"
-                                    class="p-2 pl-3 text-gray-600 bg-blue-50 rounded-r border-l-2 border-blue-200"
-                                  >
-                                    {{ law }}
-                                  </div>
-                                </div>
-                              </details>
-                            </div>
+                          </div>
+                        </div>
 
-                            <div
-                              v-if="
-                                caseItem.applicablelawonly && caseItem.applicablelawonly.length > 0
-                              "
-                              class="mb-3"
+                        <div class="mb-4">
+                          <div class="flex flex-wrap gap-2">
+                            <span
+                              v-if="caseItem.typeofcase"
+                              class="px-2 py-1 text-gray-800 bg-gray-100 rounded-full"
+                              >{{ caseItem.typeofcase }}</span
                             >
-                              <details>
-                                <summary class="px-3 py-2 rounded cursor-pointer hover:bg-gray-50">
-                                  <span class="text-[15px] font-medium text-gray-800"
-                                    >涉及法律法规</span
-                                  >
-                                </summary>
-                                <div class="flex flex-wrap gap-2 px-3 pb-2">
-                                  <span
-                                    v-for="(lawName, lawIndex) in caseItem.applicablelawonly"
-                                    :key="lawIndex"
-                                    class="px-2 py-1 text-blue-800 bg-blue-100 rounded-full"
-                                    >{{ lawName }}</span
-                                  >
-                                </div>
-                              </details>
-                            </div>
+                            <span
+                              v-if="caseItem.causeofaction"
+                              class="px-2 py-1 text-gray-800 bg-gray-100 rounded-full"
+                              >{{ caseItem.causeofaction }}</span
+                            >
+                            <span
+                              v-if="caseItem.level"
+                              class="px-2 py-1 text-gray-800 bg-gray-100 rounded-full"
+                              >{{ caseItem.level }}</span
+                            >
+                          </div>
+                        </div>
 
-                            <div
-                              v-if="caseItem.highlight_list && caseItem.highlight_list.length > 0"
-                              class="mb-3"
-                            >
-                              <details>
-                                <summary class="px-3 py-2 rounded cursor-pointer hover:bg-gray-50">
-                                  <span class="text-[15px] font-medium text-gray-800"
-                                    >高亮节选</span
-                                  >
-                                </summary>
-                                <div class="px-3 pb-2 space-y-2">
-                                  <div
-                                    v-for="(hl, hIdx) in caseItem.highlight_list"
-                                    :key="hIdx"
-                                    class="leading-relaxed text-gray-700"
-                                  >
-                                    <span v-html="hl"></span>
-                                  </div>
-                                </div>
-                              </details>
-                            </div>
+                        <div
+                          v-if="caseItem.abstract"
+                          class="mb-3 leading-relaxed text-gray-700 whitespace-pre-wrap"
+                        >
+                          {{ caseItem.abstract }}
+                        </div>
 
+                        <div
+                          v-if="caseItem.applicablelaw && caseItem.applicablelaw.length > 0"
+                          class="mb-4"
+                        >
+                          <h5 class="mb-2 font-medium text-gray-700">适用法律条文:</h5>
+                          <div class="space-y-1">
                             <div
-                              class="flex justify-between items-center pt-3 border-t border-gray-100"
+                              v-for="(law, lawIndex) in caseItem.applicablelaw"
+                              :key="lawIndex"
+                              class="p-2 pl-3 text-gray-600 bg-blue-50 rounded-r border-l-2 border-blue-200"
                             >
-                              <div class="flex flex-wrap gap-2 text-xs text-gray-500">
-                                <span>案件编号: {{ caseItem.uniqid }}</span>
-                                <span>•</span>
-                                <span>数据来源: {{ caseItem.database }}</span>
-                                <span v-if="caseItem.judgeyear">•</span>
-                                <span v-if="caseItem.judgeyear"
-                                  >判决年份: {{ caseItem.judgeyear }}</span
-                                >
-                              </div>
+                              {{ law }}
                             </div>
                           </div>
-                        </details>
+                        </div>
+
+                        <div
+                          v-if="caseItem.applicablelawonly && caseItem.applicablelawonly.length > 0"
+                          class="mb-4"
+                        >
+                          <h5 class="mb-2 font-medium text-gray-700">涉及法律法规:</h5>
+                          <div class="flex flex-wrap gap-2">
+                            <span
+                              v-for="(lawName, lawIndex) in caseItem.applicablelawonly"
+                              :key="lawIndex"
+                              class="px-2 py-1 text-blue-800 bg-blue-100 rounded-full"
+                              >{{ lawName }}</span
+                            >
+                          </div>
+                        </div>
+
+                        <div
+                          class="flex justify-between items-center pt-3 border-t border-gray-100"
+                        >
+                          <div class="flex flex-wrap gap-2 text-xs text-gray-500">
+                            <span>案件编号: {{ caseItem.uniqid }}</span>
+                            <span>•</span>
+                            <span>数据来源: {{ caseItem.database }}</span>
+                            <span v-if="caseItem.judgeyear">•</span>
+                            <span v-if="caseItem.judgeyear"
+                              >判决年份: {{ caseItem.judgeyear }}</span
+                            >
+                          </div>
+                        </div>
                       </div>
                     </template>
 
@@ -440,6 +335,7 @@
                         </details>
                       </div>
                     </template>
+
                     <template
                       v-else-if="
                         typeof getParsedContent(result.content) === 'object' &&
@@ -775,72 +671,13 @@ const isConcurrentButtonDisabled = (message: any, key: string): boolean => {
   return false
 }
 
-// 新增：解析包含加粗标题的 HTML 为分段数组
-const htmlToText = (s: string): string => {
-  return s
-    .replace(/<br\s*\/?>/gi, '\n')
-    .replace(/<hr[^>]*>/gi, '\n----------------\n')
-    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
-    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
-    .replace(/<[^>]+>/g, '')
-    .replace(/\u00A0/g, ' ')
-    .replace(/\s+\n/g, '\n')
-    .replace(/\n{3,}/g, '\n\n')
-    .trim()
-}
-
-const parseHtmlSections = (html: string): Array<{ title: string; content: string }> => {
-  if (!html) return []
-  const normalized = String(html)
-  const titleRegex = /<div[^>]*style="[^"]*font-weight:\s*bold[^"]*"[^>]*>([\s\S]*?)<\/div>/gi
-
-  const sections: Array<{ title: string; contentStart: number }> = []
-  let match: RegExpExecArray | null
-  titleRegex.lastIndex = 0
-
-  while ((match = titleRegex.exec(normalized)) !== null) {
-    const rawTitle = match[1]
-    const title = htmlToText(rawTitle)
-    const contentStart = titleRegex.lastIndex
-    sections.push({ title, contentStart })
-  }
-
-  const results: Array<{ title: string; content: string }> = []
-  for (let i = 0; i < sections.length; i++) {
-    const { title, contentStart } = sections[i]
-    const nextStart = i + 1 < sections.length ? sections[i + 1].contentStart : normalized.length
-    const rawContent = normalized.slice(contentStart, nextStart)
-    const content = htmlToText(rawContent)
-    if (title || content) {
-      results.push({ title, content })
-    }
-  }
-
-  // 若未匹配到任何加粗标题，但仍有内容，则尝试用第一行作为标题
-  if (results.length === 0) {
-    const asText = htmlToText(normalized)
-    const lines = asText.split('\n').filter((l) => l.trim() !== '')
-    if (lines.length > 0) {
-      const title = lines[0]
-      const content = lines.slice(1).join('\n')
-      results.push({ title, content })
-    }
-  }
-
-  return results
-}
-
 // 新增：解析并发内容（容错）
 const getParsedContent = (content: string) => {
   if (!content) return ''
   const str = String(content).trim()
-
-  // 1) 尝试直接 JSON
   try {
     return JSON.parse(str)
   } catch {}
-
-  // 2) 提取包裹的 JSON（如 “xxx { ... } yyy”）
   const start = str.indexOf('{')
   const end = str.lastIndexOf('}')
   if (start !== -1 && end !== -1 && end > start) {
@@ -849,8 +686,6 @@ const getParsedContent = (content: string) => {
       return JSON.parse(jsonPart)
     } catch {}
   }
-
-  // 3) 提取 “data=” 后的 JSON
   const eqIdx = str.indexOf('data=')
   if (eqIdx !== -1) {
     const maybe = str.slice(eqIdx + 5).trim()
@@ -858,14 +693,6 @@ const getParsedContent = (content: string) => {
       return JSON.parse(maybe)
     } catch {}
   }
-
-  // 4) 解析包含加粗标题的 HTML 为数组（用于 wlgd / xgft 等）
-  if (/<div[^>]*style="[^"]*font-weight:\s*bold/i.test(str)) {
-    const sections = parseHtmlSections(str)
-    if (sections.length > 0) return sections
-  }
-
-  // 5) 返回原始字符串（模板中以 v-html 或纯文本展示）
   return str
 }
 
@@ -898,27 +725,6 @@ const getConcurrentContentByKey = (
   if (!results) return ''
   const result = results.find((item) => item.key === key)
   return result ? result.content : ''
-}
-
-const groupCasesByDate = (
-  list: Array<Record<string, any>>,
-): Array<{ date: string; cases: Array<Record<string, any>> }> => {
-  if (!Array.isArray(list)) return []
-  const groups: Record<string, Array<Record<string, any>>> = {}
-  const order: string[] = []
-
-  for (const item of list) {
-    const raw = String(item?.judgedate || '').trim()
-    // 规范到 yyyy-mm-dd（若为空则归类到 '未知日期'）
-    const key = raw ? raw.slice(0, 10) : '未知日期'
-    if (!groups[key]) {
-      groups[key] = []
-      order.push(key)
-    }
-    groups[key].push(item)
-  }
-
-  return order.map((date) => ({ date, cases: groups[date] }))
 }
 </script>
 

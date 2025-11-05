@@ -351,8 +351,8 @@ watch(inputValue, (newValue) => {
 
 // 处理发送消息
 const handleSendMessage = () => {
-  numberOfInterceptions({ code: 401, data: null, msg: '账号未登录' })
-  return
+  // numberOfInterceptions({ code: 401, data: null, msg: '账号未登录' })
+  // return
   // 判断 claim 有没有值，如果有则拼接，没有则直接使用 inputValue
   if (!claim.value && !inputValue.value) {
     return
