@@ -131,7 +131,7 @@ class ConcurrentAIService {
         body: JSON.stringify(requestBody),
         signal: signal,
       })
-      alert('请求成功')
+      // alert('请求成功')
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)

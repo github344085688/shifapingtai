@@ -289,6 +289,7 @@
 <script setup lang="ts">
 import { isShallow, ref, watch, computed, onMounted } from 'vue'
 import FileContentExtractor from '@/components/sendMessages/FileContentExtractor.vue'
+import { getApiKeyFromUrl, numberOfInterceptions } from '@/servers/units'
 // Props
 interface Props {
   messagesLength: number
@@ -350,6 +351,8 @@ watch(inputValue, (newValue) => {
 
 // 处理发送消息
 const handleSendMessage = () => {
+  numberOfInterceptions({ code: 401, data: null, msg: '账号未登录' })
+  return
   // 判断 claim 有没有值，如果有则拼接，没有则直接使用 inputValue
   if (!claim.value && !inputValue.value) {
     return
@@ -371,18 +374,17 @@ const handleNewDialogue = () => {
 
 // 是否为 H5 环境：根据 URL 参数 h5=1 决定
 const isH5 = ref(false)
+const model = ref()
 
 onMounted(() => {
   const params = new URLSearchParams(window.location.search)
   isH5.value = params.get('h5') === '1'
+  model.value = params.get('model')
 })
 
-// 点击返回时向当前页广播 navback
+// 点击返回时向当前页、父窗口、RN、小程序广播 navback
 const handleH5Back = () => {
-  const payload = 'navback'
-  if (typeof window.postMessage === 'function') {
-    window.postMessage(payload, '*')
-    console.log('H5在当前页广播消息:', payload)
-  }
+  numberOfInterceptions({ code: '点击', data: model.value, msg: '点击返回' })
+  return
 }
 </script>

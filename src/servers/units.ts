@@ -81,12 +81,21 @@ export function numberOfInterceptions(msg: any) {
   const hasMiniProgram = hasWx && (window as any).wx.miniProgram
   const messageText =
     typeof msg === 'string' && msg.trim() ? msg : '您的免费次数已用用完，请充值后再使用。'
-
   // 统一的消息载荷
-  const payload = {
-    type: 'fromH5',
-    data: messageText,
-    action: 'updateUserInfo',
+  let payload = {}
+  if (msg.code === '点击') {
+    // alert(msg.code)
+    payload = {
+      type: 'fromH5',
+      data: msg,
+      action: 'click',
+    }
+  } else {
+    payload = {
+      type: 'fromH5',
+      data: messageText,
+      action: 'updateUserInfo',
+    }
   }
 
   // H5 通信：父窗口（iframe / 宿主容器）
