@@ -1,5 +1,35 @@
 <template>
   <div class="min-h-screen bg-gray-50">
+    <div
+      class="flex px-4 h-[85rpx] justify-start items-center bg-white shadow-[0_1px_3px_rgba(0,0,0,0.05)]"
+    >
+      <!-- Logo -->
+      <div
+        v-if="isH5"
+        class="w-[60rpx] h-[60rpx] mr-4 rounded-full flex items-center justify-center cursor-pointer"
+        @click="handleH5Back"
+      >
+        <div class="w-[32px] h-[32px]">
+          <svg
+            t="1762162915985"
+            class="icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="2069"
+            width="28"
+            height="28"
+          >
+            <path
+              d="M481.233 904c8.189 0 16.379-3.124 22.628-9.372 12.496-12.497 12.496-32.759 0-45.256L166.488 512l337.373-337.373c12.496-12.497 12.496-32.758 0-45.255-12.498-12.497-32.758-12.497-45.256 0l-360 360c-12.496 12.497-12.496 32.758 0 45.255l360 360c6.249 6.249 14.439 9.373 22.628 9.373z"
+              fill=""
+              p-id="2070"
+            ></path>
+          </svg>
+        </div>
+      </div>
+      <div class="text-gray-400 flex items-end text-[14px]">内容由AI生成，仅供参考</div>
+    </div>
     <div class="p-3 mx-auto max-w-4xl">
       <!-- Header -->
       <!-- <div class="bg-white rounded-xl p-6 mb-6 shadow-[0_2px_8px_rgba(0,0,0,0.05)]">
@@ -586,7 +616,7 @@ import { ref, onMounted, computed, onUnmounted, watch } from 'vue'
 import { useTitle } from '@/composables/useTitle'
 import { BigDataAssessmentService } from '@/servers/aiservisDsjsspgbg'
 import FileContentExtractor from '@/components/sendMessages/FileContentExtractor.vue'
-
+import { numberOfInterceptions } from '@/servers/units'
 // 设置页面标题
 useTitle('大数据胜诉评估报告')
 
@@ -610,6 +640,8 @@ const generateReportButton = ref<HTMLElement | null>(null) // 生成报告按钮
 const showScrollButton = ref(false) // 是否显示滚动按钮
 const showProvincePicker = ref(false) // 是否显示省份选择器
 const provinceSearchQuery = ref('') // 省份搜索关键词
+const isH5 = ref() // 省份搜索关键词
+const model = ref() // 省份搜索关键词
 const selectedProvince = ref<{ label: string; value: string } | null>(null) // 当前选中的省份
 
 // 省份数据
@@ -750,6 +782,9 @@ const handleScroll = () => {
 
 // 页面加载时的初始化
 onMounted(async () => {
+  const params = new URLSearchParams(window.location.search)
+  isH5.value = params.get('h5') === '1'
+  model.value = params.get('model')
   console.log('页面已加载，等待用户生成报告')
 
   // 添加滚动事件监听
@@ -834,6 +869,11 @@ const handleAssessmentCallback = async (
     console.log('接收到部分数据:', content)
   }
 }
+
+const handleH5Back = () => {
+  numberOfInterceptions({ code: '点击', data: model.value, msg: '点击返回' })
+  return
+}
 </script>
 
 <style scoped>
@@ -841,10 +881,6 @@ const handleAssessmentCallback = async (
 .loader_item {
   width: 20px;
   height: 20px;
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #e23338;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {

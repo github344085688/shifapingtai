@@ -338,9 +338,14 @@ class AIService {
               model.toLowerCase().includes('gpt') || model.toLowerCase().includes('fyllm')
 
             if (isGptModel) {
-              // 如果是 GPT 模型或 fyllm 模型，使用增强逻辑处理推理数据、搜索结果数据、材料数据
+              // 新增：统一跳过无 delta.content 或为空字符串的消息
+              const deltaContentRaw = json.choices?.[0]?.delta?.content
+              const hasDeltaContent =
+                typeof deltaContentRaw === 'string' ? deltaContentRaw.trim().length > 0 : !!deltaContentRaw
+              if (!hasDeltaContent) {
+                continue
+              }
 
-              // 处理思考和推理数据
               const additionalData = json.choices[0]?.additional
               if (additionalData) {
                 // 移除对 step 类型的跳过处理，只排除其他不需要的类型
@@ -513,15 +518,16 @@ class AIService {
               const deltaType = json.choices[0]?.delta?.type
 
               if (content && deltaType !== 'answer') {
-                // 实时输出内容
-                callback(content, false, false) // 第三个参数为false表示这是正常内容
+                callback(content, false, false)
               }
             } else {
               // 如果不是 GPT 模型，使用原有的简单逻辑
               const content =
                 json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
-              // 实时输出内容
-              callback(content, false, false)
+              const processedContent = content ? content : ''
+              if (processedContent && processedContent.trim()) {
+                callback(processedContent, false, false)
+              }
             }
           } catch (e) {
             console.error('解析 JSON 失败:', e)

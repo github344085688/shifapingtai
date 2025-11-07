@@ -5,7 +5,7 @@
   >
     <div
       v-if="isH5"
-      class="w-[70rpx] h-[70rpx] rounded-full pl-4 flex items-center justify-center cursor-pointer"
+      class="w-[60rpx] h-[60rpx] rounded-full pl-4 flex items-center justify-center cursor-pointer"
       @click="handleH5Back"
     >
       <div class="w-[32px] h-[32px]">
@@ -197,7 +197,7 @@
           </div>
           <div
             v-if="isH5"
-            class="w-[70rpx] h-[70rpx] fixed top-[18px] left-[10px] rounded-full pl-4 flex items-center justify-center cursor-pointer"
+            class="w-[60rpx] h-[60rpx] fixed top-[18px] left-[10px] rounded-full pl-4 flex items-center justify-center cursor-pointer"
             @click="handleH5Back"
           >
             <div class="w-[32px] h-[32px]">
@@ -220,7 +220,7 @@
             </div>
           </div>
           <div class="absolute bottom-[50px] text-gray-400 flex items-end text-[14px]">
-            内容由AI生成，仅供参考ss
+            内容由AI生成，仅供参考
           </div>
         </div>
       </div>
@@ -290,6 +290,10 @@
 import { isShallow, ref, watch, computed, onMounted } from 'vue'
 import FileContentExtractor from '@/components/sendMessages/FileContentExtractor.vue'
 import { getApiKeyFromUrl, numberOfInterceptions } from '@/servers/units'
+import { status } from 'juejin-state'
+
+const state = status()
+const globalState = state.state
 // Props
 interface Props {
   messagesLength: number
@@ -379,6 +383,7 @@ const model = ref()
 onMounted(() => {
   const params = new URLSearchParams(window.location.search)
   isH5.value = params.get('h5') === '1'
+  globalState.environment = isH5.value ? 'h5' : 'noh5'
   model.value = params.get('model')
 })
 

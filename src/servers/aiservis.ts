@@ -317,9 +317,15 @@ class AIService {
             const isLegalInterface = this.isLegalInterface()
 
             if (isGptModel || isLegalInterface) {
-              // 如果是 GPT 模型、fyllm 模型或法律接口，使用增强逻辑处理推理数据、搜索结果数据、材料数据
+              // 新增：统一跳过无 delta.content 或为空字符串的消息
+              const deltaContentRaw = json.choices?.[0]?.delta?.content
+              const hasDeltaContent =
+                typeof deltaContentRaw === 'string' ? deltaContentRaw.trim().length > 0 : !!deltaContentRaw
+              if (!hasDeltaContent) {
+                continue
+              }
 
-              // 处理思考和推理数据
+              // 如果是 GPT 模型、fyllm 模型或法律接口，使用增强逻辑处理推理数据、搜索结果数据、材料数据
               const additionalData = json.choices[0]?.additional
               if (additionalData) {
                 // 移除对 step 类型的跳过处理，只排除其他不需要的类型
@@ -624,13 +630,12 @@ class AIService {
               const content =
                 json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
 
-              // 使用 TextProcessor 进行文字处理
-              const processedContent = content
-                ? TextProcessor.processSearchResultContent(content)
-                : content
-
-              // 实时输出内容
-              callback(processedContent, false, false)
+              // 使用 TextProcessor 进行文字处理（仅在有内容时）
+              const processedContent = content ? TextProcessor.processSearchResultContent(content) : ''
+              if (processedContent && processedContent.trim()) {
+                // 实时输出内容
+                callback(processedContent, false, false)
+              }
             }
           } catch (e) {
             console.error('解析 JSON 失败:', {

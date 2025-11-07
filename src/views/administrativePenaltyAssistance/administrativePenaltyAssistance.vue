@@ -37,13 +37,55 @@
             <!-- 相似案例：卡片内折叠（移除整体折叠头） -->
             <div v-if="message.concurrentResults && message.concurrentResults.length" class="mt-3">
               <div class="overflow-hidden bg-white rounded-lg">
-                <div class="p-2 text-gray-700 truncate bg-gray-200" v-if="isSimilarCases">
-                  相似案例
+                <div
+                  class="flex items-center p-2 text-gray-700 truncate bg-gray-200"
+                  v-if="isSimilarCases"
+                >
+                  <span>相似案例</span>
+                  <!-- 加载中 -->
+                  <span
+                    v-if="
+                      getConcurrentResult(message.aiLoading, message.concurrentResults, 'xsalgnfx')
+                        ?.aiLoading
+                    "
+                    class="flex items-center ml-2 text-xs text-gray-500"
+                  >
+                    <span class="mr-1 loader_item"></span>加载中
+                  </span>
+                  <!-- 接口错误 -->
+                  <span
+                    v-if="
+                      getConcurrentResult(message.aiLoading, message.concurrentResults, 'xsalgnfx')
+                        ?.error
+                    "
+                    class="ml-2 text-xs text-red-600"
+                  >
+                    接口错误
+                  </span>
+                  <!-- 暂无数据 -->
+                  <span
+                    v-if="
+                      !getConcurrentResult(message.aiLoading, message.concurrentResults, 'xsalgnfx')
+                        ?.aiLoading &&
+                      !getConcurrentResult(message.aiLoading, message.concurrentResults, 'xsalgnfx')
+                        ?.error &&
+                      toArray(
+                        getParsedContent(
+                          getConcurrentContentByKey(message.concurrentResults, 'xsalgnfx'),
+                        ),
+                      ).length === 0
+                    "
+                    class="ml-2 text-xs text-gray-400"
+                  >
+                    暂无数据
+                  </span>
                 </div>
 
                 <div
                   v-for="(item, i) in toArray(
-                    getParsedContent(getConcurrentContentByKey(message.concurrentResults, 'xsal')),
+                    getParsedContent(
+                      getConcurrentContentByKey(message.concurrentResults, 'xsalgnfx'),
+                    ),
                   )"
                   :key="item.uniqid || i"
                   class="overflow-hidden bg-white border-gray-200 border-b-[1px] border-solid"
@@ -64,25 +106,33 @@
                         transform: isCaseExpanded(message, i) ? 'rotate(180deg)' : 'rotate(0deg)',
                       }"
                     >
-                      <path
-                        d="M593.066667 793.6a32.170667 32.170667 0 0 1 0-45.226667L829.44 512 593.066667 275.626667a32.170667 32.170667 0 0 1 0-45.226667c12.373333-12.373333 32.853333-12.373333 45.226666 0l258.986667 258.986667c12.373333 12.373333 12.373333 32.853333 0 45.226666l-258.986667 258.986667c-6.4 6.4-14.506667 9.386667-22.613333 9.386667s-16.213333-2.986667-22.613333-9.386667z"
-                        fill="#bfbfbf"
-                      ></path>
+                      <path fill="currentColor" d="M512 640L192 320h640L512 640z" />
                     </svg>
                   </div>
-                  <!-- 卡片内容：折叠详情 -->
                   <transition name="content-fade">
                     <div
-                      v-if="isCaseExpanded(message, i)"
-                      class="px-3 pb-3 text-sm leading-loose text-gray-600"
+                      v-show="isCaseExpanded(message, i)"
+                      class="px-3 pb-3 text-sm text-gray-700"
                     >
-                      <div v-if="item.casecause">案由：{{ item.casecause }}</div>
-                      <div v-if="item.caseid">案号：{{ item.caseid }}</div>
-                      <div v-if="item.court">法院：{{ item.court }}</div>
-                      <div v-if="item.judgedate">裁判日期：{{ item.judgedate }}</div>
-                      <div v-if="item.province">省份：{{ item.province }}</div>
-                      <div v-if="item.chunk || item.summyByrw" class="mt-1">
-                        摘要：{{ (item.summyByrw || item.chunk || '').trim() }}
+                      <div class="text-gray-600">
+                        来源：<a
+                          :href="cleanUrl(item.link)"
+                          class="text-blue-600 underline"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          >{{ cleanUrl(item.link) }}</a
+                        >
+                        <span
+                          v-if="isWeixinUrl(item.link)"
+                          class="px-1.5 py-0.5 ml-2 text-xs text-green-600 bg-green-100 rounded"
+                          >微信</span
+                        >
+                        <button
+                          class="ml-2 text-xs text-gray-500 underline hover:text-gray-700"
+                          @click.stop="copyToClipboard(cleanUrl(item.link))"
+                        >
+                          复制链接
+                        </button>
                       </div>
                       <div v-if="item.highlight_list && item.highlight_list.length" class="mt-1">
                         选摘：{{ formatHighlight(item.highlight_list) }}
@@ -166,7 +216,7 @@ const handleUserScroll = () => {
   }
 }
 
-const concurrentLabels = ref([{ key: 'xsal', label: '相似案例' }])
+const concurrentLabels = ref([{ key: 'xsalgnfx', label: '相似案例' }])
 
 // 复制成功提示/无数据提示
 const showCopySuccess = ref(false)
@@ -273,7 +323,7 @@ const handleConcurrentCallback = (
   const lastMessage = messages.value[messages.value.length - 1]
   if (lastMessage && lastMessage.sender === 'assistant') {
     const lastResult = concurrentAiService.getAllResults()
-    // 仅保留并发标签对应的结果（当前为 xsal）
+    // 仅保留并发标签对应的结果（当前为 xsalgnfx
     const filtered = lastResult.filter((r) => concurrentLabels.value.some((l) => l.key === r.key))
     lastMessage.concurrentResults = filtered
     filtered.forEach((result) => (result.aiLoading = !result.isCompleted))
@@ -351,7 +401,7 @@ const isConcurrentButtonDisabled = (message: any, key: string): boolean => {
   if (!result || !result.content) return true
 
   const parsed = getParsedContent(result.content)
-  if (key === 'xsal') {
+  if (key === 'xsalgnfx') {
     return !(Array.isArray(parsed) && parsed.length > 0)
   }
   return false
@@ -457,6 +507,4 @@ const formatHighlight = (list: string[]) => {
   opacity: 1;
   transform: translateX(0);
 }
-
-/* 其余样式保持不变 */
 </style>
