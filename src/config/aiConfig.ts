@@ -27,7 +27,7 @@ const apiMap = {
   xzzfzs: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzzfzs', //行政执法助手
   xzfcfz: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzfcfz', //行政处罚辅助
   xsalgnfx: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsalgnfx', //行政处理相似案例相似案例归纳分析
-  involvedDepartments: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/involvedDepartments', //涉及部门
+  involvedDepartments: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzzfbmyc', //涉及部门
 }
 
 // 定义API配置接口
