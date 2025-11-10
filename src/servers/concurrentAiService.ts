@@ -1,3 +1,4 @@
+// class ConcurrentAIService
 import aiConfig, { concurrentApis } from '@/config/aiConfig'
 import { TextProcessor } from './processingData'
 import { getApiKeyFromUrl } from './units'
@@ -20,11 +21,13 @@ class ConcurrentAIService {
   private apiKey: string
   private model: string
   private results: Map<string, ConcurrentResult>
+  private activeApis: Array<(typeof concurrentApis)[keyof typeof concurrentApis]> = []
 
   constructor(apiKey?: string) {
     this.apiKey = apiKey || aiConfig.apiKey
     this.model = aiConfig.model
     this.results = new Map()
+    this.activeApis = []
 
     // 初始化结果对象
     Object.values(concurrentApis).forEach((apiConfig) => {
@@ -39,25 +42,53 @@ class ConcurrentAIService {
     })
   }
 
-  // 获取所有结果
+  // 获取所有结果（仅返回本次激活的 API 对应的结果）
   getAllResults(): ConcurrentResult[] {
-    return Array.from(this.results.values())
+    // 安全保护：activeApis 未设置则回退到现有结果
+    if (!this.activeApis || this.activeApis.length === 0) {
+      return Array.from(this.results.values())
+    }
+    return this.activeApis
+      .map((api) => this.results.get(api.key))
+      .filter((r): r is ConcurrentResult => !!r)
   }
 
   // 并发调用所有API - 改为循环处理
-  async sendConcurrentRequests(message: any, callback: ConcurrentCallback): Promise<void> {
-    // 重置所有结果状态
-    Object.values(concurrentApis).forEach((apiConfig) => {
+  async sendConcurrentRequests(
+    message: any,
+    callback: ConcurrentCallback,
+    labels?: Array<{ key: string; label: string }>,
+  ): Promise<void> {
+    // 根据传入的 labels 映射到并发 API 配置；若未传则默认全部
+    const selectedApis =
+      labels && labels.length > 0
+        ? labels
+            .map((l) => concurrentApis[l.key])
+            .filter((cfg): cfg is (typeof concurrentApis)[keyof typeof concurrentApis] => !!cfg)
+        : Object.values(concurrentApis)
+
+    this.activeApis = selectedApis
+
+    selectedApis.forEach((apiConfig) => {
+      if (!this.results.has(apiConfig.key)) {
+        this.results.set(apiConfig.key, {
+          key: apiConfig.key,
+          name: apiConfig.name,
+          content: '',
+          isLoading: false,
+          isCompleted: false,
+          aiLoading: false,
+        })
+      }
       const result = this.results.get(apiConfig.key)!
       result.isLoading = true
       result.isCompleted = false
-      result.aiLoading = true // 设置aiLoading为true
+      result.aiLoading = true
       result.content = ''
       result.error = undefined
     })
 
-    // 循环处理每个API，每个API独立处理
-    Object.values(concurrentApis).forEach((apiConfig) => {
+    selectedApis.forEach((apiConfig) => {
       this.sendSingleRequest(apiConfig, message, callback)
     })
   }

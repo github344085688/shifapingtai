@@ -27,6 +27,7 @@ const apiMap = {
   xzzfzs: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzzfzs', //行政执法助手
   xzfcfz: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzfcfz', //行政处罚辅助
   xsalgnfx: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsalgnfx', //行政处理相似案例相似案例归纳分析
+  involvedDepartments: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/involvedDepartments', //涉及部门
 }
 
 // 定义API配置接口
@@ -104,6 +105,12 @@ export const concurrentApis: Record<string, ApiConfig> = {
     key: 'xsalgnfx',
     name: '行政处理相似案例',
     api: apiMap.xsalgnfx,
+    top_k: 20,
+  },
+  involvedDepartments: {
+    key: 'involvedDepartments',
+    name: '涉及部门',
+    api: apiMap.involvedDepartments,
     top_k: 20,
   },
 }

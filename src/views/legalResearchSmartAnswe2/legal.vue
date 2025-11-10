@@ -1359,7 +1359,7 @@ const handleExampleClick = (question: string) => {
 
 const sendMessages = async () => {
   const message = userInput.value
-  if (message === '') return
+  if (!message) return
 
   autoScroll.value = true
   userScrolled.value = false
@@ -1379,7 +1379,11 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   aiService.sendToAI(newMessage, setMessage)
-  await concurrentAiService.sendConcurrentRequests(newMessage, handleConcurrentCallback)
+  await concurrentAiService.sendConcurrentRequests(
+    newMessage,
+    handleConcurrentCallback,
+    concurrentLabels.value,
+  )
 
   userInput.value = ''
 }
