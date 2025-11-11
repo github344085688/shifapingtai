@@ -1684,6 +1684,26 @@ const isSectionNoData = (result: ConcurrentResult): boolean => {
       return !result.content || result.content.trim() === ''
     }
   }
+  // 新增：相似疑问（data.qa）空态判断
+  if (result.key === 'xsyw') {
+    try {
+      const parsed = getParsedContent(result.content) as any
+      const arr = parsed?.qa
+      return !Array.isArray(arr) || arr.length === 0
+    } catch {
+      return true
+    }
+  }
+  // 新增：实务研究（data.t2wechat 或 data.data.t2wechat）空态判断
+  if (result.key === 'swyj') {
+    try {
+      const parsed = getParsedContent(result.content) as any
+      const arr = parsed?.t2wechat || parsed?.data?.t2wechat
+      return !Array.isArray(arr) || arr.length === 0
+    } catch {
+      return true
+    }
+  }
   // 其他栏目：内容为空或仅空白
   return !result.content || result.content.trim() === ''
 }
