@@ -80,7 +80,7 @@ class AIService {
     )
   }
 
-  async sendToAI(message: any, callback: any, lastMessage: any) {
+  async sendToAI(message: any, callback: any, lastMessage: any = null) {
     // console.log('import.meta.env.DEV2222222222', this.aiConfig)
 
     // 在发送到 AI 之前先记录次数，确保 POST 成功后再继续
@@ -320,7 +320,9 @@ class AIService {
               // 新增：统一跳过无 delta.content 或为空字符串的消息
               const deltaContentRaw = json.choices?.[0]?.delta?.content
               const hasDeltaContent =
-                typeof deltaContentRaw === 'string' ? deltaContentRaw.trim().length > 0 : !!deltaContentRaw
+                typeof deltaContentRaw === 'string'
+                  ? deltaContentRaw.trim().length > 0
+                  : !!deltaContentRaw
               if (!hasDeltaContent) {
                 continue
               }
@@ -358,7 +360,11 @@ class AIService {
 
                   // 解析失败时的兜底：直接字符串命中
                   if (!shouldBlock) {
-                    if (/"t2we[^"]*"/i.test(dataStrFilter) || dataStrFilter.includes('laws_1') || dataStrFilter.includes('laws1')) {
+                    if (
+                      /"t2we[^"]*"/i.test(dataStrFilter) ||
+                      dataStrFilter.includes('laws_1') ||
+                      dataStrFilter.includes('laws1')
+                    ) {
                       shouldBlock = true
                     }
                   }
@@ -631,7 +637,9 @@ class AIService {
                 json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
 
               // 使用 TextProcessor 进行文字处理（仅在有内容时）
-              const processedContent = content ? TextProcessor.processSearchResultContent(content) : ''
+              const processedContent = content
+                ? TextProcessor.processSearchResultContent(content)
+                : ''
               if (processedContent && processedContent.trim()) {
                 // 实时输出内容
                 callback(processedContent, false, false)

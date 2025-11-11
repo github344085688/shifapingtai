@@ -1388,22 +1388,73 @@ const sendMessages = async () => {
   userInput.value = ''
 }
 
+// const handleConcurrentCallback = (
+//   key: string,
+//   content: string,
+//   isCompleted: boolean,
+//   error?: string,
+// ) => {
+//   const lastMessage = messages.value[messages.value.length - 1]
+//   if (lastMessage && lastMessage.sender === 'assistant') {
+//     const lastResult = concurrentAiService.getAllResults()
+//     lastMessage.concurrentResults = lastResult
+//     lastResult.forEach((result) => (result.aiLoading = !result.isCompleted))
+//     const allCompleted = lastResult.every((result) => result.isCompleted)
+//     if (allCompleted && !lastMessage.aiLoading) {
+//       lastMessage.isLoading = false
+//       globalState.legalResearchSmartAnswer.aiResults = messages.value
+//     }
+//   }
+// }
+
 const handleConcurrentCallback = (
   key: string,
   content: string,
   isCompleted: boolean,
   error?: string,
 ) => {
-  const lastMessage = messages.value[messages.value.length - 1]
-  if (lastMessage && lastMessage.sender === 'assistant') {
-    const lastResult = concurrentAiService.getAllResults()
-    lastMessage.concurrentResults = lastResult
-    lastResult.forEach((result) => (result.aiLoading = !result.isCompleted))
-    const allCompleted = lastResult.every((result) => result.isCompleted)
-    if (allCompleted && !lastMessage.aiLoading) {
-      lastMessage.isLoading = false
-      globalState.legalResearchSmartAnswer.aiResults = messages.value
+  const currentMessages = messages.value
+  const lastIndex = currentMessages.length - 1
+  const lastMessage = currentMessages[lastIndex]
+
+  // 仅处理最后一条且是 assistant 的消息
+  if (!lastMessage || lastMessage.sender !== 'assistant') return
+
+  // 从服务获取结果，但做不可变克隆与更新
+  const serviceResults = concurrentAiService.getAllResults()
+  const updatedResults = serviceResults.map((r: any) => {
+    if (r.key === key) {
+      return {
+        ...r,
+        // content: content ?? r.content,
+        isCompleted: isCompleted ?? r.isCompleted,
+        error: error ?? r.error,
+        aiLoading: !(isCompleted ?? r.isCompleted),
+      }
     }
+    return {
+      ...r,
+      aiLoading: !r.isCompleted,
+    }
+  })
+
+  const allCompleted = updatedResults.every((r: any) => r.isCompleted)
+
+  // 只更新最后一条消息的内容与状态（不可变替换）
+  const updatedLastMessage = {
+    ...lastMessage,
+    // content: content ? (lastMessage.content || '') + content : lastMessage.content,
+    concurrentResults: updatedResults,
+    isLoading: !allCompleted,
+    aiLoading: !allCompleted,
+  }
+
+  // 不改变原有数据结构，只替换最后一条
+  messages.value = [...currentMessages.slice(0, lastIndex), updatedLastMessage]
+
+  // 全部完成后再写入全局结果
+  if (allCompleted) {
+    globalState.legalResearchSmartAnswer.aiResults = messages.value
   }
 }
 

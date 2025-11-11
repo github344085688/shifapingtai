@@ -112,6 +112,7 @@ export const concurrentApis: Record<string, ApiConfig> = {
     name: '涉及部门',
     api: apiMap.involvedDepartments,
     top_k: 20,
+    dataField: 'departments',
   },
 }
 //法律问题咨询
