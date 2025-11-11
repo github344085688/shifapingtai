@@ -1388,25 +1388,6 @@ const sendMessages = async () => {
   userInput.value = ''
 }
 
-// const handleConcurrentCallback = (
-//   key: string,
-//   content: string,
-//   isCompleted: boolean,
-//   error?: string,
-// ) => {
-//   const lastMessage = messages.value[messages.value.length - 1]
-//   if (lastMessage && lastMessage.sender === 'assistant') {
-//     const lastResult = concurrentAiService.getAllResults()
-//     lastMessage.concurrentResults = lastResult
-//     lastResult.forEach((result) => (result.aiLoading = !result.isCompleted))
-//     const allCompleted = lastResult.every((result) => result.isCompleted)
-//     if (allCompleted && !lastMessage.aiLoading) {
-//       lastMessage.isLoading = false
-//       globalState.legalResearchSmartAnswer.aiResults = messages.value
-//     }
-//   }
-// }
-
 const handleConcurrentCallback = (
   key: string,
   content: string,
