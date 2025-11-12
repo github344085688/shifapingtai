@@ -80,12 +80,13 @@
               >
                 <button
                   type="button"
-                  class="flex justify-between items-center px-3 py-2 w-full text左"
+                  class="flex justify-between items-center px-3 py-2 w-full text-left"
                   :class="
-                    isConcurrentButtonDisabled(message, result.key)
+                    isSectionNoData(result)
                       ? 'cursor-not-allowed text-gray-400'
                       : 'cursor-pointer hover:bg-gray-50'
                   "
+                  :disabled="isSectionNoData(result)"
                   @click="toggleConcurrentCard(message, result.key)"
                 >
                   <span>{{
@@ -99,9 +100,11 @@
                     v-if="result.aiLoading"
                     class="flex items-center ml-2 text-xs text-gray-500"
                   >
-                    <span class="mr-1 loader_item"></span>加载中
+                    <span class="mr-1 loader_item"></span>正在加载...
                   </span>
-                  <span v-else-if="result.error" class="ml-2 text-xs text-red-600"> 接口错误 </span>
+                  <span v-else-if="result.error" class="ml-2 text-xs text-gray-400">
+                    接口错误
+                  </span>
                   <span v-else-if="isSectionNoData(result)" class="ml-2 text-xs text-gray-400">
                     暂无数据 </span
                   ><template>
@@ -1502,6 +1505,7 @@ const isConcurrentButtonDisabled = (message: any, key: string): boolean => {
   if (!message.concurrentResults || message.concurrentResults.length === 0) return true
   const result = message.concurrentResults.find((item: any) => item.key === key)
   if (!result || !result.content) return true
+  if (result.error) return true
 
   switch (key) {
     case 'xsyw':

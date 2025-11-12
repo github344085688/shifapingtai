@@ -25,15 +25,224 @@ export class TextProcessor {
       .replace(/\\n/g, '\n')
       .replace(/\\\"/g, '"')
 
-    // 修复数字顿号处理：1、2、3、等
-    processedContent = processedContent.replace(/([*]?)([0-9]+)、/g, (match, asterisk, number) => {
-      return `<br>${asterisk}${number}、`
-    })
+    // 处理 "---\n\n" 转为断行
+    processedContent = processedContent.replace(/---\n\n/g, '<br>')
+
+    // 新增：预处理拆分的编号与孤立的点
+    processedContent = processedContent
+      // 将“数字 + 换行/<br> + .”合并为“数字.”
+      .replace(/([0-9]+)\s*(?:\r?\n|<br>)\s*\./g, '$1.')
+      // 将“数字. + 换行/<br>”也收敛为“数字.”
+      .replace(/([0-9]+)\.\s*(?:\r?\n|<br>)/g, '$1.')
+      // 合并“中文数字 + 换行/<br> + 、”为“中文数字、”
+      .replace(/([一二三四五六七八九十百千万]+)\s*(?:\r?\n|<br>)\s*、/g, '$1、')
+      // 合并“阿拉伯数字 + 换行/<br> + 、”为“数字、”
+      .replace(/([0-9]+)\s*(?:\r?\n|<br>)\s*、/g, '$1、')
+      // 合并“### + 空格 + 中文数字 + 换行/<br> + 、”为“### 中文数字、”
+      .replace(/(#{1,6})\s*(?:\r?\n|<br>)\s*([一二三四五六七八九十百千万]+)\s*、/g, '$1 $2、')
+      // 移除单独一行的句点（孤立的 .）
+      .replace(/(?:^|<br>|\r?\n)\s*\.(?=(<br>|\r?\n|$))/g, '')
+      // 压缩连续英文点“..”为“.”
+      .replace(/\.{2,}/g, '.')
+
+    // 处理编号格式的断行（并缩进两个中文全角空格：　　）
+    // 一、二、三等（前面带标点符号）
+    processedContent = processedContent.replace(
+      /([*]?)([一二三四五六七八九十]+)、/g,
+      (match, asterisk, number, offset, string) => {
+        // 避免在 Markdown 标题 "### 一、" 中断行
+        const prev = string.slice(Math.max(0, offset - 5), offset)
+        if (/#/.test(prev)) return match
+        return `<br>　　${asterisk}${number}、`
+      },
+    )
+
+    // 第一步、第二步、第三步等
+    processedContent = processedContent.replace(
+      /([*]?)第([一二三四五六七八九十]+|[0-9]+)步，/g,
+      (match, asterisk, number, offset, string) => {
+        const prev = string.slice(Math.max(0, offset - 5), offset)
+        if (/#/.test(prev)) return match
+        return `<br>　　${asterisk}第${number}步，`
+      },
+    )
+
+    // 处理 \n（一）、\n（二）、\n（三）等格式
+    processedContent = processedContent.replace(
+      /\\n（([一二三四五六七八九十]+)）/g,
+      (match, number) => {
+        return `<br>　　（${number}）`
+      },
+    )
+
+    // 1. 2. 3. 等（排除时间格式）- 同时处理有空格和无空格的情况
+    processedContent = processedContent.replace(
+      /([*]?)([0-9]+)\.(\s|(?=[\u4e00-\u9fff]))/g,
+      (match, asterisk, number, spaceOrChinese, offset, string) => {
+        const beforeChar = string[offset - 1]
+        const afterChars = string.substring(offset + match.length, offset + match.length + 3)
+        // 避免时间格式
+        if (/[0-9:]/.test(beforeChar) || /[0-9]{2}:/.test(afterChars)) {
+          return match
+        }
+        // 避免在 Markdown 标题 "### 1." 中断行
+        const prev = string.slice(Math.max(0, offset - 5), offset)
+        if (/#/.test(prev)) return match
+        return `<br>　　${asterisk}${number}.${spaceOrChinese}`
+      },
+    )
+
+    // 1.， 2.。 3.； 等数字+点+中文标点
+    processedContent = processedContent.replace(
+      /([*]?)([0-9]+)\.([，。；：])/g,
+      (match, asterisk, number, punctuation, offset, string) => {
+        const beforeChar = string[offset - 1]
+        if (/[0-9:]/.test(beforeChar)) {
+          return match
+        }
+        const prev = string.slice(Math.max(0, offset - 5), offset)
+        if (/#/.test(prev)) return match
+        return `<br>　　${asterisk}${number}.${punctuation}`
+      },
+    )
+
+    // （一）（二）（三）等
+    processedContent = processedContent.replace(
+      /([*]?)（([一二三四五六七八九十]+)）/g,
+      (match, asterisk, number) => {
+        return `<br>　　${asterisk}（${number}）`
+      },
+    )
+
+    // （一）、（二），（三）； 等（带标点）
+    processedContent = processedContent.replace(
+      /([*]?)（([一二三四五六七八九十]+)）([，。；：、])/g,
+      (match, asterisk, number, punctuation, offset, string) => {
+        const beforeChar = string[offset - 1]
+        if (
+          /[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z]/.test(
+            beforeChar,
+          )
+        ) {
+          return `<br>　　${asterisk}（${number}）${punctuation}`
+        }
+        return match
+      },
+    )
+
+    // 冒号后的中文编号：（一）：（二）：等
+    processedContent = processedContent.replace(
+      /([*]?)（([一二三四五六七八九十]+)）[:：]/g,
+      (match, asterisk, number, offset, string) => {
+        const beforeChar = string[offset - 1]
+        if (
+          /[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z]/.test(
+            beforeChar,
+          )
+        ) {
+          return `<br>　　${asterisk}（${number}）：`
+        }
+        return match
+      },
+    )
+
+    // (1) (2) (3) 等阿拉伯数字括号格式
+    processedContent = processedContent.replace(
+      /([*]?)(\([0-9]+\))/g,
+      (match, asterisk, number, offset, string) => {
+        const beforeChar = string[offset - 1]
+        if (
+          /[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z]/.test(
+            beforeChar,
+          )
+        ) {
+          return `<br>　　${asterisk}${number}`
+        }
+        return match
+      },
+    )
+
+    // 标点符号 + （数字）格式：。（1）、，（2）、；（3）等（半角/全角数字皆可）
+    processedContent = processedContent.replace(
+      /([。，、；：！？""''）】》])(\([1-9１-９][0-9０-９]*\))/g,
+      (match, punctuation, numberPart) => {
+        return `${punctuation}<br>　　${numberPart}`
+      },
+    )
+
+    // (1), (2). (3)， 等括号 + 标点符号格式
+    processedContent = processedContent.replace(
+      /([*]?)(\([0-9]+\))([，。；：,.])/g,
+      (match, asterisk, number, punctuation, offset, string) => {
+        const beforeChar = string[offset - 1]
+        if (
+          /[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z]/.test(
+            beforeChar,
+          )
+        ) {
+          return `<br>　　${asterisk}${number}${punctuation}`
+        }
+        return match
+      },
+    )
+
+    // 数字编号处理：1，2，3，等（排除时间）
+    processedContent = processedContent.replace(
+      /([*]?)([0-9]+)，/g,
+      (match, asterisk, number, offset, string) => {
+        const beforeChar = string[offset - 1]
+        const afterChars = string.substring(offset + match.length, offset + match.length + 3)
+        if (/[0-9:]/.test(beforeChar) || /[0-9]{2}:/.test(afterChars)) {
+          return match
+        }
+        const prev = string.slice(Math.max(0, offset - 5), offset)
+        if (/#/.test(prev)) return match
+        return `<br>　　${asterisk}${number}，`
+      },
+    )
+
+    // 数字顿号处理：1、2、3、等（统一断行）
+    processedContent = processedContent.replace(
+      /([*]?)([0-9]+)、/g,
+      (match, asterisk, number, offset, string) => {
+        const prev = string.slice(Math.max(0, offset - 5), offset)
+        if (/#/.test(prev)) return match
+        return `<br>　　${asterisk}${number}、`
+      },
+    )
+
+    // 圆圈数字编号 ①②③④⑤⑥⑦⑧⑨⑩…
+    processedContent = processedContent.replace(
+      /([*]?)([①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳])/g,
+      (match, asterisk, circleNumber, offset, string) => {
+        const beforeChar = string[offset - 1]
+        if (
+          /[\u4e00-\u9fff\u3000-\u303f\uff00-\uffef。，、；：！？""''（）【】《》a-zA-Z]/.test(
+            beforeChar,
+          )
+        ) {
+          return `<br>　　${asterisk}${circleNumber}`
+        }
+        return `<br>　　${asterisk}${circleNumber}`
+      },
+    )
+
+    // 第一、第二等
+    processedContent = processedContent.replace(
+      /([*]?)第([一二三四五六七八九十]+)/g,
+      (match, asterisk, number, offset, string) => {
+        const prev = string.slice(Math.max(0, offset - 5), offset)
+        if (/#/.test(prev)) return match
+        return `<br>　　${asterisk}第${number}`
+      },
+    )
+
+    // 编号处理后压缩连续中文标点
+    processedContent = processedContent.replace(/([，。；：、]){2,}/g, '$1')
 
     // 处理 HTML 内容
     processedContent = this.processHtmlContent(processedContent)
 
-    // 如果有 title，添加灰黑色样式并另起一行
     if (title && title.trim()) {
       const titleHtml = `<div style="  font-weight: bold; margin-bottom: 8px; line-height: 1.4;">${title}</div>`
       processedContent = titleHtml + processedContent
@@ -53,12 +262,6 @@ export class TextProcessor {
 
     // 新增：处理带 <br> 的 "####"（确保只保留一个空行）
     processedContent = processedContent.replace(/<br>\s*####\s*(?=<br>|$)/g, '<br>')
-
-    // 新增：在处理标题之前，先清理单独的星号行
-    // processedContent = processedContent.replace(/<br>\s*\*\s*<br>/g, '<br>')
-    // processedContent = processedContent.replace(/^\s*\*\s*<br>/g, '')
-    // processedContent = processedContent.replace(/<br>\s*\*\s*$/g, '<br>')
-    // processedContent = processedContent.replace(/^\s*\*\s*$/gm, '')
 
     // 处理 Markdown 标题格式
     // ### 三级标题
@@ -128,13 +331,6 @@ export class TextProcessor {
       '<br><strong>$1</strong>',
     )
 
-    // 清理不需要的标签
-    // processedContent = processedContent
-    //   .replace(/<img[^>]*>/gi, '') // 去掉 img 标签
-    //   .replace(/<a[^>]*>(.*?)<\/a>/gi, '$1') // 去掉 a 标签但保留文本内容
-    //   .replace(/<url[^>]*>(.*?)<\/url>/gi, '$1') // 去掉 url 相关的标签
-    //   .replace(/<(?!\/?(?:p|h[1-6]|ul|ol|li|strong|b|em|i|br|div|span)\b)[^>]*>/gi, '') // 移除不允许的标签但保留内容
-
     // 去除 URL 链接（http/https）
     processedContent = processedContent.replace(/https?:\/\/[^\s<>"']+/gi, '') // 去掉 http 和 https 链接
 
@@ -142,25 +338,10 @@ export class TextProcessor {
     processedContent = processedContent
       .replace(/来源[:：]\s*/gi, '') // 去掉"来源："或"来源："
       .replace(/来源/gi, '') // 去掉单独的"来源"
-      .replace(/['"]?https?:[^'"]*['"]?/gi, '') // 去掉所有包含http/https的内容，不管有没有引号
-      .replace(/['"]?http:[^'"]*['"]?/gi, '') // 去掉所有包含http的内容，不管有没有引号
+      .replace(/['"]?https?:[^'"]*['"]?/gi, '') // 去掉所有包含http/https的内容
+      .replace(/['"]?http:[^'"]*['"]?/gi, '') // 去掉所有包含http的内容
       .replace(/https?:xxx/gi, '') // 去掉http:xxx和https:xxx格式
       .replace(/http:xxx/gi, '') // 去掉http:xxx格式
-
-    // // 防止法律文件标题中的编号在《》内断行
-    // processedContent = processedContent.replace(
-    //   /《([^》]*?)(<br>|<br\s*\/?>)(\([一二三四五六七八九十]+\))/gi,
-    //   '《$1$3',
-    // )
-    // processedContent = processedContent.replace(/《([^》]*?)(<br>|<br\s*\/?>)(\(\d+\))/gi, '《$1$3')
-    // processedContent = processedContent.replace(
-    //   /《([^》]*?)(<br>|<br\s*\/?>)([^》]*?\([一二三四五六七八九十]+\)[^》]*?)》/gi,
-    //   '《$1$3》',
-    // )
-    // processedContent = processedContent.replace(
-    //   /《([^》]*?)(<br>|<br\s*\/?>)([^》]*?)》/gi,
-    //   '《$1$3》',
-    // )
 
     // 去除邮箱地址
     processedContent = processedContent.replace(
@@ -206,70 +387,6 @@ export class TextProcessor {
       .replace(/Android版iPhone版iPad版/gi, '')
       .replace(/微博公众号抖音号/gi, '')
       .replace(/派生万物/gi, '')
-
-    // 清理多余的空白字符和标点符号
-    // processedContent = processedContent
-    //   .replace(/\s+/g, ' ')
-    //   .replace(/(<br>\s*){2,}/gi, '<br>')
-    //   .replace(/[:：]\s*$/gi, '')
-    //   .replace(/^\s*[:：]/gi, '')
-    //   .trim()
-
-    // // 新增：处理连续的 <br><br> 中间没有内容的情况，去掉一个
-    // processedContent = processedContent.replace(/<br>\s*<br>/gi, '<br>')
-
-    // // 基础文本清理
-    // processedContent = processedContent.replace(/\\n/g, '\n').trim()
-
-    // // 处理markdown标题（带粗体的 ###/##）
-    // processedContent = processedContent.replace(
-    //   /###\s*\*\*([^*]+)\*\*/g,
-    //   '<h3 style="color: #2c5aa0; font-weight: bold; margin: 16px 0 8px 0;">$1</h3>',
-    // )
-    // processedContent = processedContent.replace(
-    //   /##\s*\*\*([^*]+)\*\*/g,
-    //   '<h2 style="color: #1a4480; font-weight: bold; margin: 20px 0 12px 0;">$1</h2>',
-    // )
-
-    // // 处理普通的粗体文本
-    // processedContent = processedContent.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
-
-    // // 处理换行符
-    // processedContent = processedContent.replace(/\n+/g, '<br>')
-
-    // // 清理多余的换行
-    // processedContent = processedContent.replace(/(<br>\s*){3,}/gi, '<br><br>')
-
-    // // 新增：去掉单独的星号行（在转换为标题标签之前处理）
-    // processedContent = processedContent.replace(/<br>\s*\*\s*<br>/g, '<br>')
-    // processedContent = processedContent.replace(/^\s*\*\s*<br>/g, '')
-    // processedContent = processedContent.replace(/<br>\s*\*\s*$/g, '<br>')
-
-    // // 新增：去掉空的标题标签和只包含星号的标题标签
-    // processedContent = processedContent.replace(/<h[1-6][^>]*>\s*\*?\s*<\/h[1-6]>/gi, '')
-    // processedContent = processedContent.replace(/<h[1-6][^>]*>\s*<\/h[1-6]>/gi, '')
-
-    // // 新增：去掉多个连续的空行（最终清理）
-    // processedContent = processedContent.replace(/(<br>\s*){3,}/gi, '<br><br>')
-
-    // // 压缩多个 <br> 只保留一个
-    // processedContent = processedContent.replace(/(<br>\s*){2,}/gi, '<br>')
-
-    // // ***文字*** → 斜体 + 加粗
-    // processedContent = processedContent.replace(
-    //   /\*\*\*(.+?)\*\*\*/g,
-    //   '<strong><em>$1</em></strong>',
-    // )
-
-    // // **文字** → 加粗（再次兜底）
-    // processedContent = processedContent.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-
-    // // *文字* 或 _文字_ → 斜体
-    // processedContent = processedContent.replace(/(\*|_)(.+?)\1/g, '<em>$2</em>')
-
-    // // 清理 HTML 标签前后的孤立星号
-    // processedContent = processedContent.replace(/<\/(em|strong)>\*/g, '</$1>')
-    // processedContent = processedContent.replace(/\*<(em|strong)>/g, '<$1>')
 
     // 去掉最后的中文逗号 "，"
     processedContent = processedContent.replace(/，\s*$/, '')
@@ -422,30 +539,7 @@ export class TextProcessor {
       .replace(/【法律依据】[^【]*$/g, '')
       .replace(/【注意事项】[^【]*$/g, '')
       .replace(/更多相关内容.*/g, '')
-      .replace(/相关推荐.*/g, '')
-      .replace(/扫码关注.*/g, '')
-      .replace(/关注微信.*/g, '')
 
-    // 处理标题和段落格式
-    // processedContent = processedContent.replace(
-    //   /【([^】]+)】/g,
-    //   '<br><strong style="color: #2c5aa0;">【$1】</strong><br>',
-    // )
-
-    // 处理HTML内容
-    processedContent = this.processHtmlContent(processedContent)
-
-    // 构建网络内容信息头部（不显示URL）
-    const webHeader = `
-      <div style="background: #f0f8ff; padding: 12px; margin: 8px 0; border-left: 4px solid #28a745; border-radius: 4px;">
-        <div style="font-weight: bold; color: #333; margin-bottom: 4px;">${webData.name || webData.title}</div>
-        <div style="font-size: 0.9em; color: #666;">
-          <span style="margin-right: 12px;">来源：${webData.name}</span>
-          <span>相关度评分：${(webData.score * 100).toFixed(1)}%</span>
-        </div>
-      </div>
-    `
-
-    return webHeader + processedContent
+    return this.processHtmlContent(processedContent)
   }
 }

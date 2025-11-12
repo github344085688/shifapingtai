@@ -1,42 +1,598 @@
-	message	{"id":"ecb25933f1d946ebb43bc286a4327a46","created":1762873512000,"model":"gpt","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":"AI思考中……","type":"console"},"additionalHis":null,"delta":{"content":""},"finish_reason":null}]}	
-15:05:37.656
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"**","type":"answer"},"finish_reason":null}]}	
-15:05:51.170
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"一","type":"answer"},"finish_reason":null}]}	
-15:05:51.170
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、立案**\n\n区","type":"answer"},"finish_reason":null}]}	
-15:05:51.233
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"市监局依据","type":"answer"},"finish_reason":null}]}	
-15:05:51.233
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"温州","type":"answer"},"finish_reason":null}]}	
-15:05:51.388
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"海关缉私分局","type":"answer"},"finish_reason":null}]}	
-15:05:51.388
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"移交的","type":"answer"},"finish_reason":null}]}	
-15:05:51.419
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"线索，以","type":"answer"},"finish_reason":null}]}	
-15:05:51.434
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"“涉嫌经营无","type":"answer"},"finish_reason":null}]}	
-15:05:51.450
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"合法来源证明进口","type":"answer"},"finish_reason":null}]}	
-15:05:51.465
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"成品油”为","type":"answer"},"finish_reason":null}]}	
-15:05:51.481
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"由启动","type":"answer"},"finish_reason":null}]}	
-15:05:51.497
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"行政执法","type":"answer"},"finish_reason":null}]}	
-15:05:51.512
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"程序，符合","type":"answer"},"finish_reason":null}]}	
-15:05:51.559
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"《市场","type":"answer"},"finish_reason":null}]}	
-15:05:51.559
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844747,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"监督管理行政处罚程序规定","type":"answer"},"finish_reason":null}]}	
-15:05:51.559
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844748,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"》第四","type":"answer"},"finish_reason":null}]}	
-15:05:51.781
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844748,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"十四条关于“","type":"answer"},"finish_reason":null}]}	
-15:05:51.796
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844748,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"接到","type":"answer"},"finish_reason":null}]}	
-15:05:51.812
-message	{"id":"e1b5d87517034e5d8597dcc6d1eb5e20","created":1762844748,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"移交","type":"answer"},"finish_reason":null}]}	
-15:05:51.842
+	message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "司法",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 36.836
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "实践",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 36.866
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "要求",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 36.898
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "，",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 36.914
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "具体",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 36.945
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "分析",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 36.976
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "如下",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.008
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "：\n\n",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.039
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "###",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.069
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": " ",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.101
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "一",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.115
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "、",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.147
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "诉讼",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.178
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "请求",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.209
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "的",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.242
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "法定",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.273
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856552,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "构成",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.290
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856553,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "要",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.321
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856553,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "件",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.353
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856553,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "\n",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.384
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856553,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "1",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.416
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856553,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": ".",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.447
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856553,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": " **",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.462
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856553,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "请求",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.494
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856553,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "内容",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.526
+message	{
+		"id": "f1e6105a470f40258504a3db82bc5240",
+		"created": 1762856553,
+		"model": "gpt4",
+		"code": 1000,
+		"msg": null,
+		"choices": [
+			{
+				"index": 0,
+				"additional": {
+					"data": null,
+					"type": "answer"
+				},
+				"additionalHis": null,
+				"delta": {
+					"content": "明确",
+					"type": "answer"
+				},
+				"finish_reason": null
+			}
+		]
+	}	
+18: 22: 37.557
