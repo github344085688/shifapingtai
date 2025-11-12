@@ -255,6 +255,12 @@ class AIService {
     let countershu = 0
     let stepContent = '' // 用于累积 step 内容
     hasShownSearchProcessHeader = hasShownSearchProcessHeader || false
+    let numListStarted = false
+    let numCollectingItem = false
+    let numPendingNumber: string | null = null
+    let listStarted = false
+    let collectingListItem = false
+    let parenOpen = false
 
     try {
       while (true) {
@@ -313,6 +319,11 @@ class AIService {
           if (!eventData) continue
 
           if (eventData === '[DONE]') {
+            if (listStarted && collectingListItem) {
+              callback('</li></ul>', false, false)
+              collectingListItem = false
+              listStarted = false
+            }
             callback(null, true, false) // 标记流结束
             continue
           }
@@ -518,15 +529,172 @@ class AIService {
               const deltaType = json.choices[0]?.delta?.type
 
               if (content && deltaType !== 'answer') {
-                callback(content, false, false)
+                const isDashBlockEnd = content === '  \n\n'
+                if (isDashBlockEnd && listStarted && collectingListItem) {
+                  callback('</li></ul>', false, false)
+                  collectingListItem = false
+                  listStarted = false
+                  continue
+                }
+
+                const isOrderedListEnd = content === '。\n\n'
+                if (isOrderedListEnd && numListStarted) {
+                  if (numCollectingItem) {
+                    callback('</li></ol>', false, false)
+                  } else {
+                    callback('</ol>', false, false)
+                  }
+                  numCollectingItem = false
+                  numListStarted = false
+                  numPendingNumber = null
+                  continue
+                }
+
+                const isListItemEnd = content === '  \n'
+                if (isListItemEnd && numListStarted && numCollectingItem) {
+                  callback('</li>', false, false)
+                  numCollectingItem = false
+                  continue
+                }
+
+                const isNumericOnly = /^\s*[0-9]+\s*$/.test(content)
+                if (isNumericOnly) {
+                  if (!parenOpen) {
+                    numPendingNumber = content.trim()
+                    continue
+                  }
+                  const processedNumeric = TextProcessor.processSearchResultContent(content)
+                  callback(processedNumeric, false, false)
+                  continue
+                }
+
+                const isParenOpen = content.trim() === '（' || content.trim() === '('
+                if (isParenOpen) {
+                  parenOpen = true
+                  const processed = TextProcessor.processSearchResultContent(content)
+                  callback(processed, false, false)
+                  continue
+                }
+                const isParenClose = content.trim() === '）' || content.trim() === ')'
+                if (isParenClose) {
+                  parenOpen = false
+                  const processed = TextProcessor.processSearchResultContent(content)
+                  callback(processed, false, false)
+                  continue
+                }
+
+                const isDotOnly = content === '.'
+                if (isDotOnly && numPendingNumber) {
+                  if (!numListStarted) {
+                    callback('<ol><li>', false, false)
+                    numListStarted = true
+                    numCollectingItem = true
+                  } else {
+                    callback('<li>', false, false)
+                    numCollectingItem = true
+                  }
+                  numPendingNumber = null
+                  continue
+                }
+
+                const isDashOnly = /^\s*-\s*$/.test(content)
+                if (isDashOnly) {
+                  if (!listStarted) {
+                    callback('<ul><li>', false, false)
+                    listStarted = true
+                    collectingListItem = true
+                  } else {
+                    callback('</li><li>', false, false)
+                    collectingListItem = true
+                  }
+                } else {
+                  callback(content, false, false)
+                }
               }
             } else {
               // 如果不是 GPT 模型，使用原有的简单逻辑
               const content =
                 json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
-              const processedContent = content ? content : ''
-              if (processedContent && processedContent.trim()) {
-                callback(processedContent, false, false)
+              const isDashBlockEnd2 = content === '  \n\n'
+              if (isDashBlockEnd2 && listStarted && collectingListItem) {
+                callback('</li></ul>', false, false)
+                collectingListItem = false
+                listStarted = false
+              } else {
+                const isOrderedListEnd2 = content === '。\n\n'
+                if (isOrderedListEnd2 && numListStarted) {
+                  if (numCollectingItem) {
+                    callback('</li></ol>', false, false)
+                  } else {
+                    callback('</ol>', false, false)
+                  }
+                  numCollectingItem = false
+                  numListStarted = false
+                  numPendingNumber = null
+                } else {
+                  const isListItemEnd2 = content === '  \n'
+                  if (isListItemEnd2 && numListStarted && numCollectingItem) {
+                    callback('</li>', false, false)
+                    numCollectingItem = false
+                  } else {
+                  const isNumericOnly2 = /^\s*[0-9]+\s*$/.test(content)
+                  if (isNumericOnly2) {
+                    if (!parenOpen) {
+                      numPendingNumber = content.trim()
+                    } else {
+                      const processedNumeric = content ? content : ''
+                      if (processedNumeric && processedNumeric.trim()) {
+                        callback(processedNumeric, false, false)
+                      }
+                    }
+                  } else if (content === '.' && numPendingNumber) {
+                    if (!numListStarted) {
+                      callback('<ol><li>', false, false)
+                      numListStarted = true
+                      numCollectingItem = true
+                    } else {
+                      callback('<li>', false, false)
+                      numCollectingItem = true
+                    }
+                    numPendingNumber = null
+                  } else {
+                    const isParenOpen2 = content.trim() === '（' || content.trim() === '('
+                    if (isParenOpen2) {
+                      parenOpen = true
+                      const processed = content ? content : ''
+                      if (processed && processed.trim()) {
+                        callback(processed, false, false)
+                      }
+                    } else {
+                      const isParenClose2 = content.trim() === '）' || content.trim() === ')'
+                      if (isParenClose2) {
+                        parenOpen = false
+                        const processed = content ? content : ''
+                        if (processed && processed.trim()) {
+                          callback(processed, false, false)
+                        }
+                      } else {
+                      const isDashOnly2 = /^\s*-\s*$/.test(content)
+                      if (isDashOnly2) {
+                        if (!listStarted) {
+                          callback('<ul><li>', false, false)
+                          listStarted = true
+                          collectingListItem = true
+                        } else {
+                          callback('</li><li>', false, false)
+                          collectingListItem = true
+                        }
+                      } else {
+                        const processedContent = content ? content : ''
+                        if (processedContent && processedContent.trim()) {
+                          callback(processedContent, false, false)
+                        }
+                      }
+                      }
+                    }
+                  }
+                  }
+                }
               }
             }
           } catch (e) {
@@ -762,6 +930,31 @@ class AIService {
       .replace(/[:：]\s*$/gi, '') // 去掉行末的冒号
       .replace(/^\s*[:：]/gi, '') // 去掉行首的冒号
       .trim() // 去掉首尾空白
+
+    // 将连续的数字加点序列转换为有序列表
+    {
+      const parts = processedContent.split(/<br>/)
+      const out: string[] = []
+      let inList = false
+      for (const p of parts) {
+        const t = p.trim()
+        if (/^(?:　　)?\*?[0-9]+\.\s*/.test(t)) {
+          if (!inList) {
+            out.push('<ol>')
+            inList = true
+          }
+          out.push(`<li>${t.replace(/^(?:　　)?\*?[0-9]+\.\s*/, '')}</li>`)
+        } else {
+          if (inList) {
+            out.push('</ol>')
+            inList = false
+          }
+          out.push(p)
+        }
+      }
+      if (inList) out.push('</ol>')
+      processedContent = out.join('<br>')
+    }
 
     return processedContent
   }

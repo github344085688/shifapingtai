@@ -16,26 +16,26 @@ export class TextProcessor {
     processedContent = processedContent
       .replace(/正在输入\.\.\./g, '')
       .replace(/\.打开对话/g, '')
-      .replace(/\\n/g, '\n')
       .replace(/\\\"/g, '"')
+      .replace(/(?:<br>\s*){3,}/g, '<br><br>')
+      .replace(/[ \t]*<br>[ \t]*/g, '<br>')
 
-    // 处理 "---\n\n" 转为断行
-    processedContent = processedContent.replace(/---\n\n/g, '<br>')
+    processedContent = processedContent.replace(/(^|\s)\*\*(?=\s|$)/g, '')
 
     // 新增：预处理拆分的编号与孤立的点
     processedContent = processedContent
       // 将“数字 + 换行/<br> + .”合并为“数字.”
-      .replace(/([0-9]+)\s*(?:\r?\n|<br>)\s*\./g, '$1.')
+      .replace(/([0-9]+)\s*(?:<br>)\s*\./g, '$1.')
       // 将“数字. + 换行/<br>”也收敛为“数字.”
-      .replace(/([0-9]+)\.\s*(?:\r?\n|<br>)/g, '$1.')
+      .replace(/([0-9]+)\.\s*(?:<br>)/g, '$1.')
       // 合并“中文数字 + 换行/<br> + 、”为“中文数字、”
-      .replace(/([一二三四五六七八九十百千万]+)\s*(?:\r?\n|<br>)\s*、/g, '$1、')
+      .replace(/([一二三四五六七八九十百千万]+)\s*(?:<br>)\s*、/g, '$1、')
       // 合并“阿拉伯数字 + 换行/<br> + 、”为“数字、”
-      .replace(/([0-9]+)\s*(?:\r?\n|<br>)\s*、/g, '$1、')
+      .replace(/([0-9]+)\s*(?:<br>)\s*、/g, '$1、')
       // 合并“### + 空格 + 中文数字 + 换行/<br> + 、”为“### 中文数字、”
-      .replace(/(#{1,6})\s*(?:\r?\n|<br>)\s*([一二三四五六七八九十百千万]+)\s*、/g, '$1 $2、')
-      // 移除单独一行的句点（孤立的 .）
-      .replace(/(?:^|<br>|\r?\n)\s*\.(?=(<br>|\r?\n|$))/g, '')
+      .replace(/(#{1,6})\s*(?:<br>)\s*([一二三四五六七八九十百千万]+)\s*、/g, '$1 $2、')
+      // 移除单独一行的句点（孤立的 .） — 已移除该规则，保留编号后的点
+      // .replace(/(?:^|<br>|\r?\n)\s*\.(?=(<br>|\r?\n|$))/g, '')
       // 压缩连续英文点“..”为“.”
       .replace(/\.{2,}/g, '.')
 
@@ -326,7 +326,7 @@ export class TextProcessor {
     )
 
     // 去除 URL 链接（http/https）
-    processedContent = processedContent.replace(/https?:\/\/[^\s<>"']+/gi, '') // 去掉 http 和 https 链接
+    processedContent = processedContent.replace(/https?:\/\/[^\s<>"']+/gi, '')
 
     // 去除来源相关信息
     processedContent = processedContent
@@ -384,6 +384,110 @@ export class TextProcessor {
 
     // 去掉最后的中文逗号 "，"
     processedContent = processedContent.replace(/，\s*$/, '')
+
+    const toOrderedFromDash = (src: string, useBr: boolean) => {
+      const parts = useBr ? src.split(/<br>/) : src.split(/\r?\n/)
+      const out: string[] = []
+      let buf: string[] = []
+      const flush = () => {
+        if (buf.length) {
+          const items = buf.map((l) => l.replace(/^\s*-\s+/, '').trim()).filter((v) => v.length > 0)
+          out.push(`<ul>${items.map((i) => `<li>${i}</li>`).join('')}</ul>`)
+          buf = []
+        }
+      }
+      for (const p of parts) {
+        const t = p.trim()
+        if (/^-\s+/.test(t)) {
+          buf.push(p)
+        } else {
+          flush()
+          out.push(p)
+        }
+      }
+      flush()
+      return useBr ? out.join('<br>') : out.join('\n')
+    }
+
+    const toOrderedFromNumbers = (src: string, useBr: boolean) => {
+      const parts = useBr ? src.split(/<br>/) : src.split(/\r?\n/)
+      const out: string[] = []
+      let buf: string[] = []
+      const flush = () => {
+        if (buf.length) {
+          const items = buf
+            .map((l) => l.replace(/^\s*(?:　　)?\*?[0-9]+\.\s*/, '').trim())
+            .filter((v) => v.length > 0)
+          out.push(`<ol>${items.map((i) => `<li>${i}</li>`).join('')}</ol>`)
+          buf = []
+        }
+      }
+      for (const p of parts) {
+        const t = p.trim()
+        if (/^(?:　　)?\*?[0-9]+\.\s*/.test(t)) {
+          buf.push(p)
+        } else {
+          flush()
+          out.push(p)
+        }
+      }
+      flush()
+      return useBr ? out.join('<br>') : out.join('\n')
+    }
+
+    processedContent = toOrderedFromNumbers(processedContent, false)
+    processedContent = toOrderedFromDash(processedContent, false)
+
+    // 新增：统一将剩余的原始换行转为 <br>，保证换行显示
+
+    processedContent = toOrderedFromNumbers(processedContent, true)
+    processedContent = toOrderedFromDash(processedContent, true)
+
+    if (processedContent === ' -') console.log('11111111111111111', processedContent)
+    // 处理无序列表（- 开头的行）
+    processedContent = processedContent.replace(
+      /(?:^|\r?\n|\s)-\s*(.*?)(?=(\r?\n|$))/g,
+      (match, item) => {
+        // item 可能是空字符串或只包含空白，去掉两端空白
+        const text = (item || '').trim()
+        console.log('matched item:', JSON.stringify(text))
+        return `<li>${text}</li>`
+      },
+    )
+
+    console.log('after li replace:', JSON.stringify(processedContent))
+
+    const wrapLiGroupsSafe = (src: string) => {
+      let result = ''
+      let lastIndex = 0
+      const re = /(?:\s*<li>[\s\S]*?<\/li>\s*)+/g
+      let m: RegExpExecArray | null
+      while ((m = re.exec(src)) !== null) {
+        const start = m.index
+        const end = re.lastIndex
+        result += src.slice(lastIndex, start)
+        const before = src.slice(Math.max(0, start - 16), start)
+        const after = src.slice(end, Math.min(src.length, end + 16))
+        const hasOpen = /<\s*(ul|ol)\b/i.test(before)
+        const hasClose = /<\/\s*(ul|ol)\b/i.test(after)
+        if (hasOpen && hasClose) {
+          result += m[0]
+        } else {
+          result += `<ul>${m[0].trim()}</ul>`
+        }
+        lastIndex = end
+      }
+      result += src.slice(lastIndex)
+      return result
+    }
+    processedContent = wrapLiGroupsSafe(processedContent)
+
+    processedContent = processedContent.replace(/(?:<br>\s*){3,}/g, '<br><br>')
+    processedContent = processedContent.replace(/[ \t]*<br>[ \t]*/g, '<br>')
+    processedContent = processedContent.replace(/\r\n/g, '\n')
+    processedContent = processedContent.replace(/\r/g, '\n')
+    processedContent = processedContent.replace(/\n{2,}/g, '<br><br>')
+    processedContent = processedContent.replace(/[ \t]*\n/g, '<br>')
 
     return processedContent
   }

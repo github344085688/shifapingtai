@@ -19,13 +19,17 @@ interface MockResponse {
   model: string
 }
 
+const dataph = './jsons.json'
+
 export class MockAIService {
   private mockData: string[] = []
   private currentIndex = 0
   private aiConfig: any
+  private responseDelayMs: number = 0 //控制api熟读
 
   constructor(aiConfig?: any) {
     this.aiConfig = aiConfig || {}
+    this.responseDelayMs = Number(this.aiConfig?.responseDelayMs) || 0
     // 异步加载模拟数据，如果失败会使用默认数据
     this.loadMockData().catch(() => {
       // 如果加载失败，使用默认数据
@@ -36,7 +40,7 @@ export class MockAIService {
   private async loadMockData() {
     try {
       // 尝试从多个可能的路径加载 JSON 文件
-      const possiblePaths = ['/jsons.json', '/src/servers/jsons.json', './jsons.json']
+      const possiblePaths = [dataph]
 
       let jsonContent = ''
       let loaded = false
@@ -57,7 +61,7 @@ export class MockAIService {
       }
 
       if (!loaded) {
-        throw new Error('无法从任何路径加载 jsons.json 文件')
+        throw new Error('无法从任何路径加载  .json 文件')
       }
 
       // 按行分割并过滤空行，不做任何处理，保持原始格式
@@ -95,7 +99,7 @@ export class MockAIService {
     // console.log(`[MockAI] 开始模拟响应: ${JSON.stringify(message)}`)
 
     // 模拟网络延迟
-    await new Promise((resolve) => setTimeout(resolve, 100))
+    await new Promise((resolve) => setTimeout(resolve, this.responseDelayMs))
 
     // 使用模拟数据流
     await this.simulateResponseStream(
@@ -123,7 +127,7 @@ export class MockAIService {
         }
 
         // 模拟网络延迟 (20-80ms，更接近真实API响应速度)
-        await new Promise((resolve) => setTimeout(resolve, 20 + Math.random() * 60))
+        await new Promise((resolve) => setTimeout(resolve, this.responseDelayMs))
 
         if (!line.trim()) continue
 
@@ -161,7 +165,7 @@ export class MockAIService {
 
     for (const data of this.mockData) {
       // 模拟网络延迟 (20-80ms，更接近真实API响应速度)
-      await this.delay(20 + Math.random() * 10)
+      await this.delay(this.responseDelayMs)
 
       // 直接返回原始数据，不做任何处理
       yield data
@@ -221,6 +225,10 @@ export class MockAIService {
     return new Promise((resolve) => setTimeout(resolve, ms))
   }
 
+  setResponseDelay(ms: number) {
+    this.responseDelayMs = Math.max(0, Math.floor(Number(ms) || 0))
+  }
+
   private generateId(): string {
     return Math.random().toString(36).substr(2, 9)
   }
@@ -232,11 +240,7 @@ export default MockAIService
 const loadJsonsData = async (): Promise<string> => {
   const possiblePaths = [
     // 生产环境路径
-    './jsons.json',
-    '/jsons.json',
-    // 开发环境路径
-    '/src/servers/jsons.json',
-    './jsons.json',
+    dataph,
   ]
 
   for (const path of possiblePaths) {
@@ -246,11 +250,11 @@ const loadJsonsData = async (): Promise<string> => {
         return await response.text()
       }
     } catch (error) {
-      console.warn(`无法从路径 ${path} 加载 jsons.json:`, error)
+      console.warn(`无法从路径 ${path} 加载  :`, error)
     }
   }
 
   // 如果所有路径都失败，返回默认数据而不是抛出错误
-  console.warn('无法从任何路径加载 jsons.json 文件，使用默认数据')
+  console.warn('无法从任何路径加载   文件，使用默认数据')
   return 'data:{"choices":[{"additional":{"data":"默认响应数据","type":"step"},"delta":{"content":"","type":"step"},"index":0}],"code":1000,"id":"default","model":"fyllm"}'
 }

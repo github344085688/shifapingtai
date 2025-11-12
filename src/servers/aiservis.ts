@@ -236,6 +236,12 @@ class AIService {
     let countershu = 0
     let stepContent = '' // 用于累积 step 内容
     hasShownSearchProcessHeader = hasShownSearchProcessHeader || false
+    let listStarted = false
+    let collectingListItem = false
+    let numListStarted = false
+    let numCollectingItem = false
+    let numPendingNumber: string | null = null
+    let parenOpen = false
 
     try {
       while (true) {
@@ -294,7 +300,22 @@ class AIService {
           if (!eventData) continue
 
           if (eventData === '[DONE]') {
-            callback(null, true, false) // 标记流结束
+            if (listStarted && collectingListItem) {
+              callback('</li></ul>', false, false)
+              collectingListItem = false
+              listStarted = false
+            }
+            if (numListStarted) {
+              if (numCollectingItem) {
+                callback('</li></ol>', false, false)
+              } else {
+                callback('</ol>', false, false)
+              }
+              numCollectingItem = false
+              numListStarted = false
+              numPendingNumber = null
+            }
+            callback(null, true, false)
             continue
           }
 
@@ -629,24 +650,217 @@ class AIService {
               const hasAnswerType = json.choices[0]?.additional?.type === 'answer'
 
               if (content && deltaType !== 'answer' && !hasAnswerType) {
-                // 对所有普通内容都进行 processSearchResultContent 处理
-                let processedContent = TextProcessor.processSearchResultContent(content)
+                const trimmed = (content || '').trim()
+                if (trimmed === '**') {
+                  continue
+                }
+                const isLineBreak = trimmed === '<br>' || content === '\n' || content === '\r\n'
+                if (isLineBreak) {
+                  if (numListStarted && numCollectingItem) {
+                    callback('</li>', false, false)
+                    numCollectingItem = false
+                  }
+                  if (listStarted && collectingListItem) {
+                    callback('</li>', false, false)
+                    collectingListItem = false
+                  }
+                  continue
+                }
+                const isDashBlockEnd = content === '  \n\n'
+                if (isDashBlockEnd && listStarted && collectingListItem) {
+                  callback('</li></ul>', false, false)
+                  collectingListItem = false
+                  listStarted = false
+                  continue
+                }
 
-                // 实时输出内容
-                callback(processedContent, false, false) // 第三个参数为false表示这是正常内容
+                const isOrderedListEnd = content === '。\n\n'
+                if (isOrderedListEnd && numListStarted) {
+                  if (numCollectingItem) {
+                    callback('</li></ol>', false, false)
+                  } else {
+                    callback('</ol>', false, false)
+                  }
+                  numCollectingItem = false
+                  numListStarted = false
+                  numPendingNumber = null
+                  continue
+                }
+
+                const isListItemEnd = content === '  \n'
+                if (isListItemEnd && numListStarted && numCollectingItem) {
+                  callback('</li>', false, false)
+                  numCollectingItem = false
+                  continue
+                }
+
+                const isNumericOnly = /^\s*[0-9]+\s*$/.test(content)
+                if (isNumericOnly) {
+                  if (!parenOpen) {
+                    numPendingNumber = content.trim()
+                    continue
+                  }
+                  // 在括号中出现的数字，直接输出，不进入有序列表状态机
+                  const processedNumeric = TextProcessor.processSearchResultContent(content)
+                  callback(processedNumeric, false, false)
+                  continue
+                }
+
+                // 处理括号分片
+                const isParenOpen = content.trim() === '（' || content.trim() === '('
+                if (isParenOpen) {
+                  parenOpen = true
+                  const processed = TextProcessor.processSearchResultContent(content)
+                  callback(processed, false, false)
+                  continue
+                }
+                const isParenClose = content.trim() === '）' || content.trim() === ')'
+                if (isParenClose) {
+                  parenOpen = false
+                  const processed = TextProcessor.processSearchResultContent(content)
+                  callback(processed, false, false)
+                  continue
+                }
+
+                const isDotOnly = content === '.'
+                if (isDotOnly && numPendingNumber) {
+                  if (!numListStarted) {
+                    callback('<ol><li>', false, false)
+                    numListStarted = true
+                    numCollectingItem = true
+                  } else {
+                    callback('<li>', false, false)
+                    numCollectingItem = true
+                  }
+                  numPendingNumber = null
+                  continue
+                }
+
+                const isDashOnly = /^\s*-\s*$/.test(content)
+                if (isDashOnly) {
+                  if (!listStarted) {
+                    callback('<ul><li>', false, false)
+                    listStarted = true
+                    collectingListItem = true
+                  } else {
+                    callback('</li><li>', false, false)
+                    collectingListItem = true
+                  }
+                  continue
+                }
+
+                let processedContent = TextProcessor.processSearchResultContent(content)
+                callback(processedContent, false, false)
               }
             } else {
               // 如果不是 GPT 模型和法律接口，json.choices[0].delta.content 需要进行文字处理
               const content =
                 json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
 
-              // 使用 TextProcessor 进行文字处理（仅在有内容时）
-              const processedContent = content
-                ? TextProcessor.processSearchResultContent(content)
-                : ''
-              if (processedContent && processedContent.trim()) {
-                // 实时输出内容
-                callback(processedContent, false, false)
+              const trimmed2 = (content || '').trim()
+              if (trimmed2 === '**') {
+                // 跳过孤立的加粗标记分片
+              } else {
+                const isLineBreak2 = trimmed2 === '<br>' || content === '\n' || content === '\r\n'
+                if (isLineBreak2) {
+                  if (numListStarted && numCollectingItem) {
+                    callback('</li>', false, false)
+                    numCollectingItem = false
+                  }
+                  if (listStarted && collectingListItem) {
+                    callback('</li>', false, false)
+                    collectingListItem = false
+                  }
+                }
+              }
+              const isDashBlockEnd2 = content === '  \n\n'
+              if (isDashBlockEnd2 && listStarted && collectingListItem) {
+                callback('</li></ul>', false, false)
+                collectingListItem = false
+                listStarted = false
+              } else {
+                const isOrderedListEnd2 = content === '。\n\n'
+                if (isOrderedListEnd2 && numListStarted) {
+                  if (numCollectingItem) {
+                    callback('</li></ol>', false, false)
+                  } else {
+                    callback('</ol>', false, false)
+                  }
+                  numCollectingItem = false
+                  numListStarted = false
+                  numPendingNumber = null
+                } else {
+                  const isListItemEnd2 = content === '  \n'
+                  if (isListItemEnd2 && numListStarted && numCollectingItem) {
+                    callback('</li>', false, false)
+                    numCollectingItem = false
+                  } else {
+                    const isNumericOnly2 = /^\s*[0-9]+\s*$/.test(content)
+                    if (isNumericOnly2) {
+                      if (!parenOpen) {
+                        numPendingNumber = content.trim()
+                      } else {
+                        const processedNumeric = content
+                          ? TextProcessor.processSearchResultContent(content)
+                          : ''
+                        if (processedNumeric && processedNumeric.trim()) {
+                          callback(processedNumeric, false, false)
+                        }
+                      }
+                    } else if (content === '.' && numPendingNumber) {
+                      if (!numListStarted) {
+                        callback('<ol><li>', false, false)
+                        numListStarted = true
+                        numCollectingItem = true
+                      } else {
+                        callback('<li>', false, false)
+                        numCollectingItem = true
+                      }
+                      numPendingNumber = null
+                    } else {
+                      const isParenOpen2 = content.trim() === '（' || content.trim() === '('
+                      if (isParenOpen2) {
+                        parenOpen = true
+                        const processed = content
+                          ? TextProcessor.processSearchResultContent(content)
+                          : ''
+                        if (processed && processed.trim()) {
+                          callback(processed, false, false)
+                        }
+                      } else {
+                        const isParenClose2 = content.trim() === '）' || content.trim() === ')'
+                        if (isParenClose2) {
+                          parenOpen = false
+                          const processed = content
+                            ? TextProcessor.processSearchResultContent(content)
+                            : ''
+                          if (processed && processed.trim()) {
+                            callback(processed, false, false)
+                          }
+                        } else {
+                          const isDashOnly2 = /^\s*-\s*$/.test(content)
+                          if (isDashOnly2) {
+                            if (!listStarted) {
+                              callback('<ul><li>', false, false)
+                              listStarted = true
+                              collectingListItem = true
+                            } else {
+                              callback('</li><li>', false, false)
+                              collectingListItem = true
+                            }
+                          } else {
+                            const processedContent = content
+                              ? TextProcessor.processSearchResultContent(content)
+                              : ''
+                            if (processedContent && processedContent.trim()) {
+                              callback(processedContent, false, false)
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           } catch (e) {
