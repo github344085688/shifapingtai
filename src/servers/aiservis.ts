@@ -52,8 +52,12 @@ class AIService {
   constructor(aiConfig: any) {
     this.aiConfig = aiConfig
     // 只在开发环境且 MockAIService 可用时创建实例
-
     this.mockService = import.meta.env.DEV && MockAIService ? new MockAIService(aiConfig) : null
+
+    // 在开发环境下，且配置了 useMock 时，自动切换到模拟模式
+    if (import.meta.env.DEV && this.mockService && aiConfig?.useMock) {
+      this.enableMockMode()
+    }
   }
 
   // 辅助方法：创建带样式的消息

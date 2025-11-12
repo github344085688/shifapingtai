@@ -1,9 +1,3 @@
-// 样式常量
-const STYLES = {
-  THINKING_CONTENT:
-    'background: #f9f9f9; padding: 16px; margin: 8px 0; border-radius: 8px; text-gray-500 line-height: 1.6; color: #676666;',
-}
-
 /**
  * 文字处理工具类
  * 提供各种文本内容处理的公共方法
