@@ -564,6 +564,80 @@ class AIService {
 
                     const tok = answerContent
 
+                    const brTok = tok.trim() === '<br>' || tok === '\n' || tok === '\r\n'
+                    if (brTok) {
+                      if (numListStarted && numCollectingItem) {
+                        callback('</li>', false, false)
+                        numCollectingItem = false
+                      }
+                      if (listStarted && collectingListItem) {
+                        callback('</li>', false, false)
+                        collectingListItem = false
+                      }
+                      break
+                    }
+
+                    if (tok === '  \n\n' && listStarted && collectingListItem) {
+                      callback('</li></ul>', false, false)
+                      collectingListItem = false
+                      listStarted = false
+                      break
+                    }
+
+                    if (tok === '。\n\n' && numListStarted) {
+                      if (numCollectingItem) {
+                        callback('</li></ol>', false, false)
+                      } else {
+                        callback('</ol>', false, false)
+                      }
+                      numCollectingItem = false
+                      numListStarted = false
+                      numPendingNumber = null
+                      break
+                    }
+
+                    if (tok === '  \n' && numListStarted && numCollectingItem) {
+                      callback('</li>', false, false)
+                      numCollectingItem = false
+                      break
+                    }
+
+                    const numDotWithText = tok.match(/^\s*(?:　　)?\*?([0-9]+)\.\s*(.*)$/)
+                    if (numDotWithText) {
+                      if (!numListStarted) {
+                        callback('<ol><li>', false, false)
+                        numListStarted = true
+                        numCollectingItem = true
+                      } else {
+                        callback('<li>', false, false)
+                        numCollectingItem = true
+                      }
+                      const rest = numDotWithText[2]
+                      if (rest) {
+                        const processedRest = TextProcessor.processSearchResultContent(rest)
+                        callback(processedRest, false, false)
+                      }
+                      break
+                    }
+
+                    const dashWithText = tok.match(/^\s*-\s+(.*)$/)
+                    if (dashWithText) {
+                      if (!listStarted) {
+                        callback('<ul><li>', false, false)
+                        listStarted = true
+                        collectingListItem = true
+                      } else {
+                        callback('</li><li>', false, false)
+                        collectingListItem = true
+                      }
+                      const rest = dashWithText[1]
+                      if (rest) {
+                        const processedRest = TextProcessor.processSearchResultContent(rest)
+                        callback(processedRest, false, false)
+                      }
+                      break
+                    }
+
                     // 检测开始：严格匹配以 '###' 起始
                     if (!(this as any)._inH3 && /^###(?:\s|$)/.test(tok)) {
                       ;(this as any)._inH3 = true

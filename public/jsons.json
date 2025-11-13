@@ -1,264 +1,951 @@
-data:{"id":"736d6c59b53e45678d174a14df503c91","created":1762940417000,"model":"gpt","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":"AI思考中……","type":"console"},"additionalHis":null,"delta":{"content":""},"finish_reason":null}]}
-retry:30000 
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763055537000,"model":"gpt","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":"AI思考中……","type":"console"},"additionalHis":null,"delta":{"content":""},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"根据","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"您提供的案","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"情描述","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，被告人","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"欧阳某臣的行为","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"已严重","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"触","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"犯《中华人民共和国","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"刑法》关于","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"黑","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"社会性质组织犯罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"的相关规定，具体","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"分析","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"如下：\n\n一","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、构成","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"组织、","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"领导黑社会性质","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"组织罪（","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"《刑法》第","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"29","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"4条）\n\n","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"欧阳","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"某臣自","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"2012","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"年起，有","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"组织地纠","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"集社会","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"闲杂人员，","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"形成","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"结构","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"稳定、层级","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"分明的犯罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"团伙，具备","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"以下","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"黑","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"社会性质组织的","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"法定","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"特征：\n\n1.","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":" **组织特征","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"**：以","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"欧阳某臣为","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"组织者、领导者","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，成员","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"固定","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，分工","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"明确，长期","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"纠","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"集实施","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"违法犯罪活动","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"；\n2. **","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"经济特征**：","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026759,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"通过开设","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"赌场、高","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"利放贷等","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"非法手段聚敛","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"巨额","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"财富","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，用于","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"维","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"系组织","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"运转、收","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"买保护","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"伞","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、支付","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"成员","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"报酬","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"；\n3. **","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"行为特征**：","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"有组织地实施","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"聚众斗殴","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、寻衅滋","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"事、非法拘","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"禁、故意","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"伤害","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、毁","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"坏","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"财物等暴力犯罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，手段","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"残忍，","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"影响恶劣；\n4","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":". **危害","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"性特征**：","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"在某","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"镇及周边形成","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"非法","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"控制，欺","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"压残","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"害群众，破坏","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"基层","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"经济秩序，使","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"群众","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"不敢举报","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、不敢维权","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，严重","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"扰乱","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"社会公共秩序。\n\n","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"二、相关","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罪名并","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罚\n\n","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"除","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"组织","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、领导黑社会","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"性质组织罪外","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，欧阳某臣","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"还应依法","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"对","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"以下具体","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"犯罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"行为承担刑事责任","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"：\n\n-","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":" **故意","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"伤害罪**（","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"致一人","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"重伤、两人轻","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"伤）","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"；\n- **聚","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"众斗殴罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"**（持","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"械、","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"人数","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"众多","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、造成财产","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"重大","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"损失）；\n-","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":" **寻","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"衅滋事罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"**（随意","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"殴打他人","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、任意","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"损毁财物","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"）；\n- **","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"非法拘禁罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"**（为","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"追讨赌","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"债限制","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"人身","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"自由）；\n-","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":" **开设赌场罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"**；\n","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"- **非法","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"放","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"贷（","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026760,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"高利贷）","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"行为","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"**，","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"可能构成非法经营","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罪或","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"催","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"收非法债务","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罪（","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"《刑法》第","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"29","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"3条之一","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"）；\n- **","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"纵","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"容黑","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"社会性质组织罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"**（若","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"查","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"实","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"国家工作人员为其","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"提供","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"包","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"庇，可","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"另","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"案处理，但","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"欧阳某臣作为","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"组织者，","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"其","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"行为构成","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"对公","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"权力","type":"answer"},"finish_reason":null}]}
+retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"的腐蚀","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"分析","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"）。\n\n","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"如下","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"三、量","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"：\n\n","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"刑建议\n\n","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"###","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"根据《刑法","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":" ","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"》第29","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"一","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"4条及最高","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"人民法院、","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"处罚","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"最高人民检察院、","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"决定","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"公安部、","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"书","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"司法部《关于","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"要求","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"办理黑恶势力","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"直接","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"犯罪案件若干","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"缴","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"问题的意见》（","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"款","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"法发〔2","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"至","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"018","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"行政机关","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"〕1号","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"账户","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"）：\n\n- ","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"的","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"组织、领导","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"法律","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"黑社会性质组织","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"性质","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"的","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"\n","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，处七年","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"1","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"以上有期徒刑，并","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":".","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"处没收财产","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":" **","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"；\n- 对其","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"程序","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"实施的其他","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"违法","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"具体犯罪行为，","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"性","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"应数罪并","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"**","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罚；\n- ","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"  \n","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"因其","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"  ","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"犯罪","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":" ","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"情节","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"本案","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"特别","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"中","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"恶劣、社会","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911676,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"影响","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"区","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"极其","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"市场监管","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"严重","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"局","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，且","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"在","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"有","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"2","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"前","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"0","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"科劣","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"2","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"迹（","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"5","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"曾因持","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"年","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"刀伤人私","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"1","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"了），主观","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"月","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"恶性深","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"作出","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"的","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"再犯可能性","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"行政处罚","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"高，依法","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"决定","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"应从","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"书","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"重处罚；\n","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"要求","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"- 若","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"当事人","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"存在","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"将","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"“保护","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罚款","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"伞”问题","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"直接","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，应","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"缴纳","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"深","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"至","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"挖彻查，","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"该","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"依法","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"局","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"追责。\n\n","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"账户","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"四、司法","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"处理","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"违反","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026761,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"建议\n\n1","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"了","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":". ","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"《","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"由公安机关成立","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"行政处罚","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"专案组，","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"法","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"全面收集","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"》","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"组织","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"第六","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"架构","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"十七条","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、资金流水、","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"确立","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"证","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"的","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"人证言","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911677,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罚","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、监控录像","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911678,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"缴","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、通讯记录等","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911678,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"分离","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"证据；\n2.","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911678,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"制度","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":" 检察","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911678,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"。","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"机关依法提起","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911678,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"该","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"公诉，建议适用","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911678,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"制度","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"“扫黑除恶","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911678,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"旨在","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"”专项","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911678,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"防止","type":"answer"},"finish_reason":null}]}
-retry:30000  
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"政策","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，从严","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"惩","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"处；\n3.","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":" 法院应","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"依法公开","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"审理，彰显","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"司法权威，回应","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"社会关切；\n","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"4. ","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"建议同步","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"开展","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"“打伞破","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"网”工作","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，彻","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"查是否存在","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"公","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"职人员包庇","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、纵容行为","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"。\n\n综上，","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"欧阳某臣的行为","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"已构成典型的","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"黑社会性质组织","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"犯罪，依法","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"应以","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"组织","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"、领导黑社会","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"性质组织罪为主","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"，与其他","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"名数罪并","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"罚，判处","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"十年","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"以上有期徒刑、","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"无期徒刑","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"甚至死刑（","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"如造成","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"特别","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"严重后果），并","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"处没收全部","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"违法","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"所得及","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"个人财产，","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"彻底铲除其","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"犯罪","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"根基，","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"维护社会公平正义","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"与基层治理","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"秩序。\n\n","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"如","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"需进一步撰写","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"起诉书、判决","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"书或法律","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"意见书，","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"可","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"提供","type":"answer"},"finish_reason":null}]}
+retry:30000
+
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"具体格式","type":"answer"},"finish_reason":null}]}
+retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911693,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"重新","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"要求，我可","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911693,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"作出","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"协助生成","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911693,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"合法","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"规范","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911693,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"决定","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"法律","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"60890c3529e740228b27e4772eddb238","created":1762911693,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"。","type":"answer"},"finish_reason":null}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763026762,"model":"gpt4","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":"文书。","type":"answer"},"finish_reason":null}]}
 retry:30000
 
-data:{"id":"736d6c59b53e45678d174a14df503c91","created":1762940471000,"model":"gpt","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":""},"finish_reason":"stop"}]}
+data:{"id":"9ab108d697f34218911701f46b19cebb","created":1763055541000,"model":"gpt","code":1000,"msg":null,"choices":[{"index":0,"additional":{"data":null,"type":"answer"},"additionalHis":null,"delta":{"content":""},"finish_reason":"stop"}]}
 retry:30000
 

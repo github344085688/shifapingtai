@@ -137,6 +137,7 @@ const aiConfigs = {
   apiKey: getApiKeyFromUrl(),
   model: litigationStrategyGeneration.model,
   isTimer: true,
+  // useMock: true,
 }
 
 const aiService = new AIService(aiConfigs)

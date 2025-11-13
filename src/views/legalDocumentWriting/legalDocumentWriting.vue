@@ -137,6 +137,7 @@ const aiConfigs = {
   apiKey: getApiKeyFromUrl(),
   model: legalDocumentWriting.model,
   isTimer: true,
+  // useMock: true,
 }
 
 const aiService = new AIService(aiConfigs)
