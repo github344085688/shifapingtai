@@ -131,7 +131,6 @@ export class MockAIService {
 
         if (!line.trim()) continue
 
-        // 直接输出原始数据，不做任何处理
         callback(line, false, false)
 
         this.currentIndex++
@@ -167,7 +166,6 @@ export class MockAIService {
       // 模拟网络延迟 (20-80ms，更接近真实API响应速度)
       await this.delay(this.responseDelayMs)
 
-      // 直接返回原始数据，不做任何处理
       yield data
 
       this.currentIndex++

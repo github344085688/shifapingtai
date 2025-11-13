@@ -1333,7 +1333,7 @@ const aiConfigs = {
   apiKey: getApiKeyFromUrl(),
   model: ConsultationOnLegalIssues.model,
   isTimer: true,
-  useMock: true, // 开发环境下启用 mockService
+  // useMock: true, // 开发环境下启用 mockService
 }
 const aiService = new AIService(aiConfigs)
 const concurrentAiService = new ConcurrentAIService(getApiKeyFromUrl())

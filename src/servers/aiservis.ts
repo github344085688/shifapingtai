@@ -335,8 +335,8 @@ class AIService {
             }
             // 检查模型是否包含 "gpt" 字符串或者是 "fyllm" 模型
             const model = json.model || this.aiConfig.model || ''
-            const isGptModel =
-              model.toLowerCase().includes('gpt') || model.toLowerCase().includes('fyllm')
+            const isGptModel = false
+            // model.toLowerCase().includes('gpt') || model.toLowerCase().includes('fyllm')
 
             // 检查是否为法律相关接口
             const isLegalInterface = this.isLegalInterface()
