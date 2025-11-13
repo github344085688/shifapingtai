@@ -11,14 +11,16 @@ export class TextProcessor {
    */
   static processSearchResultContent(content: string, title?: string): string {
     let processedContent = content
-
-    // 清理不需要的文字
+    processedContent = this.processHtmlContent(processedContent)
+    // 清理不需要的文字    processedContent = this.processHtmlContent(processedContent)
     processedContent = processedContent
       .replace(/正在输入\.\.\./g, '')
       .replace(/\.打开对话/g, '')
       .replace(/\\\"/g, '"')
       .replace(/(?:<br>\s*){3,}/g, '<br><br>')
       .replace(/[ \t]*<br>[ \t]*/g, '<br>')
+
+    // 处理 HTML 内容
 
     // 新增：预处理拆分的编号与孤立的点
     processedContent = processedContent
@@ -231,9 +233,6 @@ export class TextProcessor {
 
     // 编号处理后压缩连续中文标点
     processedContent = processedContent.replace(/([，。；：、]){2,}/g, '$1')
-
-    // 处理 HTML 内容
-    processedContent = this.processHtmlContent(processedContent)
 
     if (title && title.trim()) {
       const titleHtml = `<div style="  font-weight: bold; margin-bottom: 8px; line-height: 1.4;">${title}</div>`
@@ -518,6 +517,7 @@ export class TextProcessor {
 
     // 基础文本清理
     processedContent = processedContent.replace(/正在输入\.\.\./g, '').replace(/\.打开对话/g, '')
+    processedContent = this.processHtmlContent(processedContent)
     // .replace(/\\n/g, '\n')
     // .replace(/\\\"/g, '"')
 
@@ -577,9 +577,8 @@ export class TextProcessor {
       .replace(/\.打开对话/g, '')
       .replace(/\\n/g, '\n')
       .replace(/\\\"/g, '"')
-
+    processedContent = this.processHtmlContent(processedContent)
     // 处理 "---\n\n" 转为断行
-    processedContent = processedContent.replace(/---\n\n/g, '<br>')
 
     // 去除重复内容 - 检测并移除重复的段落
     const paragraphs = processedContent.split(/\n+/)
@@ -608,7 +607,7 @@ export class TextProcessor {
       .replace(/【法律依据】[^【]*$/g, '')
       .replace(/【注意事项】[^【]*$/g, '')
       .replace(/更多相关内容.*/g, '')
-
+    processedContent = processedContent.replace(/---\n\n/g, '<br>')
     return this.processHtmlContent(processedContent)
   }
 }
