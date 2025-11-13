@@ -981,7 +981,6 @@ class AIService {
 
   // 测试方法：使用模拟数据进行测试
   async sendToAIMock(message: any, callback: any, lastMessage: any) {
-    console.log('🧪 使用模拟数据进行测试...')
     console.log('📝 测试消息:', message)
     console.log('📄 数据源: jsons.json')
     console.log('✨ 使用 responseReader 处理模拟数据，保持与真实API相同的处理逻辑')

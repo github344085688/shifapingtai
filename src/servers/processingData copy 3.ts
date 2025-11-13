@@ -22,9 +22,6 @@ export class TextProcessor {
 
     processedContent = processedContent.replace(/(^|\s)\*\*(?=\s|$)/g, '')
 
-    processedContent = processedContent.replace(/\*\*([^*]+)\*\*/g, '$1')
-    processedContent = processedContent.replace(/\*\*/g, '')
-
     // 新增：预处理拆分的编号与孤立的点
     processedContent = processedContent
       // 将“数字 + 换行/<br> + .”合并为“数字.”
@@ -275,10 +272,6 @@ export class TextProcessor {
       /^###\s+(.+)$/gm,
       '<h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
     )
-    processedContent = processedContent.replace(
-      /^###([^\s].+)$/gm,
-      '<h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
-    )
 
     // ## 二级标题
     processedContent = processedContent.replace(
@@ -311,12 +304,6 @@ export class TextProcessor {
       /<br>###\s+(.+?)(?=<br>|$)/g,
       '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
     )
-    processedContent = processedContent.replace(
-      /<br>###([^\s].+?)(?=<br>|$)/g,
-      '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
-    )
-    processedContent = processedContent.replace(/^###\s*$/gm, '')
-    processedContent = processedContent.replace(/<br>\s*###\s*(?=<br>|$)/g, '<br>')
     processedContent = processedContent.replace(
       /<br>##\s+(.+?)(?=<br>|$)/g,
       '<br><h2 style="font-size: 1.4em; font-weight: bold; margin: 20px 0 10px 0; color: #333;">$1</h2>',

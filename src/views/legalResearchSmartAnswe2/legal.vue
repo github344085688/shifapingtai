@@ -80,13 +80,12 @@
               >
                 <button
                   type="button"
-                  class="flex justify-between items-center px-3 py-2 w-full text-left"
+                  class="flex justify-between items-center px-3 py-2 w-full text左"
                   :class="
-                    isSectionNoData(result)
+                    isConcurrentButtonDisabled(message, result.key)
                       ? 'cursor-not-allowed text-gray-400'
                       : 'cursor-pointer hover:bg-gray-50'
                   "
-                  :disabled="isSectionNoData(result)"
                   @click="toggleConcurrentCard(message, result.key)"
                 >
                   <span>{{
@@ -100,11 +99,9 @@
                     v-if="result.aiLoading"
                     class="flex items-center ml-2 text-xs text-gray-500"
                   >
-                    <span class="mr-1 loader_item"></span>正在加载...
+                    <span class="mr-1 loader_item"></span>加载中
                   </span>
-                  <span v-else-if="result.error" class="ml-2 text-xs text-gray-400">
-                    接口错误
-                  </span>
+                  <span v-else-if="result.error" class="ml-2 text-xs text-red-600"> 接口错误 </span>
                   <span v-else-if="isSectionNoData(result)" class="ml-2 text-xs text-gray-400">
                     暂无数据 </span
                   ><template>
@@ -1333,7 +1330,7 @@ const aiConfigs = {
   apiKey: getApiKeyFromUrl(),
   model: ConsultationOnLegalIssues.model,
   isTimer: true,
-  // useMock: true, // 开发环境下启用 mockService
+  useMock: true,
 }
 const aiService = new AIService(aiConfigs)
 const concurrentAiService = new ConcurrentAIService(getApiKeyFromUrl())
@@ -1383,14 +1380,33 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   aiService.sendToAI(newMessage, setMessage)
-  // await concurrentAiService.sendConcurrentRequests(
-  //   newMessage,
-  //   handleConcurrentCallback,
-  //   concurrentLabels.value,
-  // )
+  await concurrentAiService.sendConcurrentRequests(
+    newMessage,
+    handleConcurrentCallback,
+    concurrentLabels.value,
+  )
 
   userInput.value = ''
 }
+
+// const handleConcurrentCallback = (
+//   key: string,
+//   content: string,
+//   isCompleted: boolean,
+//   error?: string,
+// ) => {
+//   const lastMessage = messages.value[messages.value.length - 1]
+//   if (lastMessage && lastMessage.sender === 'assistant') {
+//     const lastResult = concurrentAiService.getAllResults()
+//     lastMessage.concurrentResults = lastResult
+//     lastResult.forEach((result) => (result.aiLoading = !result.isCompleted))
+//     const allCompleted = lastResult.every((result) => result.isCompleted)
+//     if (allCompleted && !lastMessage.aiLoading) {
+//       lastMessage.isLoading = false
+//       globalState.legalResearchSmartAnswer.aiResults = messages.value
+//     }
+//   }
+// }
 
 const handleConcurrentCallback = (
   key: string,
@@ -1506,7 +1522,6 @@ const isConcurrentButtonDisabled = (message: any, key: string): boolean => {
   if (!message.concurrentResults || message.concurrentResults.length === 0) return true
   const result = message.concurrentResults.find((item: any) => item.key === key)
   if (!result || !result.content) return true
-  if (result.error) return true
 
   switch (key) {
     case 'xsyw':
@@ -1687,26 +1702,6 @@ const isSectionNoData = (result: ConcurrentResult): boolean => {
       return !Array.isArray(arr) || arr.length === 0
     } catch {
       return !result.content || result.content.trim() === ''
-    }
-  }
-  // 新增：相似疑问（data.qa）空态判断
-  if (result.key === 'xsyw') {
-    try {
-      const parsed = getParsedContent(result.content) as any
-      const arr = parsed?.qa
-      return !Array.isArray(arr) || arr.length === 0
-    } catch {
-      return true
-    }
-  }
-  // 新增：实务研究（data.t2wechat 或 data.data.t2wechat）空态判断
-  if (result.key === 'swyj') {
-    try {
-      const parsed = getParsedContent(result.content) as any
-      const arr = parsed?.t2wechat || parsed?.data?.t2wechat
-      return !Array.isArray(arr) || arr.length === 0
-    } catch {
-      return true
     }
   }
   // 其他栏目：内容为空或仅空白
