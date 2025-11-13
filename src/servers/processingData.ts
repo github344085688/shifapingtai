@@ -4,11 +4,255 @@
  */
 export class TextProcessor {
   /**
+   * 处理 HTML 内容
+   * @param content 原始内容
+   * @returns 处理后的内容
+   */
+  static processHtmlContent(content: string): string {
+    // 将换行符转换为 <br> 标签
+    let processedContent = content
+    console.log('111111111', JSON.stringify(processedContent))
+    // ###### 六级标题
+    // processedContent = processedContent.replace(
+    //   /^######[ \t]+([^\r\n]+)(?=\r?\n|$)/gm,
+    //   '<h6 style="font-size:0.95em;font-weight:bold;margin:10px 0 6px 0;color:#333;">$1</h6>',
+    // )
+    // // ##### 五级标题
+    // processedContent = processedContent.replace(
+    //   /^#####[ \t]+([^\r\n]+)(?=\r?\n|$)/gm,
+    //   '<h5 style="font-size:1.0em;font-weight:bold;margin:12px 0 6px 0;color:#333;">$1</h5>',
+    // )
+    // // #### 四级标题
+    // processedContent = processedContent.replace(
+    //   /^####[ \t]+([^\r\n]+)(?=\r?\n|$)/gm,
+    //   '<h4 style="font-size:1.1em;font-weight:bold;margin:14px 0 8px 0;color:#333;">$1</h4>',
+    // )
+    // // ### 三级标题
+    // processedContent = processedContent.replace(
+    //   /^###[ \t]+([^\r\n]+)(?=\r?\n|$)/gm,
+    //   '<h3 style="font-size:1.2em;font-weight:bold;margin:16px 0 8px 0;color:#333;">$1</h3>',
+    // )
+    // // ## 二级标题
+    // processedContent = processedContent.replace(
+    //   /^##[ \t]+([^\r\n]+)(?=\r?\n|$)/gm,
+    //   '<h2 style="font-size:1.4em;font-weight:bold;margin:20px 0 10px 0;color:#333;">$1</h2>',
+    // )
+    // // # 一级标题
+    // processedContent = processedContent.replace(
+    //   /^#[ \t]+([^\r\n]+)(?=\r?\n|$)/gm,
+    //   '<h1 style="font-size:1.6em;font-weight:bold;margin:24px 0 12px 0;color:#333;">$1</h1>',
+    // )
+
+    // 去除 URL 链接（http/https）
+    processedContent = processedContent.replace(/https?:\/\/[^\s<>"']+/gi, '')
+
+    // 新增：处理带 <br> 的 "####"（确保只保留一个空行）
+    // processedContent = processedContent.replace(/<br>\s*####\s*(?=<br>|$)/g, '<br>')
+
+    // 处理 Markdown 标题格式
+
+    // 处理带<br>标签的markdown标题（因为前面已经将\n转换为<br>）
+
+    // processedContent = processedContent.replace(/^###\s*$/gm, '')
+    // processedContent = processedContent.replace(/<br>\s*###\s*(?=<br>|$)/g, '<br>')
+
+    processedContent = processedContent.replace(
+      /\*\*\*([^*]+?)\*\*\*/g,
+      '<strong><em>$1</em></strong>',
+    )
+    processedContent = processedContent.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>')
+    processedContent = processedContent.replace(/\*([^*]+?)\*/g, '<em>$1</em>')
+
+    // 去除来源相关信息
+    processedContent = processedContent
+      .replace(/来源[:：]\s*/gi, '') // 去掉"来源："或"来源："
+      .replace(/来源/gi, '') // 去掉单独的"来源"
+      .replace(/['"]?https?:[^'"]*['"]?/gi, '') // 去掉所有包含http/https的内容
+      .replace(/['"]?http:[^'"]*['"]?/gi, '') // 去掉所有包含http的内容
+      .replace(/https?:xxx/gi, '') // 去掉http:xxx和https:xxx格式
+      .replace(/http:xxx/gi, '') // 去掉http:xxx格式
+
+    // 去除邮箱地址
+    processedContent = processedContent.replace(
+      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi,
+      '',
+    )
+
+    // 去除热线电话号码
+    processedContent = processedContent
+      .replace(/热线[:：]\s*[\d-]+/gi, '')
+      .replace(/报料热线[:：]\s*[\d-]+/gi, '')
+      .replace(/电话[:：]\s*[\d-]+/gi, '')
+
+    // 去除浏览器升级提示相关内容
+    processedContent = processedContent
+      .replace(/您使用的浏览器版本过低[^。]*。[^。]*升级浏览器/gi, '')
+      .replace(/建议升级或更换浏览器访问[^。]*升级浏览器/gi, '')
+
+    // 去除澎湃新闻相关的无用信息
+    processedContent = processedContent
+      .replace(/仅提供信息发布平台[^。]*申请澎湃号请用电脑访问/gi, '')
+      .replace(/http:\/\/renzheng\.thepaper\.cn[^。]*/gi, '')
+      .replace(/\+\d+收藏我要举报/gi, '')
+      .replace(/#[\u4e00-\u9fffA-Za-z0-9_]+#/g, '')
+      .replace(/查看更多/gi, '')
+      .replace(/开始答题/gi, '')
+      .replace(/扫码下载[^。]*客户端/gi, '')
+
+    // 去除版权和法律声明相关信息
+    processedContent = processedContent
+      .replace(/关于澎湃[^。]*开放平台/gi, '')
+      .replace(/IPSHANGHAISIXTHTONE/gi, '')
+      .replace(/新闻报料[^。]*报料邮箱[^。]*/gi, '')
+      .replace(/沪ICP备[^。]*号/gi, '')
+      .replace(/沪公网安备[^。]*号/gi, '')
+      .replace(/互联网新闻信息服务许可证[^。]*号/gi, '')
+      .replace(/增值电信业务经营许可证[^。]*号/gi, '')
+      .replace(/©\d{4}-\d{4}[^。]*有限公司/gi, '')
+      .replace(/反馈/gi, '')
+
+    // 去除其他常见的无用信息
+    processedContent = processedContent
+      .replace(/Android版iPhone版iPad版/gi, '')
+      .replace(/微博公众号抖音号/gi, '')
+      .replace(/派生万物/gi, '')
+    const toH3Blocks = (src: string, useBr: boolean) => {
+      const parts = useBr ? src.split(/<br>/) : src.split(/\r?\n/)
+      const out: string[] = []
+
+      for (const line of parts) {
+        const trimmed = line.trim()
+        // 只要###开头，直到行结束
+        if (/^###/.test(trimmed)) {
+          // 提取###后面的内容（允许空格、中文标点）
+          const content = trimmed.replace(/^###\s*/, '')
+          out.push(`<h3>${content}</h3>`)
+        } else {
+          out.push(line)
+        }
+      }
+
+      return useBr ? out.join('<br>') : out.join('\n')
+    }
+
+    // 去掉最后的中文逗号 "，"
+    processedContent = processedContent.replace(/，\s*$/, '')
+
+    const toOrderedFromDash = (src: string, useBr: boolean) => {
+      const parts = useBr ? src.split(/<br>/) : src.split(/\r?\n/)
+      const out: string[] = []
+      let buf: string[] = []
+      const flush = () => {
+        if (buf.length) {
+          const items = buf.map((l) => l.replace(/^\s*-\s+/, '').trim()).filter((v) => v.length > 0)
+          out.push(`<ul>${items.map((i) => `<li>${i}</li>`).join('')}</ul>`)
+          buf = []
+        }
+      }
+      for (const p of parts) {
+        const t = p.trim()
+        if (/^-\s+/.test(t)) {
+          buf.push(p)
+        } else {
+          flush()
+          out.push(p)
+        }
+      }
+      flush()
+      return useBr ? out.join('<br>') : out.join('\n')
+    }
+
+    const toOrderedFromNumbers = (src: string, useBr: boolean) => {
+      const parts = useBr ? src.split(/<br>/) : src.split(/\r?\n/)
+      const out: string[] = []
+      let buf: string[] = []
+      const flush = () => {
+        if (buf.length) {
+          const items = buf
+            .map((l) => l.replace(/^\s*(?:　　)?\*?[0-9]+\.\s*/, '').trim())
+            .filter((v) => v.length > 0)
+          out.push(`<ol>${items.map((i) => `<li>${i}</li>`).join('')}</ol>`)
+          buf = []
+        }
+      }
+      for (const p of parts) {
+        const t = p.trim()
+        if (/^(?:　　)?\*?[0-9]+\.\s*/.test(t)) {
+          buf.push(p)
+        } else {
+          flush()
+          out.push(p)
+        }
+      }
+      flush()
+      return useBr ? out.join('<br>') : out.join('\n')
+    }
+
+    processedContent = toH3Blocks(processedContent, false)
+    processedContent = toOrderedFromNumbers(processedContent, false)
+    processedContent = toOrderedFromDash(processedContent, false)
+
+    // 新增：统一将剩余的原始换行转为 <br>，保证换行显示
+
+    // processedContent = toOrderedFromNumbers(processedContent, true)
+    // processedContent = toOrderedFromDash(processedContent, true)
+
+    // if (processedContent === ' -') console.log('11111111111111111', processedContent)
+    // 处理无序列表（- 开头的行）
+    processedContent = processedContent.replace(
+      /(?:^|\r?\n|\s)-\s*(.*?)(?=(\r?\n|$))/g,
+      (match, item) => {
+        // item 可能是空字符串或只包含空白，去掉两端空白
+        const text = (item || '').trim()
+        // console.log('matched item:', JSON.stringify(text))
+        return `<li>${text}</li>`
+      },
+    )
+
+    // console.log('after li replace:', JSON.stringify(processedContent))
+
+    const wrapLiGroupsSafe = (src: string) => {
+      let result = ''
+      let lastIndex = 0
+      const re = /(?:\s*<li>[\s\S]*?<\/li>\s*)+/g
+      let m: RegExpExecArray | null
+      while ((m = re.exec(src)) !== null) {
+        const start = m.index
+        const end = re.lastIndex
+        result += src.slice(lastIndex, start)
+        const before = src.slice(Math.max(0, start - 16), start)
+        const after = src.slice(end, Math.min(src.length, end + 16))
+        const hasOpen = /<\s*(ul|ol)\b/i.test(before)
+        const hasClose = /<\/\s*(ul|ol)\b/i.test(after)
+        if (hasOpen && hasClose) {
+          result += m[0]
+        } else {
+          result += `<ul>${m[0].trim()}</ul>`
+        }
+        lastIndex = end
+      }
+      result += src.slice(lastIndex)
+      return result
+    }
+    processedContent = wrapLiGroupsSafe(processedContent)
+
+    processedContent = processedContent.replace(/(?:<br>\s*){3,}/g, '<br><br>')
+    processedContent = processedContent.replace(/[ \t]*<br>[ \t]*/g, '<br>')
+    processedContent = processedContent.replace(/\r\n/g, '\n')
+    processedContent = processedContent.replace(/\r/g, '\n')
+    processedContent = processedContent.replace(/\n{2,}/g, '<br><br>')
+    processedContent = processedContent.replace(/[ \t]*\n/g, '<br>')
+
+    return processedContent
+  }
+
+  /**
    * 处理搜索结果内容
    * @param content 原始内容
    * @param title 标题（可选）
    * @returns 处理后的内容
    */
+
   static processSearchResultContent(content: string, title?: string): string {
     let processedContent = content
     processedContent = this.processHtmlContent(processedContent)
@@ -243,226 +487,6 @@ export class TextProcessor {
   }
 
   /**
-   * 处理 HTML 内容
-   * @param content 原始内容
-   * @returns 处理后的内容
-   */
-  static processHtmlContent(content: string): string {
-    // 将换行符转换为 <br> 标签
-    let processedContent = content
-    processedContent = processedContent.replace(/^(#{1,6})\s*\r?\n\s*([^\r\n].+)/gm, '$1 $2')
-    processedContent = processedContent.replace(/^#{1,6}\s*$/gm, '')
-    processedContent = processedContent.replace(/<br>\s*#{1,6}\s*(?=<br>|$)/g, '<br>')
-    {
-      const styles: Record<number, string> = {
-        1: 'font-size: 1.6em; font-weight: bold; margin: 24px 0 12px 0; color: #333;',
-        2: 'font-size: 1.4em; font-weight: bold; margin: 20px 0 10px 0; color: #333;',
-        3: 'font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;',
-        4: 'font-size: 1.1em; font-weight: bold; margin: 14px 0 8px 0; color: #333;',
-        5: 'font-size: 1.0em; font-weight: bold; margin: 12px 0 6px 0; color: #333;',
-        6: 'font-size: 0.95em; font-weight: bold; margin: 10px 0 6px 0; color: #333;',
-      }
-      for (let level = 1; level <= 6; level++) {
-        const tag = `h${level}`
-        const style = styles[level]
-        processedContent = processedContent.replace(
-          new RegExp(`^#{${level}}\\s*(\\S.+)$`, 'gm'),
-          `<${tag} style="${style}">$1</${tag}>`,
-        )
-        processedContent = processedContent.replace(
-          new RegExp(`<br>#{${level}}\\s*(\\S.+?)(?=<br>|$)`, 'g'),
-          `<br><${tag} style="${style}">$1</${tag}>`,
-        )
-      }
-    }
-
-    // 去除 URL 链接（http/https）
-    processedContent = processedContent.replace(/https?:\/\/[^\s<>"']+/gi, '')
-
-    // 新增：处理带 <br> 的 "####"（确保只保留一个空行）
-    processedContent = processedContent.replace(/<br>\s*####\s*(?=<br>|$)/g, '<br>')
-
-    // 处理 Markdown 标题格式
-
-    // 处理带<br>标签的markdown标题（因为前面已经将\n转换为<br>）
-
-    processedContent = processedContent.replace(/^###\s*$/gm, '')
-    processedContent = processedContent.replace(/<br>\s*###\s*(?=<br>|$)/g, '<br>')
-
-    // 新增：带 <br> 的 ####～###### 标题
-
-    processedContent = processedContent.replace(
-      /\*\*\*([^*]+?)\*\*\*/g,
-      '<strong><em>$1</em></strong>',
-    )
-    processedContent = processedContent.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>')
-    processedContent = processedContent.replace(/\*([^*]+?)\*/g, '<em>$1</em>')
-
-    // 去除来源相关信息
-    processedContent = processedContent
-      .replace(/来源[:：]\s*/gi, '') // 去掉"来源："或"来源："
-      .replace(/来源/gi, '') // 去掉单独的"来源"
-      .replace(/['"]?https?:[^'"]*['"]?/gi, '') // 去掉所有包含http/https的内容
-      .replace(/['"]?http:[^'"]*['"]?/gi, '') // 去掉所有包含http的内容
-      .replace(/https?:xxx/gi, '') // 去掉http:xxx和https:xxx格式
-      .replace(/http:xxx/gi, '') // 去掉http:xxx格式
-
-    // 去除邮箱地址
-    processedContent = processedContent.replace(
-      /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/gi,
-      '',
-    )
-
-    // 去除热线电话号码
-    processedContent = processedContent
-      .replace(/热线[:：]\s*[\d-]+/gi, '')
-      .replace(/报料热线[:：]\s*[\d-]+/gi, '')
-      .replace(/电话[:：]\s*[\d-]+/gi, '')
-
-    // 去除浏览器升级提示相关内容
-    processedContent = processedContent
-      .replace(/您使用的浏览器版本过低[^。]*。[^。]*升级浏览器/gi, '')
-      .replace(/建议升级或更换浏览器访问[^。]*升级浏览器/gi, '')
-
-    // 去除澎湃新闻相关的无用信息
-    processedContent = processedContent
-      .replace(/仅提供信息发布平台[^。]*申请澎湃号请用电脑访问/gi, '')
-      .replace(/http:\/\/renzheng\.thepaper\.cn[^。]*/gi, '')
-      .replace(/\+\d+收藏我要举报/gi, '')
-      .replace(/#[\u4e00-\u9fffA-Za-z0-9_]+#/g, '')
-      .replace(/查看更多/gi, '')
-      .replace(/开始答题/gi, '')
-      .replace(/扫码下载[^。]*客户端/gi, '')
-
-    // 去除版权和法律声明相关信息
-    processedContent = processedContent
-      .replace(/关于澎湃[^。]*开放平台/gi, '')
-      .replace(/IPSHANGHAISIXTHTONE/gi, '')
-      .replace(/新闻报料[^。]*报料邮箱[^。]*/gi, '')
-      .replace(/沪ICP备[^。]*号/gi, '')
-      .replace(/沪公网安备[^。]*号/gi, '')
-      .replace(/互联网新闻信息服务许可证[^。]*号/gi, '')
-      .replace(/增值电信业务经营许可证[^。]*号/gi, '')
-      .replace(/©\d{4}-\d{4}[^。]*有限公司/gi, '')
-      .replace(/反馈/gi, '')
-
-    // 去除其他常见的无用信息
-    processedContent = processedContent
-      .replace(/Android版iPhone版iPad版/gi, '')
-      .replace(/微博公众号抖音号/gi, '')
-      .replace(/派生万物/gi, '')
-
-    // 去掉最后的中文逗号 "，"
-    processedContent = processedContent.replace(/，\s*$/, '')
-
-    const toOrderedFromDash = (src: string, useBr: boolean) => {
-      const parts = useBr ? src.split(/<br>/) : src.split(/\r?\n/)
-      const out: string[] = []
-      let buf: string[] = []
-      const flush = () => {
-        if (buf.length) {
-          const items = buf.map((l) => l.replace(/^\s*-\s+/, '').trim()).filter((v) => v.length > 0)
-          out.push(`<ul>${items.map((i) => `<li>${i}</li>`).join('')}</ul>`)
-          buf = []
-        }
-      }
-      for (const p of parts) {
-        const t = p.trim()
-        if (/^-\s+/.test(t)) {
-          buf.push(p)
-        } else {
-          flush()
-          out.push(p)
-        }
-      }
-      flush()
-      return useBr ? out.join('<br>') : out.join('\n')
-    }
-
-    const toOrderedFromNumbers = (src: string, useBr: boolean) => {
-      const parts = useBr ? src.split(/<br>/) : src.split(/\r?\n/)
-      const out: string[] = []
-      let buf: string[] = []
-      const flush = () => {
-        if (buf.length) {
-          const items = buf
-            .map((l) => l.replace(/^\s*(?:　　)?\*?[0-9]+\.\s*/, '').trim())
-            .filter((v) => v.length > 0)
-          out.push(`<ol>${items.map((i) => `<li>${i}</li>`).join('')}</ol>`)
-          buf = []
-        }
-      }
-      for (const p of parts) {
-        const t = p.trim()
-        if (/^(?:　　)?\*?[0-9]+\.\s*/.test(t)) {
-          buf.push(p)
-        } else {
-          flush()
-          out.push(p)
-        }
-      }
-      flush()
-      return useBr ? out.join('<br>') : out.join('\n')
-    }
-
-    processedContent = toOrderedFromNumbers(processedContent, false)
-    processedContent = toOrderedFromDash(processedContent, false)
-
-    // 新增：统一将剩余的原始换行转为 <br>，保证换行显示
-
-    // processedContent = toOrderedFromNumbers(processedContent, true)
-    // processedContent = toOrderedFromDash(processedContent, true)
-
-    if (processedContent === ' -') console.log('11111111111111111', processedContent)
-    // 处理无序列表（- 开头的行）
-    processedContent = processedContent.replace(
-      /(?:^|\r?\n|\s)-\s*(.*?)(?=(\r?\n|$))/g,
-      (match, item) => {
-        // item 可能是空字符串或只包含空白，去掉两端空白
-        const text = (item || '').trim()
-        console.log('matched item:', JSON.stringify(text))
-        return `<li>${text}</li>`
-      },
-    )
-
-    console.log('after li replace:', JSON.stringify(processedContent))
-
-    const wrapLiGroupsSafe = (src: string) => {
-      let result = ''
-      let lastIndex = 0
-      const re = /(?:\s*<li>[\s\S]*?<\/li>\s*)+/g
-      let m: RegExpExecArray | null
-      while ((m = re.exec(src)) !== null) {
-        const start = m.index
-        const end = re.lastIndex
-        result += src.slice(lastIndex, start)
-        const before = src.slice(Math.max(0, start - 16), start)
-        const after = src.slice(end, Math.min(src.length, end + 16))
-        const hasOpen = /<\s*(ul|ol)\b/i.test(before)
-        const hasClose = /<\/\s*(ul|ol)\b/i.test(after)
-        if (hasOpen && hasClose) {
-          result += m[0]
-        } else {
-          result += `<ul>${m[0].trim()}</ul>`
-        }
-        lastIndex = end
-      }
-      result += src.slice(lastIndex)
-      return result
-    }
-    processedContent = wrapLiGroupsSafe(processedContent)
-
-    processedContent = processedContent.replace(/(?:<br>\s*){3,}/g, '<br><br>')
-    processedContent = processedContent.replace(/[ \t]*<br>[ \t]*/g, '<br>')
-    processedContent = processedContent.replace(/\r\n/g, '\n')
-    processedContent = processedContent.replace(/\r/g, '\n')
-    processedContent = processedContent.replace(/\n{2,}/g, '<br><br>')
-    processedContent = processedContent.replace(/[ \t]*\n/g, '<br>')
-
-    return processedContent
-  }
-
-  /**
    * 创建带样式的消息
    * @param content 内容
    * @param style 样式
@@ -514,10 +538,10 @@ export class TextProcessor {
     _score: number
   }): string {
     let processedContent = lawData.content
-
+    processedContent = this.processHtmlContent(processedContent)
     // 基础文本清理
     processedContent = processedContent.replace(/正在输入\.\.\./g, '').replace(/\.打开对话/g, '')
-    processedContent = this.processHtmlContent(processedContent)
+
     // .replace(/\\n/g, '\n')
     // .replace(/\\\"/g, '"')
 
@@ -535,7 +559,6 @@ export class TextProcessor {
     // processedContent = processedContent.replace(/^\*\s+/gm, '<br>　　* ')
 
     // 处理HTML内容
-    processedContent = this.processHtmlContent(processedContent)
 
     // 构建法条信息头部
     const lawHeader = `
@@ -570,14 +593,14 @@ export class TextProcessor {
     name: string
   }): string {
     let processedContent = webData.content
-
+    processedContent = this.processHtmlContent(processedContent)
     // 基础文本清理
     processedContent = processedContent
       .replace(/正在输入\.\.\./g, '')
       .replace(/\.打开对话/g, '')
       .replace(/\\n/g, '\n')
       .replace(/\\\"/g, '"')
-    processedContent = this.processHtmlContent(processedContent)
+
     // 处理 "---\n\n" 转为断行
 
     // 去除重复内容 - 检测并移除重复的段落
@@ -608,6 +631,6 @@ export class TextProcessor {
       .replace(/【注意事项】[^【]*$/g, '')
       .replace(/更多相关内容.*/g, '')
     processedContent = processedContent.replace(/---\n\n/g, '<br>')
-    return this.processHtmlContent(processedContent)
+    return processedContent
   }
 }

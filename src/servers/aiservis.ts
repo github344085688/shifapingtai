@@ -536,11 +536,21 @@ class AIService {
                     if (!answerContent || answerContent.trim() === '#') {
                       break
                     }
-                    if (answerContent) {
-                      // 对所有答案内容进行 processSearchResultContent 处理
-                      answerContent = TextProcessor.processSearchResultContent(answerContent)
+                    // 流式 H3 解析：仅基于 '###' 开始 和 '\n' 结束
+                    if (typeof (this as any)._inH3 === 'undefined') {
+                      ;(this as any)._inH3 = false
+                      ;(this as any)._h3Buffer = ''
+                    }
 
-                      // 在第一个answer内容前添加"结果："前缀
+                    const h3Style =
+                      'font-size:1.2em;font-weight:bold;margin:16px 0 8px 0;color:#333;'
+
+                    const flushH3 = () => {
+                      const text = String((this as any)._h3Buffer || '').trim()
+                      ;(this as any)._h3Buffer = ''
+                      ;(this as any)._inH3 = false
+                      if (!text) return
+                      const h3Html = `<h3 style="${h3Style}">${text}</h3>\n`
                       if (!hasShownAnswerHeader) {
                         callback(
                           this.createStyledMessage(MESSAGES.RESULT_HEADER, STYLES.ANSWER_HEADER),
@@ -549,7 +559,80 @@ class AIService {
                         )
                         hasShownAnswerHeader = true
                       }
-                      callback(answerContent, false, false)
+                      callback(h3Html, false, false)
+                    }
+
+                    const tok = answerContent
+
+                    // 检测开始：严格匹配以 '###' 起始
+                    if (!(this as any)._inH3 && /^###(?:\s|$)/.test(tok)) {
+                      ;(this as any)._inH3 = true
+                      const after = tok.replace(/^###\s*/, '')
+                      const nlIdx = after.indexOf('\n')
+                      if (nlIdx >= 0) {
+                        ;(this as any)._h3Buffer = after.slice(0, nlIdx)
+                        flushH3()
+                        const rest = after.slice(nlIdx + 1)
+                        if (rest) {
+                          const processed = TextProcessor.processSearchResultContent(rest)
+                          if (!hasShownAnswerHeader) {
+                            callback(
+                              this.createStyledMessage(
+                                MESSAGES.RESULT_HEADER,
+                                STYLES.ANSWER_HEADER,
+                              ),
+                              false,
+                              false,
+                            )
+                            hasShownAnswerHeader = true
+                          }
+                          callback(processed, false, false)
+                        }
+                      } else {
+                        ;(this as any)._h3Buffer = after
+                      }
+                      break
+                    }
+
+                    // 处于 H3 中：累计直到遇到换行
+                    if ((this as any)._inH3) {
+                      const nlIdx = tok.indexOf('\n')
+                      if (nlIdx >= 0) {
+                        ;(this as any)._h3Buffer += tok.slice(0, nlIdx)
+                        flushH3()
+                        const rest = tok.slice(nlIdx + 1)
+                        if (rest) {
+                          const processed = TextProcessor.processSearchResultContent(rest)
+                          if (!hasShownAnswerHeader) {
+                            callback(
+                              this.createStyledMessage(
+                                MESSAGES.RESULT_HEADER,
+                                STYLES.ANSWER_HEADER,
+                              ),
+                              false,
+                              false,
+                            )
+                            hasShownAnswerHeader = true
+                          }
+                          callback(processed, false, false)
+                        }
+                      } else {
+                        ;(this as any)._h3Buffer += tok
+                      }
+                      break
+                    }
+
+                    if (answerContent) {
+                      const processed = TextProcessor.processSearchResultContent(answerContent)
+                      if (!hasShownAnswerHeader) {
+                        callback(
+                          this.createStyledMessage(MESSAGES.RESULT_HEADER, STYLES.ANSWER_HEADER),
+                          false,
+                          false,
+                        )
+                        hasShownAnswerHeader = true
+                      }
+                      callback(processed, false, false)
                     }
                     break
                   case 'queries':
