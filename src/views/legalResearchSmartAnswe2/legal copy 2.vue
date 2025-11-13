@@ -1330,6 +1330,7 @@ const aiConfigs = {
   apiKey: getApiKeyFromUrl(),
   model: ConsultationOnLegalIssues.model,
   isTimer: true,
+  // useMock: true,
 }
 const aiService = new AIService(aiConfigs)
 const concurrentAiService = new ConcurrentAIService(getApiKeyFromUrl())
@@ -1379,11 +1380,11 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   aiService.sendToAI(newMessage, setMessage)
-  await concurrentAiService.sendConcurrentRequests(
-    newMessage,
-    handleConcurrentCallback,
-    concurrentLabels.value,
-  )
+  // await concurrentAiService.sendConcurrentRequests(
+  //   newMessage,
+  //   handleConcurrentCallback,
+  //   concurrentLabels.value,
+  // )
 
   userInput.value = ''
 }

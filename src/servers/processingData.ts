@@ -20,11 +20,6 @@ export class TextProcessor {
       .replace(/(?:<br>\s*){3,}/g, '<br><br>')
       .replace(/[ \t]*<br>[ \t]*/g, '<br>')
 
-    processedContent = processedContent.replace(/(^|\s)\*\*(?=\s|$)/g, '')
-
-    processedContent = processedContent.replace(/\*\*([^*]+)\*\*/g, '$1')
-    processedContent = processedContent.replace(/\*\*/g, '')
-
     // 新增：预处理拆分的编号与孤立的点
     processedContent = processedContent
       // 将“数字 + 换行/<br> + .”合并为“数字.”
@@ -256,12 +251,31 @@ export class TextProcessor {
   static processHtmlContent(content: string): string {
     // 将换行符转换为 <br> 标签
     let processedContent = content
-    // 新增：将无空格的 #中文编号 标题转为加粗（保留原有规则）
-    processedContent = processedContent.replace(/^#([^\s].+)$/gm, '<strong>$1</strong>')
-    processedContent = processedContent.replace(
-      /<br>#([^\s].+?)(?=<br>|$)/g,
-      '<br><strong>$1</strong>',
-    )
+    processedContent = processedContent.replace(/^(#{1,6})\s*\r?\n\s*([^\r\n].+)/gm, '$1 $2')
+    processedContent = processedContent.replace(/^#{1,6}\s*$/gm, '')
+    processedContent = processedContent.replace(/<br>\s*#{1,6}\s*(?=<br>|$)/g, '<br>')
+    {
+      const styles: Record<number, string> = {
+        1: 'font-size: 1.6em; font-weight: bold; margin: 24px 0 12px 0; color: #333;',
+        2: 'font-size: 1.4em; font-weight: bold; margin: 20px 0 10px 0; color: #333;',
+        3: 'font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;',
+        4: 'font-size: 1.1em; font-weight: bold; margin: 14px 0 8px 0; color: #333;',
+        5: 'font-size: 1.0em; font-weight: bold; margin: 12px 0 6px 0; color: #333;',
+        6: 'font-size: 0.95em; font-weight: bold; margin: 10px 0 6px 0; color: #333;',
+      }
+      for (let level = 1; level <= 6; level++) {
+        const tag = `h${level}`
+        const style = styles[level]
+        processedContent = processedContent.replace(
+          new RegExp(`^#{${level}}\\s*(\\S.+)$`, 'gm'),
+          `<${tag} style="${style}">$1</${tag}>`,
+        )
+        processedContent = processedContent.replace(
+          new RegExp(`<br>#{${level}}\\s*(\\S.+?)(?=<br>|$)`, 'g'),
+          `<br><${tag} style="${style}">$1</${tag}>`,
+        )
+      }
+    }
 
     // 去除 URL 链接（http/https）
     processedContent = processedContent.replace(/https?:\/\/[^\s<>"']+/gi, '')
@@ -270,75 +284,20 @@ export class TextProcessor {
     processedContent = processedContent.replace(/<br>\s*####\s*(?=<br>|$)/g, '<br>')
 
     // 处理 Markdown 标题格式
-    // ### 三级标题
-    processedContent = processedContent.replace(
-      /^###\s+(.+)$/gm,
-      '<h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
-    )
-    processedContent = processedContent.replace(
-      /^###([^\s].+)$/gm,
-      '<h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
-    )
-
-    // ## 二级标题
-    processedContent = processedContent.replace(
-      /^##\s+(.+)$/gm,
-      '<h2 style="font-size: 1.4em; font-weight: bold; margin: 20px 0 10px 0; color: #333;">$1</h2>',
-    )
-
-    // # 一级标题
-    processedContent = processedContent.replace(
-      /^#\s+(.+)$/gm,
-      '<h1 style="font-size: 1.6em; font-weight: bold; margin: 24px 0 12px 0; color: #333;">$1</h1>',
-    )
-
-    // 新增：####～###### 标题（行首）
-    processedContent = processedContent.replace(
-      /^####\s+(.+)$/gm,
-      '<h4 style="font-size: 1.1em; font-weight: bold; margin: 14px 0 8px 0; color: #333;">$1</h4>',
-    )
-    processedContent = processedContent.replace(
-      /^#####\s+(.+)$/gm,
-      '<br><h5 style="font-size: 1.0em; font-weight: bold; margin: 12px 0 6px 0; color: #333;">$1</h5>',
-    )
-    processedContent = processedContent.replace(
-      /^######\s+(.+)$/gm,
-      '<h6 style="font-size: 0.95em; font-weight: bold; margin: 10px 0 6px 0; color: #333;">$1</h6>',
-    )
 
     // 处理带<br>标签的markdown标题（因为前面已经将\n转换为<br>）
-    processedContent = processedContent.replace(
-      /<br>###\s+(.+?)(?=<br>|$)/g,
-      '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
-    )
-    processedContent = processedContent.replace(
-      /<br>###([^\s].+?)(?=<br>|$)/g,
-      '<br><h3 style="font-size: 1.2em; font-weight: bold; margin: 16px 0 8px 0; color: #333;">$1</h3>',
-    )
+
     processedContent = processedContent.replace(/^###\s*$/gm, '')
     processedContent = processedContent.replace(/<br>\s*###\s*(?=<br>|$)/g, '<br>')
-    processedContent = processedContent.replace(
-      /<br>##\s+(.+?)(?=<br>|$)/g,
-      '<br><h2 style="font-size: 1.4em; font-weight: bold; margin: 20px 0 10px 0; color: #333;">$1</h2>',
-    )
-    processedContent = processedContent.replace(
-      /<br>#\s+(.+?)(?=<br>|$)/g,
-      '<br><h1 style="font-size: 1.6em; font-weight: bold; margin: 24px 0 12px 0; color: #333;">$1</h1>',
-    )
 
     // 新增：带 <br> 的 ####～###### 标题
+
     processedContent = processedContent.replace(
-      /<br>####\s+(.+?)(?=<br>|$)/g,
-      '<br><h4 style="font-size: 1.1em; font-weight: bold; margin: 14px 0 8px 0; color: #333;">$1</h4>',
+      /\*\*\*([^*]+?)\*\*\*/g,
+      '<strong><em>$1</em></strong>',
     )
-    processedContent = processedContent.replace(
-      /<br>#####\s+(.+?)(?=<br>|$)/g,
-      '<br><h5 style="font-size: 1.0em; font-weight: bold; margin: 12px 0 6px 0; color: #333;">$1</h5>',
-    )
-    processedContent = processedContent.replace(
-      /<br>######\s+(.+?)(?=<br>|$)/g,
-      '<br><h6 style="font-size: 0.95em; font-weight: bold; margin: 10px 0 6px 0; color: #333;">$1</h6>',
-    )
+    processedContent = processedContent.replace(/\*\*([^*]+?)\*\*/g, '<strong>$1</strong>')
+    processedContent = processedContent.replace(/\*([^*]+?)\*/g, '<em>$1</em>')
 
     // 去除来源相关信息
     processedContent = processedContent
@@ -371,7 +330,7 @@ export class TextProcessor {
       .replace(/仅提供信息发布平台[^。]*申请澎湃号请用电脑访问/gi, '')
       .replace(/http:\/\/renzheng\.thepaper\.cn[^。]*/gi, '')
       .replace(/\+\d+收藏我要举报/gi, '')
-      .replace(/#[^#]*#/gi, '')
+      .replace(/#[\u4e00-\u9fffA-Za-z0-9_]+#/g, '')
       .replace(/查看更多/gi, '')
       .replace(/开始答题/gi, '')
       .replace(/扫码下载[^。]*客户端/gi, '')
