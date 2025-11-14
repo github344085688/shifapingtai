@@ -23,17 +23,18 @@
             :class="[
               message.sender === 'user'
                 ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px] markdownUser'
-                : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
+                : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px] w-full box-border',
             ]"
           >
-            <div v-if="message.aiLoading" class="">ai思考中...</div>
+            <div v-if="message.aiLoading" class="w-full">ai思考中...</div>
             <!-- 思考过程显示 -->
             <div
               v-if="message.thinkingProcess"
-              class="mb-4 thinking-process"
+              class="box-border mb-4 w-full thinking-process"
               v-html="message.thinkingProcess"
             ></div>
             <AiText :popsMessage="message" />
+            <!-- {{ message.content }} -->
           </div>
         </div>
       </div>

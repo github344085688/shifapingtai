@@ -236,6 +236,12 @@ class AIService {
     let countershu = 0
     let stepContent = '' // 用于累积 step 内容
     hasShownSearchProcessHeader = hasShownSearchProcessHeader || false
+    let listStarted = false
+    let collectingListItem = false
+    let numListStarted = false
+    let numCollectingItem = false
+    let numPendingNumber: string | null = null
+    let parenOpen = false
 
     try {
       while (true) {
@@ -294,6 +300,21 @@ class AIService {
           if (!eventData) continue
 
           if (eventData === '[DONE]') {
+            if (listStarted && collectingListItem) {
+              callback('</li></ul>', false, false)
+              collectingListItem = false
+              listStarted = false
+            }
+            if (numListStarted) {
+              if (numCollectingItem) {
+                callback('</li></ol>', false, false)
+              } else {
+                callback('</ol>', false, false)
+              }
+              numCollectingItem = false
+              numListStarted = false
+              numPendingNumber = null
+            }
             callback(null, true, false)
             continue
           }
@@ -474,7 +495,11 @@ class AIService {
                             // 网络搜索接口使用网络内容处理
                             formattedContent = TextProcessor.processWebContent(resData)
                           } else {
-                            formattedContent = formattedContent
+                            // 其他接口使用通用搜索结果处理
+                            formattedContent = TextProcessor.processSearchResultContent(
+                              formattedContent,
+                              resData.title,
+                            )
                           }
 
                           const contentDiv = `<div style="${STYLES.THINKING_CONTENT}">${formattedContent}</div>`
@@ -505,19 +530,184 @@ class AIService {
                     }
                     break
                   case 'answer':
+                    // 处理答案数据，添加"结果："前缀
                     let answerContent = json.choices[0]?.delta?.content || ''
+                    // 屏蔽单行 '#' 的 answer
                     if (!answerContent || answerContent.trim() === '#') {
                       break
                     }
-                    if (!hasShownAnswerHeader) {
-                      callback(
-                        this.createStyledMessage(MESSAGES.RESULT_HEADER, STYLES.ANSWER_HEADER),
-                        false,
-                        false,
-                      )
-                      hasShownAnswerHeader = true
+                    // 流式 H3 解析：仅基于 '###' 开始 和 '\n' 结束
+                    if (typeof (this as any)._inH3 === 'undefined') {
+                      ;(this as any)._inH3 = false
+                      ;(this as any)._h3Buffer = ''
                     }
-                    callback(answerContent, false, false)
+
+                    const h3Style =
+                      'font-size:1.2em;font-weight:bold;margin:16px 0 8px 0;color:#333;'
+
+                    const flushH3 = () => {
+                      const text = String((this as any)._h3Buffer || '').trim()
+                      ;(this as any)._h3Buffer = ''
+                      ;(this as any)._inH3 = false
+                      if (!text) return
+                      const h3Html = `<h3 style="${h3Style}">${text}</h3>\n`
+                      if (!hasShownAnswerHeader) {
+                        callback(
+                          this.createStyledMessage(MESSAGES.RESULT_HEADER, STYLES.ANSWER_HEADER),
+                          false,
+                          false,
+                        )
+                        hasShownAnswerHeader = true
+                      }
+                      callback(h3Html, false, false)
+                    }
+
+                    const tok = answerContent
+
+                    const brTok = tok.trim() === '<br>' || tok === '\n' || tok === '\r\n'
+                    if (brTok) {
+                      if (numListStarted && numCollectingItem) {
+                        callback('</li>', false, false)
+                        numCollectingItem = false
+                      }
+                      if (listStarted && collectingListItem) {
+                        callback('</li>', false, false)
+                        collectingListItem = false
+                      }
+                      break
+                    }
+
+                    if (tok === '  \n\n' && listStarted && collectingListItem) {
+                      callback('</li></ul>', false, false)
+                      collectingListItem = false
+                      listStarted = false
+                      break
+                    }
+
+                    if (tok === '。\n\n' && numListStarted) {
+                      if (numCollectingItem) {
+                        callback('</li></ol>', false, false)
+                      } else {
+                        callback('</ol>', false, false)
+                      }
+                      numCollectingItem = false
+                      numListStarted = false
+                      numPendingNumber = null
+                      break
+                    }
+
+                    if (tok === '  \n' && numListStarted && numCollectingItem) {
+                      callback('</li>', false, false)
+                      numCollectingItem = false
+                      break
+                    }
+
+                    const numDotWithText = tok.match(/^\s*(?:　　)?\*?([0-9]+)\.\s*(.*)$/)
+                    if (numDotWithText) {
+                      if (!numListStarted) {
+                        callback('<ol><li>', false, false)
+                        numListStarted = true
+                        numCollectingItem = true
+                      } else {
+                        callback('<li>', false, false)
+                        numCollectingItem = true
+                      }
+                      const rest = numDotWithText[2]
+                      if (rest) {
+                        const processedRest = TextProcessor.processSearchResultContent(rest)
+                        callback(processedRest, false, false)
+                      }
+                      break
+                    }
+
+                    const dashWithText = tok.match(/^\s*-\s+(.*)$/)
+                    if (dashWithText) {
+                      if (!listStarted) {
+                        callback('<ul><li>', false, false)
+                        listStarted = true
+                        collectingListItem = true
+                      } else {
+                        callback('</li><li>', false, false)
+                        collectingListItem = true
+                      }
+                      const rest = dashWithText[1]
+                      if (rest) {
+                        const processedRest = TextProcessor.processSearchResultContent(rest)
+                        callback(processedRest, false, false)
+                      }
+                      break
+                    }
+
+                    // 检测开始：严格匹配以 '###' 起始
+                    if (!(this as any)._inH3 && /^###(?:\s|$)/.test(tok)) {
+                      ;(this as any)._inH3 = true
+                      const after = tok.replace(/^###\s*/, '')
+                      const nlIdx = after.indexOf('\n')
+                      if (nlIdx >= 0) {
+                        ;(this as any)._h3Buffer = after.slice(0, nlIdx)
+                        flushH3()
+                        const rest = after.slice(nlIdx + 1)
+                        if (rest) {
+                          const processed = TextProcessor.processSearchResultContent(rest)
+                          if (!hasShownAnswerHeader) {
+                            callback(
+                              this.createStyledMessage(
+                                MESSAGES.RESULT_HEADER,
+                                STYLES.ANSWER_HEADER,
+                              ),
+                              false,
+                              false,
+                            )
+                            hasShownAnswerHeader = true
+                          }
+                          callback(processed, false, false)
+                        }
+                      } else {
+                        ;(this as any)._h3Buffer = after
+                      }
+                      break
+                    }
+
+                    // 处于 H3 中：累计直到遇到换行
+                    if ((this as any)._inH3) {
+                      const nlIdx = tok.indexOf('\n')
+                      if (nlIdx >= 0) {
+                        ;(this as any)._h3Buffer += tok.slice(0, nlIdx)
+                        flushH3()
+                        const rest = tok.slice(nlIdx + 1)
+                        if (rest) {
+                          const processed = TextProcessor.processSearchResultContent(rest)
+                          if (!hasShownAnswerHeader) {
+                            callback(
+                              this.createStyledMessage(
+                                MESSAGES.RESULT_HEADER,
+                                STYLES.ANSWER_HEADER,
+                              ),
+                              false,
+                              false,
+                            )
+                            hasShownAnswerHeader = true
+                          }
+                          callback(processed, false, false)
+                        }
+                      } else {
+                        ;(this as any)._h3Buffer += tok
+                      }
+                      break
+                    }
+
+                    if (answerContent) {
+                      const processed = TextProcessor.processSearchResultContent(answerContent)
+                      if (!hasShownAnswerHeader) {
+                        callback(
+                          this.createStyledMessage(MESSAGES.RESULT_HEADER, STYLES.ANSWER_HEADER),
+                          false,
+                          false,
+                        )
+                        hasShownAnswerHeader = true
+                      }
+                      callback(processed, false, false)
+                    }
                     break
                   case 'queries':
                     // 搜索查询语句
@@ -592,7 +782,10 @@ class AIService {
                   default:
                     // 其他类型的additional数据
                     if (additionalData.data && additionalData.data.trim()) {
-                      let processedData = additionalData.data
+                      // 对所有其他数据也进行 processSearchResultContent 处理
+                      let processedData = TextProcessor.processSearchResultContent(
+                        additionalData.data,
+                      )
 
                       hasShownThinkingHeader = this.handleMessageWithHeader(
                         processedData,
@@ -605,17 +798,226 @@ class AIService {
                 }
               }
 
-              const content = json.choices[0]?.delta?.content || ''
+              // 处理正常的内容输出（非answer类型的内容）
+              const content =
+                json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
               const deltaType = json.choices[0]?.delta?.type
+
+              // 检查是否已经处理了answer类型的数据
               const hasAnswerType = json.choices[0]?.additional?.type === 'answer'
+
               if (content && deltaType !== 'answer' && !hasAnswerType) {
-                callback(content, false, false)
+                const trimmed = (content || '').trim()
+                if (trimmed === '**') {
+                  continue
+                }
+                const isLineBreak = trimmed === '<br>' || content === '\n' || content === '\r\n'
+                if (isLineBreak) {
+                  if (numListStarted && numCollectingItem) {
+                    callback('</li>', false, false)
+                    numCollectingItem = false
+                  }
+                  if (listStarted && collectingListItem) {
+                    callback('</li>', false, false)
+                    collectingListItem = false
+                  }
+                  continue
+                }
+                const isDashBlockEnd = content === '  \n\n'
+                if (isDashBlockEnd && listStarted && collectingListItem) {
+                  callback('</li></ul>', false, false)
+                  collectingListItem = false
+                  listStarted = false
+                  continue
+                }
+
+                const isOrderedListEnd = content === '。\n\n'
+                if (isOrderedListEnd && numListStarted) {
+                  if (numCollectingItem) {
+                    callback('</li></ol>', false, false)
+                  } else {
+                    callback('</ol>', false, false)
+                  }
+                  numCollectingItem = false
+                  numListStarted = false
+                  numPendingNumber = null
+                  continue
+                }
+
+                const isListItemEnd = content === '  \n'
+                if (isListItemEnd && numListStarted && numCollectingItem) {
+                  callback('</li>', false, false)
+                  numCollectingItem = false
+                  continue
+                }
+
+                const isNumericOnly = /^\s*[0-9]+\s*$/.test(content)
+                if (isNumericOnly) {
+                  if (!parenOpen) {
+                    numPendingNumber = content.trim()
+                    continue
+                  }
+                  // 在括号中出现的数字，直接输出，不进入有序列表状态机
+                  const processedNumeric = TextProcessor.processSearchResultContent(content)
+                  callback(processedNumeric, false, false)
+                  continue
+                }
+
+                // 处理括号分片
+                const isParenOpen = content.trim() === '（' || content.trim() === '('
+                if (isParenOpen) {
+                  parenOpen = true
+                  const processed = TextProcessor.processSearchResultContent(content)
+                  callback(processed, false, false)
+                  continue
+                }
+                const isParenClose = content.trim() === '）' || content.trim() === ')'
+                if (isParenClose) {
+                  parenOpen = false
+                  const processed = TextProcessor.processSearchResultContent(content)
+                  callback(processed, false, false)
+                  continue
+                }
+
+                const isDotOnly = content === '.'
+                if (isDotOnly && numPendingNumber) {
+                  if (!numListStarted) {
+                    callback('<ol><li>', false, false)
+                    numListStarted = true
+                    numCollectingItem = true
+                  } else {
+                    callback('<li>', false, false)
+                    numCollectingItem = true
+                  }
+                  numPendingNumber = null
+                  continue
+                }
+
+                const isDashOnly = /^\s*-\s*$/.test(content)
+                if (isDashOnly) {
+                  if (!listStarted) {
+                    callback('<ul><li>', false, false)
+                    listStarted = true
+                    collectingListItem = true
+                  } else {
+                    callback('</li><li>', false, false)
+                    collectingListItem = true
+                  }
+                  continue
+                }
+
+                let processedContent = TextProcessor.processSearchResultContent(content)
+                callback(processedContent, false, false)
               }
             } else {
               // 如果不是 GPT 模型和法律接口，json.choices[0].delta.content 需要进行文字处理
-              const content = json.choices[0]?.delta?.content || ''
-              if (content) {
-                callback(content, false, false)
+              const content =
+                json.choices[0] && json.choices[0].delta ? json.choices[0].delta.content : ''
+
+              const trimmed2 = (content || '').trim()
+              if (trimmed2 === '**') {
+                // 跳过孤立的加粗标记分片
+              } else {
+                const isLineBreak2 = trimmed2 === '<br>' || content === '\n' || content === '\r\n'
+                if (isLineBreak2) {
+                  if (numListStarted && numCollectingItem) {
+                    callback('</li>', false, false)
+                    numCollectingItem = false
+                  }
+                  if (listStarted && collectingListItem) {
+                    callback('</li>', false, false)
+                    collectingListItem = false
+                  }
+                }
+              }
+              const isDashBlockEnd2 = content === '  \n\n'
+              if (isDashBlockEnd2 && listStarted && collectingListItem) {
+                callback('</li></ul>', false, false)
+                collectingListItem = false
+                listStarted = false
+              } else {
+                const isOrderedListEnd2 = content === '。\n\n'
+                if (isOrderedListEnd2 && numListStarted) {
+                  if (numCollectingItem) {
+                    callback('</li></ol>', false, false)
+                  } else {
+                    callback('</ol>', false, false)
+                  }
+                  numCollectingItem = false
+                  numListStarted = false
+                  numPendingNumber = null
+                } else {
+                  const isListItemEnd2 = content === '  \n'
+                  if (isListItemEnd2 && numListStarted && numCollectingItem) {
+                    callback('</li>', false, false)
+                    numCollectingItem = false
+                  } else {
+                    const isNumericOnly2 = /^\s*[0-9]+\s*$/.test(content)
+                    if (isNumericOnly2) {
+                      if (!parenOpen) {
+                        numPendingNumber = content.trim()
+                      } else {
+                        const processedNumeric = content
+                          ? TextProcessor.processSearchResultContent(content)
+                          : ''
+                        if (processedNumeric && processedNumeric.trim()) {
+                          callback(processedNumeric, false, false)
+                        }
+                      }
+                    } else if (content === '.' && numPendingNumber) {
+                      if (!numListStarted) {
+                        callback('<ol><li>', false, false)
+                        numListStarted = true
+                        numCollectingItem = true
+                      } else {
+                        callback('<li>', false, false)
+                        numCollectingItem = true
+                      }
+                      numPendingNumber = null
+                    } else {
+                      const isParenOpen2 = content.trim() === '（' || content.trim() === '('
+                      if (isParenOpen2) {
+                        parenOpen = true
+                        const processed = content
+                          ? TextProcessor.processSearchResultContent(content)
+                          : ''
+                        if (processed && processed.trim()) {
+                          callback(processed, false, false)
+                        }
+                      } else {
+                        const isParenClose2 = content.trim() === '）' || content.trim() === ')'
+                        if (isParenClose2) {
+                          parenOpen = false
+                          const processed = content
+                            ? TextProcessor.processSearchResultContent(content)
+                            : ''
+                          if (processed && processed.trim()) {
+                            callback(processed, false, false)
+                          }
+                        } else {
+                          const isDashOnly2 = /^\s*-\s*$/.test(content)
+                          if (isDashOnly2) {
+                            if (!listStarted) {
+                              callback('<ul><li>', false, false)
+                              listStarted = true
+                              collectingListItem = true
+                            } else {
+                              callback('</li><li>', false, false)
+                              collectingListItem = true
+                            }
+                          } else {
+                            const processedContent = content
+                              ? TextProcessor.processSearchResultContent(content)
+                              : ''
+                            if (processedContent && processedContent.trim()) {
+                              callback(processedContent, false, false)
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
               }
             }
           } catch (e) {
@@ -726,12 +1128,12 @@ class AIService {
 
   // 修改：处理法律接口的答案内容 - 统一使用 processSearchResultContent
   private processLegalAnswerContent(content: string): string {
-    return content
+    return TextProcessor.processSearchResultContent(content)
   }
 
   // 修改：处理法律接口的通用内容 - 统一使用 processSearchResultContent
   private processLegalContent(content: string): string {
-    return content
+    return TextProcessor.processSearchResultContent(content)
   }
 
   // 测试方法：使用模拟数据进行测试
