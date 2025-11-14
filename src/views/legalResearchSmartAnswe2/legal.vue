@@ -1380,11 +1380,11 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   aiService.sendToAI(newMessage, setMessage)
-  // await concurrentAiService.sendConcurrentRequests(
-  //   newMessage,
-  //   handleConcurrentCallback,
-  //   concurrentLabels.value,
-  // )
+  await concurrentAiService.sendConcurrentRequests(
+    newMessage,
+    handleConcurrentCallback,
+    concurrentLabels.value,
+  )
 
   userInput.value = ''
 }
