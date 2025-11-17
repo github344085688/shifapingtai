@@ -1,0 +1,82 @@
+import { getApiKeyFromUrl, setTimes, interceptData } from './units'
+export interface SearchServisParams {
+  api: string
+  body: any
+  apiKey?: string
+  headers?: Record<string, string>
+  signal?: AbortSignal
+  maxRetries?: number
+  timeoutMs?: number
+}
+
+function getKeyFromUrl(api: string): string | undefined {
+  try {
+    const u = new URL(api)
+    return u.searchParams.get('apiKey') || u.searchParams.get('token') || undefined
+  } catch {
+    return undefined
+  }
+}
+
+export async function fetchWithRetry(
+  url: string,
+  options: RequestInit,
+  maxRetries: number = 3,
+): Promise<Response> {
+  let lastError: any
+  for (let i = 0; i <= maxRetries; i++) {
+    try {
+      const response = await fetch(url, options)
+      return response
+    } catch (error: any) {
+      lastError = error
+      if (i === maxRetries) {
+        throw error
+      }
+      const delay = Math.pow(2, i) * 1000
+      await new Promise((resolve) => setTimeout(resolve, delay))
+      console.log(`网络请求失败，正在进行第 ${i + 1} 次重试...`)
+    }
+  }
+  throw lastError
+}
+
+export async function SearchServis(params: SearchServisParams): Promise<any> {
+  const { api, body, apiKey, headers, signal, maxRetries = 3, timeoutMs } = params
+  const key = apiKey || getKeyFromUrl(api)
+  const ac = new AbortController()
+  if (signal) signal.addEventListener('abort', () => ac.abort(), { once: true })
+  let timeoutId: any
+  if (timeoutMs && timeoutMs > 0) timeoutId = setTimeout(() => ac.abort(), timeoutMs)
+  try {
+    const KeyFromUrl = getApiKeyFromUrl()
+    const response = await fetchWithRetry(
+      api,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + KeyFromUrl,
+          ...(key ? { Authorization: 'Bearer ' + key } : {}),
+          ...(headers || {}),
+        },
+        body: JSON.stringify(body),
+        signal: ac.signal,
+      },
+      maxRetries,
+    )
+    if (timeoutId) clearTimeout(timeoutId)
+    if (response.status === 401) throw new Error('账号未登录')
+    if (!response.ok) {
+      const text = await response.text().catch(() => '')
+      throw new Error(text || `HTTP ${response.status}`)
+    }
+    const ct = response.headers.get('content-type') || ''
+    if (ct.includes('application/json')) return response.json()
+    return response.text()
+  } finally {
+    if (timeoutId) clearTimeout(timeoutId)
+  }
+}
+
+export default SearchServis

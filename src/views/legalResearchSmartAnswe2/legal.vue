@@ -1378,7 +1378,7 @@ const sendMessages = async () => {
     concurrentResults: concurrentAiService.getAllResults(),
   }
   messages.value.push(assistantMessage)
-
+  // await aiService.sendToAIMock('测试消息', setMessage)
   aiService.sendToAI(newMessage, setMessage)
   await concurrentAiService.sendConcurrentRequests(
     newMessage,

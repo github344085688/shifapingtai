@@ -824,11 +824,11 @@
                       <template
                         v-else-if="
                           result.key === 'xsalgnfx' &&
-                          Array.isArray(getParsedContent(result.content)?.expertview)
+                          Array.isArray(getParsedContent(result.content))
                         "
                       >
                         <div
-                          v-for="(viewItem, vIdx) in getParsedContent(result.content).expertview"
+                          v-for="(viewItem, vIdx) in getParsedContent(result.content)"
                           :key="vIdx"
                           class="mb-2 bg白 rounded-lg border border-gray-200"
                         >
@@ -842,15 +842,55 @@
                                 </div>
                                 <div class="mt-1 text-xs text-gray-600">{{ viewItem.caseid }}</div>
                               </div>
-                              <span class="ml-2 text-xs text-gray-500"
+                              <!-- <span class="ml-2 text-xs text-gray-500"
                                 >相关性:
                                 {{ (Number(viewItem._score || 0) * 100).toFixed(1) }}%</span
-                              >
+                              > -->
                             </summary>
                             <div class="px-3 pb-3">
-                              <div class="mt-2 leading-relaxed text-gray-700 whitespace-pre-wrap">
-                                {{ viewItem.content }}
+                              <div class="mt-2 leading-relaxed bg-[#edeff0] p-4 rounded-lg">
+                                <div class="text-[16px] font-bold text-gray-800">案情简介：</div>
+                                <div
+                                  class="mt-2 leading-relaxed text-gray-700 whitespace-pre-wrap indent-8"
+                                >
+                                  {{ viewItem.chunk }}
+                                </div>
                               </div>
+
+                              <div class="mt-2 leading-relaxed bg-[#eff6ff] p-4 rounded-lg">
+                                <div class="text-[16px] font-bold text-gray-800">
+                                  {{ viewItem.datatype }} :
+                                </div>
+                                <div class="leading-relaxed text-gray-700 whitespace-pre-wrap">
+                                  <div
+                                    class="pt-2 pl-4"
+                                    v-for="(item, idx) in viewItem.highlight_list"
+                                    :key="idx"
+                                  >
+                                    {{ item }}
+                                  </div>
+                                </div>
+                              </div>
+                              <!-- <div class="mt-2 leading-relaxed bg-[#f0fdf4] p-4 rounded-lg">
+                                <div class="text-[16px] font-bold text-gray-800">裁判结果：</div>
+                                <div
+                                  class="mt-2 leading-relaxed text-gray-700 whitespace-pre-wrap indent-8"
+                                >
+                                  {{ viewItem.paragraphText }}
+                                </div>
+                              </div> -->
+                              <!-- <div class="my-4"></div> -->
+                              <!-- <div class="pl-4 my-4"></div> -->
+                              <!-- <div class="my-4">
+                                {{ viewItem.paragraphText }}
+                              </div> -->
+
+                              <button
+                                @click="getSearchServis(viewItem.caseid)"
+                                class="flex gap-x-2 justify-center items-center px-5 py-2 mt-4 w-1/2 text-sm text-white bg-red-500 rounded-lg border transition-colors duration-200 sm:w-auto"
+                              >
+                                {{ viewItem.caseid }}
+                              </button>
                             </div>
                           </details>
                         </div>
@@ -881,7 +921,7 @@ import ConcurrentAIService, { type ConcurrentResult } from '@/servers/concurrent
 import router from '@/router'
 import { useTitle } from '@/composables/useTitle'
 import SendMessages from '@/components/sendMessages/sendMessages.vue'
-
+import SearchServis from '@/servers/SearchServis'
 const state = status()
 const globalState = state.state
 
@@ -1107,7 +1147,7 @@ const handleConcurrentCallback = (
 
   // 全部完成后再写入全局结果
   if (allCompleted) {
-    globalState.legalResearchSmartAnswer.aiResults = messages.value
+    globalState.administrativePenaltyAssistance.aiResults = messages.value
   }
 }
 
@@ -1349,6 +1389,17 @@ const isSectionNoData = (result: ConcurrentResult): boolean => {
   }
   // 其他栏目：内容为空或仅空白
   return !result.content || result.content.trim() === ''
+}
+
+const getSearchServis = (id: any) => {
+  SearchServis({
+    api: ' https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/awsbscxgkal',
+    body: {
+      docId: id,
+    },
+  }).then((res) => {
+    console.log(res)
+  })
 }
 </script>
 

@@ -26,7 +26,7 @@ const apiMap = {
   dsjsspgbg: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/dsjsspgbg', //大数据胜诉评估报告
   xzzfzs: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzzfzs', //行政执法助手
   xzfcfz: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzfcfz', //行政处罚辅助
-  xsalgnfx: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsalgnfx', //行政处理相似案例相似案例归纳分析
+  xsalgnfx: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xsaltj', //行政处理相似案例相似案例归纳分析
   involvedDepartments: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/xzzfbmyc', //涉及部门
 }
 
@@ -45,7 +45,7 @@ interface ApiConfig {
   simulatedData?: any
 }
 // 定义并发API配置
-export const concurrentApis: Record<string, ApiConfig> = {
+export const concurrentApis = {
   xsyw: {
     key: 'xsyw',
     name: '相似疑问',
@@ -230,3 +230,9 @@ export const administrativePenaltyAssistance: any = {
   placeholder: '请输入内容',
   note: '为执法部门提供行政执法辅助建议',
 }
+
+// const concurrentLabels = ref([
+//   { key: 'involvedDepartments', label: '相关事件涉及部门' },
+//   { key: 'xgft', label: '相关问题涉及到的法律法规' },
+//   { key: 'xsalgnfx', label: '相似案例' },
+// ])

@@ -190,7 +190,7 @@ class ConcurrentAIService {
       let requestBody: any
 
       // 特殊处理相似案例API
-      if (apiConfig.name === '相似案例' || apiConfig.key === 'xsalgnfx') {
+      if (apiConfig.name === '相似案例') {
         requestBody = {
           question: message.content,
         }

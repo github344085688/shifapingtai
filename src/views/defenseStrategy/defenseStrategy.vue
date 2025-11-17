@@ -192,9 +192,9 @@ const sendMessages = async () => {
   messages.value.push(assistantMessage)
 
   // 启动主要AI服务
-  await aiService.sendToAIMock('测试消息', setMessage)
+  // await aiService.sendToAIMock('测试消息', setMessage)
   // 启动主要AI服务
-  // aiService.sendToAI(newMessage, setMessage)
+  aiService.sendToAI(newMessage, setMessage)
 
   userInput.value = ''
 }
