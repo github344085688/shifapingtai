@@ -887,7 +887,7 @@
 
                               <button
                                 @click="getSearchServis(viewItem.caseid)"
-                                class="flex gap-x-2 justify-center items-center px-5 py-2 mt-4 w-1/2 text-sm text-white bg-red-500 rounded-lg border transition-colors duration-200 sm:w-auto"
+                                class="flex gap-x-2 justify-center items-center px-5 py-2 mt-4 w-auto text-sm text-white bg-red-500 rounded-lg border transition-colors duration-200 sm:w-auto"
                               >
                                 {{ viewItem.caseid }}
                               </button>
@@ -908,11 +908,245 @@
         </div>
       </div>
     </div>
+    <div
+      v-if="showDataModal"
+      class="flex fixed inset-0 z-50 justify-center items-start mt-auto bg-black/40"
+    >
+      <div class="bg-white w-[97%] max-w-3xl rounded-lg shadow-lg pb-4 mt-[7vh]">
+        <div class="flex justify-between items-center px-4 py-3 border-b">
+          <div class="text-lg font-semibold">
+            {{ resolvedModal && resolvedModal.caseid ? resolvedModal.caseid : '案件详情' }}
+          </div>
+          <button class="px-2 py-1 text-gray-600 hover:text-gray-800" @click="closeDataModal">
+            关闭
+          </button>
+        </div>
+        <div class="p-4 px-2 max-h-[70vh] overflow-auto">
+          <div v-if="modalLoading" class="flex items-center text-gray-600">
+            <span class="mr-2 loader_item"></span>加载中...
+          </div>
+          <div v-else-if="modalError" class="text-red-600">{{ modalError }}</div>
+          <div v-else-if="resolvedModal">
+            <div class="mb-2 font-bold text-center">{{ resolvedModal.title }}</div>
+            <div class="flex text-sm text-gray-600">
+              {{ resolvedModal.court }} · {{ resolvedModal.doctype }} ·
+              {{ resolvedModal.procedure }}
+            </div>
+            <div class="py-3">
+              <span class="ml-auto" v-if="resolvedModal.judgedate">{{
+                resolvedModal.judgedate
+              }}</span>
+            </div>
+            <div class="p-3 mb-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+              <div class="font-bold">涉及法条</div>
+              <div
+                class="indent-8 text-[16px]"
+                v-for="(item, idx) in resolvedModal.applicable_law"
+                :key="idx"
+              >
+                {{ item }}
+              </div>
+            </div>
+            <div class="p-3 mb-4 bg-white rounded-lg border border-gray-200 shadow-sm">
+              <div class="font-bold">涉及法律</div>
+              <div
+                class="indent-8 text-[16px]"
+                v-for="(item, idx) in resolvedModal.applicable_law_only"
+                :key="idx"
+              >
+                {{ item }}
+              </div>
+            </div>
+
+            <div class="p-3 rounded-lg border border-gray-200 shadow-sm">
+              <div class="space-y-3">
+                <div v-for="(item, idx) in resolvedModal.paragraphs" :key="idx">
+                  <div
+                    class="bg-white border-gray-200"
+                    :class="item.tag != '标题' ? 'border-t-[1px] p-3' : ''"
+                  >
+                    <div class="text-[15px] font-bold text-gray-800" v-if="item.tag != '标题'">
+                      {{ item.tag }}
+                    </div>
+                    <div
+                      class="mt-1 text-gray-700 whitespace-pre-wrap indent-8"
+                      :class="
+                        item.tag === '标题' ? 'text-[18px] font-semibold text-center indent-0' : ''
+                      "
+                    >
+                      {{ item.content }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="p-3 mt-4 rounded-lg border border-gray-200 shadow-sm"
+              v-if="resolvedModal.format_paragraphs"
+            >
+              <div class="mb-2 font-bold text-center" v-if="resolvedModal.format_paragraphs.title">
+                {{ resolvedModal.format_paragraphs.title }}
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="resolvedModal.format_paragraphs.headInfo"
+              >
+                <div class="font-bold">基本信息</div>
+                <div class="indent-8" v-if="resolvedModal.format_paragraphs.headInfo.court">
+                  {{ resolvedModal.format_paragraphs.headInfo.court }}
+                </div>
+                <div class="indent-8" v-if="resolvedModal.format_paragraphs.headInfo.doctype">
+                  {{ resolvedModal.format_paragraphs.headInfo.doctype }}
+                </div>
+                <div class="indent-8" v-if="resolvedModal.format_paragraphs.headInfo.caseid">
+                  {{ resolvedModal.format_paragraphs.headInfo.caseid }}
+                </div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="resolvedModal.format_paragraphs.litigants"
+              >
+                <div class="font-bold">当事人</div>
+                <div class="indent-8">{{ resolvedModal.format_paragraphs.litigants }}</div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="
+                  resolvedModal.format_paragraphs.other_participants &&
+                  resolvedModal.format_paragraphs.other_participants.lawyer
+                "
+              >
+                <div class="font-bold">其他参加人员</div>
+                <div class="indent-8">
+                  律师：{{ resolvedModal.format_paragraphs.other_participants.lawyer }}
+                </div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="
+                  resolvedModal.format_paragraphs.pleadings &&
+                  (resolvedModal.format_paragraphs.pleadings.prosecution_words ||
+                    resolvedModal.format_paragraphs.pleadings.argued_words ||
+                    resolvedModal.format_paragraphs.pleadings.claims_words ||
+                    resolvedModal.format_paragraphs.pleadings.third_person_words)
+                "
+              >
+                <div class="font-bold">诉辩意见</div>
+                <div
+                  class="indent-8"
+                  v-if="resolvedModal.format_paragraphs.pleadings.prosecution_words"
+                >
+                  起诉人：{{ resolvedModal.format_paragraphs.pleadings.prosecution_words }}
+                </div>
+                <div class="indent-8" v-if="resolvedModal.format_paragraphs.pleadings.argued_words">
+                  被诉人：{{ resolvedModal.format_paragraphs.pleadings.argued_words }}
+                </div>
+                <div class="indent-8" v-if="resolvedModal.format_paragraphs.pleadings.claims_words">
+                  请求：{{ resolvedModal.format_paragraphs.pleadings.claims_words }}
+                </div>
+                <div
+                  class="indent-8"
+                  v-if="resolvedModal.format_paragraphs.pleadings.third_person_words"
+                >
+                  第三人：{{ resolvedModal.format_paragraphs.pleadings.third_person_words }}
+                </div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="resolvedModal.format_paragraphs.pre_trial_process"
+              >
+                <div class="font-bold">一审审理经过</div>
+                <div class="whitespace-pre-wrap indent-8">
+                  {{ resolvedModal.format_paragraphs.pre_trial_process }}
+                </div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="resolvedModal.format_paragraphs.trial_process"
+              >
+                <div class="font-bold">二审审理经过</div>
+                <div class="whitespace-pre-wrap indent-8">
+                  {{ resolvedModal.format_paragraphs.trial_process }}
+                </div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="resolvedModal.format_paragraphs.arguments_court"
+              >
+                <div class="font-bold">庭审辩论</div>
+                <div class="whitespace-pre-wrap indent-8">
+                  {{ resolvedModal.format_paragraphs.arguments_court }}
+                </div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="
+                  resolvedModal.format_paragraphs.judge_result &&
+                  (resolvedModal.format_paragraphs.judge_result.court_ascertained_words ||
+                    resolvedModal.format_paragraphs.judge_result.court_believe_words)
+                "
+              >
+                <div class="font-bold">本院认为</div>
+                <div
+                  class="whitespace-pre-wrap indent-8"
+                  v-if="resolvedModal.format_paragraphs.judge_result.court_ascertained_words"
+                >
+                  {{ resolvedModal.format_paragraphs.judge_result.court_ascertained_words }}
+                </div>
+                <div
+                  class="whitespace-pre-wrap indent-8"
+                  v-if="resolvedModal.format_paragraphs.judge_result.court_believe_words"
+                >
+                  {{ resolvedModal.format_paragraphs.judge_result.court_believe_words }}
+                </div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="
+                  resolvedModal.format_paragraphs.judge_result &&
+                  resolvedModal.format_paragraphs.judge_result.judge_result_words
+                "
+              >
+                <div class="font-bold">裁定结果</div>
+                <div class="whitespace-pre-wrap indent-8">
+                  {{ resolvedModal.format_paragraphs.judge_result.judge_result_words }}
+                </div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="resolvedModal.format_paragraphs.appendix"
+              >
+                <div class="font-bold">附</div>
+                <div class="whitespace-pre-wrap indent-8">
+                  {{ resolvedModal.format_paragraphs.appendix }}
+                </div>
+              </div>
+              <div
+                class="p-3 bg-white border-t-[1px] border-gray-200"
+                v-if="resolvedModal.format_paragraphs.tailInfo"
+              >
+                <div class="font-bold">审判信息</div>
+                <div class="indent-8" v-if="resolvedModal.format_paragraphs.tailInfo.judge_members">
+                  {{ resolvedModal.format_paragraphs.tailInfo.judge_members }}
+                </div>
+                <div class="indent-8" v-if="resolvedModal.format_paragraphs.tailInfo.clerk">
+                  书记员：{{ resolvedModal.format_paragraphs.tailInfo.clerk }}
+                </div>
+                <div class="indent-8" v-if="resolvedModal.format_paragraphs.tailInfo.judge_date">
+                  {{ resolvedModal.format_paragraphs.tailInfo.judge_date }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, defineComponent, nextTick, onMounted } from 'vue'
+import { ref, defineComponent, nextTick, onMounted, computed, watch } from 'vue'
 import { AiText } from 'juejin-puts'
 import { status } from 'juejin-state'
 import aiConfig, { administrativePenaltyAssistance, CACHE_DURATION } from '@/config/aiConfig'
@@ -1041,6 +1275,41 @@ const messages = ref<
 const userInput = ref('')
 const chatContainer = ref<HTMLElement | null>(null)
 const concurrentResults = ref<ConcurrentResult[]>([])
+const showDataModal = ref(false)
+const modalLoading = ref(false)
+const modalError = ref('')
+const modalData = ref<any>(null)
+const closeDataModal = () => {
+  showDataModal.value = false
+}
+
+const resolvedModal = computed(() => {
+  const raw = modalData.value
+  return raw && raw.data ? raw.data : raw
+})
+
+const loadModalDataFromPath = async (path: string) => {
+  modalLoading.value = true
+  modalError.value = ''
+  try {
+    const res = await fetch(cleanUrl(path))
+    const data = await res.json()
+    modalData.value = data
+  } catch (e: any) {
+    modalError.value = e?.message ? String(e.message) : '读取失败'
+  } finally {
+    modalLoading.value = false
+  }
+}
+
+watch(
+  () => modalData.value,
+  (val) => {
+    if (typeof val === 'string') {
+      loadModalDataFromPath(val)
+    }
+  },
+)
 
 const handleExampleClick = (question: string) => {
   userInput.value = question
@@ -1392,14 +1661,32 @@ const isSectionNoData = (result: ConcurrentResult): boolean => {
 }
 
 const getSearchServis = (id: any) => {
+  showDataModal.value = true
+  modalLoading.value = true
+  modalError.value = ''
+  modalData.value = null
   SearchServis({
-    api: ' https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/awsbscxgkal',
+    api: 'https://sfdsj.juejinvr.cn/app-api/sfdsj/aimodel/awsbscxgkal',
     body: {
       docId: id,
     },
-  }).then((res) => {
-    console.log(res)
   })
+    .then((res: any) => {
+      console.log(res)
+      if (res.code === 0) {
+        modalData.value = res?.data
+        return
+      } else {
+        modalError.value = res?.message || '请求失败'
+      }
+      // modalData.value = res?.data || res
+    })
+    .catch((e) => {
+      modalError.value = e?.message ? String(e.message) : '请求失败'
+    })
+    .finally(() => {
+      modalLoading.value = false
+    })
 }
 </script>
 
