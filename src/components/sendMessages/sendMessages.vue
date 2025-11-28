@@ -196,7 +196,11 @@
             </div>
             <div class="box-border p-1.5 h-full">
               <div
-                class="flex justify-center items-center h-full rounded-full aspect-[1/1] bg-slate-500 cursor-pointer"
+                :class="[
+                  'flex justify-center items-center h-full rounded-full aspect-[1/1] cursor-pointer',
+                  isIatRecording ? 'bg-red-500' : 'bg-slate-500',
+                ]"
+                @click="openIatModal"
               >
                 <svg
                   t="1764311643400"
@@ -251,6 +255,66 @@
             内容由AI生成，仅供参考
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    v-if="showIatModal"
+    class="fixed inset-0 z-[10000] bg-black/50 flex items-center justify-center"
+  >
+    <div class="relative bg-white w-[90%] max-w-[420px] rounded-2xl p-6 shadow-xl">
+      <button
+        class="absolute top-3 right-3 text-gray-400 hover:text-gray-600"
+        @click="closeIatModal"
+      >
+        ✕
+      </button>
+      <div class="min-h-[20vh] max-h-[30vh] overflow-y-auto">
+        <div class="min-h-[60px] text-center text-[14px] text-gray-800 mb-4 break-words">
+          {{ iatText || '按住下方按钮开始说话' }}
+        </div>
+        <div v-if="iatError" class="text-center text-red-500 text-[12px] mb-2">{{ iatError }}</div>
+      </div>
+      <div class="flex justify-center items-center mb-6">
+        <div class="flex gap-1 items-end h-6">
+          <div
+            :class="['w-1 bg-orange-500 rounded', isIatRecording ? 'animate-pulse h-6' : 'h-4']"
+          ></div>
+          <div
+            :class="['w-1 bg-orange-500 rounded', isIatRecording ? 'animate-pulse h-5' : 'h-3']"
+          ></div>
+          <div
+            :class="['w-1 bg-orange-500 rounded', isIatRecording ? 'animate-pulse h-6' : 'h-4']"
+          ></div>
+          <div
+            :class="['w-1 bg-orange-500 rounded', isIatRecording ? 'animate-pulse h-4' : 'h-2']"
+          ></div>
+          <div
+            :class="['w-1 bg-orange-500 rounded', isIatRecording ? 'animate-pulse h-6' : 'h-4']"
+          ></div>
+          <div
+            :class="['w-1 bg-orange-500 rounded', isIatRecording ? 'animate-pulse h-5' : 'h-3']"
+          ></div>
+          <div
+            :class="['w-1 bg-orange-500 rounded', isIatRecording ? 'animate-pulse h-6' : 'h-4']"
+          ></div>
+        </div>
+      </div>
+      <div class="flex justify-center items-center">
+        <button
+          :class="[
+            'w-36 h-36 rounded-full flex items-center justify-center text-white text-[16px] select-none',
+            isIatRecording ? 'bg-red-500' : 'bg-[#e23338]',
+          ]"
+          @mousedown="pressStart"
+          @mouseup="pressStop"
+          @mouseleave="pressStop"
+          @touchstart.prevent="pressStart"
+          @touchend.prevent="pressStop"
+        >
+          按住说话
+        </button>
       </div>
     </div>
   </div>
@@ -319,6 +383,7 @@ import { isShallow, ref, watch, computed, onMounted } from 'vue'
 import FileContentExtractor from '@/components/sendMessages/FileContentExtractor.vue'
 import { getApiKeyFromUrl, numberOfInterceptions } from '@/servers/units'
 import { status } from 'juejin-state'
+import { useXFYunIat } from '@/composables/useXFYunIat'
 
 const state = status()
 const globalState = state.state
@@ -419,5 +484,49 @@ onMounted(() => {
 const handleH5Back = () => {
   numberOfInterceptions({ code: '点击', data: model.value, msg: '点击返回' })
   return
+}
+
+const showIatModal = ref(false)
+const iatText = ref('')
+const iatError = ref('')
+let iatStartTs = 0
+
+const {
+  isRecording: isIatRecording,
+  start: startIat,
+  stop: stopIat,
+} = useXFYunIat({
+  onText: (t) => {
+    iatText.value = t
+  },
+})
+
+const openIatModal = () => {
+  showIatModal.value = true
+  iatText.value = ''
+  iatError.value = ''
+}
+
+const closeIatModal = () => {
+  showIatModal.value = false
+  iatError.value = ''
+  stopIat()
+}
+
+const pressStart = () => {
+  iatText.value = ''
+  iatError.value = ''
+  iatStartTs = Date.now()
+  startIat()
+}
+
+const pressStop = () => {
+  stopIat()
+  const dur = Date.now() - iatStartTs
+  const tooShort = dur < 800 || (iatText.value || '').trim().length < 3
+  if (tooShort) {
+    iatError.value = '语音过短'
+    iatText.value = ''
+  }
 }
 </script>
