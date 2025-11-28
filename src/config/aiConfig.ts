@@ -124,7 +124,7 @@ export const ConsultationOnLegalIssues: any = {
   stream: true,
   title: '我是法研智答。',
   placeholder: '请输入案情内容',
-  note: '根据案情、法律问题提供网络观点、相似案例、相关法条、法相似问题、法律知识、裁判观点',
+  note: '根据案情、法律问题提供网络观点、相似案例、相关法条、相似疑问、实务研究、裁判观点',
 }
 
 export const AcrossTheEntireNetwork: any = {
@@ -215,7 +215,7 @@ export const administrativeLawEnforcementAssistant: any = {
   api: apiMap.xzzfzs,
   model: '中国法研LLM',
   stream: true,
-  title: '我是行政执法助手助手。',
+  title: '我是综治协调助手。',
   placeholder: '请输入内容',
   note: '为执法部门提供行政执法辅助建议',
 }

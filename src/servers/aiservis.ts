@@ -28,7 +28,6 @@ const ERROR_MESSAGES = {
   REQUEST_ABORTED: '【请求已中断】',
   REQUEST_FAILED: '网络请求失败',
   NETWORK_ERROR: '网络错误',
-  TIMEOUT: '请求超时',
   CONNECTION_FAILED: '网络连接失败',
 }
 
@@ -180,14 +179,6 @@ class AIService {
       } else if (error.message && error.message.includes('504')) {
         callback(
           this.createStyledMessage(ERROR_MESSAGES.SERVER_ERROR, STYLES.ERROR_STYLE),
-          true,
-          false,
-          true,
-        )
-        return
-      } else if (error.message && error.message.includes('timeout')) {
-        callback(
-          this.createStyledMessage(ERROR_MESSAGES.TIMEOUT, STYLES.ERROR_STYLE),
           true,
           false,
           true,

@@ -23,20 +23,38 @@
             :class="[
               message.sender === 'user'
                 ? 'bg-[#e23338] text-[#ffffff] rounded-tr-[4px] max-w-[80%]  px-[15px] markdownUser'
-                : 'bg-white text-[#333] rounded-tl-[4px] shadow-[0_2px_8px_rgba(0,0,0,0.05)] max-w-[100%]  p-[15px_15px]',
+                : '  text-[#333]   shadow-0 max-w-[100%]  p-[15px_0px]',
             ]"
           >
-            <div v-if="message.aiLoading" class="">ai思考中...</div>
+            <!-- <div v-if="message.aiLoading" class="">ai思考中...</div> -->
             <!-- 思考过程显示 -->
             <div
               v-if="message.thinkingProcess"
               class="mb-4 w-full thinking-process"
               v-html="message.thinkingProcess"
             ></div>
-            <AiText :popsMessage="message" />
+            <div class="" v-if="message.sender == 'user'">
+              <AiText :popsMessage="message" />
+            </div>
+            <div class="bg-white rounded-lg border border-gray-200 shadow-sm" v-else>
+              <details>
+                <summary
+                  class="flex justify-between items-center px-3 py-2 cursor-pointer hover:bg-gray-50"
+                >
+                  <div class="text-[16px] font-medium text-gray-800 line-clamp-1">
+                    <div v-if="message.aiLoading" class="">ai思考中...</div>
+                    {{ message.content }}
+                  </div>
+                </summary>
+                <div class="px-3 pb-3 border-t-[1px] border-gray-200 p-2">
+                  <AiText :popsMessage="message" />
+                </div>
+              </details>
+              <!-- <AiText :popsMessage="message" /> -->
+            </div>
 
             <!-- 并发结果显示区域：卡片折叠 -->
-            <div class="mt-4" v-if="message.sender != 'user' && message.concurrentResults?.length">
+            <div class="mt-2" v-if="message.sender != 'user' && message.concurrentResults?.length">
               <div
                 v-for="(result, idx) in message.concurrentResults"
                 :key="result.key"
@@ -139,7 +157,7 @@
                               <!-- 思考过程显示 -->
                               <div
                                 v-if="message.thinkingProcess"
-                                class="mb-4 w-full thinking-process"
+                                class="w-full thinking-process"
                                 v-html="message.thinkingProcess"
                               ></div>
                               <AiText :popsMessage="message" />
@@ -152,7 +170,7 @@
                                 <div
                                   v-for="(result, idx) in message.concurrentResults"
                                   :key="result.key"
-                                  class="mb-2 bg-white rounded-lg border border-gray-200 shadow-sm"
+                                  class="bg-white rounded-lg border border-gray-200 shadow-sm"
                                 >
                                   <button
                                     type="button"
@@ -837,10 +855,12 @@
                               class="flex justify-between items-center px-3 py-2 cursor-pointer hover:bg-gray-50"
                             >
                               <div class="flex-1">
-                                <div class="text-[15px] font-medium text-gray-800">
+                                <!-- <div class="text-[15px] font-medium text-gray-800">
                                   {{ viewItem.title }}
+                                </div> -->
+                                <div class="mt-1 text-gray-600 line-clamp-1">
+                                  {{ viewItem.chunk }}
                                 </div>
-                                <div class="mt-1 text-xs text-gray-600">{{ viewItem.caseid }}</div>
                               </div>
                               <!-- <span class="ml-2 text-xs text-gray-500"
                                 >相关性:
@@ -853,7 +873,8 @@
                                 <div
                                   class="mt-2 leading-relaxed text-gray-700 whitespace-pre-wrap indent-8"
                                 >
-                                  {{ viewItem.chunk }}
+                                  <div class="" v-html="viewItem.chunk"></div>
+                                  <!-- {{ viewItem.chunk }} -->
                                 </div>
                               </div>
 
@@ -867,29 +888,17 @@
                                     v-for="(item, idx) in viewItem.highlight_list"
                                     :key="idx"
                                   >
-                                    {{ item }}
+                                    <div class="" v-html="item"></div>
+                                    <!-- {{  }} -->
                                   </div>
                                 </div>
                               </div>
-                              <!-- <div class="mt-2 leading-relaxed bg-[#f0fdf4] p-4 rounded-lg">
-                                <div class="text-[16px] font-bold text-gray-800">裁判结果：</div>
-                                <div
-                                  class="mt-2 leading-relaxed text-gray-700 whitespace-pre-wrap indent-8"
-                                >
-                                  {{ viewItem.paragraphText }}
-                                </div>
-                              </div> -->
-                              <!-- <div class="my-4"></div> -->
-                              <!-- <div class="pl-4 my-4"></div> -->
-                              <!-- <div class="my-4">
-                                {{ viewItem.paragraphText }}
-                              </div> -->
-
                               <button
+                                v-if="viewItem.caseid"
                                 @click="getSearchServis(viewItem.caseid)"
                                 class="flex gap-x-2 justify-center items-center px-5 py-2 mt-4 w-auto text-sm text-white bg-red-500 rounded-lg border transition-colors duration-200 sm:w-auto"
                               >
-                                {{ viewItem.caseid }}
+                                点击查看 {{ viewItem.caseid }}
                               </button>
                             </div>
                           </details>

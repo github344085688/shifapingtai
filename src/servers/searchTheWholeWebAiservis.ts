@@ -29,7 +29,6 @@ const ERROR_MESSAGES = {
   REQUEST_ABORTED: '【请求已中断】',
   REQUEST_FAILED: '网络请求失败',
   NETWORK_ERROR: '网络错误',
-  TIMEOUT: '请求超时',
   CONNECTION_FAILED: '网络连接失败',
 }
 
@@ -213,14 +212,6 @@ class AIService {
           true,
         )
         return
-      } else if (error.message && error.message.includes('timeout')) {
-        callback(
-          this.createStyledMessage(ERROR_MESSAGES.TIMEOUT, STYLES.ERROR_STYLE),
-          true,
-          false,
-          true,
-        )
-        return
       } else if (error.message && error.message.includes('Failed to fetch')) {
         // 添加更详细的网络错误信息
         const detailedError = `${ERROR_MESSAGES.CONNECTION_FAILED}: ${error.message || '网络连接异常，请检查网络设置或API地址'}`
@@ -352,7 +343,9 @@ class AIService {
               // 新增：统一跳过无 delta.content 或为空字符串的消息
               const deltaContentRaw = json.choices?.[0]?.delta?.content
               const hasDeltaContent =
-                typeof deltaContentRaw === 'string' ? deltaContentRaw.trim().length > 0 : !!deltaContentRaw
+                typeof deltaContentRaw === 'string'
+                  ? deltaContentRaw.trim().length > 0
+                  : !!deltaContentRaw
               if (!hasDeltaContent) {
                 continue
               }
@@ -637,62 +630,62 @@ class AIService {
                     callback('</li>', false, false)
                     numCollectingItem = false
                   } else {
-                  const isNumericOnly2 = /^\s*[0-9]+\s*$/.test(content)
-                  if (isNumericOnly2) {
-                    if (!parenOpen) {
-                      numPendingNumber = content.trim()
-                    } else {
-                      const processedNumeric = content ? content : ''
-                      if (processedNumeric && processedNumeric.trim()) {
-                        callback(processedNumeric, false, false)
+                    const isNumericOnly2 = /^\s*[0-9]+\s*$/.test(content)
+                    if (isNumericOnly2) {
+                      if (!parenOpen) {
+                        numPendingNumber = content.trim()
+                      } else {
+                        const processedNumeric = content ? content : ''
+                        if (processedNumeric && processedNumeric.trim()) {
+                          callback(processedNumeric, false, false)
+                        }
                       }
-                    }
-                  } else if (content === '.' && numPendingNumber) {
-                    if (!numListStarted) {
-                      callback('<ol><li>', false, false)
-                      numListStarted = true
-                      numCollectingItem = true
-                    } else {
-                      callback('<li>', false, false)
-                      numCollectingItem = true
-                    }
-                    numPendingNumber = null
-                  } else {
-                    const isParenOpen2 = content.trim() === '（' || content.trim() === '('
-                    if (isParenOpen2) {
-                      parenOpen = true
-                      const processed = content ? content : ''
-                      if (processed && processed.trim()) {
-                        callback(processed, false, false)
+                    } else if (content === '.' && numPendingNumber) {
+                      if (!numListStarted) {
+                        callback('<ol><li>', false, false)
+                        numListStarted = true
+                        numCollectingItem = true
+                      } else {
+                        callback('<li>', false, false)
+                        numCollectingItem = true
                       }
+                      numPendingNumber = null
                     } else {
-                      const isParenClose2 = content.trim() === '）' || content.trim() === ')'
-                      if (isParenClose2) {
-                        parenOpen = false
+                      const isParenOpen2 = content.trim() === '（' || content.trim() === '('
+                      if (isParenOpen2) {
+                        parenOpen = true
                         const processed = content ? content : ''
                         if (processed && processed.trim()) {
                           callback(processed, false, false)
                         }
                       } else {
-                      const isDashOnly2 = /^\s*-\s*$/.test(content)
-                      if (isDashOnly2) {
-                        if (!listStarted) {
-                          callback('<ul><li>', false, false)
-                          listStarted = true
-                          collectingListItem = true
+                        const isParenClose2 = content.trim() === '）' || content.trim() === ')'
+                        if (isParenClose2) {
+                          parenOpen = false
+                          const processed = content ? content : ''
+                          if (processed && processed.trim()) {
+                            callback(processed, false, false)
+                          }
                         } else {
-                          callback('</li><li>', false, false)
-                          collectingListItem = true
+                          const isDashOnly2 = /^\s*-\s*$/.test(content)
+                          if (isDashOnly2) {
+                            if (!listStarted) {
+                              callback('<ul><li>', false, false)
+                              listStarted = true
+                              collectingListItem = true
+                            } else {
+                              callback('</li><li>', false, false)
+                              collectingListItem = true
+                            }
+                          } else {
+                            const processedContent = content ? content : ''
+                            if (processedContent && processedContent.trim()) {
+                              callback(processedContent, false, false)
+                            }
+                          }
                         }
-                      } else {
-                        const processedContent = content ? content : ''
-                        if (processedContent && processedContent.trim()) {
-                          callback(processedContent, false, false)
-                        }
-                      }
                       }
                     }
-                  }
                   }
                 }
               }

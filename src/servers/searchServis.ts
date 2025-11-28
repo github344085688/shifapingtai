@@ -6,7 +6,6 @@ export interface SearchServisParams {
   headers?: Record<string, string>
   signal?: AbortSignal
   maxRetries?: number
-  timeoutMs?: number
 }
 
 function getKeyFromUrl(api: string): string | undefined {
@@ -42,12 +41,10 @@ export async function fetchWithRetry(
 }
 
 export async function SearchServis(params: SearchServisParams): Promise<any> {
-  const { api, body, apiKey, headers, signal, maxRetries = 3, timeoutMs } = params
+  const { api, body, apiKey, headers, signal, maxRetries = 3 } = params
   const key = apiKey || getKeyFromUrl(api)
   const ac = new AbortController()
   if (signal) signal.addEventListener('abort', () => ac.abort(), { once: true })
-  let timeoutId: any
-  if (timeoutMs && timeoutMs > 0) timeoutId = setTimeout(() => ac.abort(), timeoutMs)
   try {
     const KeyFromUrl = getApiKeyFromUrl()
     const response = await fetchWithRetry(
@@ -65,7 +62,6 @@ export async function SearchServis(params: SearchServisParams): Promise<any> {
       },
       maxRetries,
     )
-    if (timeoutId) clearTimeout(timeoutId)
     if (response.status === 401) throw new Error('账号未登录')
     if (!response.ok) {
       const text = await response.text().catch(() => '')
@@ -75,7 +71,6 @@ export async function SearchServis(params: SearchServisParams): Promise<any> {
     if (ct.includes('application/json')) return response.json()
     return response.text()
   } finally {
-    if (timeoutId) clearTimeout(timeoutId)
   }
 }
 
